@@ -141,7 +141,7 @@ learning/WeekXX_TopicName/
 * 初學者可理解的直覺解釋
 * 必要的架構或資料流說明
 * 與 Transformer、VLM、VLA 或機器人系統等適當應用脈絡的關聯
-* 不需要過深數學推導，除非使用者明確要求
+* 避免不必要的深數學推導；若公式是理解核心機制所必需，必須依 Section 21：Mathematical Depth Rule（數學深度規則）清楚說明
 
 ### Tasks 規範
 
@@ -657,6 +657,9 @@ Attention（注意力機制）是模型決定要關注哪些資訊的方法。
 * 說明內部機制
 * 引入必要技術名詞
 * 可以使用簡化架構圖
+* 必須同時遵守 Section 16：Concept Dependency Rule（概念依賴規則）
+* 必須同時遵守 Section 17：Deep Learning Content Rule（深度學習內容規則）
+* 若涉及公式，還必須遵守 Section 21：Mathematical Depth Rule（數學深度規則）
 
 範例：
 
@@ -1072,3 +1075,185 @@ Attention（完整版）
 * 學習反思或回顧指引
 
 文件最後不應放置核心概念的完整版教學內容。
+
+---
+
+## 21. Mathematical Depth Rule（數學深度規則）
+
+目的：
+
+避免教材只給公式，不解釋公式。
+
+若某概念的數學內容為理解核心機制所必需，教材不得只列出公式，必須同時說明公式背後的直覺、變數、用途與驗證方式。
+
+常見需要數學深度說明的概念包含：
+
+* Embedding（嵌入向量）
+* Query-Key-Value（查詢-鍵-值，QKV）
+* Attention（注意力機制）
+* Softmax（柔性最大化函數）
+* Position Encoding（位置編碼）
+* Multi-Head Attention（多頭注意力）
+* Transformer（轉換器架構）
+
+### 必須包含
+
+若教材使用公式，必須包含：
+
+1. 公式
+2. 各變數意義
+3. 幾何或直覺解釋
+4. 為什麼需要此公式
+5. Demo 驗證方式
+
+禁止只出現公式而沒有說明。
+
+### 範例：Attention Score（注意力分數）
+
+公式：
+
+```text
+score = Q x K^T
+```
+
+必須說明：
+
+* Q 是 Query（查詢），代表目前位置想找的資訊。
+* K 是 Key（鍵），代表每個位置可被比對的特徵。
+* `K^T` 是 Key Matrix Transpose（鍵矩陣轉置），讓 Query 可以和多個 Key 做內積比對。
+* 內積用來估計 Query 和 Key 的方向是否相近。
+* score（分數）越高，代表目前 Query 越應該關注該 Key 對應的位置。
+* Demo 可透過 `demo/qkv/demo_qkv.py` 或 `demo/attention/demo_attention_matrix.py` 觀察 Q、K、Attention Score 的變化。
+
+### 數學說明深度
+
+數學內容應先提供直覺，再提供公式，最後提供 Demo 驗證。
+
+建議順序：
+
+```text
+問題直覺
+-> 為什麼需要公式
+-> 公式
+-> 變數意義
+-> 幾何或計算直覺
+-> Demo 驗證
+-> 驗收問題
+```
+
+### 禁止寫法
+
+不得只寫：
+
+```text
+Attention(Q, K, V) = softmax(QK^T / sqrt(d_k))V
+```
+
+而沒有說明：
+
+* Q、K、V 分別是什麼
+* `d_k` 是什麼
+* 為什麼要除以 `sqrt(d_k)`
+* Softmax（柔性最大化函數）如何把分數轉成權重
+* 權重如何加權 Value（值）
+* Demo 中如何觀察上述步驟
+
+---
+
+## 22. Demo Completion Rule（Demo 完成規則）
+
+目的：
+
+避免學生只執行程式卻沒有學習。
+
+Demo 不以成功執行為完成條件。
+
+學生必須完成以下全部項目，才可視為 Demo 完成：
+
+1. 成功執行 Demo。
+2. 保存輸出結果。
+3. 在 `study_log.md` 記錄觀察。
+4. 回答 Demo `README.md` 中的問題。
+
+### Demo README 必須提供
+
+每個 Demo 的總覽或概念子資料夾 `README.md` 必須包含：
+
+* 執行指令
+* 預期輸出
+* 觀察重點
+* 驗收問題
+
+### study_log.md 記錄要求
+
+學生執行 Demo 後，`study_log.md` 應至少紀錄：
+
+* Demo 名稱
+* 執行日期
+* 是否成功執行
+* 重要輸出摘要
+* 觀察到的概念
+* 遇到的問題
+* Demo README 驗收問題的回答位置
+
+### Completion 判定
+
+`completion.md` 中的 Demo 勾選必須代表學生已完成執行、保存、觀察與回答，不得只因程式沒有報錯就勾選完成。
+
+Codex 不得代替學生勾選 Demo 完成，也不得代替學生撰寫個人理解。
+
+---
+
+## 23. Week01 Minimum Coverage Rule（Week01 最低涵蓋規則）
+
+目的：
+
+確保 Transformer（轉換器架構）基礎完整，避免 Week01 教材只涵蓋表層概念而直接進入 Generated（教材已生成）狀態。
+
+Week01 Transformer 必須至少涵蓋以下概念：
+
+1. Token（詞元）
+2. Token ID（詞元編號）
+3. Embedding（嵌入向量）
+4. Query（查詢）
+5. Key（鍵）
+6. Value（值）
+7. Attention（注意力機制）
+8. Self-Attention（自注意力）
+9. Attention Matrix（注意力矩陣）
+10. Position Encoding（位置編碼）
+11. Multi-Head Attention（多頭注意力）
+12. Encoder（編碼器）
+13. Decoder（解碼器）
+
+缺少以上任一項目，不得標記為 Generated（教材已生成）。
+
+### Week01 Generated 最低條件
+
+Week01 進入 Generated 前，除了 Section 6 的 Not Started → Generated 條件，也必須滿足：
+
+* `notes.md` 已整合上述 13 個概念。
+* 每個概念至少符合 Section 13 的五層學習架構。
+* 每個概念至少說明輸入、輸出、目的、解決問題與下一步概念。
+* 涉及公式的概念符合 Section 21：Mathematical Depth Rule（數學深度規則）。
+* Demo 依 Section 19 建立概念子資料夾。
+* Demo 完成定義依 Section 22 說明，不得只以成功執行作為完成。
+
+### Week01 Demo 建議最低結構
+
+Week01 `demo/` 建議至少包含：
+
+```text
+demo/
+├─ demo_README.md
+├─ token/
+├─ embedding/
+├─ qkv/
+├─ attention/
+├─ self_attention/
+├─ position_encoding/
+├─ multi_head_attention/
+└─ encoder_decoder/
+```
+
+若某概念尚未有 Real Model Demo（真實模型示範），至少必須提供 Concept Demo（概念示範）或 Mechanism Demo（機制示範），並在 Knowledge Gap Check（知識缺口檢查）中說明後續補強方向。
