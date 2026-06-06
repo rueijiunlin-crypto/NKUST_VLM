@@ -2,7 +2,7 @@
 
 ## 閱讀完成
 
-* [ ] README.md
+* [✅] README.md
 * [ ] notes.md
 
 ---
@@ -22,6 +22,8 @@
 * [ ] demo_tokenizer.py
 * [ ] demo_embedding.py
 * [ ] demo_attention.py
+* [ ] demo_self_attention.py
+* [ ] demo_encoder_decoder_flow.py
 
 ---
 

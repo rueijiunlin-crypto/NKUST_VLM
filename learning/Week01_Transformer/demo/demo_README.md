@@ -113,3 +113,44 @@ Transformer（轉換器架構）的基本流程可以簡化成：
 
 理解這三件事後，下一週學習 CLIP（對比式圖文預訓練）時，就能更容易理解圖片與文字如何被轉成向量並進行相似度比較。
 
+## AGENTS v2 Demo 補強
+
+### 新增 Demo 檔案
+
+- `demo_self_attention.py`：展示 Self-Attention（自注意力）中，不同 Token（詞元）如何在同一序列內互相參考。
+- `demo_encoder_decoder_flow.py`：比較 Encoder（編碼器）與 Decoder（解碼器）在理解、檢索、生成與動作描述中的角色差異。
+
+### 模型下載提醒
+
+`demo_embedding.py` 會使用 Hugging Face Transformers（模型工具套件）載入 `distilbert-base-uncased`。第一次執行時，可能需要下載 tokenizer（分詞器）與模型權重；若環境無網路，請先在可連網環境準備模型快取，或暫時只閱讀程式與預期輸出。
+
+### 補強後建議執行順序
+
+請從 Week01 根目錄依序執行：
+
+```powershell
+python demo\demo_tokenizer.py
+python demo\demo_embedding.py
+python demo\demo_attention.py
+python demo\demo_self_attention.py
+python demo\demo_encoder_decoder_flow.py
+```
+
+### 與 VLM/VLA 研究的關係
+
+- `demo_tokenizer.py`：對應 VLM/VLA 對語言指令的第一步處理，例如把「拿起紅色杯子」切成可處理的 Token。
+- `demo_embedding.py`：對應文字向量化，協助理解 CLIP（對比式圖文預訓練）如何把文字放進共同向量空間。
+- `demo_attention.py`：對應模型如何關注任務中最重要的語意線索，例如導航目標、物件屬性或空間關係。
+- `demo_self_attention.py`：對應文字 Token 或影像 Patch（影像切塊）之間的上下文關係，是 Vision Transformer（視覺轉換器）與多模態理解的基礎。
+- `demo_encoder_decoder_flow.py`：對應 CLIP 的 Encoder（編碼器）式圖文表示，以及 LLaVA（大型語言與視覺助手）和 OpenVLA（開源視覺語言動作模型）中 Decoder（解碼器）式回答生成或動作描述。
+
+### 每個 Demo 對應的學習概念
+
+| Demo | 對應概念 | 執行後應能回答 |
+|---|---|---|
+| `demo_tokenizer.py` | Token（詞元） | Token 和原始文字有什麼差異？ |
+| `demo_embedding.py` | Embedding（嵌入向量） | Embedding Shape 代表什麼？ |
+| `demo_attention.py` | Attention（注意力機制） | Attention Score 代表什麼？ |
+| `demo_self_attention.py` | Self-Attention（自注意力） | 為什麼同一句話內的 Token 需要互相參考？ |
+| `demo_encoder_decoder_flow.py` | Encoder（編碼器）、Decoder（解碼器） | Encoder 偏理解、Decoder 偏生成，差異是什麼？ |
+

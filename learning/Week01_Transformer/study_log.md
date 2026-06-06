@@ -8,7 +8,7 @@
 
 ## 閱讀進度
 
-* [ ] README.md
+* [✅] README.md
 * [ ] notes.md
 * [ ] tasks.md
 * [ ] demo/demo_README.md
@@ -20,6 +20,8 @@
 | demo_tokenizer.py | [ ] |  |  |
 | demo_embedding.py | [ ] |  |  |
 | demo_attention.py | [ ] |  |  |
+| demo_self_attention.py | [ ] |  |  |
+| demo_encoder_decoder_flow.py | [ ] |  |  |
 
 ## 問題紀錄
 
