@@ -16,7 +16,8 @@ def main() -> None:
         "the": 0.10,
         "laboratory": 0.50,
     }
-
+    print()
+    print("輸入指令：" + " ".join(tokens))
     print("Token（詞元）與 Attention Score（注意力分數）：")
     print("-" * 42)
     for token in tokens:
