@@ -29,9 +29,9 @@
 
 * 船體
 * 浮力
-* USV
+* USV（無人船）
 * 海浪
-* PINNs
+* PINNs（物理資訊神經網路）
 * 海事機器人
 
 若因規範說明需要提及，只能出現在排除項目或限制條款中。
@@ -76,18 +76,38 @@ learning/WeekXX_TopicName/
 ├─ study_log.md
 └─ demo/
    ├─ demo_README.md
-   └─ demo_*.py
+   ├─ token/
+   │  ├─ README.md
+   │  └─ demo_*.py
+   ├─ embedding/
+   │  ├─ README.md
+   │  └─ demo_*.py
+   ├─ qkv/
+   │  ├─ README.md
+   │  └─ demo_*.py
+   ├─ attention/
+   │  ├─ README.md
+   │  └─ demo_*.py
+   ├─ self_attention/
+   │  ├─ README.md
+   │  └─ demo_*.py
+   ├─ position_encoding/
+   │  ├─ README.md
+   │  └─ demo_*.py
+   └─ multi_head_attention/
+      ├─ README.md
+      └─ demo_*.py
 ```
 
 ### 必要檔案用途
 
 * `README.md`：本週學習入口，說明目標、範圍、學習安排與驗收標準。
-* `notes.md`：本週正式筆記，說明核心概念與 VLM/VLA 關聯。
+* `notes.md`：本週正式筆記，說明核心概念、資料流與適當的應用關聯。
 * `tasks.md`：本週任務，包含觀念練習、程式練習與驗收要求。
 * `review.md`：本週回顧模板，供學生整理理解與問題。
 * `completion.md`：本週完成證明，由學生填寫，Codex 不得自動填寫學生理解內容。
 * `study_log.md`：本週學習過程紀錄，保存閱讀、實作、Demo 執行與問題紀錄。
-* `demo/`：保存本週所有 Demo 程式與 Demo 說明。
+* `demo/`：保存本週所有 Demo 程式與 Demo 說明，並依核心概念建立子資料夾。
 
 ---
 
@@ -120,7 +140,7 @@ learning/WeekXX_TopicName/
 * 核心概念說明
 * 初學者可理解的直覺解釋
 * 必要的架構或資料流說明
-* 與 VLM/VLA 的關聯
+* 與 Transformer、VLM、VLA 或機器人系統等適當應用脈絡的關聯
 * 不需要過深數學推導，除非使用者明確要求
 
 ### Tasks 規範
@@ -156,18 +176,39 @@ learning/WeekXX_TopicName/
 
 所有 Demo 程式必須放在 `demo/` 中，不得散落於週資料夾根目錄或 Repository 根目錄。
 
+`demo/` 底下必須依概念建立子資料夾，例如：
+
+```text
+demo/
+├─ demo_README.md
+├─ token/
+├─ embedding/
+├─ qkv/
+├─ attention/
+├─ self_attention/
+├─ position_encoding/
+└─ multi_head_attention/
+```
+
+每個概念子資料夾至少必須包含：
+
+* `README.md`
+* `demo_*.py`
+
+Demo 應小而清楚，避免單一大型 Demo 混合太多概念。若一個概念需要多個層次的理解，應拆成多個小 Demo，而不是塞進同一個大型程式。
+
 ### Demo 可執行性
 
 Demo 必須符合：
 
 * 可用明確指令執行
-* 若需要外部套件，必須在 `demo_README.md` 說明安裝方式
+* 若需要外部套件，必須在 `demo_README.md` 與對應概念子資料夾 `README.md` 說明安裝方式
 * 若可能需要下載模型或資料，必須明確提示
 * 程式輸出需能對應本週學習概念
 
 ### demo_README.md
 
-每週 `demo/` 必須包含 `demo_README.md`，內容至少包含：
+每週 `demo/` 必須包含 `demo_README.md` 作為總覽文件，內容至少包含：
 
 * Demo 檔案清單
 * 如何執行
@@ -175,6 +216,30 @@ Demo 必須符合：
 * 如何觀察結果
 * 與本週主題的關係
 * 與 VLM/VLA 研究的關係
+
+### 概念子資料夾 README.md
+
+各概念子資料夾的 `README.md` 作為局部說明文件，內容至少包含：
+
+* 對應概念
+* 執行指令
+* 預期輸出
+* 觀察重點
+* 執行後應回答的問題
+
+教材中的 Demo 路徑必須指向對應子資料夾，例如：
+
+```text
+python demo/token/demo_tokenizer.py
+python demo/embedding/demo_embedding.py
+python demo/qkv/demo_qkv.py
+```
+
+不得只寫：
+
+```text
+python demo/demo_xxx.py
+```
 
 ---
 
@@ -456,7 +521,7 @@ ChatGPT 驗收分為三個等級：
 
 ### Major Revision
 
-表示核心概念、Tasks、Demo 或 VLM/VLA 關聯仍明顯不足。學生需重新閱讀與補做主要任務後再進入 Reviewing。
+表示核心概念、Tasks、Demo 或應用關聯仍明顯不足。學生需重新閱讀與補做主要任務後再進入 Reviewing。
 
 ---
 
@@ -559,7 +624,7 @@ Completed
 
 避免教材只停留在概念介紹。
 
-確保學生能理解、實作、驗證並連結到 VLM/VLA 研究。
+確保學生能理解、實作、驗證並連結到適當的應用脈絡。
 
 ---
 
@@ -614,16 +679,19 @@ Attention 的 Query（查詢）、Key（鍵）、Value（值）機制。
 
 ---
 
-### Level 4：VLM/VLA 關聯
+### Level 4：Application Relation（應用關聯）
 
 必須回答：
 
-「它與 VLM/VLA 有什麼關係？」
+「它與哪些後續應用或系統脈絡有關？」
 
 要求：
 
-* 說明在 CLIP、LLaVA、OpenVLA 中的用途
-* 說明在機器人應用中的角色
+* 可依概念內容選擇說明與 Transformer（轉換器架構）的關聯
+* 可依概念內容選擇說明與 Vision-Language Model（視覺語言模型，VLM）的關聯
+* 可依概念內容選擇說明與 Vision-Language-Action Model（視覺語言動作模型，VLA）的關聯
+* 可依概念內容選擇說明與機器人系統的關聯
+* 不要求每個概念都強制說明 VLM/VLA，但重要概念仍需說明其應用脈絡
 
 ---
 
@@ -693,7 +761,7 @@ Level 1~Level 5
 
 執行：
 
-python demo/demo_tokenizer.py
+python demo/token/demo_tokenizer.py
 
 觀察：
 
@@ -753,3 +821,254 @@ Week01 Transformer（轉換器）
 
 * CLIP（對比式圖文預訓練）
 * Vision Transformer（視覺轉換器）
+
+---
+
+## 16. Concept Dependency Rule（概念依賴規則）
+
+每個核心概念必須說明它在學習鏈中的位置，避免學生只背名詞而不知道資料如何往下一步流動。
+
+每個核心概念必須包含：
+
+1. 輸入是什麼
+2. 輸出是什麼
+3. 為什麼需要這個機制
+4. 解決什麼問題
+5. 下一步會進入哪個概念
+
+### 範例：Embedding（嵌入向量）
+
+輸入：
+
+* Token ID（詞元編號）
+
+輸出：
+
+* Embedding Vector（嵌入向量）
+
+目的：
+
+* 將離散 Token（詞元）轉換為可運算的向量表示。
+
+解決問題：
+
+* 原始 Token ID 只是編號，無法直接表達語意相似度或上下文關係。
+
+下一步：
+
+* Query（查詢）、Key（鍵）、Value（值）
+
+### 概念銜接要求
+
+教材應清楚呈現概念之間的資料流，例如：
+
+```text
+Text（文字）
+-> Token（詞元）
+-> Token ID（詞元編號）
+-> Embedding Vector（嵌入向量）
+-> Query（查詢）/ Key（鍵）/ Value（值）
+-> Attention Score（注意力分數）
+-> Contextual Representation（上下文表示）
+```
+
+若某週教材只涵蓋其中一部分，也必須說明尚未涵蓋的後續概念會在何時補上。
+
+---
+
+## 17. Deep Learning Content Rule（深度學習內容規則）
+
+技術原理不得只描述定義。
+
+每個核心概念必須回答：
+
+1. 為什麼需要它
+2. 沒有它會發生什麼問題
+3. 它如何解決問題
+4. 它與前一個概念的關係
+5. 它與下一個概念的關係
+
+禁止只出現：
+
+```text
+XXX 是一種...
+```
+
+而沒有進一步說明原因、輸入、輸出、機制與限制。
+
+### 深度說明最低要求
+
+每個核心概念的技術原理至少應包含：
+
+* 輸入與輸出
+* 核心運作流程
+* 解決的限制或問題
+* 與前後概念的銜接
+* 初學者容易誤解的地方
+
+### 範例：Attention（注意力機制）
+
+不足寫法：
+
+```text
+Attention 是一種讓模型關注重要資訊的方法。
+```
+
+合格寫法應補足：
+
+* 為什麼只靠 Embedding（嵌入向量）仍不足以理解上下文
+* Query（查詢）與 Key（鍵）如何比對
+* Q x K 如何產生 Attention Score（注意力分數）
+* Attention Score 如何加權 Value（值）
+* 為什麼加權後的表示比原本單一 Token 表示更有上下文資訊
+
+---
+
+## 18. Multi-Level Demo Rule（多層次 Demo 規則）
+
+每個核心概念至少應具備以下其中兩種 Demo 類型。若概念是關鍵主題，建議三種都具備。
+
+### Level A：Concept Demo（概念示範）
+
+用途：
+
+* 用於理解概念本身。
+* 可以使用人工資料、簡化數字或生活化輸入。
+
+### Level B：Mechanism Demo（機制示範）
+
+用途：
+
+* 用於理解內部運作。
+* 應呈現中間步驟，例如分數、矩陣、向量、資料流或狀態變化。
+
+### Level C：Real Model Demo（真實模型示範）
+
+用途：
+
+* 用於觀察真實模型行為。
+* 可使用 Hugging Face Transformers（模型工具套件）、PyTorch（深度學習框架）或其他合適工具。
+* 若需要下載模型、資料或大型套件，必須明確提示。
+
+### 範例：Embedding（嵌入向量）
+
+* Concept Demo（概念示範）：觀察 Token（詞元）如何轉成向量。
+* Mechanism Demo（機制示範）：比較不同詞的向量相似度。
+* Real Model Demo（真實模型示範）：使用 Hugging Face Transformers 取出真實模型 Embedding。
+
+### 範例：Attention（注意力機制）
+
+* Concept Demo（概念示範）：手動注意力分數。
+* Mechanism Demo（機制示範）：QKV 計算流程。
+* Mechanism Demo（機制示範）：Attention Matrix（注意力矩陣）。
+
+### Demo 規模要求
+
+Demo 應保持小而清楚：
+
+* 一個 Demo 優先說明一個概念或一個機制。
+* 不應用單一大型 Demo 同時混合 Token、Embedding、QKV、Attention Matrix、模型下載與視覺化。
+* 若概念有多層理解，應拆成多個 Demo，並在概念子資料夾 `README.md` 說明建議順序。
+
+---
+
+## 19. Demo Unit Folder Rule（Demo 單元資料夾規則）
+
+Demo 不得全部放於同一資料夾。
+
+每週 `demo/` 底下必須依照概念建立子資料夾。
+
+範例：
+
+```text
+demo/
+├─ token/
+├─ embedding/
+├─ qkv/
+├─ attention/
+├─ self_attention/
+├─ position_encoding/
+└─ multi_head_attention/
+```
+
+每個子資料夾至少包含：
+
+```text
+README.md
+demo_*.py
+```
+
+每個概念子資料夾 `README.md` 必須包含：
+
+* 對應概念
+* 執行指令
+* 預期輸出
+* 觀察重點
+* 執行後應回答的問題
+
+教材中的 Demo 路徑必須指向對應子資料夾。
+
+正確範例：
+
+```text
+python demo/token/demo_tokenizer.py
+python demo/embedding/demo_embedding.py
+python demo/qkv/demo_qkv.py
+```
+
+錯誤範例：
+
+```text
+python demo/demo_xxx.py
+```
+
+若某週暫時沒有某概念的 Demo，該概念子資料夾可不建立；但一旦該概念有 Demo，就必須使用對應概念子資料夾。
+
+---
+
+## 20. Refactor Over Append Rule（重構優先於追加規則）
+
+教材更新時，優先重構既有內容，而不是在文件最後追加補充內容。
+
+不得出現以下結構：
+
+```text
+前面章節：
+Token（簡易版）
+Embedding（簡易版）
+Attention（簡易版）
+
+文件最後：
+Token（完整版）
+Embedding（完整版）
+Attention（完整版）
+```
+
+新增內容必須整合回原本對應章節。
+
+例如：
+
+* Token（詞元）的補強內容必須整合進 Token 章節。
+* Embedding（嵌入向量）的補強內容必須整合進 Embedding 章節。
+* QKV 內容必須整合進 Attention（注意力機制）或獨立 QKV 章節，而不是放在文件最後。
+* Demo 提示必須出現在對應概念段落後方，而不是集中放在最後。
+
+### 重構要求
+
+更新教材時應優先：
+
+1. 找到既有概念章節。
+2. 將新增直覺、技術原理、Demo、觀察重點與驗收問題整合進該章節。
+3. 移除或避免重複的尾端補充章節。
+4. 保留必要的 Knowledge Gap Check（知識缺口檢查），但不得把完整概念教學塞進該區。
+
+### 允許放在文件最後的內容
+
+文件最後可以保留：
+
+* 本週已掌握內容
+* 本週尚未涵蓋內容
+* 下一週預告
+* 學習反思或回顧指引
+
+文件最後不應放置核心概念的完整版教學內容。
