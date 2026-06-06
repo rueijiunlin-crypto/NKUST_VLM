@@ -48,22 +48,22 @@
 
 | Week | Topic | GitHub 對應資料夾 |
 |---|---|---|
-| Week01 | Transformer 基礎 | `Week01_Transformer/` |
-| Week02 | CLIP | `Week02_CLIP/` |
-| Week03 | Hugging Face | `Week03_HuggingFace/` |
-| Week04 | LLaVA | `Week04_LLaVA/` |
-| Week05 | VLM Architecture | `Week05_VLM_Architecture/` |
-| Week06 | VLM Paper Reading | `Week06_PaperReading/` |
-| Week07 | Prompt Engineering | `Week07_PromptEngineering/` |
-| Week08 | Mini Project：Image Caption + Visual QA | `Week08_MiniProject/` |
-| Week09 | VLM + Camera | `Week09_VLM_Camera/` |
-| Week10 | VLM + ROS2 Topic | `Week10_VLM_ROS2/` |
-| Week11 | VLM + Navigation Concept | `Week11_VLM_Navigation/` |
-| Week12 | VLM Robot System Prototype | `Week12_Robot_Prototype/` |
-| Week13 | Isaac Sim Environment | `Week13_IsaacSim_Environment/` |
-| Week14 | Isaac Sim Camera | `Week14_IsaacSim_Camera/` |
-| Week15 | Isaac Sim + VLM | `Week15_IsaacSim_VLM/` |
-| Week16 | Final Mini Project | `Week16_FinalProject/` |
+| Week01 | Transformer 基礎 | `learning/Week01_Transformer/` |
+| Week02 | CLIP | `learning/Week02_CLIP/` |
+| Week03 | Hugging Face | `learning/Week03_HuggingFace/` |
+| Week04 | LLaVA | `learning/Week04_LLaVA/` |
+| Week05 | VLM Architecture | `learning/Week05_VLM_Architecture/` |
+| Week06 | VLM Paper Reading | `learning/Week06_PaperReading/` |
+| Week07 | Prompt Engineering | `learning/Week07_PromptEngineering/` |
+| Week08 | Mini Project：Image Caption + Visual QA | `learning/Week08_MiniProject/` |
+| Week09 | VLM + Camera | `learning/Week09_VLM_Camera/` |
+| Week10 | VLM + ROS2 Topic | `learning/Week10_VLM_ROS2/` |
+| Week11 | VLM + Navigation Concept | `learning/Week11_VLM_Navigation/` |
+| Week12 | VLM Robot System Prototype | `learning/Week12_Robot_Prototype/` |
+| Week13 | Isaac Sim Environment | `learning/Week13_IsaacSim_Environment/` |
+| Week14 | Isaac Sim Camera | `learning/Week14_IsaacSim_Camera/` |
+| Week15 | Isaac Sim + VLM | `learning/Week15_IsaacSim_VLM/` |
+| Week16 | Final Mini Project | `learning/Week16_FinalProject/` |
 
 每一週頁面都要包含：
 
@@ -80,7 +80,7 @@
 - 必懂概念：Transformer Encoder（轉換器編碼器）、Transformer Decoder（轉換器解碼器）。
 - 實作任務：整理資料流圖與概念筆記。
 - 驗收標準：能說明為什麼 VLM 需要 Transformer。
-- GitHub 對應資料夾：`Week01_Transformer/`
+- GitHub 對應資料夾：`learning/Week01_Transformer/`
 - Notion 紀錄項目：概念筆記、資料流圖、下週 CLIP 問題。
 
 ### Week02 CLIP
@@ -89,7 +89,7 @@
 - 必懂概念：Image Encoder（影像編碼器）、Text Encoder（文字編碼器）、Similarity（相似度）。
 - 實作任務：以圖片與多個文字標籤進行相似度測試。
 - 驗收標準：能說明共同向量空間如何支援分類與檢索。
-- GitHub 對應資料夾：`Week02_CLIP/`
+- GitHub 對應資料夾：`learning/Week02_CLIP/`
 - Notion 紀錄項目：測試圖片、候選文字、相似度結果。
 
 ### Week03 Hugging Face
@@ -98,7 +98,7 @@
 - 必懂概念：Processor（處理器）、Model（模型）、CUDA（GPU 運算平台）。
 - 實作任務：下載模型並完成一次推論。
 - 驗收標準：能記錄環境、模型與輸出結果。
-- GitHub 對應資料夾：`Week03_HuggingFace/`
+- GitHub 對應資料夾：`learning/Week03_HuggingFace/`
 - Notion 紀錄項目：模型名稱、硬體環境、執行結果。
 
 ### Week04 LLaVA
@@ -107,7 +107,7 @@
 - 必懂概念：Vision Encoder、Projector、Large Language Model（大型語言模型）。
 - 實作任務：對圖片提出問題並取得文字回答。
 - 驗收標準：能分析回答是否符合影像內容。
-- GitHub 對應資料夾：`Week04_LLaVA/`
+- GitHub 對應資料夾：`learning/Week04_LLaVA/`
 - Notion 紀錄項目：圖片、問題、回答、錯誤案例。
 
 ### Week05 VLM Architecture
@@ -116,7 +116,7 @@
 - 必懂概念：影像特徵、文字特徵、跨模態對齊。
 - 實作任務：整理 LLaVA 類模型流程圖。
 - 驗收標準：能說明 Camera（相機）到 Answer（回答）的資料流。
-- GitHub 對應資料夾：`Week05_VLM_Architecture/`
+- GitHub 對應資料夾：`learning/Week05_VLM_Architecture/`
 - Notion 紀錄項目：架構圖、輸入輸出、限制。
 
 ### Week06 VLM Paper Reading
@@ -125,7 +125,7 @@
 - 必懂概念：研究問題、方法、資料集、實驗與貢獻。
 - 實作任務：閱讀 CLIP 與 LLaVA 摘要與架構。
 - 驗收標準：能用固定模板摘要論文。
-- GitHub 對應資料夾：`Week06_PaperReading/`
+- GitHub 對應資料夾：`learning/Week06_PaperReading/`
 - Notion 紀錄項目：Paper Database 條目。
 
 ### Week07 Prompt Engineering
@@ -134,7 +134,7 @@
 - 必懂概念：任務提示、輸出格式限制、錯誤回覆處理。
 - 實作任務：設計語意導覽與物體辨識提示。
 - 驗收標準：輸出能穩定轉成結構化結果。
-- GitHub 對應資料夾：`Week07_PromptEngineering/`
+- GitHub 對應資料夾：`learning/Week07_PromptEngineering/`
 - Notion 紀錄項目：提示版本與測試結果。
 
 ### Week08 Mini Project：Image Caption + Visual QA
@@ -143,7 +143,7 @@
 - 必懂概念：圖片輸入、文字問題、模型輸出。
 - 實作任務：建立最小可執行範例。
 - 驗收標準：能展示三組圖片問答結果。
-- GitHub 對應資料夾：`Week08_MiniProject/`
+- GitHub 對應資料夾：`learning/Week08_MiniProject/`
 - Notion 紀錄項目：截圖、問題、回答、心得。
 
 ### Week09 VLM + Camera
@@ -152,7 +152,7 @@
 - 必懂概念：OpenCV、影像擷取、單張推論。
 - 實作任務：從相機取得影像並輸入模型。
 - 驗收標準：能得到場景描述。
-- GitHub 對應資料夾：`Week09_VLM_Camera/`
+- GitHub 對應資料夾：`learning/Week09_VLM_Camera/`
 - Notion 紀錄項目：相機設定、影像、模型輸出。
 
 ### Week10 VLM + ROS2 Topic
@@ -161,7 +161,7 @@
 - 必懂概念：rclpy、String Message（字串訊息）、semantic_description（語意描述）。
 - 實作任務：建立語意發布節點。
 - 驗收標準：能在終端機訂閱並看到語意文字。
-- GitHub 對應資料夾：`Week10_VLM_ROS2/`
+- GitHub 對應資料夾：`learning/Week10_VLM_ROS2/`
 - Notion 紀錄項目：節點名稱、Topic 名稱、輸出範例。
 
 ### Week11 VLM + Navigation Concept
@@ -170,7 +170,7 @@
 - 必懂概念：Semantic Landmark（語意地標）、Goal（目標）、Navigation（導航）。
 - 實作任務：設計文字指令到目標描述的轉換規則。
 - 驗收標準：能處理簡單目標物導覽案例。
-- GitHub 對應資料夾：`Week11_VLM_Navigation/`
+- GitHub 對應資料夾：`learning/Week11_VLM_Navigation/`
 - Notion 紀錄項目：指令、解析結果、導航概念圖。
 
 ### Week12 VLM Robot System Prototype
@@ -179,7 +179,7 @@
 - 必懂概念：節點、資料流、錯誤處理。
 - 實作任務：整合文字輸入、VLM 推論與語意 Topic。
 - 驗收標準：能完成可展示流程。
-- GitHub 對應資料夾：`Week12_Robot_Prototype/`
+- GitHub 對應資料夾：`learning/Week12_Robot_Prototype/`
 - Notion 紀錄項目：系統架構圖、執行截圖、問題。
 
 ### Week13 Isaac Sim Environment
@@ -188,7 +188,7 @@
 - 必懂概念：場景、目標物、障礙物、機器人模型。
 - 實作任務：建立簡化教室、實驗室或走廊場景。
 - 驗收標準：場景可載入並能放置目標物。
-- GitHub 對應資料夾：`Week13_IsaacSim_Environment/`
+- GitHub 對應資料夾：`learning/Week13_IsaacSim_Environment/`
 - Notion 紀錄項目：場景截圖、物件列表、設定。
 
 ### Week14 Isaac Sim Camera
@@ -197,7 +197,7 @@
 - 必懂概念：Camera Sensor（相機感測器）、影像 Topic、畫面擷取。
 - 實作任務：設定模擬相機並輸出影像。
 - 驗收標準：能保存或訂閱相機畫面。
-- GitHub 對應資料夾：`Week14_IsaacSim_Camera/`
+- GitHub 對應資料夾：`learning/Week14_IsaacSim_Camera/`
 - Notion 紀錄項目：相機位置、影像結果、問題。
 
 ### Week15 Isaac Sim + VLM
@@ -206,7 +206,7 @@
 - 必懂概念：模擬影像、模型輸入、語意輸出。
 - 實作任務：讓 VLM 描述模擬場景內容。
 - 驗收標準：語意輸出能反映場景中的主要物件。
-- GitHub 對應資料夾：`Week15_IsaacSim_VLM/`
+- GitHub 對應資料夾：`learning/Week15_IsaacSim_VLM/`
 - Notion 紀錄項目：場景、提示、回答、錯誤案例。
 
 ### Week16 Final Mini Project
@@ -215,7 +215,7 @@
 - 必懂概念：使用者指令、語意理解、導航概念、展示流程。
 - 實作任務：展示「找出指定目標」或「前往指定位置」流程。
 - 驗收標準：有完整 README、截圖、執行紀錄與回顧。
-- GitHub 對應資料夾：`Week16_FinalProject/`
+- GitHub 對應資料夾：`learning/Week16_FinalProject/`
 - Notion 紀錄項目：成果展示、限制、下一步論文方向。
 
 ## 3. Paper Database
@@ -369,3 +369,4 @@
 4. 建立 Experiment Log Database，作為每次實作紀錄入口。
 5. 建立 Isaac Sim & ROS2 Page，整理模擬與機器人中介軟體筆記。
 6. 建立 Thesis Research Database，持續比較論文題目。
+

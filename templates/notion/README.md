@@ -1,3 +1,4 @@
-﻿# notion_templates
+﻿# templates/notion
 
 此資料夾保存可直接複製到 Notion（筆記與資料庫管理工具）的模板，包含每週學習、論文閱讀、實驗紀錄、論文題目、週回顧與 Codex 任務追蹤。
+
