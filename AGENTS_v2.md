@@ -549,3 +549,205 @@ Completed
 
 只有在使用者明確提供「ChatGPT 已驗收通過 WeekXX」或等價訊息時，Codex 才能協助將該週推進到 Completed 相關流程。
 
+## 13. Learning Content Standard
+
+所有 Week 教材必須符合以下五層學習架構。
+
+目的：
+
+避免教材只停留在概念介紹。
+
+確保學生能理解、實作、驗證並連結到 VLM/VLA 研究。
+
+---
+
+### Level 1：直覺理解
+
+必須回答：
+
+「這個東西是什麼？」
+
+要求：
+
+* 初學者可理解
+* 避免數學公式
+* 使用生活化例子
+
+範例：
+
+Attention（注意力機制）是模型決定要關注哪些資訊的方法。
+
+---
+
+### Level 2：技術原理
+
+必須回答：
+
+「它實際上怎麼運作？」
+
+要求：
+
+* 說明內部機制
+* 引入必要技術名詞
+* 可以使用簡化架構圖
+
+範例：
+
+Attention 的 Query（查詢）、Key（鍵）、Value（值）機制。
+
+---
+
+### Level 3：實作驗證
+
+必須回答：
+
+「我可以怎麼觀察它？」
+
+要求：
+
+* 至少一個可執行 Demo
+* 提供執行方式
+* 提供觀察重點
+* 提供預期輸出
+
+---
+
+### Level 4：VLM/VLA 關聯
+
+必須回答：
+
+「它與 VLM/VLA 有什麼關係？」
+
+要求：
+
+* 說明在 CLIP、LLaVA、OpenVLA 中的用途
+* 說明在機器人應用中的角色
+
+---
+
+### Level 5：驗收問題
+
+必須回答：
+
+「我是否真的理解？」
+
+要求：
+
+* 至少三個觀念問題
+* 至少一個應用問題
+* 必須能用自己的話回答
+
+---
+
+### 每個核心概念都必須符合五層架構
+
+例如：
+
+Token（詞元）
+
+Embedding（嵌入向量）
+
+Attention（注意力機制）
+
+Self-Attention（自注意力）
+
+Encoder（編碼器）
+
+Decoder（解碼器）
+
+皆需具備：
+
+Level 1~Level 5
+
+## 14. Demo Integration Rule
+
+教材不得將所有 Demo 集中於最後。
+
+當某個概念有對應 Demo 時，
+
+必須於該概念段落後立即提示學生執行。
+
+---
+
+### 必須包含
+
+1. Demo 檔案名稱
+
+2. 執行指令
+
+3. 觀察重點
+
+4. 預期輸出
+
+5. 執行後應能回答的問題
+
+---
+
+### 範例
+
+#### 建議執行 Demo
+
+當讀完 Token（詞元）後：
+
+執行：
+
+python demo/demo_tokenizer.py
+
+觀察：
+
+* Token 如何切分
+* Token ID 如何產生
+
+預期輸出：
+
+Tokens: [...]
+
+Token IDs: [...]
+
+執行後請回答：
+
+1. Token 和原始文字有什麼差異？
+2. Token ID 的用途是什麼？
+3. 為什麼需要 Embedding（嵌入向量）？
+
+---
+
+每個 Demo 必須有明確的執行時機。
+
+不得只在 demo_README.md 中列出。
+
+## 15. Knowledge Gap Check
+
+每個 Week 的 notes.md 最後必須包含：
+
+### 本週尚未涵蓋內容
+
+列出：
+
+* 已學會內容
+* 尚未學習內容
+* 下一週將補充內容
+
+---
+
+範例
+
+Week01 Transformer（轉換器）
+
+已學會：
+
+* Token
+* Embedding
+* Attention
+* Self-Attention
+
+尚未涵蓋：
+
+* Position Encoding（位置編碼）
+* Multi-Head Attention（多頭注意力）
+* Layer Normalization（層正規化）
+
+下一週：
+
+* CLIP（對比式圖文預訓練）
+* Vision Transformer（視覺轉換器）
