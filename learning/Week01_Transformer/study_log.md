@@ -19,8 +19,8 @@
 |---|---|---|---|
 | demo/token/demo_tokenizer.py | [✅] |透過分詞器將句子分成token並賦予編號|無|
 | demo/embedding/demo_embedding.py | [✅] |將分類好的token轉換為數字向量|無|
-| demo/qkv/demo_qkv.py | [ ] |  |  |
-| demo/attention/demo_attention.py | [ ] |  |  |
+| demo/qkv/demo_qkv.py | [✅] | 將數字向量轉換成Q K V三種向量供注意力機制使用 | 無 |
+| demo/attention/demo_attention.py | [✅] | 在一句話中根據任務找最大關聯的token | 無 |
 | demo/attention/demo_attention_matrix.py | [ ] |  |  |
 | demo/self_attention/demo_self_attention.py | [ ] |  |  |
 | demo/position_encoding/demo_position_encoding.py | [ ] |  |  |
