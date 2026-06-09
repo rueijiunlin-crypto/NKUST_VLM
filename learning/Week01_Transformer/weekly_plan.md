@@ -170,11 +170,11 @@ print("The token helps locate the target in the instruction.")
 - [✅] 執行 `demo/encoder_decoder/demo_encoder_decoder_flow.py`。
 - [ ] 完成 4 題觀念練習。
 - [ ] 完成 3 題程式練習。
-- [ ] 將 Demo（示範程式）輸出與觀察記錄到 `study_log.md`。
-- [ ] 能口頭說明 Token -> Token ID -> Embedding -> QKV -> Attention 的流程。
-- [ ] 能口頭說明 Attention Matrix、Position Encoding 與 Multi-Head Attention。
-- [ ] 能比較 Encoder 與 Decoder。
-- [ ] 能用 150 字說明 Transformer 與 CLIP 的關係。
+- [✅] 將 Demo（示範程式）輸出與觀察記錄到 `study_log.md`。
+- [✅] 能口頭說明 Token -> Token ID -> Embedding -> QKV -> Attention 的流程。
+- [✅] 能口頭說明 Attention Matrix、Position Encoding 與 Multi-Head Attention。
+- [✅] 能比較 Encoder 與 Decoder。
+- [✅] 能用 150 字說明 Transformer 與 CLIP 的關係。
 
 ## 8. Notion 紀錄項目
 
