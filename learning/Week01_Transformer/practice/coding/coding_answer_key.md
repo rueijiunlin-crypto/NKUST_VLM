@@ -39,3 +39,42 @@ TODO 重點是把 `d_model` 拆成多個 head，每個 head 有 `head_dim = d_mo
 ## 8. encoder_decoder_practice.py
 
 TODO 重點是用簡化流程理解 Encoder 負責產生輸入表示，Decoder 使用自己的輸入並參考 Encoder 輸出。常見錯誤是把 Encoder 輸出與 Decoder 輸入混成同一件事。
+
+## 整合操作題參考方向
+
+以下內容由原 `weekly_plan.md` 移入。請先完成 `coding_practice.md` 與 `exercises/` 後再查看。
+
+### 操作題 A：簡易 Token 與詞彙表
+
+```python
+sentence = "take me to the laboratory"
+tokens = sentence.split()
+vocab = {token: idx for idx, token in enumerate(sorted(set(tokens)))}
+ids = [vocab[token] for token in tokens]
+print(tokens)
+print(ids)
+```
+
+驗收重點：能看到文字被切成 Token，並被轉成數字 ID。
+
+### 操作題 B：簡易 Attention 權重直覺
+
+```python
+tokens = ["go", "to", "red", "door", "laboratory"]
+attention = {
+    "go": 0.2,
+    "to": 0.1,
+    "red": 0.2,
+    "door": 0.4,
+    "laboratory": 0.1,
+}
+most_important = max(attention, key=attention.get)
+print(f"Most important token: {most_important}")
+print("The token helps locate the target in the instruction.")
+```
+
+驗收重點：能用程式輸出說明 Attention 是「加權參考其他 Token」。
+
+### 操作題 C：簡易 QKV 分數
+
+手動設定一個 Query 向量與三個 Key 向量，計算 Q x K 分數。驗收重點是能說明分數最高的 Key 為什麼最接近 Query。

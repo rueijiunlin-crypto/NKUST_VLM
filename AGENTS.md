@@ -1,12 +1,12 @@
-# AGENTS_v3.1.md
+# AGENTS.md
 
 > Current revision: v3.1.1 practice-enhanced
 >
-> 本修訂以 `AGENTS_v3.1.md` 的原始標準為基礎，只補充 `practice/` 練習資料夾規範，不改寫原本 v3.1 的核心內容。
+> 本修訂以 `AGENTS.md` 的原始標準為基礎，只補充 `practice/` 練習資料夾規範，不改寫原本 v3.1 的核心內容。
 
 本文件定義本 Repository（程式碼與文件倉庫）的專案規則、工作流程、文件標準與 Codex 行為規範。
 
-`AGENTS_v3.1.md` 只描述通用規則與每週文件格式，不得寫入具體 Week01、Week02 或任何特定週次的課程內容。每週課程規劃必須放在該週資料夾內的 `weekly_plan.md`。
+`AGENTS.md` 只描述通用規則與每週文件格式，不得寫入具體 Week01、Week02 或任何特定週次的課程內容。每週課程規劃必須放在該週資料夾內的 `weekly_plan.md`。
 
 ---
 
@@ -253,7 +253,7 @@ Codex 不得將 `solutions/` 的完整答案複製到 `exercises/`。
 learning/WeekXX_TopicName/weekly_plan.md
 ```
 
-不得將每週課程規劃放在 `AGENTS_v3.md`。`AGENTS_v3.md` 只能描述 `weekly_plan.md` 的格式與通用標準，不得寫入具體週次的課程內容。
+不得將每週課程規劃放在 `AGENTS.md`。`AGENTS.md` 只能描述 `weekly_plan.md` 的格式與通用標準，不得寫入具體週次的課程內容。
 
 ### weekly_plan.md 必須包含
 
@@ -836,7 +836,7 @@ Codex 不得因為 Practice 檔案已建立，就把 Notion 狀態改成 Complet
 
 若使用者要求生成多週內容，Codex 應提醒此規範，並只處理已被批准的週次。
 
-每一週的最低涵蓋概念、必要 Demo、任務清單與驗收條件，應寫在該週的 `weekly_plan.md`，不得寫入 `AGENTS_v3.md`。
+每一週的最低涵蓋概念、必要 Demo、任務清單與驗收條件，應寫在該週的 `weekly_plan.md`，不得寫入 `AGENTS.md`。
 
 ---
 
@@ -1100,11 +1100,11 @@ XXX 是一種...
 
 Codex 在本 Repository 工作時必須遵守：
 
-* 執行任務前先閱讀並遵守目前最高版本的 `AGENTS_v*.md`。
+* 執行任務前先閱讀並遵守目前最高版本的 `AGENTS.md`。
 * 不得直接修改 `main` 分支。
 * 不得在未經要求時修改既有 Week 內容。
 * 建立或更新每週教材時，必須維持 `weekly_plan.md`、`notes.md`、`study_log.md`、`demo/` 的職責分離。
-* 不得把具體週次課程內容寫入 `AGENTS_v3.md`。
+* 不得把具體週次課程內容寫入 `AGENTS.md`。
 * 不得代替學生撰寫個人理解、學習反思或 Demo 驗收回答。
 * 不得宣稱已更新 Notion，除非確實具有 Notion 權限並完成同步。
 * 更新教材時應重構既有內容，避免在文件尾端堆疊重複補充。

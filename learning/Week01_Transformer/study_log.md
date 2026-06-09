@@ -27,6 +27,13 @@
 | demo/multi_head_attention/demo_multi_head_attention.py | [x] | 了解多頭可以給每隔token做分類 | 無 |
 | demo/encoder_decoder/demo_encoder_decoder_flow.py | [x] | 理解文字如何進行輸入與輸出 | 無 |
 
+## Practice 結果摘要
+
+| Practice | 是否完成 | 結果 | 錯誤修正 | 備註 |
+|---|---|---|---|---|
+| Concept Practice |  |  |  |  |
+| Coding Practice |  |  |  |  |
+
 ## 個人概念紀錄
 
 ### Token（詞元）
@@ -189,10 +196,3 @@ embedding 如何透過 attention 和 encoder 形成語意表示，
 ## 下週目標
 
 -
-
-## Practice 結果摘要
-
-| Practice | 是否完成 | 結果 | 錯誤修正 | 備註 |
-|---|---|---|---|---|
-| Concept Practice |  |  |  |  |
-| Coding Practice |  |  |  |  |

@@ -15,6 +15,28 @@
 | 7 | `exercises/multi_head_attention_practice.py` | Multi-Head Attention |  |  |  |
 | 8 | `exercises/encoder_decoder_practice.py` | Encoder / Decoder 流程 |  |  |  |
 
+## 整合操作題
+
+以下操作題由原 `weekly_plan.md` 移入，作為 Coding Practice 的補充索引。完整參考方向請完成練習後再查看 [`coding_answer_key.md`](./coding_answer_key.md)。
+
+### 操作題 A：簡易 Token 與詞彙表
+
+建立簡單 Python（程式語言）檔案，練習輸入英文句子 `take me to the laboratory`，用空白切分成 Token，建立 vocabulary（詞彙表），並印出 Token 列表與 ID 列表。
+
+建議先完成：`exercises/token_practice.py`
+
+### 操作題 B：簡易 Attention 權重直覺
+
+建立簡單程式，模擬 `["go", "to", "red", "door", "laboratory"]` 中每個 Token 的注意力權重，找出分數最高的 Token，並用一句話說明它為什麼重要。
+
+建議先完成：`exercises/attention_matrix_practice.py`
+
+### 操作題 C：簡易 QKV 分數
+
+建立簡單程式，手動設定一個 Query 向量與三個 Key 向量，計算 Q x K 分數，並說明分數最高的 Key 為什麼最接近 Query。
+
+建議先完成：`exercises/qkv_practice.py`
+
 ## 建議執行方式
 
 ```bash
