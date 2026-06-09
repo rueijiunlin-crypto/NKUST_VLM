@@ -109,6 +109,15 @@ Embedding
 
 當注意力轉換完成後，可以讓單獨的 Token 變成包含前後文意思的 Token。
 
+Self-Attention：
+同一份資料內部互相比對，用來理解上下文。
+
+Cross-Attention：
+不同資料來源互相比對，用來對齊資訊。
+
+Attention：
+以上兩者的總稱，不一定只代表交叉對比。
+
 ### Attention Matrix（注意力矩陣）
 
 透過轉換矩陣找哪個字跟哪個字比較有關聯。
