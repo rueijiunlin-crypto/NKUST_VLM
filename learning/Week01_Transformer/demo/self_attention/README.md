@@ -1,4 +1,4 @@
-# Self-Attention Demo
+# Self-Attention Demo（自注意力示範程式）
 
 ## 對應概念
 
@@ -6,23 +6,26 @@ Self-Attention（自注意力）。
 
 ## 執行指令
 
+請在 `learning/Week01_Transformer/` 目錄下執行：
+
 ```powershell
-python demo\self_attention\demo_self_attention.py
+python demo/self_attention/demo_self_attention.py
 ```
 
 ## 預期輸出
 
-- 不同 Query token 的注意力分布
-- 每個 Token 對其他 Token 的關注分數
+- 每個 Query token。
+- 該 Query token 關注的其他 Token。
+- 權重或分數摘要。
 
 ## 觀察重點
 
-- 每個 Token 都可以是 Query（查詢）。
-- 不同 Token 會看到不同資訊。
-- Self-Attention 是序列內部互相參考。
+- 同一段輸入中的每個 Token 都能扮演 Query。
+- 每個 Token 會依照自己的 Query 關注不同 Key。
+- 輸出表示會包含上下文資訊。
 
 ## 執行後應回答的問題
 
-1. 為什麼每個 Token 都可以是 Query？
-2. Self-Attention 和一般 Attention 有什麼關係？
-3. 為什麼不同 Token 會關注不同資訊？
+1. Self-Attention 與一般 Attention 的差異是什麼？
+2. 為什麼每個 Token 需要看其他 Token？
+3. 經過 Self-Attention 後，Token 表示如何改變？

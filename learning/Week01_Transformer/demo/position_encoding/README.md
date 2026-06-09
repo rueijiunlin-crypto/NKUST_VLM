@@ -1,4 +1,4 @@
-# Position Encoding Demo
+# Position Encoding Demo（位置編碼示範程式）
 
 ## 對應概念
 
@@ -6,23 +6,26 @@ Position Encoding（位置編碼）。
 
 ## 執行指令
 
+請在 `learning/Week01_Transformer/` 目錄下執行：
+
 ```powershell
-python demo\position_encoding\demo_position_encoding.py
+python demo/position_encoding/demo_position_encoding.py
 ```
 
 ## 預期輸出
 
-- 不同 position（位置）的 encoding（編碼）數值
-- Token 與位置編碼的對應
+- 不同位置的 Position Encoding 向量。
+- 相同維度在不同位置的數值變化。
+- Token Embedding 加上位置資訊後的示意。
 
 ## 觀察重點
 
-- 不同位置會產生不同位置訊號。
-- Transformer（轉換器架構）需要額外位置資訊。
-- 順序改變會影響語意。
+- Transformer（轉換器架構）本身不天然知道順序。
+- 不同位置需要有不同的位置表示。
+- 文字 Token 與影像 Patch（影像切塊）都需要位置資訊。
 
 ## 執行後應回答的問題
 
-1. Transformer 為什麼不知道 Token 順序？
-2. Position Encoding 解決了什麼問題？
-3. 影像 Patch（影像切塊）為什麼也需要位置資訊？
+1. 為什麼 Transformer 需要 Position Encoding？
+2. Position Encoding 如何補足順序資訊？
+3. 影像 Patch 的位置資訊和文字 Token 的位置資訊有什麼相似之處？
