@@ -433,3 +433,9 @@ Week01 建立的是「序列如何變成上下文向量」的基礎。Week02 CLI
 1. 為什麼學 CLIP 前要先理解 Transformer？
 2. 影像 Patch 與文字 Token 有什麼相似之處？
 3. CLIP 的共同向量空間和 Week01 哪些概念最相關？
+
+---
+
+## Practice 對應
+
+本週練習統一放在 [`practice/`](./practice/README.md)。`demo/` 用來觀察完整可執行流程，`practice/` 用來進行觀念作答與程式補空練習；參考答案請完成練習後再查看。

@@ -195,3 +195,23 @@ print("The token helps locate the target in the instruction.")
 - 一張簡單圖片，用於圖文相似度測試。
 - 5 個文字標籤，用於比較圖片與文字描述。
 - 一段自己的解釋：為什麼 Transformer 能幫助 CLIP 處理文字與影像？
+
+---
+
+## Practice 順序
+
+1. [Practice Overview](./practice/README.md)
+2. [Concept Practice](./practice/concept/concept_practice.md)
+3. [Coding Practice](./practice/coding/coding_practice.md)
+
+參考答案請完成練習後再查看：
+
+- [Concept Answer Key](./practice/concept/concept_answer_key.md)
+- [Coding Answer Key](./practice/coding/coding_answer_key.md)
+- [Coding Solutions](./practice/coding/solutions/)
+
+## Practice 驗收補充
+
+- [ ] 完成 Concept Practice
+- [ ] 完成 Coding Practice
+- [ ] 在 study_log.md 記錄 Practice 結果

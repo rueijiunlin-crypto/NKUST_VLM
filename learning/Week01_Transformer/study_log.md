@@ -189,3 +189,10 @@ embedding 如何透過 attention 和 encoder 形成語意表示，
 ## 下週目標
 
 -
+
+## Practice 結果摘要
+
+| Practice | 是否完成 | 結果 | 錯誤修正 | 備註 |
+|---|---|---|---|---|
+| Concept Practice |  |  |  |  |
+| Coding Practice |  |  |  |  |
