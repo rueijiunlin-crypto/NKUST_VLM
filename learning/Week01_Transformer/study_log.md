@@ -9,9 +9,9 @@
 ## 閱讀進度
 
 - [x] README.md
-- [ ] weekly_plan.md
-- [ ] notes.md
-- [ ] demo/demo_README.md
+- [x] weekly_plan.md
+- [x] notes.md
+- [x] demo/demo_README.md
 
 ## Demo（示範程式）執行結果
 
@@ -21,11 +21,11 @@
 | demo/embedding/demo_embedding.py | [x] | 將分類好的 Token 轉換為數字向量。 | 無 |
 | demo/qkv/demo_qkv.py | [x] | 將數字向量轉換成 Q、K、V 三種向量，供注意力機制使用。 | 無 |
 | demo/attention/demo_attention.py | [x] | 在一句話中根據任務找出關聯較高的 Token。 | 無 |
-| demo/attention/demo_attention_matrix.py | [ ] |  |  |
-| demo/self_attention/demo_self_attention.py | [ ] |  |  |
-| demo/position_encoding/demo_position_encoding.py | [ ] |  |  |
-| demo/multi_head_attention/demo_multi_head_attention.py | [ ] |  |  |
-| demo/encoder_decoder/demo_encoder_decoder_flow.py | [ ] |  |  |
+| demo/attention/demo_attention_matrix.py | [x] | 看到他的token矩陣 | 無 |
+| demo/self_attention/demo_self_attention.py | [x] | 了解到同一句話中，對比token時會有不同的分數 | 無 |
+| demo/position_encoding/demo_position_encoding.py | [x] | 了解token如何獲得位置資訊的 | 無 |
+| demo/multi_head_attention/demo_multi_head_attention.py | [x] | 了解多頭可以給每隔token做分類 | 無 |
+| demo/encoder_decoder/demo_encoder_decoder_flow.py | [x] | 理解文字如何進行輸入與輸出 | 無 |
 
 ## 個人概念紀錄
 
@@ -155,7 +155,7 @@ embedding 如何透過 attention 和 encoder 形成語意表示，
 
 ### Transformer 與 CLIP（對比式圖文預訓練）的關係
 
-待完成。
+轉換器主要是做編碼，CLIP則是運用到視覺與文字編碼器去做對比
 
 ## Notion 更新
 

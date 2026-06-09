@@ -156,18 +156,18 @@ print("The token helps locate the target in the instruction.")
 
 ## 7. 驗收清單
 
-- [ ] 閱讀 `README.md`。
-- [ ] 閱讀 `weekly_plan.md`。
-- [ ] 閱讀 `notes.md`。
-- [ ] 執行 `demo/token/demo_tokenizer.py`。
-- [ ] 執行 `demo/embedding/demo_embedding.py`。
-- [ ] 執行 `demo/qkv/demo_qkv.py`。
-- [ ] 執行 `demo/attention/demo_attention.py`。
-- [ ] 執行 `demo/attention/demo_attention_matrix.py`。
-- [ ] 執行 `demo/self_attention/demo_self_attention.py`。
-- [ ] 執行 `demo/position_encoding/demo_position_encoding.py`。
-- [ ] 執行 `demo/multi_head_attention/demo_multi_head_attention.py`。
-- [ ] 執行 `demo/encoder_decoder/demo_encoder_decoder_flow.py`。
+- [✅] 閱讀 `README.md`。
+- [✅] 閱讀 `weekly_plan.md`。
+- [✅] 閱讀 `notes.md`。
+- [✅] 執行 `demo/token/demo_tokenizer.py`。
+- [✅] 執行 `demo/embedding/demo_embedding.py`。
+- [✅] 執行 `demo/qkv/demo_qkv.py`。
+- [✅] 執行 `demo/attention/demo_attention.py`。
+- [✅] 執行 `demo/attention/demo_attention_matrix.py`。
+- [✅] 執行 `demo/self_attention/demo_self_attention.py`。
+- [✅] 執行 `demo/position_encoding/demo_position_encoding.py`。
+- [✅] 執行 `demo/multi_head_attention/demo_multi_head_attention.py`。
+- [✅] 執行 `demo/encoder_decoder/demo_encoder_decoder_flow.py`。
 - [ ] 完成 4 題觀念練習。
 - [ ] 完成 3 題程式練習。
 - [ ] 將 Demo（示範程式）輸出與觀察記錄到 `study_log.md`。
