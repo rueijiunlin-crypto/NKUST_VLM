@@ -4,19 +4,23 @@
 def build_vocab(tokens):
     """Return a dict that maps each token to an integer id."""
     # TODO: 將 None 替換成 token 到 id 的字典。
-    return None
+    vocab = {}
+    for token in tokens:
+        if token not in vocab:
+            vocab[token] = len(vocab)
+    return vocab
 
 
 def encode(tokens, vocab):
     """Convert tokens to token ids."""
     # TODO: 透過 vocab 查詢每個 token，回傳 id 清單。
-    raise NotImplementedError
+    return [vocab[token] for token in tokens]
 
 
 def decode(token_ids, id_to_token):
     """Convert token ids back to tokens."""
     # TODO: 透過每個 id 查詢對應 token，回傳 token 清單。
-    raise NotImplementedError
+    return [id_to_token[token_id] for token_id in token_ids]
 
 
 def main():
