@@ -5,13 +5,13 @@ import numpy as np
 
 def encoder_step(source_embeddings):
     """Create a simple encoder memory from source embeddings."""
-    # TODO: Return a representation that summarizes or transforms source_embeddings.
+    # TODO: 回傳能摘要或轉換 source_embeddings 的表示。
     return None
 
 
 def decoder_step(target_embeddings, encoder_memory):
     """Use target embeddings and encoder memory to produce a simple decoder output."""
-    # TODO: Combine target information with encoder memory.
+    # TODO: 將 target 資訊與 encoder memory（編碼器記憶）結合。
     raise NotImplementedError
 
 

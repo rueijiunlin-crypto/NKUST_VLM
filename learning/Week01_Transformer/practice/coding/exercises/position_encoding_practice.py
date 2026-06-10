@@ -5,13 +5,13 @@ import numpy as np
 
 def make_position_encoding(seq_len, dim):
     """Create a simple deterministic position encoding."""
-    # TODO: Return an array with shape (seq_len, dim).
+    # TODO: 回傳 shape（形狀）為 (seq_len, dim) 的陣列。
     return None
 
 
 def add_position_encoding(embeddings):
     """Add position information to embeddings."""
-    # TODO: Create position encoding with the same shape as embeddings.
+    # TODO: 建立與 embeddings 相同 shape（形狀）的 position encoding（位置編碼）。
     position = None
     return embeddings + position
 

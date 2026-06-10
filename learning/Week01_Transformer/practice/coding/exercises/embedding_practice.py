@@ -5,7 +5,7 @@ import numpy as np
 
 def lookup_embeddings(token_ids, embedding_table):
     """Return embeddings for the given token ids."""
-    # TODO: Use token_ids to index embedding_table.
+    # TODO: 使用 token_ids 對 embedding_table 進行索引查詢。
     return None
 
 

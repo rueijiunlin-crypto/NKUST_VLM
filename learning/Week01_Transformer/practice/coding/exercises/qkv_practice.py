@@ -5,7 +5,7 @@ import numpy as np
 
 def project_qkv(x, w_q, w_k, w_v):
     """Project x into query, key, and value matrices."""
-    # TODO: Compute q, k, and v with matrix multiplication.
+    # TODO: 使用矩陣乘法計算 q、k、v。
     q = None
     k = None
     v = None

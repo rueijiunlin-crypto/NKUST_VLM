@@ -6,14 +6,14 @@ import numpy as np
 def split_heads(x, num_heads):
     """Split x from (seq_len, d_model) to (num_heads, seq_len, head_dim)."""
     seq_len, d_model = x.shape
-    # TODO: Check that d_model can be split evenly.
-    # TODO: Reshape and transpose to put num_heads first.
+    # TODO: 檢查 d_model 是否可以被平均分成多個 head。
+    # TODO: 重新 reshape 並 transpose，讓 num_heads 放在第一個維度。
     return None
 
 
 def combine_heads(x):
     """Combine x from (num_heads, seq_len, head_dim) to (seq_len, d_model)."""
-    # TODO: Transpose and reshape back to one matrix.
+    # TODO: transpose 後再 reshape 回單一矩陣。
     return None
 
 
