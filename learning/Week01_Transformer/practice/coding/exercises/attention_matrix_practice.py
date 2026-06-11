@@ -13,8 +13,9 @@ def softmax(x, axis=-1):#softmax(x_i) = exp(x_i) / sum(exp(x))
 
 def attention_weights(q, k):
     """Return the attention matrix from q and k."""
-    d_k = q.shape[-1]
-    scores = q @ k.T / np.sqrt(d_k)
+    d_k = q.shape[-1] #d_k 是每個向量的維度，通常是模型的隱藏層大小。這個縮放因子是為了避免在 softmax 前分數過大導致梯度消失。
+    # TODO: 使用 q @ k.T / sqrt(d_k) 計算縮放後的分數。
+    scores = q @ k.T / np.sqrt(d_k) #@ 是矩陣乘法，k.T 是 k 的轉置，讓我們能計算 q 中每個向量與 k 中每個向量的點積。除以 sqrt(d_k) 是為了縮放分數，避免在 softmax 前分數過大導致梯度消失。
     # TODO: 沿著 key 軸套用 softmax。
     return softmax(scores, axis=-1)
 
