@@ -19,26 +19,10 @@
 
 | Demo | 是否執行 | 結果 | 問題 |
 |---|---|---|---|
-| demo/demo_01_token_embedding.py |  |  |  |
-| demo/demo_02_attention_overview.py |  |  |  |
-| demo/demo_03_position_multihead.py |  |  |  |
-| demo/demo_04_transformer_flow.py |  |  |  |
-
-## 重構前 Demo 歷史執行紀錄
-
-以下內容是學生已填寫的歷史紀錄，僅保留原始觀察與完成狀態；其中路徑已由目前 Flat Integrated Demo 取代。
-
-| Demo | 是否執行 | 結果 | 問題 |
-|---|---|---|---|
-| demo/token/demo_tokenizer.py | [x] | 透過分詞器將句子分成 Token，並賦予編號。 | 無 |
-| demo/embedding/demo_embedding.py | [x] | 將分類好的 Token 轉換為數字向量。 | 無 |
-| demo/qkv/demo_qkv.py | [x] | 將數字向量轉換成 Q、K、V 三種向量，供注意力機制使用。 | 無 |
-| demo/attention/demo_attention.py | [x] | 在一句話中根據任務找出關聯較高的 Token。 | 無 |
-| demo/attention/demo_attention_matrix.py | [x] | 看到他的token矩陣 | 無 |
-| demo/self_attention/demo_self_attention.py | [x] | 了解到同一句話中，對比token時會有不同的分數 | 無 |
-| demo/position_encoding/demo_position_encoding.py | [x] | 了解token如何獲得位置資訊的 | 無 |
-| demo/multi_head_attention/demo_multi_head_attention.py | [x] | 了解多頭可以給每隔token做分類 | 無 |
-| demo/encoder_decoder/demo_encoder_decoder_flow.py | [x] | 理解文字如何進行輸入與輸出 | 無 |
+| demo/demo_01_token_embedding.py |✅|  |  |
+| demo/demo_02_attention_overview.py |✅|  |  |
+| demo/demo_03_position_multihead.py |✅|  |  |
+| demo/demo_04_transformer_flow.py |✅|  |  |
 
 ## Practice 結果摘要
 
