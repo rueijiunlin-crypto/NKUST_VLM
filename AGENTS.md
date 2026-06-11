@@ -1,8 +1,8 @@
 # AGENTS.md
 
-> Current revision: v3.1.1 practice-enhanced
+> Current revision: v3.1.2 dual-mode coding practice
 >
-> 本修訂以 `AGENTS.md` 的原始標準為基礎，只補充 `practice/` 練習資料夾規範，不改寫原本 v3.1 的核心內容。
+> 本修訂以 v3.1.1 Practice 規範為基礎，補充 Guided Code Reading Mode 與 Implementation Practice Mode，不改寫原本 v3.1 的核心內容。
 
 本文件定義本 Repository（程式碼與文件倉庫）的專案規則、工作流程、文件標準與 Codex 行為規範。
 
@@ -127,6 +127,36 @@ learning/WeekXX_TopicName/
 2. `*_practice.py` 與 `*_solution.py` 是命名模式，不得在 AGENTS 規範中寫死特定週次的檔名。
 3. 每週若包含 Practice 題目，該週 `weekly_plan.md` 必須連結到 `practice/` 入口。
 4. 若該週沒有 Coding Practice，可以不建立 `practice/coding/exercises/`、`practice/coding/solutions/` 或相關程式檔；但若有 Coding Practice，則必須使用 `practice/coding/` 結構，且不得假裝學生已完成練習。
+5. Coding Practice 必須依該週學習目標選擇 Guided Code Reading Mode（引導式程式閱讀模式）或 Implementation Practice Mode（實作練習模式），不得一律要求學生從零補完程式碼。
+
+若採用 Guided Code Reading Mode，可使用：
+
+```text
+practice/coding/
+├─ README.md
+├─ requirements.txt
+├─ guided_demos/
+├─ coding_practice.md
+└─ coding_observation_key.md
+```
+
+此模式可省略：
+
+* `exercises/`
+* `solutions/`
+* `coding_answer_key.md`
+
+若採用 Implementation Practice Mode，仍可使用原本結構：
+
+```text
+practice/coding/
+├─ README.md
+├─ requirements.txt
+├─ exercises/
+├─ solutions/
+├─ coding_practice.md
+└─ coding_answer_key.md
+```
 
 ### 檔案職責分離
 
@@ -196,12 +226,22 @@ Codex 不得在 `concept_practice.md` 中填入學生答案。
 
 ### Coding Practice Rule（程式練習規則）
 
+#### v3.1.2 Dual-Mode Coding Practice 補充
+
+Coding Practice 支援以下兩種模式：
+
+1. Guided Code Reading Mode（引導式程式閱讀模式）
+2. Implementation Practice Mode（實作練習模式）
+
+每週應依內容性質選擇適合的模式，也可以在同一週混合使用，但必須在 `practice/coding/README.md` 與 `weekly_plan.md` 清楚標示各項練習所屬模式。
+
 `practice/coding/coding_practice.md` 是程式練習索引與學生作答紀錄表。
 
 `coding_practice.md` 應包含：
 
 - 練習清單
-- 對應的 `exercises/` 檔案
+- 採用的 Coding Practice 模式
+- 對應的 `guided_demos/` 或 `exercises/` 檔案
 - 執行方式
 - 學習目標
 - 學生觀察欄位
@@ -209,6 +249,44 @@ Codex 不得在 `concept_practice.md` 中填入學生答案。
 - 自我檢查項目
 
 `coding_practice.md` 不得放完整答案。
+
+#### Guided Code Reading Mode
+
+Guided Code Reading Mode 適用於概念密集、以資料流與模型內部流程理解為主的週次。
+
+此模式的重點不是要求學習者從零實作，而是：
+
+* 提供完整可執行程式。
+* 程式內提供清楚的 step-by-step comments（逐步註解）。
+* 印出關鍵 tensor shape（張量形狀）、intermediate values（中間值）、attention weights（注意力權重）或模型輸出。
+* 讓學習者透過執行、觀察與修改小參數理解概念。
+* 搭配 observation questions（觀察問題）或 comprehension questions（理解問題）。
+* 在 `coding_observation_key.md` 提供觀察方向與理解說明，但不得偽造學生的實際觀察紀錄。
+
+`practice/coding/guided_demos/` 中的程式必須完整、可執行，且能對應 `notes.md` 中的概念與資料流。Guided Code Reading Mode 不強制建立 TODO、`exercises/`、`solutions/` 或 `coding_answer_key.md`。
+
+基礎模型概念導向週次，例如 Transformer、CLIP、HuggingFace、LLaVA 與 VLM Architecture（視覺語言模型架構），預設優先採用 Guided Code Reading Mode，因為主要目標是理解模型概念、資料流與架構，而不是訓練學生從零實作模型。
+
+#### Implementation Practice Mode
+
+Implementation Practice Mode 適用於需要學生實際撰寫功能、組裝模組或完成系統行為的週次，例如：
+
+* ROS2 node
+* camera pipeline
+* Isaac Sim integration
+* navigation
+* VLM system integration
+
+進入系統實作導向階段後，若內容涉及 ROS2、camera、navigation、Isaac Sim 或系統整合，可逐步增加 Implementation Practice Mode。
+
+Implementation Practice Mode 保留以下規範：
+
+* `exercises/`
+* `solutions/`
+* `TODO`
+* `None`
+* `raise NotImplementedError`
+* `coding_answer_key.md`
 
 `practice/coding/exercises/*.py` 是學生實際補程式碼的練習檔，必須包含必要骨架、提示與學生需完成的區塊。
 
@@ -242,6 +320,8 @@ Codex 不得在 `concept_practice.md` 中填入學生答案。
 ```
 
 Codex 不得將 `solutions/` 的完整答案複製到 `exercises/`。
+
+模式選擇應服務於學習目標，不得為了維持資料夾形式而強制學生補寫不必要的 TODO。概念理解週次可以只採 Guided Code Reading Mode；功能實作週次則可採 Implementation Practice Mode。
 
 ---
 
@@ -319,6 +399,15 @@ learning/WeekXX_TopicName/weekly_plan.md
 - [Concept Practice](./practice/concept/concept_practice.md)
 - [Coding Practice](./practice/coding/coding_practice.md)
 ```
+
+若採用 Guided Code Reading Mode，可補充：
+
+```markdown
+- [Guided Demos](./practice/coding/guided_demos/)
+- [Coding Observation Key](./practice/coding/coding_observation_key.md)
+```
+
+上述 Guided Code Reading Mode 連結格式屬於 v3.1.2 雙模式補充；v3.1.1 原始 Practice 連結規範維持不變。
 
 若列出參考答案，必須提醒學生完成練習後再查看：
 
@@ -572,11 +661,17 @@ Demo README 必須能讓學生理解：
 
 ### Multi-Level Demo Rule
 
-每個核心概念至少應具備以下其中兩種 Demo 類型。若概念是關鍵主題，建議三種都具備。
+Multi-Level Demo 是依概念複雜度採用的建議，不是每個核心概念的強制要求。
+
+可依學習目標選擇以下一種或多種 Demo 類型：
 
 * Level A：Concept Demo（概念示範）
 * Level B：Mechanism Demo（機制示範）
 * Level C：Real Model Demo（真實模型示範）
+
+若 Guided Code Reading Mode 已在 `practice/coding/guided_demos/` 提供完整機制拆解、shape tracing（張量形狀追蹤）與中間結果觀察，`demo/` 可只保留 Concept Demo，用於快速呈現概念現象。
+
+不要求每個概念都建立兩種以上 Demo，也不得為了滿足 Demo 數量而重複 Guided Code Reading 的逐步拆解內容。
 
 ### Demo Completion Rule
 
@@ -591,19 +686,59 @@ Demo 不以成功執行為完成條件。
 
 Codex 不得代替學生勾選 Demo 完成，也不得代替學生撰寫個人理解。
 
-### v3.1.1 Demo 與 Practice 分離補充
+### v3.1.1 Demo 與 Practice 分離規範
 
-`demo/` 是完整可執行範例，用來觀察概念、輸入、輸出與中間結果。
+v3.1.1 建立 `demo/` 與 `practice/` 必須分離的基礎規範；v3.1.2 在此基礎上進一步明確區分 What 與 How 的責任。
 
-`practice/coding/exercises/` 是學生實際補程式碼的練習檔。
+#### v3.1.2 Demo / Coding Practice 責任細化
 
-`practice/coding/solutions/` 是完整參考解答。
+`demo/` 的目標是快速展示概念現象，回答「這個東西在做什麼」，也就是：
 
-`practice/coding/coding_answer_key.md` 是文字解釋與錯誤修正說明。
+```text
+demo = What
+```
+
+`practice/coding/` 的目標是理解內部流程，回答「這個東西如何做到」，也就是：
+
+```text
+practice/coding = How
+```
+
+`demo/` 應保持精簡，用來快速觀察概念、輸入、輸出或主要現象，不應重複 `practice/coding/` 的逐步拆解內容。
+
+`practice/coding/` 不應只是 `demo/` 的複製版，應包含：
+
+* shape tracing（張量形狀追蹤）
+* step-by-step comments（逐步註解）
+* intermediate values（中間值）
+* observation tasks（觀察任務）
+
+#### v3.1.2 Guided Code Reading 與 Demo 責任邊界
+
+Demo：
+
+* 回答 What。
+* 快速展示概念現象。
+
+Guided Code Reading：
+
+* 回答 How。
+* 拆解內部資料流。
+* 追蹤 shape。
+* 觀察中間結果。
+* 理解程式設計原因。
+
+兩者應互相銜接但不得複製相同內容。`demo/` 提供快速概念入口，`practice/coding/guided_demos/` 負責完整流程閱讀與機制理解。
+
+Guided Code Reading Mode 的 `practice/coding/guided_demos/` 是完整可執行的流程閱讀材料，不等同於快速展示用的 `demo/`。
+
+Implementation Practice Mode 的 `practice/coding/exercises/` 是學生實際補程式碼的練習檔，`practice/coding/solutions/` 是完整參考解答，`practice/coding/coding_answer_key.md` 是文字解釋與錯誤修正說明。
 
 Codex 不得把 `demo/` 當成 `practice/` 的替代品。
 
-若某個概念需要學生補程式碼，應新增或更新 `practice/coding/exercises/`，不得要求學生直接修改 Demo 檔。
+若某個概念需要學生補程式碼，應採用 Implementation Practice Mode，新增或更新 `practice/coding/exercises/`，不得要求學生直接修改 Demo 檔。
+
+若某個概念主要需要學生閱讀完整流程、追蹤 shape 或觀察中間值，應採用 Guided Code Reading Mode，不得僅為符合舊有結構而強制建立 `exercises/` 與 `solutions/`。
 
 ---
 
@@ -856,7 +991,7 @@ ChatGPT 驗收分為三個等級：
 
 表示核心概念、任務、Demo 或應用關聯仍明顯不足。學生需重新閱讀與補做主要任務後再進入 Reviewing。
 
-### v3.1.1 Practice 驗收補充
+### v3.1.1 Practice 驗收補充與 v3.1.2 雙模式修正
 
 ChatGPT 驗收時應額外檢查：
 
@@ -864,13 +999,15 @@ ChatGPT 驗收時應額外檢查：
 2. Week 根目錄是否沒有散落練習檔案。
 3. `concept_practice.md` 是否沒有偽造學生答案。
 4. `concept_answer_key.md` 是否提醒學生完成練習後再查看。
-5. `coding_practice.md` 是否沒有完整答案。
-6. `coding_answer_key.md` 是否提醒學生完成 `exercises/` 後再查看。
-7. `exercises/*.py` 是否包含 `TODO`、`None` 或 `raise NotImplementedError`。
-8. `solutions/*.py` 是否為完整可執行參考解答。
-9. `weekly_plan.md` 是否連到 Practice 入口。
-10. `study_log.md` 是否沒有偽造完成內容。
-11. 若學生已有 Practice 結果，是否已保留在 `study_log.md`。
+5. `coding_practice.md` 是否標示採用 Guided Code Reading Mode、Implementation Practice Mode 或兩者並用。
+6. 採用 Guided Code Reading Mode 時，`guided_demos/` 是否完整可執行，並包含 shape tracing、逐步註解、中間值或模型輸出及觀察問題。
+7. 採用 Guided Code Reading Mode 時，是否沒有不必要地強制建立 `exercises/`、`solutions/` 或 `coding_answer_key.md`。
+8. 採用 Implementation Practice Mode 時，`coding_answer_key.md` 是否提醒學生完成 `exercises/` 後再查看。
+9. 採用 Implementation Practice Mode 時，`exercises/*.py` 是否包含 `TODO`、`None` 或 `raise NotImplementedError`。
+10. 採用 Implementation Practice Mode 時，`solutions/*.py` 是否為完整可執行參考解答。
+11. `weekly_plan.md` 是否連到 Practice 入口。
+12. `study_log.md` 是否沒有偽造完成內容。
+13. 若學生已有 Practice 結果，是否已保留在 `study_log.md`。
 
 ---
 
