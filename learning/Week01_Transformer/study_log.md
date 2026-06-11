@@ -28,8 +28,8 @@
 
 | Practice | 是否完成 | 結果 | 錯誤修正 | 備註 |
 |---|---|---|---|---|
-| Concept Practice |  |  |  |  |
-| Guided Code Reading |  |  |  |  |
+| Concept Practice |✅|完成|完成|無|
+| Guided Code Reading |✅|完成|完成|無|
 
 ## 個人概念紀錄
 
