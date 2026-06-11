@@ -19,10 +19,10 @@
 
 | Demo | 是否執行 | 結果 | 問題 |
 |---|---|---|---|
-| demo/demo_01_token_embedding.py |✅|  |  |
-| demo/demo_02_attention_overview.py |✅|  |  |
-| demo/demo_03_position_multihead.py |✅|  |  |
-| demo/demo_04_transformer_flow.py |✅|  |  |
+| demo/demo_01_token_embedding.py |✅|完成|no|
+| demo/demo_02_attention_overview.py |✅|完成|no|
+| demo/demo_03_position_multihead.py |✅|完成|no|
+| demo/demo_04_transformer_flow.py |✅|完成|no|
 
 ## Practice 結果摘要
 
