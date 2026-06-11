@@ -1,8 +1,8 @@
-# Week01 Coding Practice（程式練習）
+# Week01 Guided Code Reading（引導式程式閱讀）
 
-本資料夾存放 Week01 的程式練習。
+Week01 採用 Guided Code Reading Mode（引導式程式閱讀模式）。這裡提供完整可執行的小型程式，重點是追蹤 Transformer（轉換器架構）的資料流，而不是從零實作模型。
 
-## 使用方式
+## 學習方式
 
 1. 安裝需求：
 
@@ -10,12 +10,25 @@
    pip install -r requirements.txt
    ```
 
-2. 依序完成 [`exercises/`](./exercises/) 中的 `*_practice.py`。
-3. 在 [`coding_practice.md`](./coding_practice.md) 記錄執行結果與錯誤修正。
-4. 完成後再查看 [`coding_answer_key.md`](./coding_answer_key.md) 與 [`solutions/`](./solutions/)。
+2. 依序執行 [`guided_demos/`](./guided_demos/) 中的程式。
+3. 對照程式內中文註解，觀察 shape（張量形狀）與中間結果。
+4. 依 [`coding_practice.md`](./coding_practice.md) 修改小參數並記錄變化。
+5. 使用 [`coding_observation_key.md`](./coding_observation_key.md) 檢查觀察方向與常見誤解。
 
-## 規則
+## 建議順序
 
-- `exercises/` 是學生實際補程式碼的檔案，會保留 TODO、None 或 `raise NotImplementedError`。
-- `solutions/` 是完整可執行參考答案。
-- `coding_answer_key.md` 是文字解釋與常見錯誤整理。
+```text
+Token / Token ID / Embedding
+-> Position Encoding
+-> QKV
+-> Self-Attention
+-> Multi-Head Attention
+-> Encoder / Decoder
+```
+
+## 核心原則
+
+* `demo/` 快速回答「這個概念在做什麼」。
+* 此資料夾逐步回答「這個流程如何做到」。
+* 修改句子長度、向量維度、head 數量或遮罩等小參數，觀察資料流如何改變。
+* 不需要補寫缺漏程式碼，也不要求從零實作 Transformer。
