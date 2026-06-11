@@ -13,7 +13,20 @@
 - [x] notes.md
 - [x] demo/demo_README.md
 
-## Demo（示範程式）執行結果
+## 目前 Demo（示範程式）執行結果
+
+以下 Flat Integrated Demo 為規範重構後的新入口。請實際執行後再填寫，不沿用舊路徑的完成狀態。
+
+| Demo | 是否執行 | 結果 | 問題 |
+|---|---|---|---|
+| demo/demo_01_token_embedding.py |  |  |  |
+| demo/demo_02_attention_overview.py |  |  |  |
+| demo/demo_03_position_multihead.py |  |  |  |
+| demo/demo_04_transformer_flow.py |  |  |  |
+
+## 重構前 Demo 歷史執行紀錄
+
+以下內容是學生已填寫的歷史紀錄，僅保留原始觀察與完成狀態；其中路徑已由目前 Flat Integrated Demo 取代。
 
 | Demo | 是否執行 | 結果 | 問題 |
 |---|---|---|---|
@@ -32,7 +45,7 @@
 | Practice | 是否完成 | 結果 | 錯誤修正 | 備註 |
 |---|---|---|---|---|
 | Concept Practice |  |  |  |  |
-| Coding Practice |  |  |  |  |
+| Guided Code Reading |  |  |  |  |
 
 ## 個人概念紀錄
 

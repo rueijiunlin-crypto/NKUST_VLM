@@ -1,52 +1,40 @@
 # Week01 Transformer Demo README
 
-## Demo（示範程式）目標
+## Demo 目標
 
-本資料夾用小型 Python（程式語言）Demo 觀察 Transformer（轉換器架構）的基本資料流。每個子資料夾對應一個核心概念，請先閱讀子資料夾的 `README.md`，再執行 `demo_*.py`。
+Week01 採用 Flat Integrated Demo（扁平整合式 Demo）。這些程式快速回答「Transformer 的概念在做什麼（What）」；完整 shape tracing、中間值與內部機制拆解請使用 [`../practice/coding/guided_demos/`](../practice/coding/guided_demos/)。
+
+所有 Demo 僅使用 Python 標準函式庫，不需額外安裝套件。
+
+## Demo 清單
+
+| Demo 名稱 | 對應概念 | 執行指令 | 預期輸出 | 觀察重點 |
+|---|---|---|---|---|
+| Token 與 Embedding | Token、Token ID、Embedding | `python demo/demo_01_token_embedding.py` | Token、ID 與簡化向量 | 文字會先變成索引，再變成可計算向量 |
+| Attention Overview | QKV 角色、Attention、Self-Attention | `python demo/demo_02_attention_overview.py` | 不同 Query 的注意力分布與重點 | Attention 會依目前位置改變參考對象 |
+| Position 與 Multi-Head | Position Encoding、Multi-Head Attention | `python demo/demo_03_position_multihead.py` | 位置標記與兩個 head 的關注重點 | 模型需要順序，也可同時觀察不同關係 |
+| Transformer Flow | Encoder、Decoder、VLM 關聯 | `python demo/demo_04_transformer_flow.py` | 輸入理解、上下文與逐步輸出流程 | Encoder 偏向理解，Decoder 偏向生成 |
 
 ## 建議執行順序
 
-請在 `learning/Week01_Transformer/` 目錄下依序執行：
-
 ```powershell
-python demo/token/demo_tokenizer.py
-python demo/embedding/demo_embedding.py
-python demo/qkv/demo_qkv.py
-python demo/attention/demo_attention.py
-python demo/attention/demo_attention_matrix.py
-python demo/self_attention/demo_self_attention.py
-python demo/position_encoding/demo_position_encoding.py
-python demo/multi_head_attention/demo_multi_head_attention.py
-python demo/encoder_decoder/demo_encoder_decoder_flow.py
+python demo/demo_01_token_embedding.py
+python demo/demo_02_attention_overview.py
+python demo/demo_03_position_multihead.py
+python demo/demo_04_transformer_flow.py
 ```
 
-## Demo 與概念對應
+## Demo 與 Guided Code Reading 的分工
 
-| 概念 | Demo | 類型 |
-|---|---|---|
-| Token（詞元）/ Token ID（詞元編號） | `demo/token/demo_tokenizer.py` | Concept Demo（概念示範） |
-| Embedding（嵌入向量） | `demo/embedding/demo_embedding.py` | Real Model Demo（真實模型示範） |
-| Query（查詢）/ Key（鍵）/ Value（值） | `demo/qkv/demo_qkv.py` | Mechanism Demo（機制示範） |
-| Attention（注意力機制） | `demo/attention/demo_attention.py` | Concept Demo（概念示範） |
-| Attention Matrix（注意力矩陣） | `demo/attention/demo_attention_matrix.py` | Mechanism Demo（機制示範） |
-| Self-Attention（自注意力） | `demo/self_attention/demo_self_attention.py` | Mechanism Demo（機制示範） |
-| Position Encoding（位置編碼） | `demo/position_encoding/demo_position_encoding.py` | Mechanism Demo（機制示範） |
-| Multi-Head Attention（多頭注意力） | `demo/multi_head_attention/demo_multi_head_attention.py` | Concept Demo（概念示範） |
-| Transformer Encoder（轉換器編碼器）/ Transformer Decoder（轉換器解碼器） | `demo/encoder_decoder/demo_encoder_decoder_flow.py` | Concept Demo（概念示範） |
-
-## 依賴提醒
-
-`demo/embedding/demo_embedding.py` 可能需要額外套件：
-
-```powershell
-pip install transformers torch
+```text
+demo = What
+practice/coding/guided_demos = How
 ```
 
-若本機尚未安裝相關套件，請先記錄錯誤訊息，不要把 Demo（示範程式）標記為已完成。
+Demo 保持精簡，不逐步拆解 QKV、不做完整 shape tracing，也不印出大量矩陣。若想理解計算如何完成，請接著執行 Guided Code Reading。
 
 ## 完成標準
 
-- 執行 Demo（示範程式）。
-- 保存或摘要輸出。
-- 在 `study_log.md` 寫下觀察。
-- 回答對應子資料夾 `README.md` 的問題。
+* 成功執行 Demo。
+* 在 `study_log.md` 摘要實際輸出與觀察。
+* 能指出每個 Demo 對應的核心概念。
