@@ -14,10 +14,10 @@ DEFAULT_IMAGE_URL = (
 )
 LABELS = [
     "a photo of a robot",
-    "a photo of a dog",
+    "a photo of a cat",
     "a photo of a red apple",
     "a photo of a laboratory",
-    "a photo of a chair",
+    "a photo of a pink sofa",
 ]
 
 
