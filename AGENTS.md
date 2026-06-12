@@ -67,6 +67,28 @@ assets/
 * `templates/`：Notion 與研究管理模板。
 * `assets/`：文件附件、圖片、資料與其他素材。
 
+### modules/ 程式模組規範
+
+`modules/` 可以保存：
+
+* 可重用程式模組
+* 模型載入工具
+* 模型推論工具
+* 資料處理工具
+* ROS2 節點
+* Isaac Sim 工具
+* 其他研究實驗支援程式
+
+若 `modules/` 使用外部函式庫、真實模型、預訓練權重或資料集，必須在對應 README 或 requirements 檔案中說明：
+
+* 安裝方式
+* 依賴版本
+* 模型來源
+* 資料來源
+* 執行方式
+* 硬體需求
+* 常見錯誤
+
 每一週教材必須使用獨立資料夾，命名格式為：
 
 ```text
@@ -318,6 +340,19 @@ Implementation Practice Mode 保留以下規範：
 ```text
 # No extra packages required.
 ```
+
+#### Coding Practice Dependency Rule
+
+Coding Practice 可以依學習目標使用外部函式庫、真實模型、預訓練權重、資料集或測試素材。
+
+若程式練習需要外部依賴：
+
+1. 必須在 `practice/coding/requirements.txt` 中列出需要安裝的 Python 套件。
+2. 必須在 `practice/coding/README.md` 說明安裝方式、環境需求與執行限制。
+3. 若需要下載模型或資料，必須在 `practice/coding/README.md` 與 `coding_practice.md` 說明來源、下載需求、授權條件與硬體需求。
+4. `exercises/*.py` 可以使用外部函式庫，但在 Implementation Practice Mode 中仍必須保留學生需完成的 `TODO`、`None` 或 `raise NotImplementedError`。
+5. 若練習使用大型模型、需要 GPU 或預期執行時間較長，應標示為 optional（選做）或 advanced（進階），避免阻塞基礎學習。
+6. 不得因為使用真實模型，就把完整答案放進 `exercises/*.py`。
 
 Codex 不得將 `solutions/` 的完整答案複製到 `exercises/`。
 
@@ -729,6 +764,16 @@ Demo 必須符合：
 * 若可能需要下載模型或資料，必須明確提示
 * 程式輸出需能對應本週學習概念
 
+Demo 可以依學習目標使用外部函式庫、真實模型、預訓練權重、資料集或測試素材，不得因為需要額外下載而禁止建立有學習價值的 Demo。
+
+若 Demo 需要外部套件或真實模型，必須：
+
+1. 在 `demo/demo_README.md` 說明安裝與執行方式。
+2. 採用 Concept Folder Demo 時，在對應概念資料夾 `README.md` 補充局部依賴與操作方式。
+3. 必要時建立 `demo/requirements.txt`，集中列出 Python 套件。
+4. 說明模型或資料名稱、來源、預估下載大小、CPU/GPU 需求、預期執行時間與常見錯誤。
+5. 說明是否需要登入、存取權限、授權或接受模型使用條款。
+
 ### demo_README.md
 
 每週 `demo/` 必須包含 `demo_README.md` 作為總覽文件，內容至少包含：
@@ -844,6 +889,8 @@ Multi-Level Demo 是依概念複雜度採用的建議，不是每個核心概念
 
 不要求每個概念都建立兩種以上 Demo，也不得為了滿足 Demo 數量而重複 Guided Code Reading 的逐步拆解內容。
 
+Real Model Demo 不得取代 Basic Demo（基礎示範）。若某概念是初學者必須掌握的核心概念，應優先提供可快速執行的 Basic Demo，再依學習或研究需求提供 Real Model Demo。
+
 ### Demo Completion Rule
 
 Demo 不以成功執行為完成條件。
@@ -910,6 +957,114 @@ Codex 不得把 `demo/` 當成 `practice/` 的替代品。
 若某個概念需要學生補程式碼，應採用 Implementation Practice Mode，新增或更新 `practice/coding/exercises/`，不得要求學生直接修改 Demo 檔。
 
 若某個概念主要需要學生閱讀完整流程、追蹤 shape 或觀察中間值，應採用 Guided Code Reading Mode，不得僅為符合舊有結構而強制建立 `exercises/` 與 `solutions/`。
+
+---
+
+## Programming Dependency and Real Model Rule（程式依賴與真實模型規則）
+
+### 適用範圍
+
+本 Repository 中所有程式相關內容，包含：
+
+* `demo/`
+* `practice/coding/`
+* `modules/`
+* `docs/` 中的實驗程式說明
+* Week 內的範例程式
+* 研究實驗程式
+* 模型推論程式
+* ROS2 或 Isaac Sim 相關程式
+
+皆可依學習或研究需求使用必要外部函式庫、真實模型、預訓練權重、資料集或測試素材。
+
+不得因為需要外部函式庫、模型下載或資料集，就禁止建立有學習或研究價值的程式內容。程式選用的工具鏈應以學習目標、研究需求、可重現性與執行環境為依據，不得限制只能使用標準函式庫或少量套件。
+
+### 外部依賴揭露要求
+
+若程式使用外部依賴、模型、權重或資料，必須清楚說明：
+
+1. 需要安裝的函式庫。
+2. 建議安裝指令。
+3. 是否需要 `requirements.txt`。
+4. 是否需要 GPU。
+5. 是否可用 CPU 執行。
+6. 預估模型或資料下載大小。
+7. 模型或資料來源。
+8. 是否需要登入、授權或接受模型使用條款。
+9. 預期執行時間。
+10. 常見錯誤與解法。
+
+說明應放在最接近程式入口的 README 或對應說明文件中，讓使用者在執行前即可判斷環境、時間、硬體與授權需求。
+
+### 程式內容分層
+
+#### 1. Basic Code（基礎程式）
+
+用途：
+
+* 幫助學生理解核心概念。
+* 優先使用標準函式庫或少量依賴，例如 `numpy`。
+* 適合快速執行、觀察輸入輸出與資料流。
+
+Basic Code 應盡量降低安裝、下載與硬體門檻，但不代表所有程式內容都必須限制在此層級。
+
+#### 2. Real Model Code（真實模型程式）
+
+用途：
+
+* 連結實際 VLM/VLA 工具鏈。
+* 可使用真實模型、預訓練權重、tokenizer（詞元化器）、processor（前處理器）與資料集。
+* 可使用外部函式庫，例如 `torch`、`transformers`、`huggingface_hub`、`opencv-python`、`pillow`、`timm`、`datasets` 等。
+* 必須清楚標示安裝、下載、模型來源、硬體需求與執行方式。
+
+Real Model Code 應說明其與 Basic Code 的概念對應，避免學生只會呼叫模型而無法理解輸入、輸出與資料流。
+
+#### 3. Advanced Experiment Code（進階實驗程式）
+
+用途：
+
+* 用於研究實驗、模型測試、ROS2、Isaac Sim、VLA 或系統整合。
+* 可使用更完整的工具鏈與大型依賴。
+* 必須清楚說明環境需求、資料來源、執行限制與預期輸出。
+* 若資源需求較高，必須標示為 optional（選做）或 advanced（進階）。
+
+Advanced Experiment Code 若依賴特定作業系統、模擬器版本、CUDA、GPU 型號、ROS2 distribution（發行版本）或其他系統元件，也必須明確記錄。
+
+### Requirements Rule（依賴檔案規則）
+
+若某週或某模組需要 Python 套件，應依程式範圍建立對應 `requirements.txt`：
+
+* Week 程式練習：`learning/WeekXX_TopicName/practice/coding/requirements.txt`
+* Demo 依賴：可放在 `learning/WeekXX_TopicName/demo/requirements.txt`
+* 模組依賴：可放在 `modules/<module_name>/requirements.txt`
+
+若依賴較多，應避免將套件清單散落在不同文件中。套件與必要版本應集中寫入對應 `requirements.txt`，README 則說明環境建立方式並指向該檔案。
+
+若不同程式需要互相衝突的版本或不同執行環境，應分開 requirements 檔案或提供清楚的環境建立說明，不得用單一模糊依賴清單掩蓋版本衝突。
+
+### Model and Data Download Rule（模型與資料下載規則）
+
+若程式需要下載模型、預訓練權重、資料集或測試素材，必須在 README 或對應說明文件中標示：
+
+```markdown
+## Model / Data Requirement（模型與資料需求）
+
+- Model / Dataset：
+- Source：
+- Download size：
+- Requires login：
+- License / Terms：
+- CPU supported：
+- GPU recommended：
+- Expected runtime：
+- Common errors：
+```
+
+模型與資料來源應優先連結官方文件、官方模型頁面、官方資料集頁面或可信任的原始發布來源。
+
+若模型或資料來源有授權、登入、存取權限或再散布限制，不得把權重、憑證、存取 Token 或受限制資料直接提交進 GitHub。Repository 只能保存合法可提交的程式、設定範例、下載說明與必要中繼資料。
+
+若下載內容體積較大，應說明快取位置、磁碟空間需求與清理方式；不得假設所有執行環境都已具備模型、資料或足夠硬體資源。
 
 ---
 
