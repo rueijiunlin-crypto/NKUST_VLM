@@ -125,4 +125,4 @@ python guided_demos/06_encoder_decoder_reading.py
 
 | 日期 | 檔案 | 修改的參數 | 觀察到的變化 | 尚未理解 |
 |---|---|---|---|---|
-|  |  |  |  |  |
+|今天|每個|無|完成|無|
