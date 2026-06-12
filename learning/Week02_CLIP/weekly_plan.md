@@ -20,7 +20,7 @@
 ## 建議 7 天學習順序
 
 | Day | 建議內容 | 產出 |
-|---|---|---|
+| --- | --- | --- |
 | Day 1 | 閱讀 `README.md` 與 `notes.md` Level 1-2 | 畫出 CLIP 核心資料流 |
 | Day 2 | 閱讀 Level 3，執行 Demo 01 | 記錄 image/text embedding shape |
 | Day 3 | 閱讀 Level 4，執行 Demo 02 | 記錄內積、norm 與相似度排序 |

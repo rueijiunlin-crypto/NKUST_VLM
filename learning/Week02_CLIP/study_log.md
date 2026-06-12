@@ -3,8 +3,8 @@
 ## 學習時間
 
 | 日期 | 時間 | 內容 | 備註 |
-|---|---|---|---|
-|  |  |  |  |
+| --- | --- | --- | --- |
+| | | | |
 
 ## 閱讀進度
 
@@ -16,19 +16,19 @@
 ## Demo 執行結果
 
 | Demo | 是否執行 | 問題／觀察 |
-|---|---|---|
-| demo/demo_01_text_image_embedding.py |完成|文字與圖像如何對比|
-| demo/demo_02_cosine_similarity.py |完成|看到如何去對比文字與圖片|
-| demo/demo_03_zero_shot_classification.py |完成|  |
-| demo/demo_04_clip_flow.py |完成|  |
-| demo/demo_05_real_clip_zero_shot.py |完成|了解到CLIP在分類時遇到多重目標的缺點|
+| --- | --- | --- |
+| demo/demo_01_text_image_embedding.py | 完成 | 文字與圖像如何對比 |
+| demo/demo_02_cosine_similarity.py | 完成 | 看到如何去對比文字與圖片 |
+| demo/demo_03_zero_shot_classification.py | 完成 | |
+| demo/demo_04_clip_flow.py | 完成 | |
+| demo/demo_05_real_clip_zero_shot.py | 完成 | 了解到CLIP在分類時遇到多重目標的缺點 |
 
 ## Practice 結果摘要
 
 | Practice | 是否完成 | 重要觀察 | 疑問 |
-|---|---|---|---|
-| Concept Practice |  |  |  |
-| Guided Code Reading |  |  |  |
+| --- | --- | --- | --- |
+| Concept Practice | | | |
+| Guided Code Reading | | | |
 
 ## 本週理解摘要
 
@@ -131,17 +131,16 @@
 
 ## 本週最重要的理解
 
--
-- CLIP限制
-| 限制                 | 說明                                  |
-| ------------------ | ----------------------------------- |
-| 候選文字依賴             | 結果高度受 labels / prompt 設計影響          |
-| 單一 Top-1 不一定代表完整內容 | 圖中有多個物件時，最高分只代表最相似描述                |
-| 背景可能干擾判斷           | 大面積背景或顯眼顏色可能壓過小目標                   |
-| 不擅長精準定位            | CLIP 不會直接給 bounding box（邊界框）        |
-| 細粒度分類不穩            | 對非常接近的類別、專業場域、微小差異可能不準              |
-| 分數是相對比較            | Softmax（歸一化機率函數）分數取決於你給了哪些候選 labels |
+### CLIP 限制
 
+| 限制 | 說明 |
+| --- | --- |
+| 候選文字依賴 | 結果高度受 labels / prompt 設計影響 |
+| 單一 Top-1 不一定代表完整內容 | 圖中有多個物件時，最高分只代表最相似描述 |
+| 背景可能干擾判斷 | 大面積背景或顯眼顏色可能壓過小目標 |
+| 不擅長精準定位 | CLIP 不會直接給 bounding box（邊界框） |
+| 細粒度分類不穩 | 對非常接近的類別、專業場域、微小差異可能不準 |
+| 分數是相對比較 | Softmax（歸一化機率函數）分數取決於你給了哪些候選 labels |
 
 ## 一分鐘回顧
 
