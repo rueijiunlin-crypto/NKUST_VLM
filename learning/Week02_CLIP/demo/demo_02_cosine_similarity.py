@@ -4,9 +4,9 @@ import numpy as np
 
 
 def cosine_similarity(a: np.ndarray, b: np.ndarray) -> tuple[float, float, float, float]:
-    dot_product = float(np.dot(a, b))
-    norm_a = float(np.linalg.norm(a))
-    norm_b = float(np.linalg.norm(b))
+    dot_product = float(np.dot(a, b)) #dot是內積的意思 
+    norm_a = float(np.linalg.norm(a)) #linalg.norm是計算向量的長度（或稱為范數）的函數，這裡用來計算向量a的長度。
+    norm_b = float(np.linalg.norm(b)) #linalg.norm是計算向量的長度（或稱為范數）的函數，這裡用來計算向量b的長度。
     similarity = dot_product / (norm_a * norm_b)
     return dot_product, norm_a, norm_b, similarity
 
@@ -29,7 +29,7 @@ def main() -> None:
         print(f"dot product: {dot_product:.4f}")
         print(f"image norm: {image_norm:.4f}")
         print(f"text norm: {text_norm:.4f}")
-        print(f"cosine similarity: {similarity:.4f}")
+        print(f"cosine similarity: {similarity:.4f}") #cosine similarity是內積除以兩個向量的長度乘積，表示兩個向量的相似程度，值越接近1表示越相似，值越接近-1表示越不相似，值為0表示兩個向量垂直。
 
     print("\nSimilarity ranking")
     for rank, (label, similarity) in enumerate(
