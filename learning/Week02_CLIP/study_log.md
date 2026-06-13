@@ -8,10 +8,10 @@
 
 ## 閱讀進度
 
-- [ ] README.md
-- [ ] weekly_plan.md
-- [ ] notes.md
-- [ ] demo/demo_README.md
+- [✅] README.md
+- [✅] weekly_plan.md
+- [✅] notes.md
+- [✅] demo/demo_README.md
 
 ## Demo 執行結果
 
