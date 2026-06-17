@@ -1,4 +1,4 @@
-# Week03 Study Log
+# Week03 Study Log（學習紀錄）
 
 ## 學習時間
 
@@ -15,21 +15,22 @@
 - [ ] practice/README.md
 - [ ] practice/concept/concept_practice.md
 - [ ] practice/coding/coding_practice.md
+- [ ] practice/coding/README.md
 
 ## Demo 執行結果
 
 | Demo | 是否執行 | 問題／觀察 |
-| ---- | -------- | ---------- |
-| `demo_01_processor_inputs.py` | 未執行 |  |
-| `demo_02_clip_zero_shot_local.py` | 未執行 |  |
-| `demo_03_prompt_comparison.py` | 未執行 |  |
+| --- | --- | --- |
+| `demo_01_processor_inputs.py` | 未執行 | |
+| `demo_02_clip_zero_shot_local.py` | 未執行 | |
+| `demo_03_prompt_comparison.py` | 未執行 | |
 
 ## Practice 結果摘要
 
 | Practice | 是否完成 | 重要觀察 | 疑問 |
-| -------- | -------- | -------- | ---- |
-| Concept Practice | 未完成 |  |  |
-| Guided Code Reading | 未完成 |  |  |
+| --- | --- | --- | --- |
+| Concept Practice（觀念練習） | 未完成 | | |
+| Guided Code Reading（引導式程式閱讀） | 未完成 | | |
 
 ## 本週理解摘要
 
@@ -47,15 +48,15 @@
 
 ## 個人概念紀錄
 
-### Hugging Face
+### Hugging Face（模型平台）
 
 -
 
-### CLIPProcessor
+### CLIPProcessor（CLIP 前處理器）
 
 -
 
-### CLIPModel
+### CLIPModel（CLIP 模型）
 
 -
 
@@ -63,11 +64,11 @@
 
 -
 
-### Softmax Probability
+### Softmax Probability（softmax 機率分布）
 
 -
 
-### Prompt Sensitivity
+### Prompt Sensitivity（提示詞敏感性）
 
 -
 
@@ -102,8 +103,10 @@
 
 ## 一分鐘回顧
 
-請用自己的話總結本週 Hugging Face CLIP 推論流程。
+請用自己的話總結本週 Hugging Face（模型平台）CLIP（對比式圖文預訓練）推論流程。
+
+-
 
 ## 下週目標
 
-- 進入 Week04 LLaVA。
+- 進入 Week04 LLaVA（大型語言與視覺助手）。

@@ -1,4 +1,4 @@
-"""Run Hugging Face CLIP zero-shot classification on a local image."""
+"""使用 Hugging Face CLIP 對本地圖片執行 zero-shot classification。"""
 
 from __future__ import annotations
 
@@ -18,18 +18,18 @@ DEFAULT_LABELS = [
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--image", type=Path, required=True, help="Path to a local image.")
+    parser.add_argument("--image", type=Path, required=True, help="本地圖片路徑。")
     parser.add_argument(
         "--labels",
         nargs="+",
         default=DEFAULT_LABELS,
-        help="Candidate text labels or prompts. Provide one or more quoted labels.",
+        help="候選文字 labels（標籤）或 prompts（提示詞）。請用引號提供一個或多個項目。",
     )
     parser.add_argument(
         "--top-k",
         type=int,
         default=3,
-        help="Number of top predictions to print.",
+        help="要印出的 top-k prediction（前 k 名預測）數量。",
     )
     return parser.parse_args()
 
@@ -40,18 +40,19 @@ def main() -> int:
         from PIL import Image
         from transformers import CLIPModel, CLIPProcessor
     except ImportError as error:
-        print(f"Missing package: {error.name}")
-        print("Install dependencies with: python -m pip install -r demo/requirements.txt")
+        print(f"缺少套件：{error.name}")
+        print("請安裝依賴：python -m pip install -r demo/requirements.txt")
         return 1
 
     args = parse_args()
     if not args.image.is_file():
-        print(f"Image path does not exist: {args.image}")
+        print(f"圖片路徑不存在：{args.image}")
+        print("若 Week02 範例圖片不存在，請改用自己的本地圖片路徑。")
         return 1
 
     image = Image.open(args.image).convert("RGB")
 
-    print("Loading processor and model. The first run may download pretrained weights.")
+    print("正在載入 processor（前處理器）與 model（模型）。第一次執行可能會下載預訓練權重。")
     processor = CLIPProcessor.from_pretrained(MODEL_NAME)
     model = CLIPModel.from_pretrained(MODEL_NAME)
     model.eval()
@@ -72,21 +73,21 @@ def main() -> int:
     top_k = min(args.top_k, len(labels))
     top_indices = probabilities.topk(top_k).indices.tolist()
 
-    print(f"Model: {MODEL_NAME}")
-    print(f"Image path: {args.image}")
+    print(f"模型：{MODEL_NAME}")
+    print(f"圖片路徑：{args.image}")
     print(f"logits_per_image shape: {tuple(logits.shape)}")
-    print("\nLabels and probabilities:")
+    print("\nLabels（標籤）與 probabilities（機率分布）：")
     for label, probability in zip(labels, probabilities.tolist()):
         print(f"- {label}: {probability:.4f}")
 
-    print(f"\nTop-{top_k} predictions:")
+    print(f"\nTop-{top_k} predictions（前 {top_k} 名預測）：")
     for rank, index in enumerate(top_indices, start=1):
         print(f"{rank}. {labels[index]} ({probabilities[index].item():.4f})")
 
-    print("\nInterpretation:")
-    print("- logits_per_image is the raw score for each image-label pair.")
-    print("- softmax converts scores into a relative distribution over the provided labels.")
-    print("- The result depends on the candidate labels you provide.")
+    print("\n解讀：")
+    print("- logits_per_image 是每個 image-label pair（圖片與標籤配對）的原始分數。")
+    print("- softmax 會把分數轉成目前 labels 之間的相對分布。")
+    print("- 結果會受到你提供的候選 labels 影響。")
     return 0
 
 

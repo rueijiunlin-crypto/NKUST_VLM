@@ -1,8 +1,8 @@
-# Week03 Concept Practice
+# Week03 Concept Practice（觀念練習）
 
 請先用自己的話作答，再使用自我檢查項目確認是否涵蓋關鍵概念。
 
-## 1. Hugging Face 在本週的角色是什麼？
+## 1. Hugging Face（模型平台）在本週的角色是什麼？
 
 提示：它負責模型下載、載入、推論流程中的哪一部分？
 
@@ -11,7 +11,7 @@
 自我檢查：
 
 - [ ] 我有說明 Hugging Face 是模型工具鏈，不是模型本身。
-- [ ] 我有提到它能協助載入預訓練模型與 processor。
+- [ ] 我有提到它能協助載入預訓練模型與 processor（前處理器）。
 
 ## 2. `CLIPProcessor` 與 `CLIPModel` 分別做什麼？
 
@@ -22,7 +22,7 @@
 自我檢查：
 
 - [ ] 我有說明 processor 負責圖片與文字前處理。
-- [ ] 我有說明 model 負責輸出 logits 或 embeddings。
+- [ ] 我有說明 model（模型）負責輸出 logits（未正規化分數）或 embeddings（嵌入向量）。
 
 ## 3. `input_ids`、`attention_mask`、`pixel_values` 分別代表什麼？
 
@@ -32,21 +32,21 @@
 
 自我檢查：
 
-- [ ] 我有區分文字 tensor 與圖片 tensor。
+- [ ] 我有區分文字 tensor（張量）與圖片 tensor。
 - [ ] 我有說明 `pixel_values` 是圖片前處理後的模型輸入。
 
-## 4. `logits_per_image` 在 zero-shot classification 中代表什麼？
+## 4. `logits_per_image` 在 zero-shot classification（零樣本分類）中代表什麼？
 
-提示：它的 shape 通常和圖片數量、label 數量有關。
+提示：它的 shape（形狀）通常和圖片數量、label（標籤）數量有關。
 
 學生作答：
 
 自我檢查：
 
-- [ ] 我有提到它是每張圖片對每個文字 prompt 的原始分數。
+- [ ] 我有提到它是每張圖片對每個文字 prompt（提示詞）的原始分數。
 - [ ] 我沒有把 logits 直接當成機率。
 
-## 5. softmax probability 為什麼不是絕對真實機率？
+## 5. softmax probability（softmax 機率分布）為什麼不是絕對真實機率？
 
 提示：它和候選 labels 的集合有關。
 
@@ -59,7 +59,7 @@
 
 ## 6. 為什麼 prompt 改寫會影響 CLIP 結果？
 
-提示：不同文字會產生不同 text embedding。
+提示：不同文字會產生不同 text embedding（文字嵌入向量）。
 
 學生作答：
 
@@ -70,11 +70,11 @@
 
 ## 7. Week03 如何銜接 Week04 LLaVA？
 
-提示：LLaVA 也需要 processor、vision encoder、model loading 與輸出解讀。
+提示：LLaVA（大型語言與視覺助手）也需要 processor、vision encoder（視覺編碼器）、model loading（模型載入）與輸出解讀。
 
 學生作答：
 
 自我檢查：
 
 - [ ] 我有說明 Week03 是真實模型工具鏈基礎。
-- [ ] 我有提到 Week04 會進一步把視覺表示接到 LLM。
+- [ ] 我有提到 Week04 會進一步把視覺表示接到 LLM（大型語言模型）。
