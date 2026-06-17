@@ -3,8 +3,8 @@
 ## 學習時間
 
 | 日期 | 時間 | 內容 | 備註 |
-| --- | --- | --- | --- |
-| | | | |
+| ---- | ---- | ---- | ---- |
+| 本週 | 分段完成 | 閱讀 Week02 CLIP 教材、執行 Demo、完成 Practice 與 ChatGPT 驗收 | 已完成 Week02 核心學習 |
 
 ## 閱讀進度
 
@@ -12,43 +12,56 @@
 - [✅] weekly_plan.md
 - [✅] notes.md
 - [✅] demo/demo_README.md
+- [✅] practice/README.md
+- [✅] practice/concept/concept_practice.md
+- [✅] practice/coding/coding_practice.md
 
 ## Demo 執行結果
 
 | Demo | 是否執行 | 問題／觀察 |
-| --- | --- | --- |
-| demo/demo_01_text_image_embedding.py | 完成 | 文字與圖像如何對比 |
-| demo/demo_02_cosine_similarity.py | 完成 | 看到如何去對比文字與圖片 |
-| demo/demo_03_zero_shot_classification.py | 完成 | |
-| demo/demo_04_clip_flow.py | 完成 | |
-| demo/demo_05_real_clip_zero_shot.py | 完成 | 了解到CLIP在分類時遇到多重目標的缺點 |
+| ---- | -------- | ---------- |
+| `demo_01_text_image_embedding.py` | 完成 | 理解圖片與文字最後都會被轉成同維度 embedding，維度相同才可進行相似度比較。 |
+| `demo_02_cosine_similarity.py` | 完成 | 理解 dot product、norm 與 cosine similarity 的關係，知道 CLIP 比較的是向量方向相似度。 |
+| `demo_03_zero_shot_classification.py` | 完成 | 理解 zero-shot classification 會把候選類別寫成 prompt，再透過相似度與 softmax 取得 top-1。 |
+| `demo_04_clip_flow.py` | 完成 | 理解 image/text embedding、normalization、similarity matrix 與 argmax 預測流程。 |
+| `demo_05_real_clip_zero_shot.py` | 完成 | 使用本地圖片成功執行真實 CLIP Demo，觀察到多物件圖片中 top-1 會受候選 prompt 與畫面主體比例影響。 |
 
 ## Practice 結果摘要
 
 | Practice | 是否完成 | 重要觀察 | 疑問 |
-| --- | --- | --- | --- |
-| Concept Practice | 完成 | 無 | 無 |
-| Guided Code Reading | 完成 | 無 | 無 |
+| -------- | -------- | -------- | ---- |
+| Concept Practice | 完成 | 已能用自己的話說明 CLIP、Image Encoder、Text Encoder、Shared Embedding Space、Cosine Similarity、Zero-shot Classification、Contrastive Learning 與 VLM / VLA 的關係。 | 無重大疑問。 |
+| Guided Code Reading | 完成 | 已理解 shape、normalization、similarity matrix、softmax、top-1 prediction 與真實 CLIP Demo 的輸入流程。 | 後續需在 Week03 進一步理解 Hugging Face Processor 與模型輸出欄位。 |
 
 ## 本週理解摘要
 
 ### 我目前能解釋
 
--
+- CLIP 的核心任務是將圖片與文字轉換成向量後，在共同向量空間中做語意相似度比較。
+- Image Encoder 會將圖片轉成 image embedding，Text Encoder 會將文字 token 轉成 text embedding。
+- 共同向量空間的重點不是只讓向量能做內積，而是讓語意相符的圖片與文字靠近，語意不符者遠離。
+- Cosine Similarity 用來比較圖片向量與文字向量的方向相似度，分數主要用於候選文字之間的相對排序。
+- Zero-shot Classification 不代表模型沒有訓練，而是代表新任務不需要額外提供訓練樣本或重新訓練分類頭。
+- Contrastive Learning 透過 positive pair 與 negative pair，讓正確圖文配對相似度提高、錯誤圖文配對相似度降低。
+- CLIP 可以視為基礎型 VLM，但它主要負責圖文對齊，不具備完整語言生成、長篇推理或機器人 action 輸出。
 
 ### 我仍不理解
 
--
+- Hugging Face 中 `CLIPProcessor` 如何同時處理圖片與文字。
+- `logits_per_image`、`logits_per_text`、softmax probability 與 label prompt 之間的細節關係。
+- 真實模型下載、快取與本地圖片推論流程。
 
 ### 下週前要釐清
 
--
+- 如何用 Hugging Face 正確載入 `CLIPModel` 與 `CLIPProcessor`。
+- 如何用本地圖片與自訂 labels 做真實 zero-shot classification。
+- 如何解讀模型輸出 logits、probability 與 top-k 結果。
 
 ## 個人概念紀錄
 
 ### CLIP
 
-- 將文字與圖像經過編碼器後的向量做對比，來使兩者對齊
+- 將圖片與文字分別經過編碼器轉換成向量，並透過對比式學習讓語意相符的圖文向量靠近、語意不符的圖文向量遠離。
 
 ### Image Encoder
 
@@ -106,46 +119,53 @@
 
 ## Notion 更新
 
-- [ ] Learning Roadmap
-- [ ] Experiment Log
-- [ ] Weekly Review
+- [✅] Learning Roadmap
+- [✅] Experiment Log
+- [✅] Weekly Review
 
 ## ChatGPT 驗收
 
-- [x] 未驗收
-- [ ] Pass
+- [ ] 未驗收
+- [✅] Pass
 - [ ] Minor Revision
 - [ ] Major Revision
 
 ## ChatGPT 評語
 
-（由學生或 ChatGPT 填寫）
+Week02 驗收通過。學生已能說明 CLIP 的核心資料流、Image Encoder 與 Text Encoder 的角色、共同向量空間、cosine similarity、zero-shot classification、contrastive learning，以及 CLIP 與 VLM / VLA 的差異。Demo 與 Practice 均已完成，真實 CLIP Demo 中也能觀察並解釋多物件圖片造成 top-1 受 prompt 與畫面主體影響的限制。下一週可進入 Hugging Face，將 Week02 概念對應到 `CLIPProcessor`、`CLIPModel`、logits、probability 與本地圖片推論流程。
 
 ## 問題紀錄
 
--
+- 真實 CLIP Demo 下載 COCO 範例圖片時遇到 SSL 憑證錯誤，已改用本地圖片路徑執行。
+- 一開始對 zero-shot 的理解偏向「零成本分類」，後續已修正為「新任務不需要額外訓練樣本」。
+- 真實圖片同時包含貓與粉紅沙發時，模型 top-1 選到粉紅沙發，已理解這是候選 prompt 與畫面主體造成的相對排序問題。
 
 ## 修正方式
 
--
+- 使用 `--image demo/000000039769.jpg` 指定本地圖片，避開外部圖片下載問題。
+- 補充 zero-shot、shared embedding space、cosine similarity 與 CLIP 限制的精確說法。
+- 將 CLIP 的用途限定為圖文對齊與相似度比較，不直接等同完整 VLM / VLA。
 
 ## 本週最重要的理解
 
 ### CLIP 限制
 
 | 限制 | 說明 |
-| --- | --- |
-| 候選文字依賴 | 結果高度受 labels / prompt 設計影響 |
-| 單一 Top-1 不一定代表完整內容 | 圖中有多個物件時，最高分只代表最相似描述 |
-| 背景可能干擾判斷 | 大面積背景或顯眼顏色可能壓過小目標 |
-| 不擅長精準定位 | CLIP 不會直接給 bounding box（邊界框） |
-| 細粒度分類不穩 | 對非常接近的類別、專業場域、微小差異可能不準 |
-| 分數是相對比較 | Softmax（歸一化機率函數）分數取決於你給了哪些候選 labels |
+| ---- | ---- |
+| 候選文字依賴 | 結果高度受 labels / prompt 設計影響。 |
+| 單一 Top-1 不一定代表完整內容 | 圖中有多個物件時，最高分只代表最相似描述。 |
+| 背景可能干擾判斷 | 大面積背景或顯眼顏色可能壓過小目標。 |
+| 不擅長精準定位 | CLIP 不會直接給 bounding box（邊界框）。 |
+| 細粒度分類不穩 | 對非常接近的類別、專業場域、微小差異可能不準。 |
+| 分數是相對比較 | Softmax（歸一化機率函數）分數取決於你給了哪些候選 labels。 |
 
 ## 一分鐘回顧
 
-請用自己的話總結本週核心資料流、架構或概念。
+CLIP 會將圖片與文字分別經過 Image Encoder 與 Text Encoder 轉成 embedding，並投影到 shared embedding space。透過 contrastive learning，正確圖文配對會靠近、錯誤圖文配對會遠離。推論時，模型會計算圖片與候選文字 prompt 的相似度，再用 softmax 與 top-1 選出最相近的文字描述。CLIP 能支援 zero-shot classification，但結果會受 prompt、候選 labels 與畫面內容影響，因此不等同於精準物件偵測或完整 VLM / VLA。
 
 ## 下週目標
 
--
+- 進入 Week03 Hugging Face。
+- 學會 `CLIPProcessor` 如何處理圖片與文字。
+- 學會 `CLIPModel` 如何輸出 logits 與 probability。
+- 用本地圖片與自訂 labels 完成真實 CLIP zero-shot 推論。
