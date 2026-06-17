@@ -1,6 +1,6 @@
-> 請先完成 `concept_practice.md` 的作答，再查看本參考答案。
-
 # Week03 Concept Answer Key（觀念參考答案）
+
+> 請先完成 `concept_practice.md` 的作答，再查看本參考答案。
 
 ## 1. Hugging Face 在本週的角色是什麼？
 

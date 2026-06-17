@@ -52,41 +52,41 @@ python practice/coding/guided_demos/guided_02_logits_topk_flow.py --image demo/m
 
 ### 1. Processor keys 與 tensor shape（張量形狀）
 
-| Key | Shape | 來源是圖片或文字？ | 我的理解 |
-| --- | --- | --- | --- |
-| `input_ids` | | | |
-| `attention_mask` | | | |
-| `pixel_values` | | | |
+|Key|Shape|來源是圖片或文字？|我的理解|
+|---|---|---|---|
+|`input_ids`||||
+|`attention_mask`||||
+|`pixel_values`||||
 
 ### 2. Labels 數量與 `logits_per_image` shape
 
 請使用不同數量的 `--labels` 重跑 `guided_02_logits_topk_flow.py`，觀察 shape 如何改變。
 
-| 圖片數量 | Labels 數量 | `logits_per_image` shape | 我的觀察 |
-| --- | --- | --- | --- |
-| 1 | | | |
-| 1 | | | |
+|圖片數量|Labels 數量|`logits_per_image` shape|我的觀察|
+|---|---|---|---|
+|1||||
+|1||||
 
 ### 3. Probability 與 top-k 排序
 
-| Top-k 設定 | Top-1 label | Top-1 probability | 我如何判斷排序來自 probability？ |
-| --- | --- | --- | --- |
-| 1 | | | |
-| 3 | | | |
+|Top-k 設定|Top-1 label|Top-1 probability|我如何判斷排序來自 probability？|
+|---|---|---|---|
+|1||||
+|3||||
 
 ### 4. Prompt 改寫觀察
 
-| Prompt set | Top-1 label | 最明顯變化 | 可能原因 |
-| --- | --- | --- | --- |
-| `object_only` | | | |
-| `photo_template` | | | |
-| `scene_aware` | | | |
+|Prompt set|Top-1 label|最明顯變化|可能原因|
+|---|---|---|---|
+|`object_only`||||
+|`photo_template`||||
+|`scene_aware`||||
 
 ## 錯誤紀錄欄位
 
-| 錯誤訊息 | 發生在哪個 Demo | 我嘗試的修正 | 是否解決 |
-| --- | --- | --- | --- |
-| | | | |
+|錯誤訊息|發生在哪個 Demo|我嘗試的修正|是否解決|
+|---|---|---|---|
+|||||
 
 ## 自我檢查項目
 

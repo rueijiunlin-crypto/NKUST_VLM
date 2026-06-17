@@ -2,9 +2,9 @@
 
 ## 學習時間
 
-| 日期 | 時間 | 內容 | 備註 |
-| ---- | ---- | ---- | ---- |
-|      |      |      |      |
+|日期|時間|內容|備註|
+|---|---|---|---|
+|||||
 
 ## 閱讀進度
 
@@ -19,18 +19,18 @@
 
 ## Demo 執行結果
 
-| Demo | 是否執行 | 問題／觀察 |
-| --- | --- | --- |
-| `demo_01_processor_inputs.py` | 未執行 | |
-| `demo_02_clip_zero_shot_local.py` | 未執行 | |
-| `demo_03_prompt_comparison.py` | 未執行 | |
+|Demo|是否執行|問題／觀察|
+|---|---|---|
+|`demo_01_processor_inputs.py`|未執行||
+|`demo_02_clip_zero_shot_local.py`|未執行||
+|`demo_03_prompt_comparison.py`|未執行||
 
 ## Practice 結果摘要
 
-| Practice | 是否完成 | 重要觀察 | 疑問 |
-| --- | --- | --- | --- |
-| Concept Practice（觀念練習） | 未完成 | | |
-| Guided Code Reading（引導式程式閱讀） | 未完成 | | |
+|Practice|是否完成|重要觀察|疑問|
+|---|---|---|---|
+|Concept Practice（觀念練習）|未完成|||
+|Guided Code Reading（引導式程式閱讀）|未完成|||
 
 ## 本週理解摘要
 
