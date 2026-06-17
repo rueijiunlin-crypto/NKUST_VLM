@@ -48,7 +48,13 @@ python demo/demo_02_clip_zero_shot_local.py --image ../Week02_CLIP/demo/00000003
 python demo/demo_03_prompt_comparison.py --image ../Week02_CLIP/demo/000000039769.jpg
 ```
 
-若尚未有本地圖片，請先放一張 `.jpg` 或 `.png` 到 `demo/`，再將 `--image` 改成該圖片路徑。
+若 `../Week02_CLIP/demo/000000039769.jpg` 不存在，請改用自己的本地圖片路徑，例如 `--image demo/my_image.jpg`；不要改用外部圖片 URL，避免 SSL 或 network 問題。
+
+若要測試自訂 labels，可在 Demo 02 加上：
+
+```powershell
+python demo/demo_02_clip_zero_shot_local.py --image ../Week02_CLIP/demo/000000039769.jpg --labels "a photo of a cat" "a photo of a robot" "a photo of a classroom"
+```
 
 ## Practice 順序
 
@@ -99,4 +105,4 @@ python demo/demo_03_prompt_comparison.py --image ../Week02_CLIP/demo/00000003976
 
 ## 銜接 Week04 LLaVA
 
-完成 Week03 後，Week04 將進入 LLaVA。進入 Week04 前，應先能解釋：圖片如何被 processor 轉成模型輸入、視覺模型如何輸出 logits 或 visual features，以及為什麼真實 VLM 需要把視覺表示接到 LLM。
+完成 Week03 後，Week04 將進入 LLaVA（大型語言與視覺助手）。進入 Week04 前，應先能解釋：圖片如何被 processor 轉成模型輸入、視覺模型如何輸出 logits 或 visual features，以及為什麼真實 VLM 需要把視覺表示接到 LLM。

@@ -12,7 +12,7 @@ Week03 將 Week02 的 CLIP 概念對應到 Hugging Face 實作流程。重點不
 
 - 理解 Hugging Face 在 VLM / VLA 碩士研究中的角色。
 - 能使用 `transformers` 載入 `CLIPProcessor` 與 `CLIPModel`。
-- 能用本地圖片與自訂文字 labels 完成 zero-shot image classification。
+- 能用本地圖片與自訂文字 labels 完成 zero-shot image classification（零樣本影像分類）。
 - 能解釋 processor、input tensors、logits、probability 與 top-k prediction。
 - 能說明模型下載、快取、硬體需求與常見錯誤。
 - 能把 Hugging Face 推論流程銜接到後續 VLM、ROS2 或 Isaac Sim 應用。
@@ -48,6 +48,6 @@ Week03 將 Week02 的 CLIP 概念對應到 Hugging Face 實作流程。重點不
 
 ## 本週產出
 
-- 一份可執行的本地圖片 zero-shot CLIP 推論結果。
-- 一份 prompt 設計對結果影響的觀察紀錄。
+- 一份可執行的本地圖片與自訂 labels zero-shot CLIP 推論結果。
+- 一份 prompt 設計對結果影響的比較觀察紀錄。
 - 一段說明：Hugging Face 如何把 Week02 的 CLIP 概念轉成實際程式流程。
