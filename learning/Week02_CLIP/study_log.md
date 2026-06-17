@@ -27,8 +27,8 @@
 
 | Practice | 是否完成 | 重要觀察 | 疑問 |
 | --- | --- | --- | --- |
-| Concept Practice | | | |
-| Guided Code Reading | | | |
+| Concept Practice | 完成 | 無 | 無 |
+| Guided Code Reading | 完成 | 無 | 無 |
 
 ## 本週理解摘要
 

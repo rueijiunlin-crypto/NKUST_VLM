@@ -67,8 +67,8 @@ python demo/demo_05_real_clip_zero_shot.py
 - [✅] 閱讀 `README.md`、`weekly_plan.md` 與 `notes.md`。
 - [✅] 執行 4 個必要 NumPy Demo。
 - [✅] 保存重要輸出並記錄觀察。
-- [ ] 完成 Concept Practice。
-- [ ] 完成 4 個 Guided Demo 的觀察任務。
+- [✅] 完成 Concept Practice。
+- [✅] 完成 4 個 Guided Demo 的觀察任務。
 - [✅] 選擇性執行真實 CLIP Demo，或記錄未執行原因。
 - [✅] 更新 `study_log.md` 與 Notion。
 - [ ] 進行 ChatGPT 驗收。
@@ -81,10 +81,10 @@ python demo/demo_05_real_clip_zero_shot.py
 - [✅] 能說明 cosine similarity 如何比較圖片與文字。
 - [✅] 能說明 zero-shot classification 的流程。
 - [✅] 能說明 contrastive learning 的直覺。
-- [ ] 能執行必要 NumPy concept demos。
+- [✅] 能執行必要 NumPy concept demos。
 - [✅] 能選擇性執行 real CLIP demo，或能說明未執行原因。
-- [ ] 能完成 Concept Practice。
-- [ ] 能完成 Guided Code Reading。
+- [✅] 能完成 Concept Practice。
+- [✅] 能完成 Guided Code Reading。
 - [✅] 能用自己的話說明 CLIP 和 VLM / VLA 的關係。
 - [✅] 能說明 Week02 如何銜接 Week03 Hugging Face。
 
