@@ -29,6 +29,12 @@ python demo/demo_01_processor_inputs.py --image ../Week02_CLIP/demo/000000039769
 python demo/demo_02_clip_zero_shot_local.py --image ../Week02_CLIP/demo/000000039769.jpg
 ```
 
+也可以使用自訂 labels：
+
+```powershell
+python demo/demo_02_clip_zero_shot_local.py --image ../Week02_CLIP/demo/000000039769.jpg --labels "a photo of a cat" "a photo of a robot" "a photo of a classroom"
+```
+
 觀察重點：
 
 - `logits_per_image` shape
@@ -51,7 +57,7 @@ python demo/demo_03_prompt_comparison.py --image ../Week02_CLIP/demo/00000003976
 
 ### Image path does not exist
 
-請確認目前終端機所在位置，以及 `--image` 後面的相對路徑是否正確。
+請確認目前終端機所在位置，以及 `--image` 後面的相對路徑是否正確。若 Week02 範例圖片不存在，請改用自己的本地圖片路徑，例如 `--image demo/my_image.jpg`。
 
 ### 第一次執行很慢
 

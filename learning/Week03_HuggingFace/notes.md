@@ -16,7 +16,7 @@ Week03 要做的是把概念對應到真實工具：
 → top-k prediction
 ```
 
-Hugging Face 的價值在於：
+Hugging Face Transformers（模型載入與推論工具庫）的價值在於：
 
 - 提供預訓練模型下載與載入介面。
 - 提供 processor，降低圖片與文字前處理成本。
@@ -165,7 +165,7 @@ Hugging Face 是後續 VLM 實作的基礎工具鏈。Week03 學的是：
 如何記錄推論結果
 ```
 
-這些能力會在 Week04 LLaVA、Week05 VLM Architecture 與後續機器人應用中重複使用。
+這些能力會在 Week04 LLaVA（大型語言與視覺助手）、Week05 VLM Architecture 與後續機器人應用中重複使用。
 
 ## 本週尚未涵蓋
 

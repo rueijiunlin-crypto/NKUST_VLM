@@ -20,6 +20,12 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--image", type=Path, required=True, help="Path to a local image.")
     parser.add_argument(
+        "--labels",
+        nargs="+",
+        default=DEFAULT_LABELS,
+        help="Candidate text labels or prompts. Provide one or more quoted labels.",
+    )
+    parser.add_argument(
         "--top-k",
         type=int,
         default=3,
@@ -50,8 +56,9 @@ def main() -> int:
     model = CLIPModel.from_pretrained(MODEL_NAME)
     model.eval()
 
+    labels = args.labels
     inputs = processor(
-        text=DEFAULT_LABELS,
+        text=labels,
         images=image,
         return_tensors="pt",
         padding=True,
@@ -62,19 +69,19 @@ def main() -> int:
         logits = outputs.logits_per_image
         probabilities = logits.softmax(dim=1)[0]
 
-    top_k = min(args.top_k, len(DEFAULT_LABELS))
+    top_k = min(args.top_k, len(labels))
     top_indices = probabilities.topk(top_k).indices.tolist()
 
     print(f"Model: {MODEL_NAME}")
     print(f"Image path: {args.image}")
     print(f"logits_per_image shape: {tuple(logits.shape)}")
     print("\nLabels and probabilities:")
-    for label, probability in zip(DEFAULT_LABELS, probabilities.tolist()):
+    for label, probability in zip(labels, probabilities.tolist()):
         print(f"- {label}: {probability:.4f}")
 
     print(f"\nTop-{top_k} predictions:")
     for rank, index in enumerate(top_indices, start=1):
-        print(f"{rank}. {DEFAULT_LABELS[index]} ({probabilities[index].item():.4f})")
+        print(f"{rank}. {labels[index]} ({probabilities[index].item():.4f})")
 
     print("\nInterpretation:")
     print("- logits_per_image is the raw score for each image-label pair.")
