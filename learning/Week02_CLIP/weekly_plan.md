@@ -43,7 +43,7 @@ python demo/demo_04_clip_flow.py
 選做 / 進階：
 
 ```powershell
-python demo/demo_05_real_clip_zero_shot.py
+python demo/demo_05_real_clip_zero_shot.py --image demo/000000039769.jpg
 ```
 
 ## Practice 順序
@@ -71,7 +71,7 @@ python demo/demo_05_real_clip_zero_shot.py
 - [✅] 完成 4 個 Guided Demo 的觀察任務。
 - [✅] 選擇性執行真實 CLIP Demo，或記錄未執行原因。
 - [✅] 更新 `study_log.md` 與 Notion。
-- [ ] 進行 ChatGPT 驗收。
+- [✅] 進行 ChatGPT 驗收。
 
 ## 驗收條件
 
@@ -100,3 +100,9 @@ python demo/demo_05_real_clip_zero_shot.py
 ## 銜接 Week03 Hugging Face
 
 完成 Week02 後，Week03 將把概念對應到 Hugging Face 的 `CLIPModel`、`CLIPProcessor`、模型下載與推論流程。進入 Week03 前，應先能解釋 logits（未正規化分數）、probability（機率）與 label prompt（標籤提示詞）在零樣本分類中的角色。
+
+## ChatGPT 驗收結果
+
+- 驗收狀態：Pass。
+- 驗收日期：完成 Week02 後。
+- 評語：已能說明 CLIP 的核心資料流、Image/Text Encoder、共同向量空間、cosine similarity、zero-shot classification、contrastive learning，以及 CLIP 與 VLM / VLA 的邊界。已完成 NumPy Demo、真實 CLIP Demo 與 Practice 作答。
