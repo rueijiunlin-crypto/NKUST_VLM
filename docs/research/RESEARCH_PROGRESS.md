@@ -18,12 +18,12 @@
 
 內容：
 
-* ROS2 基礎架構
-* Topic
-* Service
-* Action
-* URDF
-* Navigation
+- ROS2 基礎架構
+- Topic
+- Service
+- Action
+- URDF
+- Navigation
 
 ---
 
@@ -35,11 +35,11 @@
 
 內容：
 
-* 環境建置
-* 機器人模型匯入
-* 感測器模擬
-* ROS2 Bridge
-* Isaac Lab 整合
+- 環境建置
+- 機器人模型匯入
+- 感測器模擬
+- ROS2 Bridge
+- Isaac Lab 整合
 
 ---
 
@@ -51,10 +51,10 @@
 
 內容：
 
-* 神經網路基礎
-* CNN
-* Transformer
-* Attention Mechanism
+- 神經網路基礎
+- CNN
+- Transformer
+- Attention Mechanism
 
 ---
 
@@ -91,11 +91,11 @@
 
 ## 待閱讀
 
-* CLIP
-* BLIP
-* LLaVA
-* RT-2
-* OpenVLA
+- CLIP
+- BLIP
+- LLaVA
+- RT-2
+- OpenVLA
 
 ---
 
@@ -149,9 +149,9 @@ VLM 救災巡檢機器人
 
 完成：
 
-* Transformer
-* Attention
-* CLIP
+- Transformer
+- Attention
+- CLIP
 
 理解
 
@@ -161,8 +161,8 @@ VLM 救災巡檢機器人
 
 完成：
 
-* LLaVA 部署
-* 本地端測試
+- LLaVA 部署
+- 本地端測試
 
 ---
 
@@ -170,7 +170,7 @@ VLM 救災巡檢機器人
 
 完成：
 
-* ROS2 與 VLM 整合
+- ROS2 與 VLM 整合
 
 ---
 
@@ -178,7 +178,7 @@ VLM 救災巡檢機器人
 
 完成：
 
-* Isaac Sim 模擬驗證
+- Isaac Sim 模擬驗證
 
 ---
 
@@ -186,8 +186,8 @@ VLM 救災巡檢機器人
 
 完成：
 
-* 論文題目定稿
-* 研究架構建立
+- 論文題目定稿
+- 研究架構建立
 
 ---
 
@@ -199,14 +199,14 @@ VLM 救災巡檢機器人
 
 研究主軸確立為：
 
-* VLM
-* VLA
-* ROS2
-* Isaac Sim
-* Isaac Lab
+- VLM
+- VLA
+- ROS2
+- Isaac Sim
+- Isaac Lab
 
 論文候選方向：
 
-* 室內語意導航機器人
-* 校園導覽機器人
-* 救災巡檢機器人
+- 室內語意導航機器人
+- 校園導覽機器人
+- 救災巡檢機器人

@@ -35,6 +35,6 @@ Demo 保持精簡，不逐步拆解 QKV、不做完整 shape tracing，也不印
 
 ## 完成標準
 
-* 成功執行 Demo。
-* 在 `study_log.md` 摘要實際輸出與觀察。
-* 能指出每個 Demo 對應的核心概念。
+- 成功執行 Demo。
+- 在 `study_log.md` 摘要實際輸出與觀察。
+- 能指出每個 Demo 對應的核心概念。

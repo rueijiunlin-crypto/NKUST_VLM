@@ -6,19 +6,19 @@ Master's student in Mechatronics Engineering.
 
 Primary research interests:
 
-* Vision-Language Models (VLM)
-* Vision-Language-Action Models (VLA)
-* Robotics
-* Autonomous Navigation
-* Human-Robot Interaction
+- Vision-Language Models (VLM)
+- Vision-Language-Action Models (VLA)
+- Robotics
+- Autonomous Navigation
+- Human-Robot Interaction
 
 Preferred language for communication:
 
-* Traditional Chinese
+- Traditional Chinese
 
 Preferred language for development:
 
-* English
+- English
 
 ---
 
@@ -28,11 +28,11 @@ The long-term objective is to develop intelligent robotic systems capable of und
 
 The system should be able to:
 
-* Understand user commands
-* Interpret visual scenes
-* Identify semantic landmarks
-* Plan navigation strategies
-* Execute actions autonomously
+- Understand user commands
+- Interpret visual scenes
+- Identify semantic landmarks
+- Plan navigation strategies
+- Execute actions autonomously
 
 ---
 
@@ -44,11 +44,11 @@ The system should be able to:
 
 Capabilities:
 
-* Natural language understanding
-* Scene understanding
-* Semantic landmark recognition
-* Autonomous indoor navigation
-* Human-robot interaction
+- Natural language understanding
+- Scene understanding
+- Semantic landmark recognition
+- Autonomous indoor navigation
+- Human-robot interaction
 
 Example:
 
@@ -58,10 +58,10 @@ User:
 
 Robot:
 
-* Understand the request
-* Identify the destination
-* Generate a navigation plan
-* Navigate autonomously
+- Understand the request
+- Identify the destination
+- Generate a navigation plan
+- Navigate autonomously
 
 ---
 
@@ -71,11 +71,11 @@ Robot:
 
 Capabilities:
 
-* Campus navigation
-* Building recognition
-* Landmark recognition
-* Route guidance
-* Interactive question answering
+- Campus navigation
+- Building recognition
+- Landmark recognition
+- Route guidance
+- Interactive question answering
 
 ---
 
@@ -85,10 +85,10 @@ Capabilities:
 
 Capabilities:
 
-* Environmental understanding
-* Hazard recognition
-* Semantic scene analysis
-* Inspection assistance
+- Environmental understanding
+- Hazard recognition
+- Semantic scene analysis
+- Inspection assistance
 
 ---
 
@@ -126,37 +126,37 @@ GitHub
 
 ## Foundation
 
-* Python
-* Linux
-* ROS2
-* Robotics Fundamentals
+- Python
+- Linux
+- ROS2
+- Robotics Fundamentals
 
 ## Computer Vision
 
-* OpenCV
-* Image Processing
-* Object Detection
-* Semantic Segmentation
+- OpenCV
+- Image Processing
+- Object Detection
+- Semantic Segmentation
 
 ## Deep Learning
 
-* Neural Networks
-* CNN
-* Transformer
-* Attention Mechanism
+- Neural Networks
+- CNN
+- Transformer
+- Attention Mechanism
 
 ## Vision-Language Models
 
-* CLIP
-* BLIP
-* LLaVA
-* MobileVLM
+- CLIP
+- BLIP
+- LLaVA
+- MobileVLM
 
 ## Vision-Language-Action Models
 
-* RT-1
-* RT-2
-* OpenVLA
+- RT-1
+- RT-2
+- OpenVLA
 
 ---
 
@@ -176,12 +176,12 @@ Priority:
 
 # Development Preferences
 
-* Prefer Python implementations
-* Prefer ROS2-native architecture
-* Prefer modular design
-* Maintain clear documentation
-* Use reproducible experiments
-* Prioritize readability and maintainability
+- Prefer Python implementations
+- Prefer ROS2-native architecture
+- Prefer modular design
+- Maintain clear documentation
+- Use reproducible experiments
+- Prioritize readability and maintainability
 
 ---
 
@@ -189,12 +189,12 @@ Priority:
 
 Current efforts are concentrated on:
 
-* Learning VLM fundamentals
-* Building ROS2 competency
-* Learning Isaac Sim workflows
-* Understanding Isaac Lab
-* Reviewing VLM-related literature
-* Defining a thesis topic
+- Learning VLM fundamentals
+- Building ROS2 competency
+- Learning Isaac Sim workflows
+- Understanding Isaac Lab
+- Reviewing VLM-related literature
+- Defining a thesis topic
 
 ---
 
