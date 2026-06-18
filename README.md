@@ -29,7 +29,7 @@ assets/     文件附件、圖片、資料與其他素材
 ## 16 週學習路線
 
 | 週次 | 主題 | 對應資料夾 |
-|---|---|---|
+| --- | --- | --- |
 | Week01 | Transformer 基礎 | `learning/Week01_Transformer/` |
 | Week02 | CLIP | `learning/Week02_CLIP/` |
 | Week03 | Hugging Face（模型平台） | `learning/Week03_HuggingFace/` |

@@ -1,4 +1,4 @@
-# Week02 Notes: CLIP 基礎
+﻿# Week02 Notes: CLIP 基礎
 
 ## 學習主線
 

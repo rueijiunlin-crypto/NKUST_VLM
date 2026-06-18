@@ -1,4 +1,4 @@
-# Week01 Weekly Plan: Transformer 基礎
+﻿# Week01 Weekly Plan: Transformer 基礎
 
 ## 1. Week01 學習目標
 
@@ -26,7 +26,7 @@
 ## 3. 建議 7 天學習安排
 
 | Day | 建議內容 | 產出 |
-|---|---|---|
+| --- | --- | --- |
 | Day 1 | 閱讀 `README.md`，讀 `notes.md` 的 Token、Token ID、Embedding | 100 字資料流摘要 |
 | Day 2 | 執行 Token / Embedding Demo 與第一個 Guided Demo | 將真實輸出與 shape 觀察寫入 `study_log.md` |
 | Day 3 | 閱讀 QKV、Attention、Attention Matrix | 完成觀念練習 2 草稿 |

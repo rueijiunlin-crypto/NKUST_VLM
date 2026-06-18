@@ -1,4 +1,4 @@
-# Week02 Demo Guide
+﻿# Week02 Demo Guide
 
 本週採 Flat Integrated Demo（扁平整合式 Demo）。`demo_01` 至 `demo_04` 回答 CLIP「在做什麼（What）」；更完整的 shape 與中間值追蹤放在 `practice/coding/guided_demos/`。
 

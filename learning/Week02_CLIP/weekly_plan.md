@@ -1,4 +1,4 @@
-# Week02 Weekly Plan: CLIP 基礎
+﻿# Week02 Weekly Plan: CLIP 基礎
 
 ## 本週目標
 

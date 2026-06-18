@@ -1,11 +1,11 @@
-# Week01 Coding Practice（觀察任務）
+﻿# Week01 Coding Practice（觀察任務）
 
 本檔案不要求補寫程式碼。請執行完整範例、追蹤 shape（張量形狀）、觀察中間值，並用自己的話記錄資料如何流動。
 
 ## 執行順序
 
 | 順序 | Guided Demo | 觀察主題 | 執行結果 |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | 1 | `guided_demos/01_token_embedding_reading.py` | 文字到 Embedding |  |
 | 2 | `guided_demos/02_position_encoding_reading.py` | 加入位置資訊 |  |
 | 3 | `guided_demos/03_qkv_reading.py` | 線性投影產生 Q、K、V |  |
@@ -124,5 +124,5 @@ python guided_demos/06_encoder_decoder_reading.py
 ## 執行紀錄
 
 | 日期 | 檔案 | 修改的參數 | 觀察到的變化 | 尚未理解 |
-|---|---|---|---|---|
-|今天|每個|無|完成|無|
+| --- | --- | --- | --- | --- |
+| 今天 | 每個 | 無 | 完成 | 無 |

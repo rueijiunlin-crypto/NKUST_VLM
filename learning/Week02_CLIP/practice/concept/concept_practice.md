@@ -1,4 +1,4 @@
-# Week02 Concept Practice
+﻿# Week02 Concept Practice
 
 請先用自己的話作答，再使用自我檢查項目確認是否涵蓋關鍵概念。
 

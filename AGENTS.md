@@ -1,4 +1,4 @@
-# AGENTS.md
+﻿# AGENTS.md
 
 > Current revision: v3.1.2 dual-mode coding practice
 >

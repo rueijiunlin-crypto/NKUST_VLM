@@ -1,23 +1,27 @@
-# Week03 Coding Practice README
+﻿# Week03 Coding Practice README
 
-本資料夾是 Week03 的 Coding Practice（程式練習）入口。本週採 Guided Code Reading Mode（引導式程式閱讀模式），重點是閱讀完整可執行程式、追蹤資料流、觀察 shape（形狀）與中間值，而不是從零補 TODO。
+Week03 Coding Practice 採用 Guided Code Reading Mode（引導式程式閱讀模式）。請透過完整可執行程式理解 CLIP 推論流程、tensor shape、softmax/top-k 與 prompt 實驗，而不是從零補 TODO。
 
-## 模式說明
+## 結構說明
 
-本週區分兩種程式材料：
-
-- `../../demo/`：Demo（示範程式），快速展示 Hugging Face（模型平台）CLIP（對比式圖文預訓練）推論在做什麼。
-- `guided_demos/`：Guided Code Reading（引導式程式閱讀），拆解 processor（前處理器）、tensor（張量）、logits（未正規化分數）、probability（機率分布）與 top-k（前 k 名）流程如何運作。
+| 路徑 | 用途 |
+| --- | --- |
+| `guided_demos/guided_01_processor_flow.py` | 觀察 `CLIPProcessor` 輸出的文字與圖片 tensor。 |
+| `guided_demos/guided_02_logits_topk_flow.py` | 觀察 `logits_per_image`、`softmax(dim=1)` 與 `topk()`。 |
+| `guided_demos/guided_03_prompt_effect_flow.py` | 比較不同 prompt set 的 top-1 與 probability 分布。 |
+| `coding_practice.md` | 學生觀察與 prompt 實驗紀錄表。 |
+| `coding_observation_key.md` | 觀察方向與理解說明。 |
+| `requirements.txt` | 本練習需要的 Python 套件。 |
 
 ## 安裝方式
 
-請從 `learning/Week03_HuggingFace` 目錄執行：
+請從 `learning/Week03_HuggingFace` 執行：
 
 ```powershell
 python -m pip install -r practice/coding/requirements.txt
 ```
 
-也可以使用 Demo 共用依賴：
+Demo 與 guided demos 使用相同主要依賴；必要時也可安裝：
 
 ```powershell
 python -m pip install -r demo/requirements.txt
@@ -25,17 +29,17 @@ python -m pip install -r demo/requirements.txt
 
 ## Model / Data Requirement（模型與資料需求）
 
-- Model / Dataset（模型 / 資料集）：`openai/clip-vit-base-patch32`
-- Source（來源）：Hugging Face Model Hub（模型中心）上的 OpenAI CLIP 模型頁面
-- Download size（下載大小）：約數百 MB，依 Hugging Face 快取與版本而定。
-- Requires login（是否需要登入）：通常不需要。
-- License / Terms（授權 / 條款）：請以 Hugging Face 模型頁面與 OpenAI CLIP 原始授權說明為準。
-- CPU supported（是否支援 CPU）：支援。
-- GPU recommended（是否建議 GPU）：非必要；若有 CUDA GPU（NVIDIA 平行運算 GPU）可加速。
-- Expected runtime（預期執行時間）：第一次執行需下載權重，之後通常數秒到數十秒內完成。
-- Common errors（常見錯誤）：模型下載失敗、SSL（安全通訊憑證）錯誤、圖片路徑錯誤、套件未安裝。
+- Model / Dataset：`openai/clip-vit-base-patch32`
+- Source：Hugging Face Model Hub，OpenAI CLIP 模型頁面
+- Download size：約數百 MB，依 Hugging Face 快取狀態而定
+- Requires login：通常不需要
+- License / Terms：請以 Hugging Face 模型頁面與 OpenAI CLIP 授權說明為準
+- CPU supported：可以
+- GPU recommended：選用；本週練習可用 CPU 執行
+- Expected runtime：首次執行需下載模型；之後通常較快
+- Common errors：網路下載失敗、SSL 問題、圖片路徑錯誤、缺少 `torch` 或 `transformers`
 
-## 執行順序
+## 執行指令
 
 ```powershell
 python practice/coding/guided_demos/guided_01_processor_flow.py --image ../Week02_CLIP/demo/000000039769.jpg
@@ -43,18 +47,22 @@ python practice/coding/guided_demos/guided_02_logits_topk_flow.py --image ../Wee
 python practice/coding/guided_demos/guided_03_prompt_effect_flow.py --image ../Week02_CLIP/demo/000000039769.jpg
 ```
 
-若 Week02 範例圖片不存在，請改用自己的本地圖片路徑，例如：
+若 Week02 圖片不存在，請改用自己的圖片：
 
 ```powershell
 python practice/coding/guided_demos/guided_01_processor_flow.py --image demo/my_image.jpg
 ```
 
-## 觀察任務
+## 觀察重點
 
-- 記錄 processor 輸出的 keys（欄位）與 shape。
-- 說明 `input_ids`、`attention_mask`、`pixel_values` 分別來自文字或圖片。
-- 改變 labels（候選標籤）數量，觀察 `logits_per_image` 的 shape 變化。
-- 說明 top-k prediction（前 k 名預測）如何從 softmax probability 排序取得。
-- 比較不同 prompt set（提示詞集合）如何改變 CLIP zero-shot classification（零樣本分類）結果。
+- `input_ids.shape`
+- `attention_mask.shape`
+- `pixel_values.shape`
+- `logits_per_image.shape`
+- `probabilities.shape`
+- labels 數量與 `logits_per_image.shape[1]` 的關係
+- `top_k` 與 labels 數量的關係
+- 不同 prompt set 的 top-1 是否改變
+- 不同 prompt set 的 probability 分布是否更集中或更分散
 
-請將觀察填入 `coding_practice.md`，完成後再查看 `coding_observation_key.md`。
+請把觀察記錄到 `coding_practice.md`，再整理到 `../../study_log.md`。

@@ -1,4 +1,4 @@
-"""引導式程式閱讀：比較 prompt wording 如何改變 CLIP predictions。"""
+"""Guided reading: compare CLIP predictions across prompt sets."""
 
 from __future__ import annotations
 
@@ -8,13 +8,7 @@ from pathlib import Path
 
 MODEL_NAME = "openai/clip-vit-base-patch32"
 PROMPT_SETS = {
-    "object_only": [
-        "cat",
-        "dog",
-        "sofa",
-        "robot",
-        "laboratory",
-    ],
+    "object_only": ["cat", "dog", "sofa", "robot", "laboratory"],
     "photo_template": [
         "a photo of a cat",
         "a photo of a dog",
@@ -25,7 +19,7 @@ PROMPT_SETS = {
     "scene_aware": [
         "a photo of two cats on a pink sofa",
         "a photo of a dog on a sofa",
-        "a photo of a pink sofa without animals",
+        "a photo of an empty sofa",
         "a photo of a robot in a laboratory",
         "a photo of a laboratory room",
     ],
@@ -33,26 +27,32 @@ PROMPT_SETS = {
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(
-        description="比較 prompt sets（提示詞集合），作為 Week03 CLIP guided practice（引導式練習）。"
-    )
-    parser.add_argument("--image", type=Path, required=True, help="本地圖片路徑。")
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--image", type=Path, required=True, help="Path to the local image file.")
+    parser.add_argument("--top-k", type=int, default=3, help="Number of top predictions to inspect.")
     return parser.parse_args()
 
 
-def run_prompt_set(processor, model, image, prompt_set_name: str, labels: list[str]) -> None:
+def run_prompt_set(processor, model, image, name: str, labels: list[str], top_k: int) -> None:
     import torch
 
-    print(f"\n[Prompt set 提示詞集合] {prompt_set_name}")
     inputs = processor(text=labels, images=image, return_tensors="pt", padding=True)
     with torch.inference_mode():
         outputs = model(**inputs)
-        probabilities = outputs.logits_per_image.softmax(dim=1)[0]
+        logits = outputs.logits_per_image
+        probabilities = logits.softmax(dim=1)[0]
 
-    top_index = int(probabilities.argmax())
-    for label, probability in zip(labels, probabilities.tolist()):
-        print(f"- {label}: probability={probability:.4f}")
-    print(f"Top-1（第一名預測）：{labels[top_index]} ({probabilities[top_index].item():.4f})")
+    safe_top_k = min(top_k, len(labels))
+    top_indices = probabilities.topk(safe_top_k).indices.tolist()
+
+    print(f"\n[Prompt set] {name}")
+    print(f"labels count: {len(labels)}")
+    print(f"logits_per_image shape: {tuple(logits.shape)}")
+    for index, (label, probability) in enumerate(zip(labels, probabilities.tolist())):
+        print(f"{index}: {label} -> {probability:.4f}")
+    print(f"Top-{safe_top_k}:")
+    for rank, index in enumerate(top_indices, start=1):
+        print(f"{rank}. labels[{index}] = {labels[index]} ({probabilities[index].item():.4f})")
 
 
 def main() -> int:
@@ -60,30 +60,30 @@ def main() -> int:
         from PIL import Image
         from transformers import CLIPModel, CLIPProcessor
     except ImportError as error:
-        print(f"缺少套件：{error.name}")
-        print("請安裝依賴：python -m pip install -r practice/coding/requirements.txt")
+        print(f"Missing dependency: {error.name}")
+        print("Install with: python -m pip install -r practice/coding/requirements.txt")
         return 1
 
     args = parse_args()
     if not args.image.is_file():
-        print(f"圖片路徑不存在：{args.image}")
-        print("請使用本地圖片路徑，例如：--image demo/my_image.jpg")
+        print(f"Image file not found: {args.image}")
+        return 1
+    if args.top_k < 1:
+        print("--top-k must be at least 1.")
         return 1
 
-    print("[Step 1] 載入圖片、processor（前處理器）與 CLIPModel。")
     image = Image.open(args.image).convert("RGB")
     processor = CLIPProcessor.from_pretrained(MODEL_NAME)
     model = CLIPModel.from_pretrained(MODEL_NAME)
     model.eval()
 
-    print("\n[Step 2] 將同一張圖片搭配不同 prompt sets 執行推論。")
-    for prompt_set_name, labels in PROMPT_SETS.items():
-        run_prompt_set(processor, model, image, prompt_set_name, labels)
+    for name, labels in PROMPT_SETS.items():
+        run_prompt_set(processor, model, image, name, labels, args.top_k)
 
-    print("\n[Observation 觀察]")
-    print("- CLIP 會比較圖片與你提供的確切 text prompts（文字提示詞）。")
-    print("- 簡短 object labels（物件標籤）與完整句子 prompts 可能產生不同 text embeddings（文字嵌入向量）。")
-    print("- Scene-aware prompts（場景感知提示詞）可能更適合描述有多物件或脈絡的圖片。")
+    print("\nObservation prompts:")
+    print("- Did top-1 change across prompt sets?")
+    print("- Which prompt set produced the sharpest probability distribution?")
+    print("- Which prompt set seems most stable, and why?")
     return 0
 
 

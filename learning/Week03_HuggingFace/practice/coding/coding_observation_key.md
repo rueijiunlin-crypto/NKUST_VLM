@@ -1,52 +1,88 @@
-# Week03 Coding Observation Key（程式觀察參考方向）
+﻿# Week03 Coding Observation Key
 
-> 請先完成 `coding_practice.md` 的觀察紀錄，再查看本觀察參考方向。本檔只提供理解線索，不代表你的實際執行結果。
+> 請先完成 `coding_practice.md` 的觀察紀錄，再查看本檔。本檔提供觀察方向與理解線索，不應取代學生自己的執行紀錄。
 
-## 1. Processor（前處理器）輸出應如何理解？
+## 1. Processor Tensor Shape
 
-`CLIPProcessor` 會同時處理文字與圖片：
+請優先檢查下列欄位，而不是只看 top-1 結果。
 
-| Key | 常見 shape（形狀） | 來源 | 觀察方向 |
-| --- | ---------- | ---- | -------- |
-| `input_ids` | `(labels 數量, token 長度)` | 文字 | 每個 prompt（提示詞）會被 tokenizer（詞元化器）轉成 token ID（詞元識別碼）。 |
-| `attention_mask` | `(labels 數量, token 長度)` | 文字 | 標示哪些 token 是有效內容，哪些是 padding（補齊）。 |
-| `pixel_values` | `(圖片數量, 3, 224, 224)` | 圖片 | 圖片會被 resize（調整尺寸）、normalize（正規化）並轉成模型輸入張量。 |
+| 欄位 | 典型 shape | 觀察方向 |
+| --- | --- | --- |
+| `input_ids.shape` | `[num_texts, sequence_length]` | 第一個維度應等於 labels/prompts 數量。 |
+| `attention_mask.shape` | `[num_texts, sequence_length]` | 通常與 `input_ids` 相同，用來標示有效 token 與 padding。 |
+| `pixel_values.shape` | `[num_images, channels, height, width]` | CLIP ViT-B/32 常見為 `[1, 3, 224, 224]`。 |
 
-重點不是背 shape，而是能說明「文字走文字前處理，圖片走圖片前處理，最後一起交給 `CLIPModel`」。
+觀察重點：
 
-## 2. Labels 數量如何影響 `logits_per_image`？
+- `sequence_length` 可能因 tokenizer 與 padding 設定而改變。
+- `attention_mask` 不是文字內容本身，而是告訴模型哪些位置要注意。
+- `pixel_values` 已經不是原始圖片檔，而是 resize 與 normalize 後的 tensor。
 
-若輸入 1 張圖片與 5 個 labels，`logits_per_image` 通常是 `(1, 5)`。第二個維度會跟候選文字數量一致，因為 CLIP 會比較每張圖片與每個文字 prompt 的相似度。
+## 2. `logits_per_image` 與 Labels 數量
 
-因此，當你把 labels 改成 3 個或 8 個時，`logits_per_image` 的第二個維度也應跟著改變。
+| 欄位 | 觀察方向 |
+| --- | --- |
+| `logits_per_image.shape` | 應接近 `[num_images, num_texts]`。 |
+| labels 數量 | 應對應 `logits_per_image.shape[1]`。 |
+| 圖片數量 | 應對應 `logits_per_image.shape[0]`。 |
 
-## 3. Top-k（前 k 名）如何從 probability（機率分布）取得？
+如果輸入 1 張圖片與 5 個 labels，`logits_per_image` 應是 `[1, 5]`。這代表同一張圖片分別對 5 個文字 prompt 產生相似度分數。
 
-Demo 02 的流程是：
+## 3. Softmax 與 Probability
 
-```text
-logits_per_image
-→ softmax(dim=1)
-→ probabilities
-→ topk(k)
-→ top-k labels（前 k 名標籤）
+`softmax(dim=1)` 是沿著 labels/texts 維度正規化。對 `[1, 5]` 來說，它會讓同一張圖片對 5 個 labels 的分數形成相對分布。
+
+請觀察：
+
+| 欄位 | 觀察方向 |
+| --- | --- |
+| `probabilities.shape` | 使用 `[0]` 後通常是 `[num_texts]`。 |
+| probability 加總 | 同一張圖片的 labels probability 通常加總約為 1。 |
+| top-1 probability | 高分只代表目前候選 labels 中相對最高。 |
+
+提醒：softmax probability 不是絕對真實機率。候選 labels 改變時，probability 會重新分配。
+
+## 4. Top-k 與 Labels 數量
+
+觀察欄位：
+
+| 欄位 | 觀察方向 |
+| --- | --- |
+| `top_k` | 使用者要求印出的前 k 名。 |
+| `len(labels)` | 候選 labels 數量。 |
+| `min(args.top_k, len(labels))` | 避免 top-k 超過 labels 數量。 |
+| `topk().indices.tolist()` | 回傳前 k 名在 probability vector 裡的位置索引。 |
+
+如果 labels 是：
+
+```python
+labels = ["cat", "dog", "car"]
 ```
 
-`top-k` 不是模型另外輸出的欄位，而是從 probability 排序後挑出前 k 個候選 labels（候選標籤）。若候選 labels 改變，probability 與 top-k 也可能改變。
+而 `topk()` 回傳 `[0, 1]`，代表前兩名對應 `labels[0]` 與 `labels[1]`，也就是 `cat` 與 `dog`。索引不是 label 名稱本身。
 
-## 4. Prompt 改寫為什麼會改變結果？
+## 5. Prompt Set 觀察
 
-CLIP 的文字端會把整句 prompt 轉成 text embedding（文字嵌入向量）。`cat`、`a photo of a cat`、`a photo of two cats on a pink sofa` 對模型而言不是完全相同的文字輸入，因此與圖片 embedding（圖片嵌入向量）的相似度可能不同。
+請比較至少三組 prompt set：
 
-觀察 Demo 03 時，請特別比較：
+| Prompt set | 觀察方向 |
+| --- | --- |
+| object-only | 短 label 是否已足夠讓 CLIP 判斷主要物件。 |
+| photo-template | `a photo of ...` 是否讓結果更穩定。 |
+| scene-aware | 更細的場景描述是否改善結果，或因描述太細造成誤判。 |
 
-- 簡短 object label（物件標籤）是否容易忽略場景。
-- photo template（照片描述模板）是否比單字更接近 CLIP 預訓練資料的描述方式。
-- scene-aware prompt（場景感知提示詞）是否更能描述整張圖片，而不是只描述單一物件。
+請特別記錄：
 
-## 5. 常見誤解
+- 不同 prompt set 的 top-1 是否改變。
+- 不同 prompt set 的 probability 分布是否更集中或更分散。
+- top-1 改變時，是因為正確描述更精準，還是候選 labels 競爭關係改變。
+- 如果候選 labels 都不理想，CLIP 仍會在其中選出相對最像的一個。
 
-- Softmax probability（softmax 機率分布）不是現實世界的絕對真實機率，而是在目前候選 labels 之間的相對分布。
-- `CLIPProcessor` 不會判斷圖片內容；它只負責前處理。
-- `CLIPModel` 的輸出需要搭配 labels 與 prompt（提示詞）設計解讀，不能只看最大值就忽略候選集合。
-- 本週程式是推論與流程理解，不是 fine-tuning（微調）或模型訓練。
+## 6. 常見誤解修正
+
+- `CLIPProcessor` 不負責判斷圖片內容，它只做文字與圖片前處理。
+- `CLIPModel` 輸出的 logits 不是機率，需要經過 softmax 才變成相對分布。
+- `softmax(dim=1)` 是在同一張圖片的 labels 之間比較，不是在不同圖片之間比較。
+- `[0]` 是取出 batch 中第 1 張圖片的結果。
+- `topk()` 回傳索引，必須再用 `labels[index]` 找回文字 label。
+- Top-1 高不代表模型完整理解圖片，只代表在目前候選 prompts 中相對最相似。

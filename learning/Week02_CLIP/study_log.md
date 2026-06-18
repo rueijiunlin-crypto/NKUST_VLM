@@ -1,9 +1,9 @@
-# Week02 Study Log
+﻿# Week02 Study Log
 
 ## 學習時間
 
 | 日期 | 時間 | 內容 | 備註 |
-| ---- | ---- | ---- | ---- |
+| --- | --- | --- | --- |
 | 本週 | 分段完成 | 閱讀 Week02 CLIP 教材、執行 Demo、完成 Practice 與 ChatGPT 驗收 | 已完成 Week02 核心學習 |
 
 ## 閱讀進度
@@ -19,7 +19,7 @@
 ## Demo 執行結果
 
 | Demo | 是否執行 | 問題／觀察 |
-| ---- | -------- | ---------- |
+| --- | --- | --- |
 | `demo_01_text_image_embedding.py` | 完成 | 理解圖片與文字最後都會被轉成同維度 embedding，維度相同才可進行相似度比較。 |
 | `demo_02_cosine_similarity.py` | 完成 | 理解 dot product、norm 與 cosine similarity 的關係，知道 CLIP 比較的是向量方向相似度。 |
 | `demo_03_zero_shot_classification.py` | 完成 | 理解 zero-shot classification 會把候選類別寫成 prompt，再透過相似度與 softmax 取得 top-1。 |
@@ -29,7 +29,7 @@
 ## Practice 結果摘要
 
 | Practice | 是否完成 | 重要觀察 | 疑問 |
-| -------- | -------- | -------- | ---- |
+| --- | --- | --- | --- |
 | Concept Practice | 完成 | 已能用自己的話說明 CLIP、Image Encoder、Text Encoder、Shared Embedding Space、Cosine Similarity、Zero-shot Classification、Contrastive Learning 與 VLM / VLA 的關係。 | 無重大疑問。 |
 | Guided Code Reading | 完成 | 已理解 shape、normalization、similarity matrix、softmax、top-1 prediction 與真實 CLIP Demo 的輸入流程。 | 後續需在 Week03 進一步理解 Hugging Face Processor 與模型輸出欄位。 |
 
@@ -151,7 +151,7 @@ Week02 驗收通過。學生已能說明 CLIP 的核心資料流、Image Encoder
 ### CLIP 限制
 
 | 限制 | 說明 |
-| ---- | ---- |
+| --- | --- |
 | 候選文字依賴 | 結果高度受 labels / prompt 設計影響。 |
 | 單一 Top-1 不一定代表完整內容 | 圖中有多個物件時，最高分只代表最相似描述。 |
 | 背景可能干擾判斷 | 大面積背景或顯眼顏色可能壓過小目標。 |

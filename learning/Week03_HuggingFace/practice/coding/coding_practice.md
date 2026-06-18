@@ -1,38 +1,28 @@
-# Week03 Coding Practice（程式練習）：Guided Code Reading（引導式程式閱讀）
+﻿# Week03 Coding Practice: Guided Code Reading Mode
 
-本週 Coding Practice 採 Guided Code Reading Mode（引導式程式閱讀模式）。請從 `learning/Week03_HuggingFace` 目錄執行 `practice/coding/guided_demos/` 中的程式，閱讀程式註解與輸出，重點是理解 Hugging Face Transformers（模型載入與推論工具庫）如何把 Week02 的 CLIP（對比式圖文預訓練）概念落到真實推論流程。
+本週 Coding Practice 採用 Guided Code Reading Mode（引導式程式閱讀模式）。重點不是從零實作 CLIP，而是透過可執行程式觀察 Hugging Face CLIP 推論流程、tensor shape、softmax/top-k 與 prompt 改寫效果。
 
-> 本週不是 TODO 填空題，請不要修改 guided demos（引導式示範程式）當作作答；請把觀察結果記錄在本檔與 `../../study_log.md`。
+請從 `learning/Week03_HuggingFace` 執行指令，並把觀察記錄在本檔與 `../../study_log.md`。本檔不得填入參考答案，只記錄你的實際觀察與問題。
 
 ## 練習清單
 
-### Processor 輸出觀察
-
-- 模式：Guided Code Reading（引導式程式閱讀）。
-- 對應檔案：`guided_demos/guided_01_processor_flow.py`
-- 學習目標：觀察 `input_ids`、`attention_mask`、`pixel_values` 的 keys（欄位）與 shape（形狀）。
-
-### Zero-shot 推論觀察
-
-- 模式：Guided Code Reading。
-- 對應檔案：`guided_demos/guided_02_logits_topk_flow.py`
-- 學習目標：觀察 labels（候選標籤）數量如何影響 `logits_per_image` shape 與 probability（機率分布）。
-
-### Prompt 比較觀察
-
-- 模式：Guided Code Reading。
-- 對應檔案：`guided_demos/guided_03_prompt_effect_flow.py`
-- 學習目標：比較 prompt（提示詞）改寫後 top-1（第一名預測）與 probability 的變化。
+| 練習 | 模式 | 對應檔案 | 學習目標 |
+| --- | --- | --- | --- |
+| Processor Flow | Guided Code Reading | `guided_demos/guided_01_processor_flow.py` | 觀察 `input_ids`、`attention_mask`、`pixel_values`。 |
+| Logits and Top-k Flow | Guided Code Reading | `guided_demos/guided_02_logits_topk_flow.py` | 觀察 `logits_per_image`、`softmax(dim=1)`、`topk()`。 |
+| Prompt Effect Flow | Guided Code Reading | `guided_demos/guided_03_prompt_effect_flow.py` | 比較不同 prompt set 對 top-1 與 probability 分布的影響。 |
+| 自訂 Prompt 實驗 | Guided Code Reading | `demo/demo_02_clip_zero_shot_local.py` 或 `demo/demo_03_prompt_comparison.py` | 自行設計 prompt sets 並分析穩定性。 |
 
 ## 執行方式
 
-請先安裝依賴：
+安裝依賴：
 
 ```powershell
+python -m pip install -r practice/coding/requirements.txt
 python -m pip install -r demo/requirements.txt
 ```
 
-若 Week02 範例圖片存在，可使用：
+執行 Guided Demos：
 
 ```powershell
 python practice/coding/guided_demos/guided_01_processor_flow.py --image ../Week02_CLIP/demo/000000039769.jpg
@@ -40,58 +30,108 @@ python practice/coding/guided_demos/guided_02_logits_topk_flow.py --image ../Wee
 python practice/coding/guided_demos/guided_03_prompt_effect_flow.py --image ../Week02_CLIP/demo/000000039769.jpg
 ```
 
-若圖片不存在，請改用自己的本地圖片路徑，例如：
+若 Week02 圖片不存在，可以使用自己的本機圖片：
 
 ```powershell
-python practice/coding/guided_demos/guided_02_logits_topk_flow.py --image demo/my_image.jpg --labels "a photo of a cat" "a photo of a robot" "a photo of a classroom"
+python demo/demo_02_clip_zero_shot_local.py --image demo/my_image.jpg
 ```
 
-第一次執行可能會下載 `openai/clip-vit-base-patch32` 權重與 processor（前處理器）檔案，請確認網路與 Hugging Face（模型平台）連線狀態。
+## 1. Processor Shape 觀察
 
-## 學生觀察欄位
+請執行 Demo 01 或 guided demo 01，記錄輸出：
 
-### 1. Processor keys 與 tensor shape（張量形狀）
+| Key | 實際 shape | 這個 shape 的意義 | 疑問 |
+| --- | --- | --- | --- |
+| `input_ids` |  |  |  |
+| `attention_mask` |  |  |  |
+| `pixel_values` |  |  |  |
 
-|Key|Shape|來源是圖片或文字？|我的理解|
-|---|---|---|---|
-|`input_ids`||||
-|`attention_mask`||||
-|`pixel_values`||||
+引導問題：
 
-### 2. Labels 數量與 `logits_per_image` shape
+- `input_ids.shape[0]` 是否等於 labels 數量？
+- `attention_mask` 為什麼和 `input_ids` shape 相同？
+- `pixel_values` 的 channels 為什麼通常是 3？
 
-請使用不同數量的 `--labels` 重跑 `guided_02_logits_topk_flow.py`，觀察 shape 如何改變。
+## 2. Logits、Softmax 與 Top-k 觀察
 
-|圖片數量|Labels 數量|`logits_per_image` shape|我的觀察|
-|---|---|---|---|
-|1||||
-|1||||
+請執行 Demo 02 或 guided demo 02，記錄：
 
-### 3. Probability 與 top-k 排序
+| Labels 數量 | `logits_per_image.shape` | `probabilities.shape` | `top_k` | top-k 是否被限制在 labels 數量內 |
+| ---: | --- | --- | ---: | --- |
+|  |  |  |  |  |
 
-|Top-k 設定|Top-1 label|Top-1 probability|我如何判斷排序來自 probability？|
-|---|---|---|---|
-|1||||
-|3||||
+請記錄 labels 與 probabilities 的對應：
 
-### 4. Prompt 改寫觀察
+| Label index | Label / prompt | Probability |
+| ---: | --- | ---: |
+|  |  |  |
 
-|Prompt set|Top-1 label|最明顯變化|可能原因|
-|---|---|---|---|
-|`object_only`||||
-|`photo_template`||||
-|`scene_aware`||||
+引導問題：
+
+- `softmax(dim=1)[0]` 中的 `dim=1` 與 `[0]` 各代表什麼？
+- `topk().indices.tolist()` 回傳的 index 如何對應到 label？
+- Top-1 高是否代表模型對圖片有絕對信心？
+
+## 3. 自訂 Prompt 設計實驗
+
+請自選一張圖片，或使用 Week02 demo 圖片。你需要設計至少 3 組 label/prompt sets，並比較結果。
+
+至少包含：
+
+- object-only labels，例如 `cat`, `dog`, `sofa`
+- `a photo of ...` template labels，例如 `a photo of a cat`
+- scene-aware descriptions，例如 `a photo of two cats on a pink sofa`
+
+可使用 Demo 02 分別執行不同 labels：
+
+```powershell
+python demo/demo_02_clip_zero_shot_local.py --image ../Week02_CLIP/demo/000000039769.jpg --labels "cat" "dog" "sofa"
+python demo/demo_02_clip_zero_shot_local.py --image ../Week02_CLIP/demo/000000039769.jpg --labels "a photo of a cat" "a photo of a dog" "a photo of a sofa"
+python demo/demo_02_clip_zero_shot_local.py --image ../Week02_CLIP/demo/000000039769.jpg --labels "a photo of two cats on a pink sofa" "a photo of a dog on a sofa" "a photo of an empty sofa"
+```
+
+請填寫你的 prompt sets：
+
+| Prompt set | Labels / prompts | 設計理由 |
+| --- | --- | --- |
+| object-only |  |  |
+| photo-template |  |  |
+| scene-aware |  |  |
+| optional extra |  |  |
+
+## 4. Prompt 實驗結果紀錄
+
+請記錄每組 prompt set 的 top-1、top-k 與 probability 分布：
+
+| Prompt set | Top-1 label | Top-1 probability | Top-k labels | Probability 分布觀察 |
+| --- | --- | ---: | --- | --- |
+| object-only |  |  |  |  |
+| photo-template |  |  |  |  |
+| scene-aware |  |  |  |  |
+| optional extra |  |  |  |  |
+
+請回答：
+
+1. prompt 改寫是否影響 top-1？如果有，可能原因是什麼？
+2. 哪一組 prompt 的 probability 分布最集中？這是否一定代表最好？
+3. 哪一組 prompt 最穩定？哪一組最容易造成誤判？
+4. 若候選 labels 缺少正確描述，CLIP 會如何選擇？
+
+學生觀察：
+
+-
 
 ## 錯誤紀錄欄位
 
-|錯誤訊息|發生在哪個 Demo|我嘗試的修正|是否解決|
-|---|---|---|---|
-|||||
+| 錯誤訊息或現象 | 發生在哪個檔案或指令 | 可能原因 | 修正方式 |
+| --- | --- | --- | --- |
+|  |  |  |  |
 
 ## 自我檢查項目
 
-- [ ] 我能說出 processor 輸出的 keys 與每個 tensor 的用途。
-- [ ] 我能解釋 labels 數量為什麼會改變 `logits_per_image` 的第二個維度。
-- [ ] 我能說明 top-k 是從 softmax probability 排序取得，而不是人工指定答案。
-- [ ] 我能舉例說明 prompt 改寫如何影響 CLIP zero-shot classification（零樣本分類）。
-- [ ] 我能把 Week03 的 Hugging Face 推論流程連到 Week04 LLaVA（大型語言與視覺助手）的模型載入與前處理流程。
+- [ ] 我能說明 `input_ids.shape`、`attention_mask.shape`、`pixel_values.shape`。
+- [ ] 我能說明 labels 數量如何影響 `logits_per_image.shape`。
+- [ ] 我能說明 `softmax(dim=1)[0]`。
+- [ ] 我能說明 `topk()` 回傳的是 label index。
+- [ ] 我完成至少 3 組 prompt sets 的比較。
+- [ ] 我在 `../../study_log.md` 記錄了 prompt 實驗結果與疑問。

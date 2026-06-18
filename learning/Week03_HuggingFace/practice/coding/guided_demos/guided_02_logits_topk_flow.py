@@ -1,4 +1,4 @@
-"""引導式程式閱讀：追蹤 logits、softmax probability 與 top-k prediction。"""
+"""Guided reading: trace CLIP logits, softmax probabilities, and top-k indices."""
 
 from __future__ import annotations
 
@@ -17,17 +17,10 @@ DEFAULT_LABELS = [
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(
-        description="追蹤 CLIP logits 與 top-k prediction，作為 Week03 guided practice（引導式練習）。"
-    )
-    parser.add_argument("--image", type=Path, required=True, help="本地圖片路徑。")
-    parser.add_argument(
-        "--labels",
-        nargs="+",
-        default=DEFAULT_LABELS,
-        help="候選文字 labels（標籤）或 prompts（提示詞）。請用引號提供一個或多個項目。",
-    )
-    parser.add_argument("--top-k", type=int, default=3, help="要印出的 top-k prediction（前 k 名預測）數量。")
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--image", type=Path, required=True, help="Path to the local image file.")
+    parser.add_argument("--labels", nargs="+", default=DEFAULT_LABELS, help="Candidate labels or prompts.")
+    parser.add_argument("--top-k", type=int, default=3, help="Number of top predictions to inspect.")
     return parser.parse_args()
 
 
@@ -37,51 +30,57 @@ def main() -> int:
         from PIL import Image
         from transformers import CLIPModel, CLIPProcessor
     except ImportError as error:
-        print(f"缺少套件：{error.name}")
-        print("請安裝依賴：python -m pip install -r practice/coding/requirements.txt")
+        print(f"Missing dependency: {error.name}")
+        print("Install with: python -m pip install -r practice/coding/requirements.txt")
         return 1
 
     args = parse_args()
     if not args.image.is_file():
-        print(f"圖片路徑不存在：{args.image}")
-        print("請使用本地圖片路徑，例如：--image demo/my_image.jpg")
+        print(f"Image file not found: {args.image}")
+        return 1
+    if args.top_k < 1:
+        print("--top-k must be at least 1.")
         return 1
 
-    print("[Step 1] 載入圖片、processor（前處理器）與 CLIPModel。")
+    print("[Step 1] Load image, processor, and model")
     image = Image.open(args.image).convert("RGB")
     processor = CLIPProcessor.from_pretrained(MODEL_NAME)
     model = CLIPModel.from_pretrained(MODEL_NAME)
     model.eval()
 
-    print("\n[Step 2] 使用一張圖片與候選 labels 建立模型輸入。")
+    print("\n[Step 2] Build model inputs")
     labels = args.labels
     inputs = processor(text=labels, images=image, return_tensors="pt", padding=True)
-    print("圖片數量：1")
-    print(f"labels 數量：{len(labels)}")
+    print(f"labels count: {len(labels)}")
+    print(f"input_ids shape: {tuple(inputs['input_ids'].shape)}")
+    print(f"attention_mask shape: {tuple(inputs['attention_mask'].shape)}")
+    print(f"pixel_values shape: {tuple(inputs['pixel_values'].shape)}")
 
-    print("\n[Step 3] 執行 inference（推論），並觀察 logits_per_image。")
+    print("\n[Step 3] Run inference without gradients")
     with torch.inference_mode():
         outputs = model(**inputs)
         logits = outputs.logits_per_image
         probabilities = logits.softmax(dim=1)[0]
 
     print(f"logits_per_image shape: {tuple(logits.shape)}")
-    print("預期 shape：(圖片數量, labels 數量)")
+    print(f"probabilities shape after [0]: {tuple(probabilities.shape)}")
 
-    print("\n[Step 4] 比較 logits（未正規化分數）與 softmax probability（softmax 機率分布）。")
-    for label, logit, probability in zip(labels, logits[0].tolist(), probabilities.tolist()):
-        print(f"- {label}: logit={logit:.4f}, probability={probability:.4f}")
+    print("\n[Step 4] Compare logits and probabilities")
+    for index, (label, logit, probability) in enumerate(zip(labels, logits[0].tolist(), probabilities.tolist())):
+        print(f"{index}: {label} | logit={logit:.4f} | probability={probability:.4f}")
 
+    print("\n[Step 5] Inspect top-k indices")
     top_k = min(args.top_k, len(labels))
     top_indices = probabilities.topk(top_k).indices.tolist()
-    print(f"\n[Step 5] 從排序後的 probability 取得 Top-{top_k} prediction。")
+    print(f"requested top_k={args.top_k}, safe top_k={top_k}")
+    print(f"top indices: {top_indices}")
     for rank, index in enumerate(top_indices, start=1):
-        print(f"{rank}. {labels[index]} ({probabilities[index].item():.4f})")
+        print(f"{rank}. labels[{index}] = {labels[index]} ({probabilities[index].item():.4f})")
 
-    print("\n[Observation 觀察]")
-    print("- 改變 labels 數量會改變 logits_per_image 的第二個維度。")
-    print("- Softmax probability 是相對於你提供的 labels 集合。")
-    print("- Top-k 來自 probability 排序，不是另一個獨立的 model head（模型分類頭）。")
+    print("\nObservation prompts:")
+    print("- Why does logits_per_image use [num_images, num_texts]?")
+    print("- Why is softmax applied with dim=1?")
+    print("- Why do top-k results need indices to recover label text?")
     return 0
 
 

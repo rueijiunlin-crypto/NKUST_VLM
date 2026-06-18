@@ -1,4 +1,4 @@
-# Week01 Coding Observation Key（觀察指引）
+﻿# Week01 Coding Observation Key（觀察指引）
 
 本文件不是標準答案。它提供觀察重點、shape 變化與常見誤解，協助檢查是否沿著正確資料流閱讀程式。
 

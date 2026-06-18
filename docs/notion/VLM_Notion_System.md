@@ -47,7 +47,7 @@
 預設 Week01 到 Week16：
 
 | Week | Topic | GitHub 對應資料夾 |
-|---|---|---|
+| --- | --- | --- |
 | Week01 | Transformer 基礎 | `learning/Week01_Transformer/` |
 | Week02 | CLIP | `learning/Week02_CLIP/` |
 | Week03 | Hugging Face | `learning/Week03_HuggingFace/` |
@@ -245,7 +245,7 @@
 預設論文條目：
 
 | Paper Title | Category | Related Week | Possible Thesis Usage |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | CLIP | VLM | Week02 | 圖文對齊與語意標籤比對 |
 | BLIP | VLM | Week06 | 影像描述與視覺問答基礎 |
 | BLIP-2 | VLM | Week06 | 輕量連接視覺模型與語言模型 |

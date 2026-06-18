@@ -1,4 +1,4 @@
-# Week02 Coding Observation Key
+﻿# Week02 Coding Observation Key
 
 > 請先執行 Guided Demos 並完成自己的觀察，再閱讀本頁。本頁提供觀察方向，不是唯一標準答案。
 

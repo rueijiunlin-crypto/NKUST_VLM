@@ -1,9 +1,9 @@
-# Week01 Study Log
+﻿# Week01 Study Log
 
 ## 學習時間
 
 | 日期 | 時間 | 內容 | 備註 |
-|---|---|---|---|
+| --- | --- | --- | --- |
 |  |  |  |  |
 
 ## 閱讀進度
@@ -18,7 +18,7 @@
 以下為 Flat Integrated Demo 的學習紀錄；既有明確完成狀態已保留，原「結果」與「問題」內容已遷移至「問題／觀察」。
 
 | Demo | 是否執行 | 問題／觀察 |
-|---|---|---|
+| --- | --- | --- |
 | demo/demo_01_token_embedding.py | ✅ | 原紀錄：完成；問題：no。 |
 | demo/demo_02_attention_overview.py | ✅ | 原紀錄：完成；問題：no。 |
 | demo/demo_03_position_multihead.py | ✅ | 原紀錄：完成；問題：no。 |
@@ -27,7 +27,7 @@
 ## Practice 紀錄
 
 | Practice | 是否完成 | 重要觀察 | 疑問 |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Concept Practice | ✅ | 原紀錄：完成；錯誤修正：完成；備註：無。尚未整理具體觀察。 | 未記錄 |
 | Guided Code Reading | ✅ | 原紀錄：完成；錯誤修正：完成；備註：無。尚未整理具體觀察。 | 未記錄 |
 

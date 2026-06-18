@@ -1,4 +1,4 @@
-"""比較不同 prompt set 如何影響 CLIP zero-shot prediction。"""
+"""Compare how different prompt sets change CLIP zero-shot predictions."""
 
 from __future__ import annotations
 
@@ -34,23 +34,32 @@ PROMPT_SETS = {
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--image", type=Path, required=True, help="本地圖片路徑。")
+    parser.add_argument("--image", type=Path, required=True, help="Path to the local image file.")
+    parser.add_argument("--top-k", type=int, default=3, help="Number of predictions per prompt set.")
     return parser.parse_args()
 
 
-def run_prompt_set(processor, model, image, prompt_set_name: str, labels: list[str]) -> None:
+def run_prompt_set(processor, model, image, prompt_set_name: str, labels: list[str], top_k: int) -> None:
     import torch
 
     inputs = processor(text=labels, images=image, return_tensors="pt", padding=True)
+
     with torch.inference_mode():
         outputs = model(**inputs)
-        probabilities = outputs.logits_per_image.softmax(dim=1)[0]
+        logits = outputs.logits_per_image
+        probabilities = logits.softmax(dim=1)[0]
 
-    top_index = int(probabilities.argmax())
-    print(f"\nPrompt set（提示詞集合）：{prompt_set_name}")
-    for label, probability in zip(labels, probabilities.tolist()):
-        print(f"- {label}: {probability:.4f}")
-    print(f"Top-1（第一名預測）：{labels[top_index]} ({probabilities[top_index].item():.4f})")
+    safe_top_k = min(top_k, len(labels))
+    top_indices = probabilities.topk(safe_top_k).indices.tolist()
+
+    print(f"\nPrompt set: {prompt_set_name}")
+    print(f"logits_per_image shape: {tuple(logits.shape)}")
+    for index, (label, probability) in enumerate(zip(labels, probabilities.tolist())):
+        print(f"{index}: {label} -> {probability:.4f}")
+
+    print(f"Top-{safe_top_k}:")
+    for rank, index in enumerate(top_indices, start=1):
+        print(f"{rank}. label[{index}] {labels[index]} ({probabilities[index].item():.4f})")
 
 
 def main() -> int:
@@ -58,33 +67,36 @@ def main() -> int:
         from PIL import Image
         from transformers import CLIPModel, CLIPProcessor
     except ImportError as error:
-        print(f"缺少套件：{error.name}")
-        print("請安裝依賴：python -m pip install -r demo/requirements.txt")
+        print(f"Missing dependency: {error.name}")
+        print("Install with: python -m pip install -r demo/requirements.txt")
         return 1
 
     args = parse_args()
     if not args.image.is_file():
-        print(f"圖片路徑不存在：{args.image}")
-        print("若 Week02 範例圖片不存在，請改用自己的本地圖片路徑。")
+        print(f"Image file not found: {args.image}")
+        print("Try the Week02 demo image or pass another local image with --image.")
+        return 1
+    if args.top_k < 1:
+        print("--top-k must be at least 1.")
         return 1
 
     image = Image.open(args.image).convert("RGB")
 
-    print("正在載入 processor（前處理器）與 model（模型）。第一次執行可能會下載預訓練權重。")
+    print("Loading CLIPProcessor and CLIPModel...")
     processor = CLIPProcessor.from_pretrained(MODEL_NAME)
     model = CLIPModel.from_pretrained(MODEL_NAME)
     model.eval()
 
-    print(f"模型：{MODEL_NAME}")
-    print(f"圖片路徑：{args.image}")
+    print(f"Model: {MODEL_NAME}")
+    print(f"Image: {args.image}")
 
     for prompt_set_name, labels in PROMPT_SETS.items():
-        run_prompt_set(processor, model, image, prompt_set_name, labels)
+        run_prompt_set(processor, model, image, prompt_set_name, labels, args.top_k)
 
-    print("\n解讀：")
-    print("- CLIP 會把圖片與你提供的確切 prompts（提示詞）進行比較。")
-    print("- 不同 prompt 寫法會改變 text embeddings（文字嵌入向量）與 prediction scores（預測分數）。")
-    print("- 對多物件圖片而言，scene-aware prompts（場景感知提示詞）可能更能描述整張圖片。")
+    print("\nNotes:")
+    print("- Each prompt set creates a different candidate-label space.")
+    print("- Softmax probabilities are relative within that prompt set.")
+    print("- Compare whether top-1 changes and whether the distribution becomes sharper or flatter.")
     return 0
 
 

@@ -1,4 +1,4 @@
-# Week01 Guided Code Reading（引導式程式閱讀）
+﻿# Week01 Guided Code Reading（引導式程式閱讀）
 
 Week01 採用 Guided Code Reading Mode（引導式程式閱讀模式）。這裡提供完整可執行的小型程式，重點是追蹤 Transformer（轉換器架構）的資料流，而不是從零實作模型。
 

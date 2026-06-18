@@ -1,11 +1,11 @@
-# Week02 Coding Practice（觀察任務）
+﻿# Week02 Coding Practice（觀察任務）
 
 本檔案是 Guided Code Reading Mode 的練習索引與學生紀錄表，不要求補寫程式碼。
 
 ## 練習清單
 
 | 順序 | Guided Demo | 學習目標 | 執行結果 |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | 1 | `guided_demos/01_vector_similarity_reading.py` | 追蹤內積、norm、正規化與餘弦相似度 |  |
 | 2 | `guided_demos/02_text_image_alignment_reading.py` | 理解圖文 embedding 與相似度矩陣 shape |  |
 | 3 | `guided_demos/03_zero_shot_reading.py` | 追蹤 logits、Softmax 與 top-1 |  |
@@ -53,7 +53,7 @@ python practice/coding/guided_demos/04_clip_pipeline_reading.py
 ## 錯誤紀錄
 
 | 日期 | 檔案 | 錯誤訊息 | 修正方式 | 尚未解決 |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 |  |  |  |  |  |
 
 ## 自我檢查

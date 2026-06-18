@@ -1,24 +1,28 @@
-# Week03 Practice Overview（練習總覽）
+﻿# Week03 Practice Overview
 
-本週練習用來確認你是否能把 Week02 的 CLIP（對比式圖文預訓練）概念對應到 Hugging Face（模型平台）實作流程。
+`practice/` 是 Week03 所有練習內容的唯一入口。本週練習分成 Concept Practice（觀念練習）與 Coding Practice（程式閱讀練習）。
 
-## 練習結構
+## 練習檔案
 
 | 路徑 | 用途 |
-| ---- | ---- |
-| `concept/concept_practice.md` | 觀念作答題。 |
-| `concept/concept_answer_key.md` | 觀念參考答案。 |
-| `coding/coding_practice.md` | 程式閱讀與觀察紀錄。 |
-| `coding/coding_observation_key.md` | 程式觀察參考方向。 |
-| `coding/README.md` | Guided Code Reading Mode（引導式程式閱讀模式）入口。 |
-| `coding/guided_demos/` | 完整可執行的程式閱讀材料。 |
-| `coding/requirements.txt` | 練習所需套件。 |
+| --- | --- |
+| `concept/concept_practice.md` | 學生觀念作答檔，包含 token、shape、softmax、top-k 與候選 labels 題目。 |
+| `concept/concept_answer_key.md` | 觀念參考答案，請完成練習後再查看。 |
+| `coding/README.md` | Coding Practice 執行方式與環境需求。 |
+| `coding/coding_practice.md` | Guided Code Reading 任務與 prompt 實驗紀錄表。 |
+| `coding/coding_observation_key.md` | 觀察方向與理解說明，請完成紀錄後再查看。 |
+| `coding/guided_demos/` | 可執行的引導式程式閱讀檔。 |
+| `coding/requirements.txt` | 程式練習依賴。 |
 
 ## 建議順序
 
-1. 先執行 `demo/` 中三個 Demo（示範程式），快速觀察 Hugging Face CLIP 推論在做什麼。
-2. 完成 `concept/concept_practice.md`。
-3. 進入 `coding/README.md`，執行 `guided_demos/` 中的 Guided Code Reading 練習。
-4. 完成 `coding/coding_practice.md` 的觀察表。
-5. 再查看參考答案與 observation key（觀察參考方向）。
-6. 將結果整理到 `study_log.md`。
+1. 先執行 `../demo/` 的三個 demo，建立整體印象。
+2. 完成 `concept/concept_practice.md`，不要先看答案。
+3. 閱讀 `coding/README.md`，執行 `coding/guided_demos/`。
+4. 在 `coding/coding_practice.md` 記錄 tensor shape、softmax/top-k 與 prompt 實驗結果。
+5. 完成後再查看 `concept/concept_answer_key.md` 與 `coding/coding_observation_key.md`。
+6. 將重要觀察與疑問整理到 `../study_log.md`。
+
+## 本週 Coding Practice 模式
+
+本週採用 Guided Code Reading Mode（引導式程式閱讀模式）。原因是 Week03 的主要目標是理解 Hugging Face CLIP 推論資料流，而不是從零實作模型。程式已提供完整可執行版本，學生需要觀察 shape、中間值、top-k 索引與 prompt 改寫效果。
