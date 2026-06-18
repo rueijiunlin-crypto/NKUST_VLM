@@ -42,9 +42,9 @@ python demo/demo_02_clip_zero_shot_local.py --image demo/my_image.jpg
 
 | Key | 實際 shape | 這個 shape 的意義 | 疑問 |
 | --- | --- | --- | --- |
-| `input_ids` |  |  |  |
-| `attention_mask` |  |  |  |
-| `pixel_values` |  |  |  |
+| `input_ids.shape` | `[num_texts, sequence_length]` | 第一個維度應等於 labels/prompts 數量。 |
+| `attention_mask.shape` | `[num_texts, sequence_length]` | 通常與 `input_ids` 相同，用來標示有效 token 與 padding。 |
+| `pixel_values.shape` | `[num_images, channels, height, width]` | CLIP ViT-B/32 常見為 `[1, 3, 224, 224]`。 |
 
 引導問題：
 

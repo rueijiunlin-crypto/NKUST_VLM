@@ -8,10 +8,10 @@
 
 | 名詞 | 你的解釋 | 在 Week03 CLIP 流程中的例子 |
 | --- | --- | --- |
-| token（詞元） |  |  |
-| token id（詞元識別碼） |  |  |
-| tensor（張量） |  |  |
-| embedding vector（嵌入向量） |  |  |
+| token（詞元） | 將句子拆分後的單位 | 句子被拆分成4~5個token |
+| token id（詞元識別碼） | 該token的代號，用於後續對照嵌入向量表 | 無 |
+| tensor（張量） | 二維以上的向量，每個數字各有他代表的含意 | 可能代表他有含幾種顏色，有多少維度 |
+| embedding vector（嵌入向量） | 該圖片或文字的實際語意，供模型閱讀使用 | 張量內的維度就是指嵌入向量是幾維的 |
 
 提示：
 
@@ -22,8 +22,8 @@
 
 自我檢查：
 
-- [ ] 我沒有把 token id 誤認為 embedding vector。
-- [ ] 我能說明 `input_ids` 為什麼是 tensor。
+- [✅] 我沒有把 token id 誤認為 embedding vector。
+- [✅] 我能說明 `input_ids` 為什麼是 tensor。
 
 ## 2. Padding 與 Attention Mask
 
@@ -42,12 +42,14 @@ a photo of two cats on a pink sofa
 
 學生作答：
 
--
+- 因為不同維度的向量無法被讀取，所以需要補齊
+- 他也是一個向量，會標示出實際需要被讀取的token的位置
+- 他會把補齊的內容當成一種嵌入向量去訓練
 
 自我檢查：
 
-- [ ] 我能解釋 `input_ids` 與 `attention_mask` 為什麼通常有相同 shape。
-- [ ] 我能說明不同長度文字如何被放進同一個 batch。
+- [✅] 我能解釋 `input_ids` 與 `attention_mask` 為什麼通常有相同 shape。
+- [✅] 我能說明不同長度文字如何被放進同一個 batch。
 
 ## 3. `logits_per_image` 的 Shape
 
@@ -59,18 +61,18 @@ logits_per_image shape = [____, ____]
 
 請解釋兩個維度各代表什麼：
 
--
+- 應當填入(1,5)，一代表著一張圖片，並且有五個候選的標籤
 
 延伸題：如果一次輸入 2 張圖片與 5 個 labels，`logits_per_image` shape 會變成什麼？為什麼？
 
 學生作答：
 
--
+- (2,5)，因為有兩張圖片以及五個候選標籤
 
 自我檢查：
 
-- [ ] 我能說明第一個維度是圖片數量。
-- [ ] 我能說明第二個維度是文字 labels 數量。
+- [✅] 我能說明第一個維度是圖片數量。
+- [✅] 我能說明第二個維度是文字 labels 數量。
 
 ## 4. 為什麼是 `softmax(dim=1)` 而不是 `softmax(dim=0)`
 
@@ -84,7 +86,7 @@ logits_per_image shape = [____, ____]
 
 學生作答：
 
--
+- 對應的是
 
 自我檢查：
 
