@@ -58,13 +58,17 @@ python demo/demo_02_clip_zero_shot_local.py --image demo/my_image.jpg
 
 | Labels 數量 | `logits_per_image.shape` | `probabilities.shape` | `top_k` | top-k 是否被限制在 labels 數量內 |
 | ---: | --- | --- | ---: | --- |
-| 待填 | 待填 | 待填 | 待填 | 待填 |
+| 5 | (1,5) | (5,) | 3 | 是 |
 
 請記錄 labels 與 probabilities 的對應：
 
 | Label index | Label / prompt | Probability |
 | ---: | --- | ---: |
-| 待填 | 待填 | 待填 |
+| 0 | a photo of a cat | 0.4922 |
+| 1 | a photo of a dog | 0.0025 |
+| 2 | a photo of a pink sofa | 0.4980 |
+| 3 | a photo of a robot | 0.0068 |
+| 4 | a photo of a laboratory | 0.0005 |
 
 引導問題：
 

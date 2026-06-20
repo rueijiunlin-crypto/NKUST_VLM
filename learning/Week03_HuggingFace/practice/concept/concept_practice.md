@@ -42,9 +42,9 @@ a photo of two cats on a pink sofa
 
 學生作答：
 
-- 因為不同維度的向量無法被讀取，所以需要補齊
-- 他也是一個向量，會標示出實際需要被讀取的token的位置
-- 他會把補齊的內容當成一種嵌入向量去訓練
+1. 因為不同維度的向量無法被讀取，所以需要補齊
+2. 他也是一個向量，會標示出實際需要被讀取的token的位置
+3. 他會把補齊的內容當成一種嵌入向量去訓練
 
 自我檢查：
 
@@ -86,12 +86,16 @@ logits_per_image shape = [____, ____]
 
 學生作答：
 
-- 對應的是
+1. `dim=1` 對應的是 labels/texts 維度，也就是同一張圖片對所有候選文字 prompt 的分數方向。以 Week03 demo 來說，`logits_per_image` 的 shape 是 `[1, num_texts]`，第 0 維是圖片數量，第 1 維是文字 labels 數量。
+
+2. 因為 CLIP zero-shot classification 的目標是：針對同一張圖片，比較它和每一個候選 label/text 的相似度。因此 softmax 要沿著 labels/texts 維度做，讓這張圖片對所有候選 labels 的 probability 加總為 1。
+
+3. 如果誤用 `dim=0`，就是沿著圖片維度做 softmax。當只有 1 張圖片時，每個 label 在圖片維度上都只有一個值，softmax 後很可能每個位置都變成 1，無法表示「這張圖片比較像哪個 label」。因此這對 zero-shot classification 沒有合理意義。
 
 自我檢查：
 
-- [ ] 我能說明 softmax probability 是候選 labels 之間的相對分布。
-- [ ] 我知道 softmax probability 不是絕對真實機率。
+- [✅] 我能說明 softmax probability 是候選 labels 之間的相對分布。
+- [✅] 我知道 softmax probability 不是絕對真實機率。
 
 ## 5. `topk()` 為什麼回傳索引
 
