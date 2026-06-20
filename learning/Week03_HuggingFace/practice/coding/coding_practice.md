@@ -42,9 +42,9 @@ python demo/demo_02_clip_zero_shot_local.py --image demo/my_image.jpg
 
 | Key | 實際 shape | 這個 shape 的意義 | 疑問 |
 | --- | --- | --- | --- |
-| `input_ids.shape` | `[num_texts, sequence_length]` | 第一個維度應等於 labels/prompts 數量。 |
-| `attention_mask.shape` | `[num_texts, sequence_length]` | 通常與 `input_ids` 相同，用來標示有效 token 與 padding。 |
-| `pixel_values.shape` | `[num_images, channels, height, width]` | CLIP ViT-B/32 常見為 `[1, 3, 224, 224]`。 |
+| `input_ids.shape` | `[num_texts, sequence_length]` | 第一個維度應等於 labels/prompts 數量。 | 待填 |
+| `attention_mask.shape` | `[num_texts, sequence_length]` | 通常與 `input_ids` 相同，用來標示有效 token 與 padding。 | 待填 |
+| `pixel_values.shape` | `[num_images, channels, height, width]` | CLIP ViT-B/32 常見為 `[1, 3, 224, 224]`。 | 待填 |
 
 引導問題：
 
@@ -58,13 +58,13 @@ python demo/demo_02_clip_zero_shot_local.py --image demo/my_image.jpg
 
 | Labels 數量 | `logits_per_image.shape` | `probabilities.shape` | `top_k` | top-k 是否被限制在 labels 數量內 |
 | ---: | --- | --- | ---: | --- |
-|  |  |  |  |  |
+| 待填 | 待填 | 待填 | 待填 | 待填 |
 
 請記錄 labels 與 probabilities 的對應：
 
 | Label index | Label / prompt | Probability |
 | ---: | --- | ---: |
-|  |  |  |
+| 待填 | 待填 | 待填 |
 
 引導問題：
 
@@ -94,10 +94,10 @@ python demo/demo_02_clip_zero_shot_local.py --image ../Week02_CLIP/demo/00000003
 
 | Prompt set | Labels / prompts | 設計理由 |
 | --- | --- | --- |
-| object-only |  |  |
-| photo-template |  |  |
-| scene-aware |  |  |
-| optional extra |  |  |
+| object-only | 待填 | 待填 |
+| photo-template | 待填 | 待填 |
+| scene-aware | 待填 | 待填 |
+| optional extra | 待填 | 待填 |
 
 ## 4. Prompt 實驗結果紀錄
 
@@ -105,10 +105,10 @@ python demo/demo_02_clip_zero_shot_local.py --image ../Week02_CLIP/demo/00000003
 
 | Prompt set | Top-1 label | Top-1 probability | Top-k labels | Probability 分布觀察 |
 | --- | --- | ---: | --- | --- |
-| object-only |  |  |  |  |
-| photo-template |  |  |  |  |
-| scene-aware |  |  |  |  |
-| optional extra |  |  |  |  |
+| object-only | 待填 | 待填 | 待填 | 待填 |
+| photo-template | 待填 | 待填 | 待填 | 待填 |
+| scene-aware | 待填 | 待填 | 待填 | 待填 |
+| optional extra | 待填 | 待填 | 待填 | 待填 |
 
 請回答：
 
@@ -125,7 +125,7 @@ python demo/demo_02_clip_zero_shot_local.py --image ../Week02_CLIP/demo/00000003
 
 | 錯誤訊息或現象 | 發生在哪個檔案或指令 | 可能原因 | 修正方式 |
 | --- | --- | --- | --- |
-|  |  |  |  |
+| 待填 | 待填 | 待填 | 待填 |
 
 ## 自我檢查項目
 
