@@ -1,4 +1,4 @@
-"""Run Hugging Face CLIP zero-shot image classification on a local image."""
+"""使用 Hugging Face CLIP 對本機圖片執行 zero-shot image classification。"""
 #本程式碼定義了一個名為demo_02_clip_zero_shot_local.py的Python腳本，用於在本地圖像上運行Hugging Face CLIP零樣本圖像分類。
 #腳本使用了argparse模塊來解析命令行參數，並使用了transformers庫中的CLIPModel和CLIPProcessor來處理圖像和文本輸入。
 from __future__ import annotations
@@ -24,14 +24,14 @@ DEFAULT_LABELS = [
 #函數最後返回解析後的命令行參數作為argparse.Namespace對象。
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--image", type=Path, required=True, help="Path to the local image file.")
+    parser.add_argument("--image", type=Path, required=True, help="本機圖片檔案路徑。")
     parser.add_argument(
         "--labels",
         nargs="+",
         default=DEFAULT_LABELS,
-        help="Candidate labels or prompts. CLIP compares the image against these texts.",
+        help="候選 labels 或 prompts；CLIP 會比較圖片與這些文字的相似度。",
     )
-    parser.add_argument("--top-k", type=int, default=3, help="Number of highest-scoring labels to print.")
+    parser.add_argument("--top-k", type=int, default=3, help="要輸出的最高分 labels 數量。")
     return parser.parse_args()
 
 
@@ -41,8 +41,8 @@ def main() -> int:
         from PIL import Image
         from transformers import CLIPModel, CLIPProcessor
     except ImportError as error:
-        print(f"Missing dependency: {error.name}")
-        print("Install with: python -m pip install -r demo/requirements.txt")
+        print(f"缺少必要套件：{error.name}")
+        print("請安裝：python -m pip install -r demo/requirements.txt")
         return 1
     #這段程式碼定義了一個名為main的函數，該函數首先嘗試導入torch庫、PIL庫中的Image模塊和transformers庫中的CLIPModel和CLIPProcessor模塊。
     #如果這些模塊未安裝，則會捕獲ImportError異常並打印錯誤信息，提示用戶安裝缺失的依賴項。
@@ -50,11 +50,11 @@ def main() -> int:
     #如果圖像文件不存在，則打印錯誤信息並返回1。
     args = parse_args()
     if not args.image.is_file():
-        print(f"Image file not found: {args.image}")
-        print("Try the Week02 demo image or pass another local image with --image.")
+        print(f"找不到圖片檔案：{args.image}")
+        print("請改用 Week02 demo 圖片，或用 --image 指定另一張本機圖片。")
         return 1
     if args.top_k < 1:
-        print("--top-k must be at least 1.")
+        print("--top-k 必須至少為 1。")
         return 1
     #如果圖像文件存在，則使用PIL庫中的Image模塊打開圖像文件並將其轉換為RGB格式。
     #接著，從命令行參數中獲取文本標籤列表。
@@ -63,7 +63,7 @@ def main() -> int:
     
     #然後，使用CLIPProcessor從預訓練模型中加載處理器，並將文本標籤和圖像作為輸入傳遞給處理器。
     #處理器將返回一個包含處理後的張量的字典
-    print("Loading CLIPProcessor and CLIPModel...")
+    print("正在載入 CLIPProcessor 與 CLIPModel...")
     processor = CLIPProcessor.from_pretrained(MODEL_NAME)
     model = CLIPModel.from_pretrained(MODEL_NAME)
     model.eval()
@@ -83,27 +83,27 @@ def main() -> int:
     top_k = min(args.top_k, len(labels))
     top_indices = probabilities.topk(top_k).indices.tolist()
 
-    print(f"Model: {MODEL_NAME}")
-    print(f"Image: {args.image}")
-    print("\nTensor shapes:")
+    print(f"模型：{MODEL_NAME}")
+    print(f"圖片：{args.image}")
+    print("\nTensor shapes（張量形狀）：")
     print(f"- input_ids: {tuple(inputs['input_ids'].shape)}")
     print(f"- attention_mask: {tuple(inputs['attention_mask'].shape)}")
     print(f"- pixel_values: {tuple(inputs['pixel_values'].shape)}")
     print(f"- logits_per_image: {tuple(logits.shape)}")
-    print(f"- probabilities for image 0: {tuple(probabilities.shape)}")
+    print(f"- 第 0 張圖片的 probabilities: {tuple(probabilities.shape)}")
 
-    print("\nLabels and probabilities:")
+    print("\nLabels 與 probabilities 對應：")
     for index, (label, probability) in enumerate(zip(labels, probabilities.tolist())):
         print(f"{index}: {label} -> {probability:.4f}")
 
-    print(f"\nTop-{top_k} predictions:")
+    print(f"\nTop-{top_k} 預測結果：")
     for rank, index in enumerate(top_indices, start=1):
         print(f"{rank}. label[{index}] {labels[index]} ({probabilities[index].item():.4f})")
 
-    print("\nNotes:")
-    print("- logits_per_image has shape [num_images, num_texts].")
-    print("- softmax(dim=1) normalizes across the candidate text labels for each image.")
-    print("- topk().indices returns label indices, so we use labels[index] for the text.")
+    print("\n觀察重點：")
+    print("- logits_per_image 的 shape 是 [num_images, num_texts]。")
+    print("- softmax(dim=1) 會沿著每張圖片的候選文字 labels 做正規化。")
+    print("- topk().indices 回傳 label 索引，所以要用 labels[index] 找回文字。")
     return 0
 
 

@@ -1,4 +1,4 @@
-﻿# Week03 Notes: Hugging Face CLIP 推論流程
+﻿# Week03 教材筆記：Hugging Face CLIP 推論流程
 
 Week03 接在 Week02 CLIP（對比式圖文預訓練）之後，目標不是訓練模型，而是看懂 Hugging Face Transformers（Hugging Face 轉換器工具庫）如何把圖片與文字送進 CLIP，並完成 zero-shot image classification（零樣本影像分類）。
 

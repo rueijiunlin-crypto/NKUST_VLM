@@ -1,4 +1,4 @@
-"""Guided reading: compare CLIP predictions across prompt sets."""
+"""引導式程式閱讀：比較不同 prompt sets 的 CLIP 預測結果。"""
 
 from __future__ import annotations
 
@@ -28,8 +28,8 @@ PROMPT_SETS = {
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--image", type=Path, required=True, help="Path to the local image file.")
-    parser.add_argument("--top-k", type=int, default=3, help="Number of top predictions to inspect.")
+    parser.add_argument("--image", type=Path, required=True, help="本機圖片檔案路徑。")
+    parser.add_argument("--top-k", type=int, default=3, help="要觀察的最高分預測數量。")
     return parser.parse_args()
 
 
@@ -45,12 +45,12 @@ def run_prompt_set(processor, model, image, name: str, labels: list[str], top_k:
     safe_top_k = min(top_k, len(labels))
     top_indices = probabilities.topk(safe_top_k).indices.tolist()
 
-    print(f"\n[Prompt set] {name}")
-    print(f"labels count: {len(labels)}")
+    print(f"\n[Prompt set 提示組] {name}")
+    print(f"labels 數量：{len(labels)}")
     print(f"logits_per_image shape: {tuple(logits.shape)}")
     for index, (label, probability) in enumerate(zip(labels, probabilities.tolist())):
         print(f"{index}: {label} -> {probability:.4f}")
-    print(f"Top-{safe_top_k}:")
+    print(f"Top-{safe_top_k}：")
     for rank, index in enumerate(top_indices, start=1):
         print(f"{rank}. labels[{index}] = {labels[index]} ({probabilities[index].item():.4f})")
 
@@ -60,16 +60,16 @@ def main() -> int:
         from PIL import Image
         from transformers import CLIPModel, CLIPProcessor
     except ImportError as error:
-        print(f"Missing dependency: {error.name}")
-        print("Install with: python -m pip install -r practice/coding/requirements.txt")
+        print(f"缺少必要套件：{error.name}")
+        print("請安裝：python -m pip install -r practice/coding/requirements.txt")
         return 1
 
     args = parse_args()
     if not args.image.is_file():
-        print(f"Image file not found: {args.image}")
+        print(f"找不到圖片檔案：{args.image}")
         return 1
     if args.top_k < 1:
-        print("--top-k must be at least 1.")
+        print("--top-k 必須至少為 1。")
         return 1
 
     image = Image.open(args.image).convert("RGB")
@@ -80,10 +80,10 @@ def main() -> int:
     for name, labels in PROMPT_SETS.items():
         run_prompt_set(processor, model, image, name, labels, args.top_k)
 
-    print("\nObservation prompts:")
-    print("- Did top-1 change across prompt sets?")
-    print("- Which prompt set produced the sharpest probability distribution?")
-    print("- Which prompt set seems most stable, and why?")
+    print("\n觀察問題：")
+    print("- 不同 prompt sets 的 top-1 是否改變？")
+    print("- 哪一組 prompt set 產生最集中的 probability 分布？")
+    print("- 哪一組 prompt set 看起來最穩定？可能原因是什麼？")
     return 0
 
 

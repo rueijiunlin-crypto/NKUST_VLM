@@ -1,4 +1,4 @@
-"""Compare how different prompt sets change CLIP zero-shot predictions."""
+"""比較不同 prompt sets 如何影響 CLIP zero-shot 預測結果。"""
 #這段程式碼定義了一個名為demo_03_prompt_comparison.py的Python腳本，用於比較不同提示集如何改變CLIP零樣本圖像分類的預測結果。
 #腳本使用了argparse模塊來解析命令行參數，並使用了transformers庫中的CLIPModel和CLIPProcessor來處理圖像和文本輸入。
 #腳本定義了三個不同的提示集，並將它們與同一張圖像進行比較，以觀察不同提示如何影響模型的預測結果。
@@ -39,8 +39,8 @@ PROMPT_SETS = {
 #函數最後返回解析後的命令行參數作為argparse.Namespace對象。
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--image", type=Path, required=True, help="Path to the local image file.")
-    parser.add_argument("--top-k", type=int, default=3, help="Number of predictions per prompt set.")
+    parser.add_argument("--image", type=Path, required=True, help="本機圖片檔案路徑。")
+    parser.add_argument("--top-k", type=int, default=3, help="每組 prompt set 要輸出的預測數量。")
     return parser.parse_args()
 
 #這段程式碼定義了一個名為run_prompt_set的函數，用於運行CLIP模型對給定圖像和提示集進行推理。該函數接受處理器、模型、圖像、提示集名稱、提示列表和top_k作為參數。
@@ -61,12 +61,12 @@ def run_prompt_set(processor, model, image, prompt_set_name: str, labels: list[s
     safe_top_k = min(top_k, len(labels))
     top_indices = probabilities.topk(safe_top_k).indices.tolist()
 
-    print(f"\nPrompt set: {prompt_set_name}")
+    print(f"\nPrompt set（提示組）：{prompt_set_name}")
     print(f"logits_per_image shape: {tuple(logits.shape)}")
     for index, (label, probability) in enumerate(zip(labels, probabilities.tolist())):
         print(f"{index}: {label} -> {probability:.4f}")
 
-    print(f"Top-{safe_top_k}:")
+    print(f"Top-{safe_top_k}：")
     for rank, index in enumerate(top_indices, start=1):
         print(f"{rank}. label[{index}] {labels[index]} ({probabilities[index].item():.4f})")
 
@@ -79,20 +79,20 @@ def main() -> int:
         from PIL import Image
         from transformers import CLIPModel, CLIPProcessor
     except ImportError as error:
-        print(f"Missing dependency: {error.name}")
-        print("Install with: python -m pip install -r demo/requirements.txt")
+        print(f"缺少必要套件：{error.name}")
+        print("請安裝：python -m pip install -r demo/requirements.txt")
         return 1
     
     #如果圖像文件存在，則使用PIL庫中的Image模塊打開圖像文件並將其轉換為RGB格式。
     #接著，從命令行參數中獲取文本標籤列表。
     args = parse_args()
     if not args.image.is_file():
-        print(f"Image file not found: {args.image}")
-        print("Try the Week02 demo image or pass another local image with --image.")
+        print(f"找不到圖片檔案：{args.image}")
+        print("請改用 Week02 demo 圖片，或用 --image 指定另一張本機圖片。")
         return 1
     #如果top-k的值小於1，則打印錯誤信息並返回1，因為top-k必須至少為1才能獲取至少一個最高得分的標籤。
     if args.top_k < 1:
-        print("--top-k must be at least 1.")
+        print("--top-k 必須至少為 1。")
         return 1
     #如果圖像文件存在，則使用PIL庫中的Image模塊打開圖像文件並將其轉換為RGB格式。
     image = Image.open(args.image).convert("RGB")
@@ -101,21 +101,21 @@ def main() -> int:
     #處理器將返回一個包含處理後的張量的字典。
     #最後，打印模型名稱、圖像路徑、文本標籤列表以及處理器輸出的張量的形狀和數據類型。
     #還提供了如何解讀這些張量形狀的說明。
-    print("Loading CLIPProcessor and CLIPModel...")
+    print("正在載入 CLIPProcessor 與 CLIPModel...")
     processor = CLIPProcessor.from_pretrained(MODEL_NAME)
     model = CLIPModel.from_pretrained(MODEL_NAME)
     model.eval()
-    print(f"Model: {MODEL_NAME}")
-    print(f"Image: {args.image}")
+    print(f"模型：{MODEL_NAME}")
+    print(f"圖片：{args.image}")
     #然後，對於PROMPT_SETS字典中的每個提示集，調用run_prompt_set函數來運行CLIP模型並打印結果。
     #最後，打印一些關於提示集和概率分布的說明。
     for prompt_set_name, labels in PROMPT_SETS.items():
         run_prompt_set(processor, model, image, prompt_set_name, labels, args.top_k)
 
-    print("\nNotes:")
-    print("- Each prompt set creates a different candidate-label space.")
-    print("- Softmax probabilities are relative within that prompt set.")
-    print("- Compare whether top-1 changes and whether the distribution becomes sharper or flatter.")
+    print("\n觀察重點：")
+    print("- 每一組 prompt set 都會建立不同的候選 label 空間。")
+    print("- Softmax probabilities 是該 prompt set 內部的相對分布。")
+    print("- 請比較 top-1 是否改變，以及分布是否更集中或更分散。")
     return 0
 
 
