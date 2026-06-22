@@ -1,0 +1,4 @@
+faster-whisper
+# Optional: install torch separately if you want to inspect CUDA availability
+# before faster-whisper model loading.
+# torch
