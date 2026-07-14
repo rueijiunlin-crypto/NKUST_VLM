@@ -22,7 +22,7 @@ Preferred language for development:
 
 ---
 
-# Research Objective
+## Research Objective
 
 The long-term objective is to develop intelligent robotic systems capable of understanding both visual environments and natural language instructions.
 
@@ -36,7 +36,7 @@ The system should be able to:
 
 ---
 
-# Candidate Thesis Directions
+## Candidate Thesis Directions
 
 ## Direction A (Highest Priority)
 
@@ -92,7 +92,7 @@ Capabilities:
 
 ---
 
-# Development Environment
+## Development Environment
 
 ## Operating System
 
@@ -108,7 +108,7 @@ Python
 
 ## Simulation Platform
 
-NVIDIA Isaac Sim 5.1
+NVIDIA Isaac Sim 6.0
 
 ## Reinforcement Learning Platform
 
@@ -122,7 +122,7 @@ GitHub
 
 ---
 
-# Learning Roadmap
+## Learning Roadmap
 
 ## Foundation
 
@@ -160,7 +160,7 @@ GitHub
 
 ---
 
-# Simulation Strategy
+## Simulation Strategy
 
 All algorithms should be validated in simulation before deployment.
 
@@ -174,7 +174,7 @@ Priority:
 
 ---
 
-# Development Preferences
+## Development Preferences
 
 - Prefer Python implementations
 - Prefer ROS2-native architecture
@@ -185,7 +185,7 @@ Priority:
 
 ---
 
-# Current Focus
+## Current Focus
 
 Current efforts are concentrated on:
 
@@ -198,6 +198,6 @@ Current efforts are concentrated on:
 
 ---
 
-# Long-Term Goal
+## Long-Term Goal
 
 Complete a master's thesis based on VLM-enabled robotic systems and demonstrate the complete system through ROS2 and Isaac Sim before deployment on a physical robot.

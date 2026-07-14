@@ -1,31 +1,61 @@
-﻿# Week04 LLaVA
+# Week04 LLaVA 影像問答推論流程
 
-## 學習目標
+## 本週定位
 
-理解 LLaVA 在 VLM/VLA 碩士研究中的角色，並完成可記錄到 Notion（筆記與資料庫管理工具）的最小實作或筆記成果。
+Week04 延續 Week03 Hugging Face（模型平台）與 CLIP（對比式圖文預訓練）推論流程，進一步學習 LLaVA（大型語言與視覺助手）如何根據圖片與問題生成文字回答。
 
-## 必懂概念
+本週重點不是只把模型呼叫起來，而是要能說清楚：
 
-- 影像問答與多模態對話推論
-- 輸入、輸出與限制
-- 與後續 ROS2（機器人作業系統第二版）或 Isaac Sim（NVIDIA 機器人模擬器）的銜接方式
+- `AutoProcessor` 如何同時整理圖片、問題與對話模板。
+- Vision Encoder（視覺編碼器）、Projector（投影器）與 Large Language Model（大型語言模型，LLM）的分工。
+- `input_ids`、`attention_mask` 與 `pixel_values` 的 shape 代表什麼。
+- `<image>` placeholder（影像占位符）如何對應多個 image tokens（影像詞元）。
+- `generate()` 如何逐 token 產生回答。
+- 問題與提示格式如何影響回答內容及 hallucination（幻覺）風險。
 
-## 實作任務
+## 文件導覽
 
-- 建立本週筆記
-- 完成一個可執行或可展示的小任務
-- 保留截圖、終端機紀錄或結果摘要
+| 檔案或資料夾 | 用途 |
+| --- | --- |
+| `weekly_plan.md` | 本週學習順序、Demo 執行順序、Practice 任務與驗收條件。 |
+| `notes.md` | LLaVA 推論流程、tensor shape（張量形狀）、核心程式與提示實驗教材。 |
+| `study_log.md` | 學生實際執行 Demo、Practice、問題比較與疑問紀錄。 |
+| `demo/` | 快速展示 Processor 輸入、架構資料流、真實視覺問答與問題比較。 |
+| `practice/` | Concept Practice（觀念練習）與 Guided Code Reading Mode（引導式程式閱讀模式）。 |
 
-## 驗收標準
+## 建議使用方式
 
-- 能用自己的話說明本週主題
-- 能指出本週成果如何支援碩士論文研究
-- 能將紀錄整理到 Notion Learning Roadmap Database（學習路線資料庫）
+1. 閱讀 `weekly_plan.md`，確認本週任務與驗收條件。
+2. 閱讀 `notes.md` 第 1–3 節，理解 Processor、模型元件與輸入 shape。
+3. 執行 Demo 01 與 Demo 02，建立真實輸入與架構資料流的整體印象。
+4. 執行 `practice/coding/guided_demos/`，追蹤 Processor、Projector、多模態序列與生成步驟。
+5. 有合適硬體與時間時，執行 optional（選做）的 Demo 03 與 Demo 04 真實模型推論。
+6. 完成 Concept Practice 與 Coding Practice 的學生觀察欄位。
+7. 將實際輸出、錯誤、幻覺案例與未解問題記錄到 `study_log.md`。
 
-## Notion 紀錄項目
+## Demo 主線
 
-- 學習目標
-- 必懂概念
-- 實作任務
-- 問題與修正
-- 本週成果
+請從 `learning/Week04_LLaVA` 執行：
+
+```powershell
+python -m pip install -r demo/requirements.txt
+python demo/demo_01_llava_processor_inputs.py --image ../Week02_CLIP/demo/000000039769.jpg
+python demo/demo_02_llava_architecture_flow.py
+python demo/demo_03_llava_visual_qa.py --image ../Week02_CLIP/demo/000000039769.jpg --question "What is shown in this image?"
+python demo/demo_04_question_comparison.py --image ../Week02_CLIP/demo/000000039769.jpg
+```
+
+Demo 01 只下載 Processor（前處理器）相關檔案，不載入完整 7B 模型。Demo 03 與 Demo 04 需要大型模型權重與較高硬體資源，屬選做／進階內容。
+
+## 與 VLM/VLA 碩士研究的關聯
+
+LLaVA 將影像觀察與文字問題轉成自然語言回答，是後續 Camera（相機）、ROS2（機器人作業系統第二版）與 NVIDIA Isaac Sim 6.0（NVIDIA 機器人模擬器）整合的重要語意介面。研究實驗必須同時保存圖片、問題、模型版本、生成參數、原始回答與錯誤分析，不能只挑選成功截圖。
+
+## 本週完成後應具備的能力
+
+- 能解釋 `AutoProcessor` 與 `LlavaForConditionalGeneration` 的分工。
+- 能畫出 Image → Vision Encoder → Projector → Image Tokens → LLM → Answer。
+- 能解讀 `input_ids`、`attention_mask` 與 `pixel_values` 的 shape。
+- 能解釋 `<image>` 為什麼不是單一 patch token（影像區塊詞元）。
+- 能說明 LLaVA 與 CLIP 的輸出機制差異。
+- 能比較不同問題的回答，辨識有影像依據與無法確認的主張。
