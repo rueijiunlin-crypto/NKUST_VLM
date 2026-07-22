@@ -1,31 +1,21 @@
-﻿# Week10 VLM + ROS2 Topic
+# Week10 VLM + ROS2 Topic
 
-## 學習目標
+## 本週定位
 
-理解 VLM + ROS2 Topic 在 VLM/VLA 碩士研究中的角色，並完成可記錄到 Notion（筆記與資料庫管理工具）的最小實作或筆記成果。
+本週把 Week08 的結構化 VLM 結果與 Week09 的相機觀測接入 ROS2 Humble。最小版本使用 `std_msgs/msg/String` 傳送 JSON，建立 publisher（發布者）、subscriber（訂閱者）、Topic 契約與分層診斷流程。
 
-## 必懂概念
+## 文件導覽
 
-- rclpy（ROS2 Python 用戶端）與語意 Topic 發布
-- 輸入、輸出與限制
-- 與後續 ROS2（機器人作業系統第二版）或 Isaac Sim（NVIDIA 機器人模擬器）的銜接方式
+- [weekly_plan.md](./weekly_plan.md)：任務、執行順序及驗收條件。
+- [notes.md](./notes.md)：ROS2 通訊、訊息契約、QoS 與除錯方法。
+- [demo/demo_README.md](./demo/demo_README.md)：契約、發布、訂閱與診斷 Demo。
+- [practice/README.md](./practice/README.md)：觀念與 Implementation Practice Mode 練習。
+- [study_log.md](./study_log.md)：ROS2 環境、Topic 輸出及問題紀錄。
 
-## 實作任務
+## 建議使用方式
 
-- 建立本週筆記
-- 完成一個可執行或可展示的小任務
-- 保留截圖、終端機紀錄或結果摘要
+先在任意 Python 環境執行 contract 與 `--dry-run`，確認 JSON 不依賴 ROS2。真正通訊則切換至 Ubuntu 22.04 + ROS2 Humble 終端機，source 環境後分別啟動 subscriber 與 publisher，再用 ROS2 CLI 獨立觀察 Topic。
 
-## 驗收標準
+## 與碩士研究的關聯
 
-- 能用自己的話說明本週主題
-- 能指出本週成果如何支援碩士論文研究
-- 能將紀錄整理到 Notion Learning Roadmap Database（學習路線資料庫）
-
-## Notion 紀錄項目
-
-- 學習目標
-- 必懂概念
-- 實作任務
-- 問題與修正
-- 本週成果
+ROS2 Topic 將感知結果從模型實作中解耦，讓導覽、巡檢或操作模組只依賴公開介面。保留觀測識別碼與時間戳後，語意結果也能與原始影像、機器人狀態及實驗紀錄對齊。

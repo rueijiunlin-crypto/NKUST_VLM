@@ -1,31 +1,25 @@
-﻿# Week08 Mini Project：Image Caption + Visual QA
+# Week08 Mini VLM Project
 
-## 學習目標
+## 本週定位
 
-理解 Mini Project：Image Caption + Visual QA 在 VLM/VLA 碩士研究中的角色，並完成可記錄到 Notion（筆記與資料庫管理工具）的最小實作或筆記成果。
+本週把前七週的模型、推論與提示設計知識整合成一個可操作的 Mini Project（迷你專案）：輸入本機影像，執行 Image Captioning（影像描述）或 Visual Question Answering（視覺問答），並輸出結構一致、可驗證的 JSON 結果。
 
-## 必懂概念
+## 文件導覽
 
-- 影像描述與視覺問答小系統
-- 輸入、輸出與限制
-- 與後續 ROS2（機器人作業系統第二版）或 Isaac Sim（NVIDIA 機器人模擬器）的銜接方式
+- [weekly_plan.md](./weekly_plan.md)：學習順序、任務與驗收條件。
+- [notes.md](./notes.md)：系統邊界、BLIP（Bootstrapping Language-Image Pre-training，語言影像預訓練）與資料契約。
+- [demo/demo_README.md](./demo/demo_README.md)：四個快速展示用 Demo。
+- [practice/README.md](./practice/README.md)：觀念與程式練習入口。
+- [study_log.md](./study_log.md)：由學習者記錄實際輸出、問題與理解。
 
-## 實作任務
+## 建議使用方式
 
-- 建立本週筆記
-- 完成一個可執行或可展示的小任務
-- 保留截圖、終端機紀錄或結果摘要
+1. 依 [weekly_plan.md](./weekly_plan.md) 閱讀必要概念。
+2. 先執行不需下載模型的資料契約與驗證 Demo。
+3. 準備自有圖片，再依環境能力執行 BLIP Caption 與 VQA Demo。
+4. 完成 [practice/README.md](./practice/README.md) 中的 Implementation Practice Mode（實作練習模式）。
+5. 將真實執行結果與尚未解決的問題寫入 [study_log.md](./study_log.md)。
 
-## 驗收標準
+## 與碩士研究的關聯
 
-- 能用自己的話說明本週主題
-- 能指出本週成果如何支援碩士論文研究
-- 能將紀錄整理到 Notion Learning Roadmap Database（學習路線資料庫）
-
-## Notion 紀錄項目
-
-- 學習目標
-- 必懂概念
-- 實作任務
-- 問題與修正
-- 本週成果
+本週建立的 `observation_id`、時間戳、任務、狀態與答案欄位，會成為 Week09 相機輸入及 Week10 ROS2（機器人作業系統第二版）Topic 整合的共同介面。研究原型若先固定資料契約，之後更換模型或感測器時較容易重現實驗並定位錯誤。

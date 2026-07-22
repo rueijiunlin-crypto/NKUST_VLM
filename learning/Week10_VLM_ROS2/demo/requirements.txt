@@ -1,0 +1,1 @@
+# ROS 2 Humble provides rclpy and std_msgs through the system environment.
