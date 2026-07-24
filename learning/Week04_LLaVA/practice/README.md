@@ -21,7 +21,7 @@
 3. 閱讀 `coding/README.md`，依序執行 `coding/guided_demos/`。
 4. 在 `coding/coding_practice.md` 記錄 Processor shape、Projector、多模態序列與生成觀察。
 5. 完成後再查看 `concept/concept_answer_key.md` 與 `coding/coding_observation_key.md`。
-6. 視硬體條件執行真實模型 Demo 03、04，將回答分類為 Supported／Uncertain／Contradicted／Requires Additional Sensor or Robot State，再整理到 `../study_log.md`。
+6. 進入 Required Real Track 的 Demo 03；若 runtime 受阻，記錄標準 blocker。Demo 04 用於進階比較。將回答分類為 Supported／Uncertain／Contradicted／Requires Additional Sensor or Robot State，再整理到 `../study_log.md`。
 
 ## 本週 Coding Practice 模式
 

@@ -1,0 +1,2 @@
+# Python >=3.12; LeRobot 0.6 stable track with Dataset v3 and SmolVLA dependencies.
+lerobot[dataset,smolvla]>=0.6,<0.7

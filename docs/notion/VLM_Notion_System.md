@@ -53,17 +53,17 @@
 | Week03 | Hugging Face | `learning/Week03_HuggingFace/` |
 | Week04 | LLaVA | `learning/Week04_LLaVA/` |
 | Week05 | VLM Architecture | `learning/Week05_VLM_Architecture/` |
-| Week06 | VLM Paper Reading | `learning/Week06_PaperReading/` |
-| Week07 | Prompt Engineering | `learning/Week07_PromptEngineering/` |
-| Week08 | Mini Project：Image Caption + Visual QA | `learning/Week08_MiniProject/` |
-| Week09 | VLM + Camera | `learning/Week09_VLM_Camera/` |
-| Week10 | VLM + ROS2 Topic | `learning/Week10_VLM_ROS2/` |
-| Week11 | VLM + Navigation Concept | `learning/Week11_VLM_Navigation/` |
-| Week12 | VLM Robot System Prototype | `learning/Week12_Robot_Prototype/` |
-| Week13 | Isaac Sim Environment | `learning/Week13_IsaacSim_Environment/` |
-| Week14 | Isaac Sim Camera | `learning/Week14_IsaacSim_Camera/` |
-| Week15 | Isaac Sim + VLM | `learning/Week15_IsaacSim_VLM/` |
-| Week16 | Final Mini Project | `learning/Week16_FinalProject/` |
+| Week06 | Video and Streaming VLM | `learning/Week06_Video_Streaming_VLM/` |
+| Week07 | ROS2 + Camera + Realtime VLM | `learning/Week07_Realtime_VLM_ROS2/` |
+| Week08 | Spatial Reasoning and Grounding | `learning/Week08_Spatial_Grounding/` |
+| Week09 | Robot State + Multimodal Observation | `learning/Week09_Robot_State/` |
+| Week10 | Embodied AI + VLA Fundamentals | `learning/Week10_VLA_Fundamentals/` |
+| Week11 | Robot Dataset and Demonstrations | `learning/Week11_Robot_Dataset/` |
+| Week12 | SmolVLA / OpenVLA Inference | `learning/Week12_VLA_Inference/` |
+| Week13 | VLA Fine-tuning | `learning/Week13_VLA_Finetuning/` |
+| Week14 | Isaac Sim Robot Learning | `learning/Week14_IsaacSim_Robot_Learning/` |
+| Week15 | Sim-to-Real / Real Robot Deployment | `learning/Week15_Sim2Real/` |
+| Week16 | Research Prototype and Evaluation | `learning/Week16_Research_Prototype/` |
 
 每一週頁面都要包含：
 
@@ -105,118 +105,118 @@
 
 - 學習目標：理解 LLaVA（大型語言與視覺助手）的影像問答流程。
 - 必懂概念：Vision Encoder、Projector、Large Language Model（大型語言模型）。
-- 實作任務：對圖片提出問題並取得文字回答。
-- 驗收標準：能分析回答是否符合影像內容。
+- 實作任務：以 pinned LLaVA revision 完成三個必要問題，記錄硬體、dtype、tokens、latency、VRAM 與原始回答。
+- 驗收標準：能逐項標示 Supported／Uncertain／Contradicted／需要額外感測或 Robot State；若受阻則記錄標準 runtime blocker。
 - GitHub 對應資料夾：`learning/Week04_LLaVA/`
 - Notion 紀錄項目：圖片、問題、回答、錯誤案例。
 
-### Week05 VLM Architecture
+### Week05 VLM Architecture for Robotics
 
-- 學習目標：能畫出典型 VLM 架構。
-- 必懂概念：影像特徵、文字特徵、跨模態對齊。
-- 實作任務：整理 LLaVA 類模型流程圖。
-- 驗收標準：能說明 Camera（相機）到 Answer（回答）的資料流。
+- 學習目標：能畫出典型 VLM 架構，並把它放入含 Robot State、Spatial Grounding（空間定位）與 Structured Output（結構化輸出）的機器人系統。
+- 必懂概念：影像特徵、文字特徵、跨模態對齊、Projector／Q-Former、Robot State、Spatial Grounding、structured semantic interface。
+- 實作任務：比較 BLIP、BLIP-2、LLaVA connector，整理從相機輸入到具有機器人能力邊界之 structured answer 的流程圖。
+- 驗收標準：能說明 Camera → Image Preprocessing → Vision Encoder → Projector／Q-Former → Language Model → Answer，並指出 BLIP、BLIP-2 與 LLaVA 的介面差異。
 - GitHub 對應資料夾：`learning/Week05_VLM_Architecture/`
 - Notion 紀錄項目：架構圖、輸入輸出、限制。
 
-### Week06 VLM Paper Reading
+### Week06 Video and Streaming VLM
 
-- 學習目標：建立論文閱讀流程。
-- 必懂概念：研究問題、方法、資料集、實驗與貢獻。
-- 實作任務：閱讀 CLIP 與 LLaVA 摘要與架構。
-- 驗收標準：能用固定模板摘要論文。
-- GitHub 對應資料夾：`learning/Week06_PaperReading/`
-- Notion 紀錄項目：Paper Database 條目。
+- 學習目標：建立 multi-frame、video 與 streaming temporal perception。
+- 必懂概念：Frame Sampling、Temporal Context、KV Cache、latency／throughput。
+- 實作任務：比較 `1/2/4 fps` 或 `2/4/8/16 frames` 的真實 Qwen2.5-VL temporal question。
+- 驗收標準：能用 sampled frames、tokens、latency、VRAM 與 temporal error 說明取捨；若受阻則保留 blocker。
+- GitHub 對應資料夾：`learning/Week06_Video_Streaming_VLM/`
+- Notion 紀錄項目：取樣設定、token budget、延遲與論文閱讀條目。
 
-### Week07 Prompt Engineering
+### Week07 ROS2 + Camera + Realtime VLM
 
-- 學習目標：設計適合機器人語境的 Prompt（提示）。
-- 必懂概念：任務提示、輸出格式限制、錯誤回覆處理。
-- 實作任務：設計語意導覽與物體辨識提示。
-- 驗收標準：輸出能穩定轉成結構化結果。
-- GitHub 對應資料夾：`learning/Week07_PromptEngineering/`
-- Notion 紀錄項目：提示版本與測試結果。
+- 學習目標：建立 Camera、ROS2、非同步推論與 semantic topic 管線。
+- 必懂概念：FPS、timestamp、Topic、QoS、queue、stale frame、structured result。
+- 實作任務：以 actual ROS2 camera／rosbag、capacity-one latest frame worker 與真實 VLM adapter 發布 structured semantic result。
+- 驗收標準：保存 QoS、age、queue replacement、inference/publish latency 與 schema evidence，且 semantic topic 不等同控制命令。
+- GitHub 對應資料夾：`learning/Week07_Realtime_VLM_ROS2/`
+- Notion 紀錄項目：rate、QoS、schema、unknown／retry 與錯誤結果。
 
-### Week08 Mini Project：Image Caption + Visual QA
+### Week08 Spatial Reasoning and Grounding
 
-- 學習目標：完成 Image Caption（影像描述）與 Visual QA（視覺問答）小系統。
-- 必懂概念：圖片輸入、文字問題、模型輸出。
-- 實作任務：建立最小可執行範例。
-- 驗收標準：能展示三組圖片問答結果。
-- GitHub 對應資料夾：`learning/Week08_MiniProject/`
-- Notion 紀錄項目：截圖、問題、回答、心得。
+- 學習目標：建立 semantic → 2D → depth → 3D → robot frame 資料鏈。
+- 必懂概念：Box／Mask、intrinsics、extrinsics、coordinate transform。
+- 實作任務：以 mock depth 完成 pixel-to-3D 與 frame transform。
+- 驗收標準：能區分語意位置、像素、相機座標與機器人座標。
+- GitHub 對應資料夾：`learning/Week08_Spatial_Grounding/`
+- Notion 紀錄項目：Spatial Observation schema、標定與不確定性。
 
-### Week09 VLM + Camera
+### Week09 Robot State + Multimodal Observation
 
-- 學習目標：串接 Camera（相機）影像與 VLM 推論。
-- 必懂概念：OpenCV、影像擷取、單張推論。
-- 實作任務：從相機取得影像並輸入模型。
-- 驗收標準：能得到場景描述。
-- GitHub 對應資料夾：`learning/Week09_VLM_Camera/`
-- Notion 紀錄項目：相機設定、影像、模型輸出。
+- 學習目標：整合 Vision、Language 與 Robot State。
+- 必懂概念：proprioception、joint／end-effector／gripper／camera pose、sync。
+- 實作任務：建立 mock embodied observation 並檢查 missing／stale state。
+- 驗收標準：能定義 observation space 與 sensor alignment。
+- GitHub 對應資料夾：`learning/Week09_Robot_State/`
+- Notion 紀錄項目：state schema、timestamp delta、missing policy。
 
-### Week10 VLM + ROS2 Topic
+### Week10 Embodied AI + VLA Fundamentals
 
-- 學習目標：將 VLM 語意輸出發布為 ROS2 Topic。
-- 必懂概念：rclpy、String Message（字串訊息）、semantic_description（語意描述）。
-- 實作任務：建立語意發布節點。
-- 驗收標準：能在終端機訂閱並看到語意文字。
-- GitHub 對應資料夾：`learning/Week10_VLM_ROS2/`
-- Notion 紀錄項目：節點名稱、Topic 名稱、輸出範例。
+- 學習目標：區分 VLM semantic output 與 VLA action policy。
+- 必懂概念：Policy、Observation、Action Space、Action Chunk、open／closed-loop。
+- 實作任務：追蹤 policy loop 並實作 action validator。
+- 驗收標準：能說明 VLA 與 Control／Safety 邊界。
+- GitHub 對應資料夾：`learning/Week10_VLA_Fundamentals/`
+- Notion 紀錄項目：action schema、loop、safety rejection。
 
-### Week11 VLM + Navigation Concept
+### Week11 Robot Dataset and Demonstrations
 
-- 學習目標：理解語意輸出如何轉成導航任務。
-- 必懂概念：Semantic Landmark（語意地標）、Goal（目標）、Navigation（導航）。
-- 實作任務：設計文字指令到目標描述的轉換規則。
-- 驗收標準：能處理簡單目標物導覽案例。
-- GitHub 對應資料夾：`learning/Week11_VLM_Navigation/`
-- Notion 紀錄項目：指令、解析結果、導航概念圖。
+- 學習目標：理解 demonstrations 與 episode dataset。
+- 必懂概念：trajectory、teleoperation、alignment、split、quality、leakage。
+- 實作任務：建立並驗證最小 episode schema。
+- 驗收標準：能檢查 observation-action alignment 與 split。
+- GitHub 對應資料夾：`learning/Week11_Robot_Dataset/`
+- Notion 紀錄項目：dataset revision、schema、quality audit。
 
-### Week12 VLM Robot System Prototype
+### Week12 SmolVLA / OpenVLA Inference
 
-- 學習目標：完成 VLM × ROS2 小型系統雛型。
-- 必懂概念：節點、資料流、錯誤處理。
-- 實作任務：整合文字輸入、VLM 推論與語意 Topic。
-- 驗收標準：能完成可展示流程。
-- GitHub 對應資料夾：`learning/Week12_Robot_Prototype/`
-- Notion 紀錄項目：系統架構圖、執行截圖、問題。
+- 學習目標：理解預訓練 VLA 的 observation-to-action 推論介面。
+- 必懂概念：processor、normalization、action chunk、device、latency。
+- 實作任務：先驗證 Basic Policy Adapter，再以官方 `make_pre_post_processors → select_action → postprocess` 完成 Required Real Track。
+- 驗收標準：能解讀 raw/processed observation、action shape、checkpoint metadata、warm-up／latency／VRAM，或留下標準 blocker。
+- GitHub 對應資料夾：`learning/Week12_VLA_Inference/`
+- Notion 紀錄項目：model revision、硬體、latency、skipped reason。
 
-### Week13 Isaac Sim Environment
+### Week13 VLA Fine-tuning
 
-- 學習目標：建立 Isaac Sim 室內模擬環境。
-- 必懂概念：場景、目標物、障礙物、機器人模型。
-- 實作任務：建立簡化教室、實驗室或走廊場景。
-- 驗收標準：場景可載入並能放置目標物。
-- GitHub 對應資料夾：`learning/Week13_IsaacSim_Environment/`
-- Notion 紀錄項目：場景截圖、物件列表、設定。
+- 學習目標：由 pretrained VLA 進入 task adaptation。
+- 必懂概念：batch、training step、LR、checkpoint、validation、overfitting、shift。
+- 實作任務：以 tiny policy 理解流程，再 dry-run／execute 官方 `lerobot-train` 20/50/100 steps 並 reload checkpoint。
+- 驗收標準：保存 command、LR、seed、step、metric、runtime、checkpoint 與 reload evidence。
+- GitHub 對應資料夾：`learning/Week13_VLA_Finetuning/`
+- Notion 紀錄項目：dataset／model revision、曲線、checkpoint、限制。
 
-### Week14 Isaac Sim Camera
+### Week14 Isaac Sim Robot Learning
 
-- 學習目標：取得 Isaac Sim 中的 RGB Camera 影像。
-- 必懂概念：Camera Sensor（相機感測器）、影像 Topic、畫面擷取。
-- 實作任務：設定模擬相機並輸出影像。
-- 驗收標準：能保存或訂閱相機畫面。
-- GitHub 對應資料夾：`learning/Week14_IsaacSim_Camera/`
-- Notion 紀錄項目：相機位置、影像結果、問題。
+- 學習目標：建立 Scene、Robot、Sensors、Task、Policy、Evaluation。
+- 必懂概念：USD、RGB／Depth、ground truth、synthetic data、randomization。
+- 實作任務：用 Isaac Sim launcher 建立 ground、Franka、RGB/depth camera、target、light，或載入記錄 revision 的自訂 stage。
+- 驗收標準：能區分 sensor observation、simulator ground truth、controlled variable 與 Isaac/asset/runtime evidence。
+- GitHub 對應資料夾：`learning/Week14_IsaacSim_Robot_Learning/`
+- Notion 紀錄項目：scene／asset revision、seed、task、metric。
 
-### Week15 Isaac Sim + VLM
+### Week15 Sim-to-Real / Real Robot Deployment
 
-- 學習目標：將 Isaac Sim 影像輸入 VLM。
-- 必懂概念：模擬影像、模型輸入、語意輸出。
-- 實作任務：讓 VLM 描述模擬場景內容。
-- 驗收標準：語意輸出能反映場景中的主要物件。
-- GitHub 對應資料夾：`learning/Week15_IsaacSim_VLM/`
-- Notion 紀錄項目：場景、提示、回答、錯誤案例。
+- 學習目標：分析 simulation／real domain gap 與部署安全。
+- 必懂概念：noise、calibration、latency、action error、recovery、checklist。
+- 實作任務：分別保存 Simulation Observation 與 Real Observation，建立 latency budget、fault injection 與 deployment gate。
+- 驗收標準：能提出 hardware-ready 或 real-robot validation evidence。
+- GitHub 對應資料夾：`learning/Week15_Sim2Real/`
+- Notion 紀錄項目：domain gap、fault、recovery、未驗證限制。
 
-### Week16 Final Mini Project
+### Week16 Research Prototype and Evaluation
 
-- 學習目標：完成期末最小可行系統。
-- 必懂概念：使用者指令、語意理解、導航概念、展示流程。
-- 實作任務：展示「找出指定目標」或「前往指定位置」流程。
-- 驗收標準：有完整 README、截圖、執行紀錄與回顧。
-- GitHub 對應資料夾：`learning/Week16_FinalProject/`
-- Notion 紀錄項目：成果展示、限制、下一步論文方向。
+- 學習目標：完成可評估、可重現的 Robot VLM/VLA Research Prototype。
+- 必懂概念：question、baseline、metric、ground truth、failure、ablation、limitation。
+- 實作任務：建立 evaluation matrix、result schema、failure analysis 與 My Method vs Paper Method Comparison Matrix。
+- 驗收標準：結論有 evidence，且不把 Demo 成功等同研究完成。
+- GitHub 對應資料夾：`learning/Week16_Research_Prototype/`
+- Notion 紀錄項目：研究問題、baseline、raw result、metric、failure、limitation。
 
 ## 3. Paper Database
 
@@ -247,17 +247,21 @@
 | Paper Title | Category | Related Week | Possible Thesis Usage |
 | --- | --- | --- | --- |
 | CLIP | VLM | Week02 | 圖文對齊與語意標籤比對 |
-| BLIP | VLM | Week06 | 影像描述與視覺問答基礎 |
-| BLIP-2 | VLM | Week06 | 輕量連接視覺模型與語言模型 |
+| Attention Is All You Need | Foundation | Week01 | Transformer 與 attention 共同骨架 |
 | LLaVA | VLM | Week04 | 影像問答與機器人場景理解 |
-| MiniGPT-4 | VLM | Week06 | 多模態對話架構比較 |
-| Qwen-VL | VLM | Week06 | 中文與多模態能力比較 |
-| InternVL | VLM | Week06 | 高效能 VLM 架構比較 |
-| RT-1 | VLA | Week12 | 機器人動作資料與策略學習 |
-| RT-2 | VLA | Week12 | 視覺語言到動作的概念延伸 |
-| OpenVLA | VLA | Week12 | 開源 VLA 實作參考 |
-| SayCan | Robot Learning | Week11 | 語言模型結合機器人可行動作 |
-| PaLM-E | Embodied AI | Week11 | 具身智慧與多模態機器人推理 |
+| BLIP | VLM | Week05 | 影像描述與視覺語言預訓練架構比較 |
+| BLIP-2 | VLM | Week05 | Q-Former 與凍結模型介面 |
+| MovieChat | Video VLM | Week06 | 長影片 sparse memory 與時間理解 |
+| RT-1 | VLA | Week07 | 即時機器人資料流、token 與系統邊界 |
+| 3D-LLM | Spatial Grounding | Week08 | 3D-language alignment 與空間推理 |
+| PaLM-E | Embodied AI | Week09 | 影像、語言與 robot state 融合 |
+| RT-2 | VLA | Week10 | VLA action token 與知識轉移 |
+| Open X-Embodiment | Robot Dataset | Week11 | 跨 embodiment 資料標準化 |
+| SmolVLA | VLA | Week12 | 可負擔 VLA inference 與 flow matching |
+| Octo | Robot Learning | Week13 | Generalist policy fine-tuning |
+| Isaac Lab | Isaac Sim | Week14 | GPU 模擬、感測器與任務介面 |
+| Domain Randomization | Sim-to-Real | Week15 | 模擬到真實的變異假設 |
+| OpenVLA | VLA | Week16 | 開源研究原型與 evaluation 比較 |
 
 每篇論文模板需包含：
 

@@ -73,6 +73,45 @@ python demo/demo_05_real_clip_zero_shot.py --image demo/000000039769.jpg
 - [✅] 更新 `study_log.md` 與 Notion。
 - [✅] 進行 ChatGPT 驗收。
 
+## Paper Reading（論文閱讀）
+
+### Core Reading
+
+- Title: Learning Transferable Visual Models From Natural Language Supervision
+- Authors: Alec Radford et al.
+- Year / Venue: 2021 / ICML
+- DOI: N/A
+- arXiv: 2103.00020
+- Link: https://proceedings.mlr.press/v139/radford21a.html
+- Code / Project: https://github.com/openai/CLIP
+- Required Reading：Abstract、Figure 1、Sections 2–3、zero-shot evaluation。
+- Skim Reading：完整資料集與超參數細節。
+- Skip for Now：所有下游資料集逐項比較。
+- Optional Reading：ALIGN；SigLIP。
+
+### Reading Questions
+
+1. CLIP 要解決什麼監督資料瓶頸？
+2. 圖像與文字各自如何編碼？
+3. Contrastive Learning（對比式學習）的正負樣本是什麼？
+4. 相似度矩陣的 shape 為何？
+5. Temperature（溫度）如何影響 softmax？
+6. Zero-shot classifier 如何由文字提示建立？
+7. 核心訓練目標與推論目標有何差異？
+8. 主要評估基準與比較方法是什麼？
+9. 哪個結果最支持 transferability？
+10. 資料偏差與失敗模式是什麼？
+11. CLIP 表徵如何供機器人感知與 grounding 使用？
+12. 哪項證據可轉成自己的研究假設？
+
+### Paper Reading Acceptance Criteria
+
+- [ ] 能說明 Core Paper 的 Research Problem。
+- [ ] 能用自己的話解釋 Core Method 與主要資料流。
+- [ ] 能指出至少一項 Claim 與對應 Evidence。
+- [ ] 能說明至少一項 Limitation／Boundary。
+- [ ] 能說明本論文與本週及後續研究的關聯。
+
 ## 驗收條件
 
 - [✅] 能說明 CLIP 的基本任務是圖文對齊。

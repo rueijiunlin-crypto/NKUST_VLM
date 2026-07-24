@@ -28,7 +28,7 @@ assets/     文件附件、圖片、資料與其他素材
 
 ## 16 週學習路線
 
-> Roadmap 重構狀態：下列主題代表目標學習路線。現有 `WeekXX` 資料夾名稱暫時保留，直到各週遷移內容經明確批准後才調整；目前資料夾名稱不代表該週教材已完成重構。
+> Curriculum 狀態：Active Curriculum（正式課程）。教材已依新版研究能力鏈遷移；這只表示教材結構啟用，不代表學生已完成任何 Week。
 
 ### Phase 1 — VLM Foundation（視覺語言模型基礎）
 
@@ -54,26 +54,26 @@ Week14–15：建立機器人學習模擬、Sim-to-Real（模擬到真實）分�
 
 Week16：完成具有 baseline（基準方法）、metric（評估指標）、失敗分析與可重現性的研究 Prototype（原型）。
 
-| Week | Target Topic | Current Directory |
+| Week | Topic | Directory |
 | --- | --- | --- |
 | Week01 | Transformer Fundamentals | `learning/Week01_Transformer/` |
 | Week02 | CLIP and Vision-Language Alignment | `learning/Week02_CLIP/` |
 | Week03 | Hugging Face Model Workflow | `learning/Week03_HuggingFace/` |
 | Week04 | LLaVA + Grounded Visual Reasoning | `learning/Week04_LLaVA/` |
 | Week05 | VLM Architecture for Robotics | `learning/Week05_VLM_Architecture/` |
-| Week06 | Video and Streaming VLM | `learning/Week06_PaperReading/` |
-| Week07 | ROS2 + Camera + Realtime VLM | `learning/Week07_PromptEngineering/` |
-| Week08 | Spatial Reasoning and Grounding | `learning/Week08_MiniProject/` |
-| Week09 | Robot State + Multimodal Observation | `learning/Week09_VLM_Camera/` |
-| Week10 | Embodied AI + VLA Fundamentals | `learning/Week10_VLM_ROS2/` |
-| Week11 | Robot Dataset and Demonstrations | `learning/Week11_VLM_Navigation/` |
-| Week12 | SmolVLA / OpenVLA Inference | `learning/Week12_Robot_Prototype/` |
-| Week13 | VLA Fine-tuning | `learning/Week13_IsaacSim_Environment/` |
-| Week14 | Isaac Sim Robot Learning | `learning/Week14_IsaacSim_Camera/` |
-| Week15 | Sim-to-Real / Real Robot Deployment | `learning/Week15_IsaacSim_VLM/` |
-| Week16 | Research Prototype and Evaluation | `learning/Week16_FinalProject/` |
+| Week06 | Video and Streaming VLM | `learning/Week06_Video_Streaming_VLM/` |
+| Week07 | ROS2 + Camera + Realtime VLM | `learning/Week07_Realtime_VLM_ROS2/` |
+| Week08 | Spatial Reasoning and Grounding | `learning/Week08_Spatial_Grounding/` |
+| Week09 | Robot State + Multimodal Observation | `learning/Week09_Robot_State/` |
+| Week10 | Embodied AI + VLA Fundamentals | `learning/Week10_VLA_Fundamentals/` |
+| Week11 | Robot Dataset and Demonstrations | `learning/Week11_Robot_Dataset/` |
+| Week12 | SmolVLA / OpenVLA Inference | `learning/Week12_VLA_Inference/` |
+| Week13 | VLA Fine-tuning | `learning/Week13_VLA_Finetuning/` |
+| Week14 | Isaac Sim Robot Learning | `learning/Week14_IsaacSim_Robot_Learning/` |
+| Week15 | Sim-to-Real / Real Robot Deployment | `learning/Week15_Sim2Real/` |
+| Week16 | Research Prototype and Evaluation | `learning/Week16_Research_Prototype/` |
 
-完整的舊課程對照、內容保存與後續重構順序請見 [Curriculum Roadmap v2](./docs/learning/curriculum_roadmap_v2.md)。
+完整的舊課程對照、內容保存與遷移執行紀錄請見 [Curriculum Roadmap v2](./docs/learning/curriculum_roadmap_v2.md)。
 
 ## GitHub 與 Notion 分工
 
@@ -89,7 +89,7 @@ ChatGPT 適合用於理論討論、研究方向收斂、文獻摘要、口試問
 
 ## 如何使用本 Repository
 
-1. 先閱讀 `AGENTS.md` 與 `AGENTS_v2.md`，確認代理與週次流程規範。
+1. 先閱讀目前正式的 `AGENTS.md`，確認代理與週次流程規範。
 2. 先閱讀 `docs/notion/VLM_Notion_System.md`，建立 Notion 管理系統。
 3. 依照 `learning/` 中的 16 週資料夾順序進行學習與實作。
 4. 每週在對應資料夾撰寫筆記、任務、程式、Demo 執行結果與回顧。

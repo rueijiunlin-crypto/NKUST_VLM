@@ -1,0 +1,6 @@
+# ROS2 packages (rclpy, sensor_msgs, std_msgs, cv_bridge) must come from the selected ROS2 distribution.
+torch>=2.2
+transformers>=4.49
+accelerate>=0.28
+pillow>=10
+opencv-python>=4.9

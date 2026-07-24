@@ -72,7 +72,7 @@ python demo/demo_02_llava_architecture_flow.py --image-size 336 --patch-size 14 
 - Projector 為什麼必要？
 - 影像寬高加倍、patch size 不變時，image token 數量可能如何變化？
 
-## Demo 03：LLaVA Visual QA（選做／進階）
+## Demo 03：LLaVA Visual QA（Required Real Track）
 
 ```powershell
 python demo/demo_03_llava_visual_qa.py --image ../Week02_CLIP/demo/000000039769.jpg --question "What is shown in this image?"
@@ -92,7 +92,7 @@ python demo/demo_03_llava_visual_qa.py --image ../Week02_CLIP/demo/000000039769.
 - 為什麼語句流暢不等於具有視覺依據？
 - 為什麼真實模型成功載入不能取代 shape 與資料流理解？
 
-## Demo 04：Question Comparison（選做／進階）
+## Demo 04：Question Comparison（進階比較）
 
 ```powershell
 python demo/demo_04_question_comparison.py --image ../Week02_CLIP/demo/000000039769.jpg

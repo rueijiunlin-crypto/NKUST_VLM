@@ -1,0 +1,2 @@
+# Python >=3.12; LeRobot 0.6 stable training and SmolVLA dependencies.
+lerobot[training,smolvla]>=0.6,<0.7
