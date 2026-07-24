@@ -31,7 +31,7 @@ Week04 延續 Week03 Hugging Face（模型平台）與 CLIP（對比式圖文預
 2. 閱讀 `notes.md` 第 1–3 節，理解 Processor、模型元件與輸入 shape。
 3. 執行 Demo 01 與 Demo 02，建立真實輸入與架構資料流的整體印象。
 4. 執行 `practice/coding/guided_demos/`，追蹤 Processor、Projector、多模態序列與生成步驟。
-5. 有合適硬體與時間時，執行 optional（選做）的 Demo 03 與 Demo 04 真實模型推論。
+5. 執行 Required Real Model Track 的 Demo 03；Demo 04 用於三個問題的比較。若環境受阻，仍須留下 blocker 與完整執行計畫。
 6. 將回答拆成 Supported（影像支持）、Uncertain（無法確認）、Contradicted（影像不支持）或 Requires Additional Sensor / Robot State（需要額外感測或機器人狀態）。
 7. 完成 Concept Practice 與 Coding Practice 的學生觀察欄位。
 8. 將實際輸出、錯誤、幻覺案例與未解問題記錄到 `study_log.md`。
@@ -49,7 +49,11 @@ python demo/demo_03_llava_visual_qa.py --image ../Week02_CLIP/demo/000000039769.
 python demo/demo_04_question_comparison.py --image ../Week02_CLIP/demo/000000039769.jpg
 ```
 
-Demo 01 只下載 Processor（前處理器）相關檔案，不載入完整 7B 模型。Demo 03 與 Demo 04 需要大型模型權重與較高硬體資源，屬選做／進階內容。
+Demo 01 只下載 Processor（前處理器）相關檔案，不載入完整 7B 模型。Demo 03 是本週 Required Real Model Track；Demo 04 是必要比較活動。需要大型模型權重與較高硬體資源時，可將 runtime 記為 Hardware／Network／Environment blocked，但不得省略問題、revision、執行命令與預期證據。
+
+## 真實模型執行契約
+
+三個必要問題分別檢查場景描述、可操作物體與缺失的機器人／幾何資訊；詳見 `weekly_plan.md` 與 `demo/real_track_README.md`。每次執行需記錄 model、revision、GPU、dtype、VRAM、load/inference time、input/output token、完整回答與 hallucination evidence（幻覺證據）。回答必須區分 Supported、Uncertain、Contradicted 與 Requires Additional Sensor / Robot State。
 
 ## 與 VLM/VLA 碩士研究的關聯
 

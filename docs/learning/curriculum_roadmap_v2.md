@@ -9,11 +9,14 @@
 ```text
 Structure Migration: Completed
 Paper Integration: Completed
-Real Model Integration: Completed (runtime validation tracked per Real Track)
+Real Model Integration: Completed
 Content Depth Pass: Completed
+Runtime Validation: Partial
 ```
 
 以上只描述教材建置狀態，不表示學生已閱讀、執行、驗收或 Completed。
+
+Runtime 的逐週證據與 blocker 見 [Runtime Validation Report](./runtime_validation_report.md)。
 
 ## 1. Why Refactor
 

@@ -10,6 +10,8 @@
 |---|---|---|---|---|
 |  |  |  |  |  |
 
+另記錄：Isaac/Kit、renderer、headless、seed、RGB/depth/joint shape、camera/target ground truth pose、physics/render dt、steps/s、asset revision 與 runtime status/blocker。
+
 ## Isaac Sim Record（學生填寫）
 
 | Isaac / Driver / GPU Version | Scene / Asset | Sensor / State Shape | Runtime / Memory | Failure / Summary |

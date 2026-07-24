@@ -30,7 +30,7 @@
 5. 閱讀 `notes.md` 第 4–5 節，理解核心推論程式與文字生成。
 6. 依序執行四個 Guided Demo，完成 shape tracing（張量形狀追蹤）與中間值觀察。
 7. 閱讀 `notes.md` 第 6 節，完成一般與機器人導向問題比較。
-8. 視硬體條件執行 Demo 03、Demo 04，或只完成其程式閱讀與實驗規劃。
+8. 進入 Required Real Model Experiment：執行 Demo 03 與三個必要問題；受阻時完成環境檢查、指令與 blocker 紀錄。Demo 04 用於進階比較。
 9. 完成 Concept Practice、Coding Practice 與 `study_log.md`。
 
 ## Demo 執行順序
@@ -43,13 +43,27 @@ python demo/demo_01_llava_processor_inputs.py --image ../Week02_CLIP/demo/000000
 python demo/demo_02_llava_architecture_flow.py
 ```
 
-選做／進階真實模型推論：
+## Required Real Model Experiment
+
+本軌是 Required Learning Track。若硬體、網路或模型存取不足，仍須完成環境檢查並在 `study_log.md` 記錄明確 blocker，不得略過。
+
+```text
+Image + Question
+→ AutoProcessor
+→ Real LLaVA Checkpoint
+→ generate()
+→ Generated Answer
+→ Grounding Analysis
+```
 
 ```powershell
-python demo/demo_03_llava_visual_qa.py --image ../Week02_CLIP/demo/000000039769.jpg --question "What is shown in this image?"
-python demo/demo_03_llava_visual_qa.py --image ../Week02_CLIP/demo/000000039769.jpg --question "Can the exact 3D position be determined from this RGB image alone?"
+python demo/demo_03_llava_visual_qa.py --revision <commit> --image ../Week02_CLIP/demo/000000039769.jpg --question "What objects are visible in this image?"
+python demo/demo_03_llava_visual_qa.py --revision <commit> --image ../Week02_CLIP/demo/000000039769.jpg --question "Which visible objects could potentially be manipulated by a robot?"
+python demo/demo_03_llava_visual_qa.py --revision <commit> --image ../Week02_CLIP/demo/000000039769.jpg --question "Can the exact 3D position be determined from this RGB image alone?"
 python demo/demo_04_question_comparison.py --image ../Week02_CLIP/demo/000000039769.jpg
 ```
+
+Demo03 是 Required；Demo04 用於三種問題的比較與 capability boundary 分析。記錄 model ID、revision、GPU、dtype、peak VRAM、load time、inference latency、generated token count、factual answer、hallucination、unsupported claim 與 uncertainty。
 
 Demo 數量依本週必要概念設定，不受固定數量限制。每個 Demo 都必須對應 `notes.md` 中的概念與觀察問題。
 
@@ -75,7 +89,8 @@ Demo 數量依本週必要概念設定，不受固定數量限制。每個 Demo 
 - [ ] 完成四個 Guided Demo 的閱讀與觀察。
 - [ ] 完成 Concept Practice。
 - [ ] 完成 Coding Practice 的問題／提示實驗設計。
-- [ ] 視硬體條件執行 Demo 03、Demo 04，或記錄未執行原因。
+- [ ] 完成 Demo 03 Required Real Track；若無法執行，記錄標準 runtime blocker、環境與重現命令。
+- [ ] 執行 Demo 04 進階比較，或完成比較設計與 blocker 紀錄。
 - [ ] 記錄至少一個可能的 hallucination 或無法由圖片確認的主張。
 - [ ] 比較 semantic relation（語意關係）與 metric coordinate（度量座標）。
 - [ ] 對 robot reachability 主張標記其所需的額外感測與 Robot State。
@@ -113,6 +128,14 @@ Demo 數量依本週必要概念設定，不受固定數量限制。每個 Demo 
 10. Hallucination（幻覺）與定位限制是什麼？
 11. LLaVA 輸出如何安全轉成機器人語意事件？
 12. 真實模型執行時要保存哪些重現資訊？
+
+### Paper Reading Acceptance Criteria
+
+- [ ] 能說明 Core Paper 的 Research Problem。
+- [ ] 能用自己的話解釋 Core Method 與主要資料流。
+- [ ] 能指出至少一項 Claim 與對應 Evidence。
+- [ ] 能說明至少一項 Limitation／Boundary。
+- [ ] 能說明本論文與本週及後續研究的關聯。
 
 ## 驗收條件
 

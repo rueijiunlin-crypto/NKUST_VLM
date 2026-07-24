@@ -15,6 +15,8 @@ Pretrained Model、Task Adaptation、Batch、Training Step、Epoch、Learning Ra
 2. 執行 tiny fine-tune 與 validation curve Demo。
 3. 完成 training step Implementation Practice。
 4. 比較 train／validation 指標並記錄重現條件。
+5. dry-run Required Real SmolVLA command，再依資源執行 20-step smoke test。
+6. 檢查並 reload checkpoint，最後完成 Paper Reading。
 
 ## Demo 執行順序
 
@@ -22,7 +24,14 @@ Pretrained Model、Task Adaptation、Batch、Training Step、Epoch、Learning Ra
 python demo/demo_01_tiny_finetune.py
 python demo/demo_02_validation_curve.py
 python practice/coding/solutions/training_step_solution.py
+python demo/demo_03_real_smolvla_finetune.py --dataset-id <repo-id> --model-revision <commit> --dataset-revision <commit> --steps 20 --learning-rate 0.0001 --seed 7
+python demo/demo_03_real_smolvla_finetune.py --dataset-id <repo-id> --model-revision <commit> --dataset-revision <commit> --steps 20 --learning-rate 0.0001 --seed 7 --execute
+python demo/demo_04_reload_finetuned_checkpoint.py --checkpoint <pretrained_model-path> --dataset-id <repo-id> --dataset-revision <commit>
 ```
+
+## Required Real SmolVLA Fine-tuning Track
+
+本軌是 Required Learning Track。順序為 Theory → Tiny Training → Validation → Practice → Real Fine-tuning → Checkpoint Reload → Paper Reading。先 dry-run，再以 20 steps smoke test；50／100 steps 只在 smoke test 通過後執行。需驗證 checkpoint、config、training metadata、reload 與 inference interface。無 GPU 時記錄 `Hardware blocked`。
 
 ## 任務清單
 
@@ -74,6 +83,14 @@ python practice/coding/solutions/training_step_solution.py
 ### Deep Reading
 
 比較 full fine-tuning、parameter-efficient tuning 與從零訓練；本週實驗不得把尚未執行的結果寫成完成。
+
+### Paper Reading Acceptance Criteria
+
+- [ ] 能說明 Core Paper 的 Research Problem。
+- [ ] 能用自己的話解釋 Architecture、Experiment 與 training flow。
+- [ ] 能指出至少一項 Claim、Evidence 與 Ablation。
+- [ ] 能說明 Limitation、Boundary 與 Reproducibility 條件。
+- [ ] 能比較 Paper fine-tuning 與本週 small-run 設定。
 
 ## 驗收條件
 

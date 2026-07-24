@@ -15,15 +15,20 @@ Pretrained VLA、Processor、Observation Input、Normalization、Policy Inferenc
 1. 閱讀 `notes.md`，先理解 processor-to-action interface。
 2. 執行 CPU Basic Demo 與 runtime planner。
 3. 執行 Guided policy adapter 並追蹤 shape。
-4. 依硬體與模型條件決定是否進行 optional real-model experiment。
+4. 執行 Required Real SmolVLA Track；若硬體或環境不足，保留完整命令與標準 blocker。
 
 ## Demo 執行順序
 
 ```powershell
 python demo/demo_01_basic_vla_inference.py --device cpu
 python demo/demo_02_runtime_planner.py
+python demo/demo_03_real_smolvla_inference.py --revision <commit> --dataset-id lerobot/svla_so100_pickplace --dataset-revision <commit> --device cuda
 python practice/coding/guided_demos/guided_policy_adapter.py
 ```
+
+## Required Real SmolVLA Inference Track
+
+本軌是 Required Learning Track，不得標為 optional／advanced。流程必須為 `Dataset Frame → make_pre_post_processors → preprocess → select_action → postprocess → finite/action-shape check → log only`。需記錄 model/data revision、observation keys、image/state/action shape、chunk、parameter count、device/dtype、warm-up/inference latency 與 peak VRAM。無法執行時記錄 blocker。
 
 ## 任務清單
 
@@ -31,7 +36,7 @@ python practice/coding/guided_demos/guided_policy_adapter.py
 - [ ] 執行 Basic VLA Inference Demo 與 runtime planner。
 - [ ] 執行 Guided Demo 並完成 Concept／Coding Practice 紀錄。
 - [ ] 記錄 device、dtype、latency、model ID 與 revision。
-- [ ] 未執行真實模型時，明確記錄 hardware／model requirement。
+- [ ] 完成真實 SmolVLA 推論，或明確記錄標準 runtime blocker、hardware／model requirement 與重現命令。
 
 ## Practice
 
@@ -77,6 +82,14 @@ python practice/coding/guided_demos/guided_policy_adapter.py
 ### Deep Reading
 
 深讀 architecture、inference data flow、action representation、latency 與評估；真實模型軌若未執行，狀態必須標為 `Not validated yet`。
+
+### Paper Reading Acceptance Criteria
+
+- [ ] 能說明 Core Paper 的 Research Problem。
+- [ ] 能用自己的話解釋 Architecture、Experiment 與 inference flow。
+- [ ] 能指出至少一項 Claim、Evidence 與 Ablation。
+- [ ] 能說明 Limitation、Boundary 與 Reproducibility 條件。
+- [ ] 能把 Paper Method 與本週 inference pipeline 對應。
 
 ## 驗收條件
 

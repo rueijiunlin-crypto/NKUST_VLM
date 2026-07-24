@@ -15,6 +15,7 @@ Research question、hypothesis、baseline、controlled variables、metric、grou
 2. 執行 evaluation matrix 與 metric summary Demo。
 3. 執行 Guided evidence chain，再完成 result validator。
 4. 填寫 evaluation plan、failure record 與 limitation。
+5. 完成 My Method vs Paper Method Comparison Matrix，不可只寫「相似／不同」。
 
 ## Demo 執行順序
 
@@ -32,6 +33,7 @@ python practice/coding/solutions/result_validator_solution.py
 - [ ] 完成 Concept Practice。
 - [ ] 完成 `result_validator_practice.py` 後再比較 solution。
 - [ ] 在 `coding_practice.md` 與 `study_log.md` 記錄 evidence、failure 與 limitation。
+- [ ] 填寫 My Method vs Paper Method 的 problem、I/O、architecture、data、training、metric、hardware、result、failure、limitation 與 reproduction gap。
 
 ## Practice
 
@@ -77,6 +79,14 @@ python practice/coding/solutions/result_validator_solution.py
 ### Deep Reading
 
 完成 Evidence Table、Comparison Matrix、Reproducibility Check 與 Thesis Literature Review Usage；若研究題目已收斂，另選一篇直接 baseline 取代泛讀材料。
+
+### Paper Reading Acceptance Criteria
+
+- [ ] 能說明 Core Paper 的 Research Problem。
+- [ ] 能用自己的話解釋 Architecture、Experiment 與 Ablation。
+- [ ] 能指出主要 Claim、Evidence 與 Reproducibility 條件。
+- [ ] 能說明 Limitation／Boundary。
+- [ ] 完成 My Method vs Paper Method Comparison Matrix。
 
 ## 驗收條件
 

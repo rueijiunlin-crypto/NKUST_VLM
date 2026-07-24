@@ -4,6 +4,8 @@
 | --- | --- | --- | --- | --- |
 |  |  |  |  |  |
 
+另記錄：LeRobot version/commit、metadata、fps、feature keys、timestamp、codec、download/cache、elapsed 與 runtime status/blocker。
+
 ## Paper Reading Record（學生填寫）
 
 | Paper / Version | Dataset Evidence | Metric / Limitation | Reproducibility | Questions |

@@ -13,16 +13,22 @@ USD、Robot Asset、RGB／Depth Camera、Semantic Label、Ground Truth、Robot S
 
 1. 閱讀 `notes.md` 並畫出 simulation-to-evaluation flow。
 2. 執行 experiment config 與 domain randomization Demo。
-3. 完成 experiment validator Implementation Practice。
-4. 記錄 simulator ground truth 與 policy observation 的差異。
+3. 以 Isaac Sim launcher 執行 Required Real default scene，或留下 Environment blocker。
+4. 完成 experiment validator Implementation Practice。
+5. 記錄 simulator ground truth 與 policy observation 的差異。
 
 ## Demo 執行順序
 
 ```powershell
 python demo/demo_01_sim_experiment_config.py
 python demo/demo_02_domain_randomization.py
+<isaac-sim-root>\python.bat demo\demo_03_real_isaac_observation.py --headless
 python practice/coding/solutions/experiment_validator_solution.py
 ```
+
+## Required Real Isaac Sim Track
+
+本軌是 Required Learning Track。未提供 `--stage` 時必須建立 Ground Plane、Franka、RGB Camera、Target Object 與 Lighting；提供 `--stage` 時檢查指定 prim。需記錄 RGB/depth shape、camera pose、joint shape、simulation timestep、render rate，以及 Sensor Observation 與 Simulator Ground Truth 的差異。無 Isaac Sim 時記錄 `Environment blocked`。
 
 模式：Implementation Practice。
 
@@ -74,6 +80,14 @@ python practice/coding/solutions/experiment_validator_solution.py
 ### Deep Reading
 
 深讀 simulation boundary、sensor fidelity、timing 與 reproducibility，並把官方 API 對應到本週 observation pipeline。
+
+### Paper Reading Acceptance Criteria
+
+- [ ] 能說明 Core Paper 的 Research Problem。
+- [ ] 能用自己的話解釋 Architecture、Experiment 與 simulation flow。
+- [ ] 能指出至少一項 Claim、Evidence 與 Ablation。
+- [ ] 能說明 Limitation、Boundary 與 Reproducibility 條件。
+- [ ] 能區分 Sensor Observation 與 Simulator Ground Truth。
 
 ## 驗收條件
 

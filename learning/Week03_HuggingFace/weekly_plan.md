@@ -105,6 +105,14 @@ python demo/demo_02_clip_zero_shot_local.py --image ../Week02_CLIP/demo/00000003
 11. 這套 API 如何支援後續 VLM/VLA 實驗？
 12. 哪項工程證據應記入實驗紀錄？
 
+### Paper Reading Acceptance Criteria
+
+- [ ] 能說明 Core Paper 的 Research Problem。
+- [ ] 能用自己的話解釋 Core Method 與主要資料流。
+- [ ] 能指出至少一項 Claim 與對應 Evidence。
+- [ ] 能說明至少一項 Limitation／Boundary。
+- [ ] 能說明本論文與本週及後續研究的關聯。
+
 ## 驗收條件
 
 - [ ] 能解釋 `CLIPProcessor` 與 `CLIPModel` 的分工。

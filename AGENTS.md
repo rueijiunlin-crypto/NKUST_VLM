@@ -287,6 +287,23 @@ Basic Demo 不得取代 Real Model Demo，Real Model Demo 也不得取代 Basic 
 
 若硬體不足，應保留 Real Model Track，並提供 lower precision、quantization、smaller checkpoint、CPU offload、reduced frames／resolution 等調整。未執行時標記 `Not validated yet`、`Hardware / network blocked` 或具體 license／download blocker，不得宣稱成功。
 
+### Required Real Model Track Rule（必修真實模型軌規則）
+
+當該週的真實模型、真實資料或真實系統是銜接後續研究能力的必要介面時，`Real Model Track` 必須標示為 `Required Learning Track`，不得再寫成 optional（選做）或 advanced（進階）。「必修」是指學生必須完成下列其中一項並留下證據：
+
+1. 實際執行並記錄 `Executed` 與 runtime evidence。
+2. 在資源不足時完成環境、API、命令、輸入輸出與安全邊界檢查，並如實記錄唯一主要狀態：
+   - `Not validated yet`
+   - `Hardware blocked`
+   - `Network blocked`
+   - `Model access blocked`
+   - `License blocked`
+   - `Environment blocked`
+
+Required 不代表 Codex 可以代替學生勾選完成，也不代表沒有 GPU 就是不及格。驗收重點是實際執行證據，或可重現的 blocker evidence、環境診斷與下一步。只有非核心擴充模型或額外大型比較實驗可以標示為 optional／advanced。
+
+Required Real Track 的 README、`weekly_plan.md`、Demo 與 `study_log.md` 必須一致，且至少記錄 model／framework ID、revision、device、dtype、input/output shape、runtime、memory（若可取得）、failure／blocker 與 safety boundary。
+
 大型模型與資料應由各週獨立下載，不得為教材重構一次下載全部權重。快取、憑證、權重與受限制資料不得提交進 Git。
 
 ### Real Robot System Boundary Rule

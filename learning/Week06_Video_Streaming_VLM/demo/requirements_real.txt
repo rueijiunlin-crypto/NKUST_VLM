@@ -3,3 +3,4 @@ transformers>=4.49
 accelerate>=0.28
 qwen-vl-utils>=0.0.8
 decord>=0.6
+opencv-python>=4.9

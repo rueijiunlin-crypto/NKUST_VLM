@@ -105,17 +105,17 @@
 
 - 學習目標：理解 LLaVA（大型語言與視覺助手）的影像問答流程。
 - 必懂概念：Vision Encoder、Projector、Large Language Model（大型語言模型）。
-- 實作任務：對圖片提出問題並取得文字回答。
-- 驗收標準：能分析回答是否符合影像內容。
+- 實作任務：以 pinned LLaVA revision 完成三個必要問題，記錄硬體、dtype、tokens、latency、VRAM 與原始回答。
+- 驗收標準：能逐項標示 Supported／Uncertain／Contradicted／需要額外感測或 Robot State；若受阻則記錄標準 runtime blocker。
 - GitHub 對應資料夾：`learning/Week04_LLaVA/`
 - Notion 紀錄項目：圖片、問題、回答、錯誤案例。
 
-### Week05 VLM Architecture
+### Week05 VLM Architecture for Robotics
 
-- 學習目標：能畫出典型 VLM 架構。
-- 必懂概念：影像特徵、文字特徵、跨模態對齊。
-- 實作任務：整理 LLaVA 類模型流程圖。
-- 驗收標準：能說明 Camera（相機）到 Answer（回答）的資料流。
+- 學習目標：能畫出典型 VLM 架構，並把它放入含 Robot State、Spatial Grounding（空間定位）與 Structured Output（結構化輸出）的機器人系統。
+- 必懂概念：影像特徵、文字特徵、跨模態對齊、Projector／Q-Former、Robot State、Spatial Grounding、structured semantic interface。
+- 實作任務：比較 BLIP、BLIP-2、LLaVA connector，整理從相機輸入到具有機器人能力邊界之 structured answer 的流程圖。
+- 驗收標準：能說明 Camera → Image Preprocessing → Vision Encoder → Projector／Q-Former → Language Model → Answer，並指出 BLIP、BLIP-2 與 LLaVA 的介面差異。
 - GitHub 對應資料夾：`learning/Week05_VLM_Architecture/`
 - Notion 紀錄項目：架構圖、輸入輸出、限制。
 
@@ -123,8 +123,8 @@
 
 - 學習目標：建立 multi-frame、video 與 streaming temporal perception。
 - 必懂概念：Frame Sampling、Temporal Context、KV Cache、latency／throughput。
-- 實作任務：比較 Camera FPS 與 inference FPS，分析 sliding window。
-- 驗收標準：能說明即時串流的 token、memory 與 freshness 取捨。
+- 實作任務：比較 `1/2/4 fps` 或 `2/4/8/16 frames` 的真實 Qwen2.5-VL temporal question。
+- 驗收標準：能用 sampled frames、tokens、latency、VRAM 與 temporal error 說明取捨；若受阻則保留 blocker。
 - GitHub 對應資料夾：`learning/Week06_Video_Streaming_VLM/`
 - Notion 紀錄項目：取樣設定、token budget、延遲與論文閱讀條目。
 
@@ -132,8 +132,8 @@
 
 - 學習目標：建立 Camera、ROS2、非同步推論與 semantic topic 管線。
 - 必懂概念：FPS、timestamp、Topic、QoS、queue、stale frame、structured result。
-- 實作任務：用 mock queue 驗證 latest-frame 與 freshness policy。
-- 驗收標準：能設計可驗證且不等同控制命令的 semantic interface。
+- 實作任務：以 actual ROS2 camera／rosbag、capacity-one latest frame worker 與真實 VLM adapter 發布 structured semantic result。
+- 驗收標準：保存 QoS、age、queue replacement、inference/publish latency 與 schema evidence，且 semantic topic 不等同控制命令。
 - GitHub 對應資料夾：`learning/Week07_Realtime_VLM_ROS2/`
 - Notion 紀錄項目：rate、QoS、schema、unknown／retry 與錯誤結果。
 
@@ -177,8 +177,8 @@
 
 - 學習目標：理解預訓練 VLA 的 observation-to-action 推論介面。
 - 必懂概念：processor、normalization、action chunk、device、latency。
-- 實作任務：先驗證 Basic Policy Adapter，再依硬體選做真實模型。
-- 驗收標準：能解讀 observation／action shape 與 checkpoint metadata。
+- 實作任務：先驗證 Basic Policy Adapter，再以官方 `make_pre_post_processors → select_action → postprocess` 完成 Required Real Track。
+- 驗收標準：能解讀 raw/processed observation、action shape、checkpoint metadata、warm-up／latency／VRAM，或留下標準 blocker。
 - GitHub 對應資料夾：`learning/Week12_VLA_Inference/`
 - Notion 紀錄項目：model revision、硬體、latency、skipped reason。
 
@@ -186,8 +186,8 @@
 
 - 學習目標：由 pretrained VLA 進入 task adaptation。
 - 必懂概念：batch、training step、LR、checkpoint、validation、overfitting、shift。
-- 實作任務：以 tiny policy 實作 training step 與 validation curve。
-- 驗收標準：能保存可重現 checkpoint 與分析 train／validation gap。
+- 實作任務：以 tiny policy 理解流程，再 dry-run／execute 官方 `lerobot-train` 20/50/100 steps 並 reload checkpoint。
+- 驗收標準：保存 command、LR、seed、step、metric、runtime、checkpoint 與 reload evidence。
 - GitHub 對應資料夾：`learning/Week13_VLA_Finetuning/`
 - Notion 紀錄項目：dataset／model revision、曲線、checkpoint、限制。
 
@@ -195,8 +195,8 @@
 
 - 學習目標：建立 Scene、Robot、Sensors、Task、Policy、Evaluation。
 - 必懂概念：USD、RGB／Depth、ground truth、synthetic data、randomization。
-- 實作任務：建立受控 experiment config 與 randomization。
-- 驗收標準：能區分 observation、ground truth 與 controlled variable。
+- 實作任務：用 Isaac Sim launcher 建立 ground、Franka、RGB/depth camera、target、light，或載入記錄 revision 的自訂 stage。
+- 驗收標準：能區分 sensor observation、simulator ground truth、controlled variable 與 Isaac/asset/runtime evidence。
 - GitHub 對應資料夾：`learning/Week14_IsaacSim_Robot_Learning/`
 - Notion 紀錄項目：scene／asset revision、seed、task、metric。
 
@@ -204,7 +204,7 @@
 
 - 學習目標：分析 simulation／real domain gap 與部署安全。
 - 必懂概念：noise、calibration、latency、action error、recovery、checklist。
-- 實作任務：建立 latency budget、fault injection 與 deployment gate。
+- 實作任務：分別保存 Simulation Observation 與 Real Observation，建立 latency budget、fault injection 與 deployment gate。
 - 驗收標準：能提出 hardware-ready 或 real-robot validation evidence。
 - GitHub 對應資料夾：`learning/Week15_Sim2Real/`
 - Notion 紀錄項目：domain gap、fault、recovery、未驗證限制。
@@ -213,7 +213,7 @@
 
 - 學習目標：完成可評估、可重現的 Robot VLM/VLA Research Prototype。
 - 必懂概念：question、baseline、metric、ground truth、failure、ablation、limitation。
-- 實作任務：建立 evaluation matrix、result schema 與 failure analysis。
+- 實作任務：建立 evaluation matrix、result schema、failure analysis 與 My Method vs Paper Method Comparison Matrix。
 - 驗收標準：結論有 evidence，且不把 Demo 成功等同研究完成。
 - GitHub 對應資料夾：`learning/Week16_Research_Prototype/`
 - Notion 紀錄項目：研究問題、baseline、raw result、metric、failure、limitation。

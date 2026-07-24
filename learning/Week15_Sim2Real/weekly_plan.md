@@ -13,16 +13,22 @@ Lighting、texture、camera noise、calibration error、sensor／inference laten
 
 1. 閱讀 `notes.md` 並建立 sim／real comparison matrix。
 2. 執行 domain gap 與 latency budget Demo。
-3. 完成 deployment gate Implementation Practice。
-4. 設計無實體機器人時仍可驗證的 hardware-ready evidence。
+3. 執行 Required Sim Observation vs Real Observation comparison；缺 real source 時記錄 Hardware blocker 與採集計畫。
+4. 完成 deployment gate Implementation Practice。
+5. 設計無實體機器人時仍可驗證的 hardware-ready evidence。
 
 ## Demo 執行順序
 
 ```powershell
 python demo/demo_01_domain_gap.py
 python demo/demo_02_latency_budget.py
+python demo/demo_03_camera_sim_comparison.py --real <real-image> --sim <sim-image>
 python practice/coding/solutions/deployment_gate_solution.py
 ```
+
+## Required Sim / Real Observation Track
+
+本軌是 Required Learning Track。比較 `Sim Observation vs Real Observation`，真實來源可為 webcam、RealSense 或事先錄製影像，不要求直接控制 robot。需固定 preprocessing，保存 source/calibration/revision、shape、latency、domain-gap metric 與 failure。
 
 模式：Implementation Practice。
 
@@ -74,6 +80,14 @@ python practice/coding/solutions/deployment_gate_solution.py
 ### Deep Reading
 
 以 real/sim paired evidence、randomization assumption、evaluation leakage 與 failure analysis 為深讀重點。
+
+### Paper Reading Acceptance Criteria
+
+- [ ] 能說明 Core Paper 的 Research Problem。
+- [ ] 能用自己的話解釋 Architecture、Experiment 與 domain randomization。
+- [ ] 能指出至少一項 Claim、Evidence 與 Ablation。
+- [ ] 能說明 Limitation、Boundary 與 Reproducibility 條件。
+- [ ] 能把論文假設對應到 Sim／Real comparison。
 
 ## 驗收條件
 

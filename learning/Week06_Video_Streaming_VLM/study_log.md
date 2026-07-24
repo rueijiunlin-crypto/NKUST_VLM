@@ -6,6 +6,8 @@
 |---|---|---|---|---|
 |  |  |  |  |  |
 
+另記錄：duration、source FPS、`--fps`／`--frames`、sampled frames、load/inference time、tokens、peak VRAM、temporal answer 與 runtime status/blocker。
+
 ## Real Model / Hardware / Failure Record（學生填寫）
 
 | Model / Revision | Device / dtype | Input / Output Shape | Runtime / Memory | Failure / Questions |

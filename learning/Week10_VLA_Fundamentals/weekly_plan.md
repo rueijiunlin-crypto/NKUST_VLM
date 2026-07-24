@@ -78,6 +78,14 @@ python practice/coding/solutions/action_validator_solution.py
 
 比較 RT-2、OpenVLA、SmolVLA、π0 與 GR00T N1 的 action representation、資料、模型規模、開放性與部署限制。
 
+### Paper Reading Acceptance Criteria
+
+- [ ] 能說明 Core Paper 的 Research Problem。
+- [ ] 能用自己的話解釋 Architecture、Experiment 與主要資料流。
+- [ ] 能指出至少一項 Claim、Evidence 與 Ablation。
+- [ ] 能說明 Limitation、Boundary 與 Reproducibility 條件。
+- [ ] 能完成 VLA 模型比較矩陣。
+
 ## 驗收條件
 
 - [ ] 能區分 VLM output 與 VLA action。

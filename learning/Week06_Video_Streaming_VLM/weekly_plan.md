@@ -14,17 +14,25 @@ Frame Sampling、online／offline understanding、KV Cache 概念、長影片 co
 ## 建議學習順序
 
 1. 閱讀 `notes.md`。
-2. 執行兩個 Demo。
-3. 執行 Guided Demo 並完成 Practice。
-4. 使用共用 Paper Reading Framework 閱讀一篇 Video／Streaming VLM 論文。
+2. 執行兩個 Basic Demo。
+3. 執行 Required Real Video VLM 的 FPS／frames temporal experiment；受阻時記錄 blocker。
+4. 執行 Guided Demo 並完成 Practice。
+5. 使用共用 Paper Reading Framework 閱讀一篇 Video／Streaming VLM 論文。
 
 ## Demo 執行順序
 
 ```powershell
 python demo/demo_01_frame_sampling.py
 python demo/demo_02_stream_budget.py --camera-fps 30 --inference-fps 2
+python demo/demo_03_real_video_vlm.py --revision <commit> --video <video.mp4> --fps 1
+python demo/demo_03_real_video_vlm.py --revision <commit> --video <video.mp4> --fps 2
+python demo/demo_03_real_video_vlm.py --revision <commit> --video <video.mp4> --frames 8
 python practice/coding/guided_demos/guided_sliding_window.py
 ```
+
+## Required Real Video VLM Track
+
+本軌是 Required Learning Track。依序比較 1、2、4 FPS，或 2、4、8、16 frames；至少回答 `What happened first?` 與 `What happened after the object was picked up?`。需記錄 model/revision、video duration、sampling FPS、sampled frames、resolution、input shape、peak VRAM、latency、generated tokens 與 answer。無法執行時須記錄 blocker。
 
 ## Practice 連結
 
@@ -77,6 +85,14 @@ python practice/coding/guided_demos/guided_sliding_window.py
 ### Deep Reading
 
 以 Architecture、Data Flow、Memory Compression 與 Evaluation 為本週深讀重點，完成共用 Paper Reading Record。
+
+### Paper Reading Acceptance Criteria
+
+- [ ] 能說明 Core Paper 的 Research Problem。
+- [ ] 能用自己的話解釋 Architecture、Experiment 與主要資料流。
+- [ ] 能指出至少一項 Claim、Evidence 與 Ablation。
+- [ ] 能說明 Limitation、Boundary 與 Reproducibility 條件。
+- [ ] 能說明本論文與 Video VLM 研究的關聯。
 
 ## 驗收條件
 

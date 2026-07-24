@@ -13,16 +13,22 @@ Episode、Trajectory、Demonstration、Teleoperation、observation-action alignm
 
 1. 閱讀 `notes.md` 並畫出 episode schema。
 2. 執行 schema 與 dataset audit Demo。
-3. 完成 dataset validator Implementation Practice。
-4. 將資料品質與 failed demonstration 觀察記錄到 `study_log.md`。
+3. 執行 Required Real LeRobotDataset sample；受阻時記錄 dataset access／環境 blocker。
+4. 完成 dataset validator Implementation Practice。
+5. 將資料品質與 failed demonstration 觀察記錄到 `study_log.md`。
 
 ## Demo 執行順序
 
 ```powershell
 python demo/demo_01_episode_schema.py
 python demo/demo_02_dataset_audit.py
+python demo/demo_03_real_lerobot_sample.py --dataset-id lerobot/aloha_mobile_cabinet --revision <commit> --episode 0
 python practice/coding/solutions/dataset_validator_solution.py
 ```
+
+## Required Real LeRobot Dataset Track
+
+本軌是 Required Learning Track。使用官方 `LeRobotDatasetMetadata` 與 `LeRobotDataset` 檢查 episode、image observation、robot state、action、task/language、timestamp/frame index 與 dataset metadata；不得用自造 interface 假裝官方 API。網路、license 或 cache 受阻時記錄 blocker。
 
 ## 任務清單
 
@@ -70,6 +76,14 @@ python practice/coding/solutions/dataset_validator_solution.py
 10. Action space 與硬體差異造成哪些限制？
 11. LeRobot sample 的 schema 如何對應論文概念？
 12. 哪些資料品質證據必須寫入 dataset card？
+
+### Paper Reading Acceptance Criteria
+
+- [ ] 能說明 Core Paper 的 Research Problem。
+- [ ] 能用自己的話解釋 Core Method 與資料標準化流程。
+- [ ] 能指出至少一項 Claim 與對應 Evidence。
+- [ ] 能說明資料、license 與 embodiment Limitation。
+- [ ] 能說明論文資料結構與 LeRobot sample 的關聯。
 
 ## 驗收條件
 

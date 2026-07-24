@@ -75,6 +75,14 @@ python practice/coding/solutions/observation_builder_solution.py
 11. 本週 observation schema 如何保存 provenance？
 12. 哪個 evidence 可支持多模態狀態融合設計？
 
+### Paper Reading Acceptance Criteria
+
+- [ ] 能說明 Core Paper 的 Research Problem。
+- [ ] 能用自己的話解釋 Core Method 與主要資料流。
+- [ ] 能指出至少一項 Claim 與對應 Evidence。
+- [ ] 能說明至少一項 Limitation／Boundary。
+- [ ] 能說明本論文與本週及後續研究的關聯。
+
 ## 驗收條件
 
 - [ ] 能畫出 Vision + Language + Robot State。

@@ -102,6 +102,14 @@ python demo/demo_05_robot_vlm_system_flow.py
 11. 哪些介面可映射到機器人 VLM 系統？
 12. BLIP-2 應放在本路線哪個知識節點，為什麼？
 
+### Paper Reading Acceptance Criteria
+
+- [ ] 能說明 Core Paper 的 Research Problem。
+- [ ] 能用自己的話解釋 Core Method 與主要資料流。
+- [ ] 能指出至少一項 Claim 與對應 Evidence。
+- [ ] 能說明至少一項 Limitation／Boundary。
+- [ ] 能說明本論文與本週及後續研究的關聯。
+
 ## 驗收條件
 
 - [ ] 能畫出 Camera → Preprocess → Vision Encoder → Connector → LLM → Validator → Structured Perception。

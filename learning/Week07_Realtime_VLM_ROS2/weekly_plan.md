@@ -14,17 +14,23 @@ Frame sampling、asynchronous inference（非同步推論）、latest-frame poli
 
 1. 閱讀 `notes.md`，先建立 realtime pipeline 與 system boundary。
 2. 執行快速 Demo，觀察 queue 與 semantic interface。
-3. 執行 Guided Demo，再完成 freshness Implementation Practice。
-4. 將實際觀察與問題記錄到 `study_log.md`。
+3. 執行 Required Real ROS2 + VLM；受阻時保存 camera/rosbag、模型與環境 blocker。
+4. 執行 Guided Demo，再完成 freshness Implementation Practice。
+5. 將實際觀察與問題記錄到 `study_log.md`。
 
 ## Demo 執行順序
 
 ```powershell
 python demo/demo_01_realtime_queue.py
 python demo/demo_02_semantic_interface.py
+python demo/demo_03_real_ros2_semantic_node.py --ros-args -p image_topic:=/camera/image_raw -p model_revision:=<commit>
 python practice/coding/guided_demos/guided_async_flow.py
 python practice/coding/solutions/realtime_policy_solution.py
 ```
+
+## Required Real ROS2 + VLM Track
+
+本軌是 Required Learning Track。流程必須為 `Image → Freshness → Latest Frame Worker → Real VLM Adapter → Validator → JSON Topic`。需確認輸出是 Semantic Observation，不是 Motor Command；無 ROS2、camera 或 GPU 時記錄 `Environment blocked`／`Hardware blocked` 與重現命令。
 
 ## 任務清單
 
@@ -74,6 +80,14 @@ python practice/coding/solutions/realtime_policy_solution.py
 10. 失敗、延遲與安全限制是什麼？
 11. ROS2 camera→VLM→topic 可借用哪些邊界？
 12. 哪些輸出只能是語意事件、不能直接當控制命令？
+
+### Paper Reading Acceptance Criteria
+
+- [ ] 能說明 Core Paper 的 Research Problem。
+- [ ] 能用自己的話解釋 Core Method 與主要資料流。
+- [ ] 能指出至少一項 Claim 與對應 Evidence。
+- [ ] 能說明至少一項 Limitation／Boundary。
+- [ ] 能說明本論文與本週及後續研究的關聯。
 
 ## 驗收條件
 

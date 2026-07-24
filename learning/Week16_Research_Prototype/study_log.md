@@ -16,6 +16,21 @@
 |---|---|---|---|---|
 |  |  |  |  |  |
 
+## My Method vs Paper Method Comparison Matrix（學生填寫）
+
+| Dimension | My Method | Paper Method | Evidence / Difference | Reproduction Status |
+|---|---|---|---|---|
+| Research problem |  |  |  |  |
+| Input / Output |  |  |  |  |
+| Architecture / Data flow |  |  |  |  |
+| Dataset / Split |  |  |  |  |
+| Training / Checkpoint |  |  |  |  |
+| Metric / Threshold |  |  |  |  |
+| Hardware / Runtime |  |  |  |  |
+| Main result |  |  |  |  |
+| Failure cases |  |  |  |  |
+| Limitation / Boundary |  |  |  |  |
+
 ## 最終驗收
 
 - ChatGPT 結果：

@@ -79,6 +79,14 @@ python practice/coding/solutions/coordinate_transform_solution.py
 
 深讀座標系、幾何投影、3D-language alignment 與失敗案例，並將論文公式對應到本週數值 Demo。
 
+### Paper Reading Acceptance Criteria
+
+- [ ] 能說明 Core Paper 的 Research Problem。
+- [ ] 能用自己的話解釋 Architecture、Experiment 與主要資料流。
+- [ ] 能指出至少一項 Claim、Evidence 與 Ablation。
+- [ ] 能說明 Limitation、Boundary 與 Reproducibility 條件。
+- [ ] 能說明本論文與 Spatial Grounding 研究的關聯。
+
 ## 驗收條件
 
 - [ ] 能寫出 pinhole 反投影公式與變數。

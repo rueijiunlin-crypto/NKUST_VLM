@@ -104,6 +104,14 @@ python demo/demo_05_real_clip_zero_shot.py --image demo/000000039769.jpg
 11. CLIP 表徵如何供機器人感知與 grounding 使用？
 12. 哪項證據可轉成自己的研究假設？
 
+### Paper Reading Acceptance Criteria
+
+- [ ] 能說明 Core Paper 的 Research Problem。
+- [ ] 能用自己的話解釋 Core Method 與主要資料流。
+- [ ] 能指出至少一項 Claim 與對應 Evidence。
+- [ ] 能說明至少一項 Limitation／Boundary。
+- [ ] 能說明本論文與本週及後續研究的關聯。
+
 ## 驗收條件
 
 - [✅] 能說明 CLIP 的基本任務是圖文對齊。

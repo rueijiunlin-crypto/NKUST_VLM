@@ -10,6 +10,8 @@
 |---|---|---|---|---|
 |  |  |  |  |  |
 
+另記錄：完整 `lerobot-train` 命令、learning rate、batch、20/50/100 steps、elapsed、peak VRAM、checkpoint files、reload result 與 runtime status/blocker。
+
 ## Real Fine-tuning Record（學生填寫）
 
 | Model / Data Revision | Hardware / Seed | Config / Steps | Train / Validation Metric | Failure / Artifact |

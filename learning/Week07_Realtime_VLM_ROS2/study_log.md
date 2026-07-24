@@ -6,6 +6,8 @@
 |---|---|---|---|---|
 |  |  |  |  |  |
 
+另記錄：ROS distro、topic/QoS、encoding、model load time、image age、queue replacement、inference/publish latency、JSON schema 結果、peak VRAM 與 runtime status/blocker。
+
 ## Real System Record（學生填寫）
 
 | Model / Revision | ROS2 / Camera / Hardware | Message Shape / Rate | Latency / Failure | Safety Observation |

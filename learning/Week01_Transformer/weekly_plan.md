@@ -92,6 +92,14 @@ Week01 採用 Guided Code Reading Mode，不使用 `exercises/`、`solutions/` �
 11. 這套機制如何成為 VLM/VLA 的共同骨架？
 12. 哪一句證據值得寫入論文閱讀紀錄？
 
+### Paper Reading Acceptance Criteria
+
+- [ ] 能說明 Core Paper 的 Research Problem。
+- [ ] 能用自己的話解釋 Core Method 與主要資料流。
+- [ ] 能指出至少一項 Claim 與對應 Evidence。
+- [ ] 能說明至少一項 Limitation／Boundary。
+- [ ] 能說明本論文與本週及後續研究的關聯。
+
 ## 6. 驗收清單
 
 - [✅] 閱讀 `README.md`。

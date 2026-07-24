@@ -29,8 +29,8 @@
 | --- | --- | --- | --- |
 | `demo_01_llava_processor_inputs.py` |  |  |  |
 | `demo_02_llava_architecture_flow.py` |  |  |  |
-| `demo_03_llava_visual_qa.py`（選做） |  |  |  |
-| `demo_04_question_comparison.py`（選做） |  |  |  |
+| `demo_03_llava_visual_qa.py`（Required Real Track） |  |  |  |
+| `demo_04_question_comparison.py`（進階比較） |  |  |  |
 
 ## Tensor Shape 觀察
 
@@ -65,7 +65,7 @@
 | --- | --- | --- | --- | --- |
 |  |  |  |  |  |
 
-## 真實模型環境（選做）
+## Required Real Model Runtime Evidence（學生填寫）
 
 | 欄位 | 紀錄 |
 | --- | --- |
@@ -74,7 +74,13 @@
 | CPU／GPU／VRAM |  |
 | dtype |  |
 | 模型下載與快取狀態 |  |
-| 推論時間 |  |
+| Model load time |  |
+| Inference time |  |
+| Peak VRAM |  |
+| Input／output tokens |  |
+| 三個問題的原始回答 artifact |  |
+| Hallucination evidence |  |
+| Runtime status / blocker |  |
 
 ## 錯誤紀錄
 
