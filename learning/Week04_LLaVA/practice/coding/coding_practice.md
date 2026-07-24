@@ -115,9 +115,23 @@ Toy logits（玩具分數）為何只能解釋生成機制，不能證明回答�
 
 若已執行 Demo 04，記錄結果：
 
-| 問題 | 回答摘要 | Supported | Uncertain | Contradicted |
+| 問題 | 回答摘要 | Supported | Uncertain | Contradicted | Requires Additional Sensor / Robot State |
+| --- | --- | --- | --- | --- | --- |
+|  |  |  |  |  |  |
+
+## 6. Robot-Oriented Prompt 與 Capability Boundary
+
+請至少設計或使用以下三類問題：
+
+1. 哪些可見物體可能是操作候選？
+2. 是否能從 RGB 得到精確 3D／robot coordinate？
+3. 物體是否可達，以及缺少哪些資訊？
+
+| Prompt | 語意主張 | 幾何／Robot Action 主張 | 目前可支持 | 額外需要的資訊 |
 | --- | --- | --- | --- | --- |
 |  |  |  |  |  |
+
+若回答出現 `x = ... m`、robot coordinate、reachable、safe grasp、navigate 或 motor command，請逐項判斷它是可見證據、合理但未驗證，還是 hallucinated geometry / action claim（幻覺幾何／動作主張）。
 
 ## 錯誤紀錄欄位
 
@@ -132,4 +146,6 @@ Toy logits（玩具分數）為何只能解釋生成機制，不能證明回答�
 - [ ] 我能區分 `<image>` 文字占位符與多個 image embeddings。
 - [ ] 我能說明 `max_new_tokens` 造成的停止與語意完整性是兩件事。
 - [ ] 我能設計問題來檢查圖片支持、不確定與錯誤主張。
+- [ ] 我能區分 semantic information、metric geometry、Robot State 與 Action。
+- [ ] 我能說明 reachability 為什麼需要額外感測與 Robot State。
 - [ ] 我有將實際觀察與未解問題記錄到 `study_log.md`。

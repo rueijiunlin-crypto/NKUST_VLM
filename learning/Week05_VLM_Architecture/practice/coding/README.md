@@ -1,6 +1,6 @@
 # Week05 Coding Practice README
 
-本週以完整可執行的小型程式拆解 Vision Encoder（視覺編碼器）、Projector（投影器）、fusion（融合）與 Camera-to-Answer 資料流。
+本週以完整可執行的小型程式拆解 Vision Encoder（視覺編碼器）、Projector（投影器）、fusion（融合）與 Robot VLM 系統資料流。
 
 ## 結構說明
 
@@ -9,7 +9,7 @@
 | `guided_01_vision_encoder_flow.py` | RGB → patch vectors 的 shape。 |
 | `guided_02_projector_alignment.py` | Projector 前後 hidden dimension。 |
 | `guided_03_fusion_strategies.py` | 串接、query compression 與 cross-attention。 |
-| `guided_04_end_to_end_flow.py` | 每個系統階段的輸入、輸出與風險。 |
+| `guided_04_end_to_end_flow.py` | 語意、幾何、Robot State、Planner、Controller 的輸入、輸出與風險。 |
 
 ## 安裝與執行
 
@@ -40,3 +40,6 @@ python practice/coding/guided_demos/guided_04_end_to_end_flow.py
 - Query compression 的資訊取捨。
 - Cross-attention 的 Query、Key、Value 來源。
 - 系統錯誤應由第一個失敗階段開始定位。
+- Frame count 對 token／latency budget 的影響。
+- Structured Output schema、Robot State mock data 與缺失資訊。
+- VLM／Planner／Controller 的責任分界。

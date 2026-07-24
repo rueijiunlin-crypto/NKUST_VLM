@@ -30,8 +30,8 @@ Demo 01 只載入 Processor（前處理器），Demo 02 只使用 Python 標準�
 | --- | --- | --- | --- | --- |
 | `demo_01_llava_processor_inputs.py` | `AutoProcessor` 多模態前處理 | `python demo/demo_01_llava_processor_inputs.py --image ../Week02_CLIP/demo/000000039769.jpg` | 輸入 keys、shape、dtype、token 數量 | 哪些 tensor 屬於文字，哪些屬於圖片。 |
 | `demo_02_llava_architecture_flow.py` | Vision Encoder → Projector → LLM | `python demo/demo_02_llava_architecture_flow.py` | 架構各階段的示意 shape | Projector 改變哪個維度，image token 數量如何計算。 |
-| `demo_03_llava_visual_qa.py` | 真實 LLaVA 視覺問答 | `python demo/demo_03_llava_visual_qa.py --image ../Week02_CLIP/demo/000000039769.jpg` | 輸入 shape、回答、token 數量、推論時間 | 回答中的主張是否由圖片支持。 |
-| `demo_04_question_comparison.py` | Question／Prompt sensitivity | `python demo/demo_04_question_comparison.py --image ../Week02_CLIP/demo/000000039769.jpg` | 同一圖片的多組問答 | 問題改寫如何影響細節、限制與幻覺。 |
+| `demo_03_llava_visual_qa.py` | 真實 LLaVA 視覺問答 | `python demo/demo_03_llava_visual_qa.py --image ../Week02_CLIP/demo/000000039769.jpg` | 輸入 shape、回答、token 數量、推論時間 | 一般與 robot-oriented 回答有哪些影像依據。 |
+| `demo_04_question_comparison.py` | Question／Prompt sensitivity 與能力邊界 | `python demo/demo_04_question_comparison.py --image ../Week02_CLIP/demo/000000039769.jpg` | 一般及機器人導向問題組 | 逐項判斷四類證據狀態，而非只比回答長度。 |
 
 Demo 數量依本週必要概念決定，不限制為固定三個，也不為增加數量而重複相同現象。
 
@@ -76,6 +76,7 @@ python demo/demo_02_llava_architecture_flow.py --image-size 336 --patch-size 14 
 
 ```powershell
 python demo/demo_03_llava_visual_qa.py --image ../Week02_CLIP/demo/000000039769.jpg --question "What is shown in this image?"
+python demo/demo_03_llava_visual_qa.py --image ../Week02_CLIP/demo/000000039769.jpg --question "Which visible objects could potentially be manipulated by a robot, and what information is still missing?"
 ```
 
 應觀察：
@@ -84,6 +85,7 @@ python demo/demo_03_llava_visual_qa.py --image ../Week02_CLIP/demo/000000039769.
 - `max_new_tokens` 與實際生成 token 數量。
 - 原始回答與推論時間。
 - 回答是否包含圖片不存在或無法確認的細節。
+- 回答是否把「可能可操作」誇大成精確可達或安全抓取。
 
 執行後應能回答：
 
@@ -106,12 +108,14 @@ python demo/demo_04_question_comparison.py --image ../Week02_CLIP/demo/000000039
 
 - 同一圖片、不同問題的回答差異。
 - 全域描述、屬性問題與不確定性問題的回答方式。
-- 回答中的 Supported（圖片支持）、Uncertain（無法確認）與 Contradicted（圖片不支持）主張。
+- 回答中的 Supported（圖片支持）、Uncertain（無法確認）、Contradicted（圖片不支持）與 Requires Additional Sensor / Robot State（需要額外感測或機器人狀態）主張。
+- 精確 3D、robot coordinate、reachability 與安全動作是否被誤當成 RGB 可直接觀察資訊。
 
 執行後應能回答：
 
 - 哪種問題最容易誘導模型補充不存在的細節？
 - 如何設計問題讓模型明確說出無法確認的資訊？
+- 為什麼「物體在左側」不等於 `x = 0.32 m`？
 
 ## 常見問題
 

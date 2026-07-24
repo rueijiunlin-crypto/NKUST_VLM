@@ -143,7 +143,7 @@ Cross-attention 可以插在語言模型若干層之間，處理交錯圖片與�
 - 觀察：串接後長度、query 壓縮結果與 cross-attention weights（交叉注意力權重）。
 - 執行後應能回答：Cross-attention 中的 Query、Key、Value 分別來自哪一種模態？
 
-## 6. Token Budget 與計算成本
+## 6. Token + Latency Budget
 
 多模態 context（上下文）概念長度可寫成：
 
@@ -158,21 +158,39 @@ total_positions ≈ visual_positions + text_positions + special_positions
 - Connector 是否壓縮位置。
 - Prompt、對話歷史與輸出長度。
 - Checkpoint 的最大 context length。
+- frame count（影格數）、Frame Sampling（影格取樣）與 temporal context（時間上下文）。
 
 ### 估算例子
 
 一張 `336 × 336` 圖片，patch size 14，產生 `24 × 24 = 576` 個 patch positions。若 connector 保留 576 個位置，再加 128 個文字位置，概念總數約 704；若 query connector 壓成 32 個位置，則約 160。
+
+多影格未壓縮時：
+
+```text
+1 frame  × 576 =   576 visual tokens
+4 frames × 576 = 2,304 visual tokens
+16 frames × 576 = 9,216 visual tokens
+32 frames × 576 = 18,432 visual tokens
+```
+
+在標準 full attention（全注意力）的簡化理解中，序列互動成本會隨位置數近似平方成長。真實 Latency（延遲）也受硬體、KV cache（鍵值快取）、實作與輸出長度影響，因此 Demo 只提供 relative cost indicator（相對成本指標），不冒充 GPU benchmark。
+
+```text
+Frames ↑ → Tokens ↑ → Memory pressure ↑ → Latency pressure ↑
+```
+
+機器人相機是 continuous stream（連續串流），不能假設把 30 FPS 每一幀完整送入大型 VLM 就能即時工作。常見架構選擇包含 Frame Sampling、事件觸發、視覺 token 壓縮、短期 temporal memory（時間記憶）或較小的前端感知模型；本週只理解取捨，不實作串流系統。
 
 這只是架構比較估算。實際模型可能使用特殊 token、動態解析度、patch merging（影像區塊合併）或其他 feature selection。
 
 ### 對應 Demo
 
 - Demo：`demo/demo_04_token_budget.py`
-- 執行：`python demo/demo_04_token_budget.py --images 2 --query-tokens 32`
+- 執行：`python demo/demo_04_token_budget.py --frames 4 --query-tokens 32`
 - 觀察：圖片數量、patch 與 query positions 如何改變總長度。
 - 執行後應能回答：壓縮 visual positions 可能犧牲什麼資訊？
 
-## 7. Camera-to-Answer 系統資料流
+## 7. Camera-to-Structured-Perception
 
 研究系統不應只畫模型內部方塊，還要包含輸入品質與輸出驗證：
 
@@ -186,10 +204,10 @@ Vision Encoder
 Connector
 ↓ dimension / token budget checks
 Language Model
-↓ raw generated answer
+↓ raw generated output
 Validator
-↓ grounding / schema / safety checks
-Accepted Answer, Retry, or Reject
+↓ grounding / schema / uncertainty checks
+Structured Perception Result, Retry, or Reject
 ```
 
 ### 典型失敗位置
@@ -199,7 +217,7 @@ Accepted Answer, Retry, or Reject
 - Vision Encoder：domain shift（領域偏移）、小物件遺失。
 - Connector：shape 相容但資訊壓縮不當。
 - LLM：hallucination（幻覺）、錯誤前提、生成不穩定。
-- Validator：只檢查 JSON 語法，未檢查視覺依據或安全性。
+- Validator：只檢查 JSON 語法，未檢查視覺依據、欄位來源與不確定性。
 
 ### 對應 Demo／Practice
 
@@ -207,7 +225,134 @@ Accepted Answer, Retry, or Reject
 - Guided Demo：`practice/coding/guided_demos/guided_04_end_to_end_flow.py`
 - 執行後應能回答：為什麼最後回答錯誤時，不能直接判定是 LLM 的問題？
 
-## 8. 架構比較與研究閱讀
+## 8. Robot VLM System Boundary
+
+機器人系統不是單一 VLM：
+
+```text
+Camera / Sensors
+↓
+Perception / VLM
+↓
+Semantic Representation
+↓
+Planner
+↓
+Controller
+↓
+Robot Action
+```
+
+VLM 通常適合提供 Scene Understanding（場景理解）、Object Semantics（物體語意）、Instruction Understanding（指令理解）、Spatial Semantic Relation（空間語意關係）與 High-Level Task Understanding（高階任務理解）。
+
+它不應單獨負責 Low-Level Motor Control（低階馬達控制）、Collision Avoidance（碰撞避免）、Joint Torque（關節力矩）、Safety Interlock（安全連鎖）或 Emergency Stop（緊急停止）。這些功能需要確定性更高、更新頻率更快、可驗證且具失效保護的系統模組。
+
+### 對應 Demo
+
+- Demo：`demo/demo_05_robot_vlm_system_flow.py`
+- 執行：`python demo/demo_05_robot_vlm_system_flow.py`
+- 觀察：VLM 與其他模組各提供哪些資訊。
+- 執行後應能回答：Why should a VLM not directly control the motor?
+
+## 9. Robot State
+
+一般 VLM 常被簡化為：
+
+```text
+Image + Language → VLM → Answer
+```
+
+機器人智能系統則至少要考慮：
+
+```text
+Image
++ Language Instruction
++ Robot State
+↓
+Robot Intelligence System
+```
+
+Robot State（機器人狀態）可包含 Robot Pose（機器人姿態）、Joint Position（關節位置）、Joint Velocity（關節速度）、Gripper State（夾爪狀態）、Camera Pose（相機姿態）與 Navigation State（導航狀態）。Image 不是機器人決策需要的全部資訊，而且不同狀態來源必須具有一致的時間與座標語意。
+
+## 10. Spatial Grounding
+
+Spatial Grounding（空間語意定位）可拆成不同資料層級：
+
+```text
+Semantic Object
+↓
+2D Grounding
+↓
+Bounding Box / Mask
+↓
+Depth Association
+↓
+3D Position
+↓
+Camera Coordinate
+↓
+Robot Coordinate
+```
+
+- Semantic Location（語意位置）：`cup is left of box`。
+- 2D Pixel Location（二維像素位置）：bounding box、mask 或像素座標。
+- 3D Camera Coordinate（三維相機座標）：相對相機原點的公尺位置。
+- Robot Coordinate：透過外部標定與座標轉換得到、相對機器人參考框架的位置。
+
+`"The cup is left of the box."` 不等於 `cup = [0.42, 0.16, 0.81] m`。前者可能只描述影像中的相對語意；後者必須聲明座標系、單位、深度來源、標定與時間。本週只學架構鏈，不連接 RealSense 或 TF2。
+
+## 11. Structured Output
+
+機器人系統通常較適合處理 JSON、structured schema（結構化綱要）、symbolic representation（符號表示）或 task representation（任務表示），而不是直接解析自由文字：
+
+```json
+{
+  "objects": [
+    {
+      "name": "cup",
+      "relative_position": "left"
+    }
+  ],
+  "uncertain": [
+    "exact_depth",
+    "robot_coordinate",
+    "reachability"
+  ]
+}
+```
+
+Structured Output（結構化輸出）的優點是欄位可驗證、缺失值可表示、介面可版本化；但 JSON 語法正確不代表視覺內容、幾何或安全性正確。Validator 必須檢查 schema、值域、Grounding、來源與不確定性，且 Planner 仍須結合 Robot State 與安全約束。
+
+## 12. Temporal / Multi-frame Input
+
+```text
+Single Image
+↓
+Multiple Images
+↓
+Sequential Frames
+↓
+Video VLM
+↓
+Streaming VLM
+```
+
+- frame（影格）：某一時間點的單張影像。
+- multiple images（多張圖片）：不一定具連續時間關係。
+- sequential frames（連續影格）：具有順序與時間間隔。
+- Temporal Context（時間上下文）：用多個時間點理解變化、持續性與事件。
+- multi-frame tokens（多影格詞元）：多個影格各自或壓縮後送入模型的位置。
+- Streaming VLM（串流視覺語言模型）：持續接收輸入並管理更新、記憶與延遲。
+
+本週不實作真正 Streaming VLM；重點是理解機器人 Camera 不是單張圖片，架構必須處理 Frame Sampling、Temporal Context、temporal memory 與 token explosion（詞元爆增）。
+
+## 13. VLM Output 與 VLA Action Output
+
+VLM output 常是 embedding、score、自然語言或 Structured Perception；Vision-Language-Action Model（視覺語言動作模型，VLA）的 action output 則需映射到明確的 action representation（動作表示），並以 Robot State、控制頻率、硬體介面與安全約束解讀。即使未來使用 VLA，也不代表可以移除 Planner、Controller 或 safety layer（安全層）。
+
+本週只建立輸出介面差異，不進行 OpenVLA／SmolVLA 訓練、資料收集或真實控制。
+
+## 14. 架構比較與研究閱讀
 
 閱讀架構圖時固定問：
 
@@ -215,7 +360,7 @@ Accepted Answer, Retry, or Reject
 2. 哪些模組是 pretrained（預訓練）、frozen（凍結）或 trainable（可訓練）？
 3. Connector 的輸入、輸出 shape 是什麼？
 4. 圖文在哪一層互動？
-5. 模型輸出是 embedding、score、token 還是 action？
+5. 模型輸出是 embedding、score、token、structured representation 還是 action？
 6. 訓練目標與推論任務是否一致？
 7. 論文用什麼實驗支持架構選擇？
 
@@ -229,6 +374,7 @@ Accepted Answer, Retry, or Reject
 ## 本週尚未涵蓋
 
 - 各模型完整訓練 loss（損失函數）與資料配方。
-- 動態解析度、多圖片與影片模型的實作細節。
+- 動態解析度、多圖片、影片與 Streaming VLM 的實作細節。
 - 量化、KV cache（鍵值快取）與部署最佳化。
-- Camera、ROS2 與 NVIDIA Isaac Sim 6.0 的實際程式整合。
+- ROS2 Node／Topic、RealSense SDK、TF2、MoveIt、Navigation2、Isaac Sim／Isaac Lab 的實際整合。
+- OpenVLA／SmolVLA 訓練、Robot Dataset Collection、LoRA／QLoRA 與 VLA fine-tuning。

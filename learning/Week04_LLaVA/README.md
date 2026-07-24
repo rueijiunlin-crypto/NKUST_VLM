@@ -1,8 +1,8 @@
-# Week04 LLaVA 影像問答推論流程
+# Week04 LLaVA + Grounded Visual Reasoning
 
 ## 本週定位
 
-Week04 延續 Week03 Hugging Face（模型平台）與 CLIP（對比式圖文預訓練）推論流程，進一步學習 LLaVA（大型語言與視覺助手）如何根據圖片與問題生成文字回答。
+Week04 延續 Week03 Hugging Face（模型平台）與 CLIP（對比式圖文預訓練）推論流程，進一步學習 LLaVA（大型語言與視覺助手）如何根據圖片與問題生成文字回答，並加入 Grounded Visual Reasoning（具有視覺依據的多模態推理）。LLaVA 基礎推論仍是本週主線。
 
 本週重點不是只把模型呼叫起來，而是要能說清楚：
 
@@ -12,6 +12,8 @@ Week04 延續 Week03 Hugging Face（模型平台）與 CLIP（對比式圖文預
 - `<image>` placeholder（影像占位符）如何對應多個 image tokens（影像詞元）。
 - `generate()` 如何逐 token 產生回答。
 - 問題與提示格式如何影響回答內容及 hallucination（幻覺）風險。
+- 一般影像問答與 Robot-Oriented Visual Reasoning（機器人導向視覺推理）需要的證據有何不同。
+- 為什麼「VLM 看得到」不等於「Robot 做得到」。
 
 ## 文件導覽
 
@@ -30,8 +32,9 @@ Week04 延續 Week03 Hugging Face（模型平台）與 CLIP（對比式圖文預
 3. 執行 Demo 01 與 Demo 02，建立真實輸入與架構資料流的整體印象。
 4. 執行 `practice/coding/guided_demos/`，追蹤 Processor、Projector、多模態序列與生成步驟。
 5. 有合適硬體與時間時，執行 optional（選做）的 Demo 03 與 Demo 04 真實模型推論。
-6. 完成 Concept Practice 與 Coding Practice 的學生觀察欄位。
-7. 將實際輸出、錯誤、幻覺案例與未解問題記錄到 `study_log.md`。
+6. 將回答拆成 Supported（影像支持）、Uncertain（無法確認）、Contradicted（影像不支持）或 Requires Additional Sensor / Robot State（需要額外感測或機器人狀態）。
+7. 完成 Concept Practice 與 Coding Practice 的學生觀察欄位。
+8. 將實際輸出、錯誤、幻覺案例與未解問題記錄到 `study_log.md`。
 
 ## Demo 主線
 
@@ -42,6 +45,7 @@ python -m pip install -r demo/requirements.txt
 python demo/demo_01_llava_processor_inputs.py --image ../Week02_CLIP/demo/000000039769.jpg
 python demo/demo_02_llava_architecture_flow.py
 python demo/demo_03_llava_visual_qa.py --image ../Week02_CLIP/demo/000000039769.jpg --question "What is shown in this image?"
+python demo/demo_03_llava_visual_qa.py --image ../Week02_CLIP/demo/000000039769.jpg --question "Which visible objects could potentially be manipulated by a robot, and what information is still missing?"
 python demo/demo_04_question_comparison.py --image ../Week02_CLIP/demo/000000039769.jpg
 ```
 
@@ -49,7 +53,7 @@ Demo 01 只下載 Processor（前處理器）相關檔案，不載入完整 7B �
 
 ## 與 VLM/VLA 碩士研究的關聯
 
-LLaVA 將影像觀察與文字問題轉成自然語言回答，是後續 Camera（相機）、ROS2（機器人作業系統第二版）與 NVIDIA Isaac Sim 6.0（NVIDIA 機器人模擬器）整合的重要語意介面。研究實驗必須同時保存圖片、問題、模型版本、生成參數、原始回答與錯誤分析，不能只挑選成功截圖。
+LLaVA 可提供物體類別、場景與相對位置等 semantic information（語意資訊），但單張 RGB 圖片不能可靠提供精確 XYZ、Robot Base Coordinate（機器人基座座標）、Joint State（關節狀態）、Reachability（可達性）或安全動作。本週只建立能力邊界，不提前實作 ROS2、深度相機、模擬器或 VLA 訓練。
 
 ## 本週完成後應具備的能力
 
@@ -59,3 +63,5 @@ LLaVA 將影像觀察與文字問題轉成自然語言回答，是後續 Camera�
 - 能解釋 `<image>` 為什麼不是單一 patch token（影像區塊詞元）。
 - 能說明 LLaVA 與 CLIP 的輸出機制差異。
 - 能比較不同問題的回答，辨識有影像依據與無法確認的主張。
+- 能區分 semantic information 與 metric / geometric information（度量／幾何資訊）。
+- 能說明 LLaVA 文字回答不能直接當成安全的 Robot Action（機器人動作）。

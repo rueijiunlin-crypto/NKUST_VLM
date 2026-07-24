@@ -33,3 +33,23 @@ LLM 對目前上下文計算下一 token 的 logits，依 greedy 或 sampling �
 ## Q8 可重現 VLM 實驗
 
 合理答案包含：Model ID／revision、套件版本、硬體與 dtype、完整 prompt／conversation、圖片來源、生成參數、random seed、原始回答、執行時間與錯誤訊息。核心推理原則是讓另一位研究者能重建輸入、環境與生成設定，而不是只看到挑選過的成功結果。
+
+## Q9 物體辨識與 Robot Coordinate
+
+物體辨識提供的是語意類別；Robot Coordinate 是相對機器人基座的度量位置。後者通常需要深度或多視角幾何、相機內外參、camera-to-robot 座標轉換與有效時間戳。常見誤解是把語意定位或影像中的像素位置當成三維機器人座標。
+
+## Q10 單張 RGB 與精確 3D
+
+同一個二維投影可能對應不同尺寸與深度的三維場景，單張 RGB 因此存在尺度與深度歧義。模型可根據經驗猜測，但猜測不等於量測。可靠系統需加入深度、立體／多視角資訊、相機標定或其他幾何約束。
+
+## Q11 相對位置與公尺座標
+
+「左側」是相對的 semantic spatial relation（語意空間關係），可能只依影像平面判斷；`x = 0.32 m` 是特定座標系、單位與原點下的度量值。若未說明座標系與量測來源，數字本身不可直接用於機器人。
+
+## Q12 VLM Answer 與 Motor Command
+
+自然語言回答可能幻覺、歧義、延遲或缺少即時狀態，也沒有自動滿足關節限制、碰撞檢查、速度限制與緊急停止條件。它最多能成為高階語意候選，仍需結構驗證、Planner（任務規劃器）、Controller（控制器）與獨立安全層處理。
+
+## Q13 Robot Reachability
+
+至少需要 robot pose、關節狀態與限制、工作空間、目標三維位置、相機與機器人座標關係，以及障礙物／碰撞資訊。只有 RGB 時應標為 `Uncertain` 或 `Requires Additional Sensor / Robot State`，不能因回答語氣肯定就標為 Supported。

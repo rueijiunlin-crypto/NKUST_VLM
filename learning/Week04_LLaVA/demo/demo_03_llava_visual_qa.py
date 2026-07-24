@@ -14,7 +14,14 @@ MODEL_NAME = "llava-hf/llava-1.5-7b-hf"
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--image", type=Path, required=True, help="本機圖片檔案路徑。")
-    parser.add_argument("--question", default="What is shown in this image?")
+    parser.add_argument(
+        "--question",
+        default="What is shown in this image?",
+        help=(
+            "影像問題。機器人導向範例：Which visible objects could potentially "
+            "be manipulated by a robot, and what information is still missing?"
+        ),
+    )
     parser.add_argument("--model-id", default=MODEL_NAME)
     parser.add_argument("--max-new-tokens", type=int, default=80)
     return parser.parse_args()
@@ -118,6 +125,11 @@ def main() -> int:
     print(f"推論時間：{elapsed:.2f} 秒")
     print(f"回答：{answer}")
     print("請逐項核對回答是否具有可見影像依據。")
+    print(
+        "若回答涉及精確深度、robot coordinate、reachability 或動作安全，"
+        "請標為 Uncertain／Requires Additional Sensor or Robot State，"
+        "不要只因語句流暢就視為 Supported。"
+    )
     return 0
 
 

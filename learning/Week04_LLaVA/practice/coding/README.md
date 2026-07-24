@@ -59,5 +59,7 @@ python practice/coding/guided_demos/guided_01_multimodal_processor_flow.py --ima
 - `<image>` 文字占位符與多個 image positions 的差異
 - `max_new_tokens`、`<eos>` 與回答完整性的關係
 - Shape 正確、語句流暢與視覺事實正確是三種不同檢查
+- Robot-oriented prompt 是否把語意候選誇大成精確幾何、可達性或安全動作
+- 回答主張需要 RGB、額外感測、Robot State 或其他系統模組中的哪一層證據
 
 請把觀察記錄到 `coding_practice.md`，再整理到 `../../study_log.md`。

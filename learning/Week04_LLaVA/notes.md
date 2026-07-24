@@ -237,6 +237,9 @@ updated context    ← append token  ←───┘
 | 屬性問題 | What colors can be verified? | 顏色是否有影像依據 |
 | 空間關係 | Where is the object located? | 左右、前後、上下關係 |
 | 安全限制 | What cannot be confirmed? | 模型是否承認不確定性 |
+| 可操作候選 | Which objects could potentially be manipulated by a robot? | 語意候選，不等於可達或安全 |
+| 度量邊界 | Can the exact 3D position be known from RGB alone? | 是否避免虛構深度與座標 |
+| 狀態需求 | What additional sensing or robot state is needed? | 是否指出決策缺少的資訊 |
 
 ### Prompt sensitivity
 
@@ -249,14 +252,44 @@ updated context    ← append token  ←───┘
 - Supported（圖片支持）。
 - Uncertain（圖片無法確認）。
 - Contradicted（圖片明顯不支持）。
+- Requires Additional Sensor / Robot State（需要額外感測或機器人狀態）：主張可能可驗證，但目前輸入不足。
 
 語法流暢不等於事實正確。LLaVA 回答也不能直接當成 ROS2 或 VLA（視覺語言動作模型）的控制命令。
+
+### 6.1 Robot-Oriented Visual Reasoning
+
+只有 RGB 圖片時，VLM 通常可提供：
+
+- 物體類別、大致場景與部分語意屬性。
+- 左右、上下、遮擋或前後等相對關係，但仍受視角與歧義影響。
+- 「可能可操作的物體」這類高階語意候選。
+
+但單張 RGB 與自然語言模型不能可靠直接提供：
+
+- 精確 XYZ、精確公尺距離、camera coordinate（相機座標）或 robot coordinate（機器人座標）。
+- Robot Base Coordinate、Joint State、gripper state（夾爪狀態）或 robot pose（機器人姿態）。
+- Reachability、Collision Free Path（無碰撞路徑）、Safe Grasp（安全抓取）或 Motor Command（馬達命令）。
+
+這些資訊需要深度、相機標定、座標轉換、Robot State、環境模型、規劃與安全模組。Week04 只理解資訊需求，不實作這些後續系統。
+
+### 6.2 Capability Boundary：VLM 看得到 ≠ Robot 做得到
+
+| 資料層級 | 例子 | 單張 RGB + LLaVA 的合理邊界 |
+| --- | --- | --- |
+| Semantic Information（語意資訊） | cup、table、left of、behind、red object | 可提出，但需 Grounding 檢查 |
+| Metric / Geometric Information（度量／幾何資訊） | `x = 0.42 m`、`depth = 0.83 m`、相機／機器人座標 | 通常不能由單張 RGB 可靠直接取得 |
+| Robot State（機器人狀態） | joint position、joint velocity、gripper state、robot pose | 圖片不是完整狀態來源 |
+| Action（動作） | move joint、grasp、navigate、stop | 必須由規劃、控制與安全層約束 |
+
+例如模型回答 `"The cup is reachable by the robot."`，若輸入沒有 robot pose、工作空間、關節限制、障礙物與幾何資訊，應標為 `Uncertain` 或 `Requires Additional Sensor / Robot State`，不能標為 Supported。
+
+LLaVA 的文字輸出可成為候選語意或任務描述，但不是經驗證的控制訊號。自然語言中的 `grasp` 不包含軌跡、速度、碰撞限制、停止條件與安全連鎖。
 
 ### 對應 Demo
 
 - Demo：`demo/demo_04_question_comparison.py`
 - 執行：`python demo/demo_04_question_comparison.py --image ../Week02_CLIP/demo/000000039769.jpg`
-- 觀察：不同問題的回答長度、細節、共同主張與可能幻覺。
+- 觀察：不同問題的語意主張、證據層級、額外感測／狀態需求與可能幻覺。
 - 預期輸出：同一圖片對多個問題的回答與推論時間。
 - 執行後應能回答：哪一個問題最容易引導模型產生無法確認的細節？
 
@@ -305,7 +338,7 @@ Large Language Model
 Generated Answer
 ```
 
-Week05 將把這條流程抽象成一般 VLM Architecture（視覺語言模型架構），比較不同模型如何完成視覺編碼、跨模態對齊、token 組合與文字生成。
+Week05 將把這條流程抽象成 VLM Architecture for Robotics（機器人視覺語言模型架構），比較視覺編碼、跨模態對齊、token 組合、Structured Output 與機器人系統邊界。
 
 本週尚未涵蓋：
 

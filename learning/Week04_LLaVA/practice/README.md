@@ -6,10 +6,10 @@
 
 | 路徑 | 用途 |
 | --- | --- |
-| `concept/concept_practice.md` | 學生觀念作答檔，包含 Processor、Projector、image tokens、生成與幻覺題目。 |
+| `concept/concept_practice.md` | 學生觀念作答檔，包含 LLaVA 基礎、Grounding 與 Robot VLM 能力邊界。 |
 | `concept/concept_answer_key.md` | 觀念參考答案，請完成練習後再查看。 |
 | `coding/README.md` | Coding Practice 執行方式、環境需求與模型需求。 |
-| `coding/coding_practice.md` | Guided Code Reading 任務、shape 與問題實驗紀錄表。 |
+| `coding/coding_practice.md` | Guided Code Reading、robot-oriented prompt 比較與主張分類紀錄表。 |
 | `coding/coding_observation_key.md` | 觀察方向與理解說明，請完成紀錄後再查看。 |
 | `coding/guided_demos/` | 完整可執行的引導式程式閱讀檔。 |
 | `coding/requirements.txt` | 程式練習依賴。 |
@@ -21,7 +21,7 @@
 3. 閱讀 `coding/README.md`，依序執行 `coding/guided_demos/`。
 4. 在 `coding/coding_practice.md` 記錄 Processor shape、Projector、多模態序列與生成觀察。
 5. 完成後再查看 `concept/concept_answer_key.md` 與 `coding/coding_observation_key.md`。
-6. 視硬體條件執行真實模型 Demo 03、04，並將重要結果整理到 `../study_log.md`。
+6. 視硬體條件執行真實模型 Demo 03、04，將回答分類為 Supported／Uncertain／Contradicted／Requires Additional Sensor or Robot State，再整理到 `../study_log.md`。
 
 ## 本週 Coding Practice 模式
 

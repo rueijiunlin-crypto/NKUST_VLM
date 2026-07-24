@@ -30,6 +30,8 @@ def main() -> int:
     ratio = args.vision_tokens / args.query_tokens
     print(f"\nIllustrative position reduction: {ratio:.1f}x")
     print("較少位置可降低序列成本，但壓縮也可能遺失細節。")
+    print("Robot VLM 需特別檢查：small objects、spatial detail、")
+    print("manipulation-relevant features 是否在 query compression 後消失。")
     return 0
 
 

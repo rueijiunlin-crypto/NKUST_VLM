@@ -49,9 +49,15 @@
 
 ## Question／Prompt 實驗紀錄
 
-| 圖片 | 問題 | 生成參數 | 回答摘要 | 支持／不確定／錯誤 | 備註 |
+| 圖片 | 問題 | 生成參數 | 回答摘要 | Supported／Uncertain／Contradicted／需額外資訊 | 備註 |
 | --- | --- | --- | --- | --- | --- |
 |  |  |  |  |  |  |
+
+## Robot-Oriented Capability Boundary
+
+| 模型主張 | 資料層級（語意／幾何／狀態／動作） | 目前證據 | 還需要的感測／Robot State | 判定 |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
 
 ## 真實模型環境（選做）
 
@@ -97,6 +103,8 @@ Image + Question
 ↓
 Answer
 ```
+
+並補一句說明：為什麼 `VLM Answer` 不能直接等於 `Robot Action`？
 
 ## Notion 更新
 

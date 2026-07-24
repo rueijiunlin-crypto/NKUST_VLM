@@ -35,8 +35,20 @@ Toy logits 是人工設計的下一 token 分數，沒有讀取圖片。因此�
 - Supported：圖片直接支持。
 - Uncertain：受解析度、遮擋或視角限制，無法確認。
 - Contradicted：圖片明顯不支持。
+- Requires Additional Sensor / Robot State：問題超出目前 RGB 與輸入狀態可驗證的範圍。
 
 帶有錯誤前提的問題容易誘導模型順著語言生成。研究紀錄應保存這類失敗案例，而不是只留下看似合理的回答。
+
+## 6. Robot-Oriented Capability Boundary
+
+「cup」「left of」可作為語意主張；`x = 0.32 m`、robot coordinate、reachable 與 safe grasp 則需要不同層級的幾何、標定、Robot State、碰撞與規劃證據。模型若在缺少這些輸入時仍輸出確定數字或安全動作，不應因格式完整就接受。
+
+Robot-oriented prompt comparison 的重點不是要求 LLaVA 完成控制，而是觀察模型是否：
+
+- 承認單張 RGB 的精確深度與座標限制。
+- 區分「可能可操作」與「已驗證可達」。
+- 指出需要深度、相機姿態、機器人姿態、關節／夾爪與環境幾何。
+- 避免把自然語言動詞包裝成安全的低階控制命令。
 
 ## 常見誤解修正
 

@@ -1,8 +1,9 @@
-"""展示從 Camera frame 到文字回答的端到端 VLM 資料流。"""
+"""展示 Camera-to-Structured-Perception 的可驗證資料流。"""
 
 from __future__ import annotations
 
 import argparse
+import json
 
 
 def parse_args() -> argparse.Namespace:
@@ -25,14 +26,22 @@ def main() -> int:
         ("2. Preprocess", "resize / normalize / batch"),
         ("3. Vision Encoder", f"{visual_positions} visual positions"),
         ("4. Connector", "map / compress visual features"),
-        ("5. Multimodal Context", f"about {total_positions} positions"),
-        ("6. Language Model", "next-token generation"),
-        ("7. Validator", "grounding / schema / safety checks"),
-        ("8. Answer", "accepted, retried, or rejected"),
+        ("5. Language Model", f"about {total_positions} context positions"),
+        ("6. Validator", "grounding / schema / uncertainty checks"),
+        ("7. Structured Result", "accepted, retried, or rejected"),
     ]
     for name, output in stages:
         print(f"{name:24} -> {output}")
-    print("\n觀察：VLM 原始回答不是機器人可直接執行的控制命令。")
+    result = {
+        "detected_semantic_objects": ["cup", "box"],
+        "relative_relations": [{"subject": "cup", "relation": "left_of", "object": "box"}],
+        "uncertain": ["exact_depth", "robot_coordinate", "reachability"],
+        "missing_information": ["depth", "camera_pose", "robot_state"],
+    }
+    print("\n示意 Structured Perception Result（不是模型偵測結果）：")
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    print("\n觀察：合法 JSON 不代表內容正確，仍需 Grounding 與 schema 驗證。")
+    print("本 Demo 不假裝由 RGB 取得真實深度、robot coordinate 或 reachability。")
     return 0
 
 

@@ -6,16 +6,16 @@
 
 | 路徑 | 用途 |
 | --- | --- |
-| `concept/concept_practice.md` | 架構、connector、融合、token budget 與失敗診斷題目。 |
+| `concept/concept_practice.md` | 架構、connector、Robot State、Spatial Grounding、Structured Output、串流與安全邊界題目。 |
 | `concept/concept_answer_key.md` | 完成作答後查看的觀念參考答案。 |
 | `coding/README.md` | 程式閱讀環境與執行方式。 |
-| `coding/coding_practice.md` | Shape、融合與端到端觀察紀錄。 |
+| `coding/coding_practice.md` | Shape、融合、frame token budget、Robot State mock data 與端到端 pipeline 紀錄。 |
 | `coding/coding_observation_key.md` | 完成觀察後查看的理解方向。 |
 | `coding/guided_demos/` | 四個完整可執行程式。 |
 
 ## 建議順序
 
-1. 執行四個 `demo/`。
+1. 執行五個 `demo/`。
 2. 完成 Concept Practice。
 3. 依序執行四個 Guided Demo 並填寫 Coding Practice。
 4. 最後查看 Answer Key 與 Observation Key。
@@ -23,4 +23,4 @@
 
 ## 本週 Coding Practice 模式
 
-本週採 Guided Code Reading Mode。學習目標是理解架構資料流與 shape，而不是從零實作完整 VLM；不建立 `exercises/` 或 `solutions/`。
+本週採 Guided Code Reading Mode。學習目標是理解架構資料流、shape 與機器人系統責任邊界，而不是從零實作完整 VLM；不建立 `exercises/` 或 `solutions/`，也不提前實作 ROS2、相機 SDK、模擬器或 VLA 訓練。

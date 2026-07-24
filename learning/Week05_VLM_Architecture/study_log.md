@@ -24,6 +24,7 @@
 | `demo_02_camera_to_answer_flow.py` |  |  |  |
 | `demo_03_connector_comparison.py` |  |  |  |
 | `demo_04_token_budget.py` |  |  |  |
+| `demo_05_robot_vlm_system_flow.py` |  |  |  |
 
 ## Architecture 比較
 
@@ -34,11 +35,23 @@
 | Query-based |  |  |  |  |  |
 | Cross-Attention |  |  |  |  |  |
 
-## Token Budget 實驗
+## Token + Latency Budget 實驗
 
-| 圖片數 | 圖片尺寸 | Patch／Query 設定 | Visual positions | Text positions | Total | 觀察 |
-| --- | --- | --- | --- | --- | --- | --- |
-|  |  |  |  |  |  |  |
+| 圖片數 | 影格數 | 圖片尺寸 | Patch／Query 設定 | Visual positions | Total | Relative cost | Latency／Memory 觀察 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+|  |  |  |  |  |  |  |  |
+
+## Spatial Grounding 與 Robot State
+
+| 語意物件／關係 | 2D 位置 | 深度／3D 相機座標 | Robot Coordinate | 使用的 Robot State | 不確定／缺少資訊 |
+| --- | --- | --- | --- | --- | --- |
+|  |  |  |  |  |  |
+
+## Structured Output 觀察
+
+| Schema 欄位 | 值的來源 | Validator 檢查 | 是否可交給 Planner | 限制 |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
 
 ## Practice 結果摘要
 
@@ -72,7 +85,7 @@
 
 ## 一分鐘回顧
 
-請用自己的話畫出 Camera-to-Answer 資料流，並標出至少一個 shape 與一個驗證點。
+請用自己的話畫出 Camera + Language + Robot State → VLM／Semantic System → Planner → Controller，並標出至少一個 shape、一個驗證點與一個不能由 RGB 直接取得的欄位。
 
 ## Notion 更新
 
