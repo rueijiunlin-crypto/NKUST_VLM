@@ -1,5 +1,22 @@
 # Week11 Notes：Robot Dataset and Demonstrations
 
+## LeRobotDataset v3
+
+LeRobot 0.6.x 的正式教材資料流應明確區分儲存格式與模型輸入：
+
+```text
+LeRobotDatasetMetadata
+→ features / tasks / fps / robot_type / statistics
+→ LeRobotDataset(repo_id, revision, episodes)
+→ dataset[index]：未批次化的單一 frame sample
+→ 依 policy config 建立 preprocessor
+→ 批次化、正規化、tokenize 與 device transfer
+```
+
+Dataset v3 的 feature schema 描述資料集中「存了什麼」，不等於特定 VLA policy 最終「吃什麼」。相機欄位、state、action、task、timestamp 或 frame index 應逐項檢查；若資料集沒有某欄位，檢查程式必須回報 `field not present`，不能自行虛構資料。
+
+正規化統計量屬於資料版本契約。模型、dataset revision、feature schema 與 statistics 必須一起記錄；正式實驗應固定 dataset commit SHA，而非只寫 `main`。
+
 ## Why 與 Problem
 
 VLA 的能力上限深受 demonstration 品質與 schema 一致性限制。Robot dataset 不是影像資料夾，而是同步的 observation-action trajectories；少一個 timestamp、錯一個 joint order 或洩漏相鄰 frame，就可能得到看似很高但不可用的指標。

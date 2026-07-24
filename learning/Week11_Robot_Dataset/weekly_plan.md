@@ -22,7 +22,7 @@ Episode、Trajectory、Demonstration、Teleoperation、observation-action alignm
 ```powershell
 python demo/demo_01_episode_schema.py
 python demo/demo_02_dataset_audit.py
-python demo/demo_03_real_lerobot_sample.py --dataset-id lerobot/aloha_mobile_cabinet --revision <commit> --episode 0
+python demo/demo_03_real_lerobot_sample.py --dataset-id lerobot/aloha_mobile_cabinet --dataset-revision <commit> --episode 0
 python practice/coding/solutions/dataset_validator_solution.py
 ```
 

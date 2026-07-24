@@ -31,13 +31,14 @@ def build_command(args: argparse.Namespace, policy_path: str) -> list[str]:
     return [
         "lerobot-train",
         f"--policy.path={policy_path}",
+        f"--policy.pretrained_revision={args.model_revision}",
         f"--dataset.repo_id={args.dataset_id}",
         f"--dataset.revision={args.dataset_revision}",
         f"--output_dir={args.output_dir}",
         f"--job_name=smolvla_smoke_{args.steps}",
         f"--steps={args.steps}",
         f"--batch_size={args.batch_size}",
-        f"--optimizer.lr={args.learning_rate}",
+        f"--policy.optimizer_lr={args.learning_rate}",
         f"--seed={args.seed}",
         f"--save_freq={args.steps}",
         "--save_checkpoint=true",
@@ -61,7 +62,10 @@ def main() -> int:
     if not args.execute:
         return 0
 
-    args.output_dir.mkdir(parents=True, exist_ok=True)
+    if args.output_dir.exists():
+        raise FileExistsError(
+            f"LeRobot requires a new output directory; choose a non-existing path: {args.output_dir}"
+        )
     metadata = {
         **{key: str(value) if isinstance(value, Path) else value for key, value in vars(args).items()},
         "resolved_policy_path": policy_path,
@@ -70,14 +74,18 @@ def main() -> int:
         "torch_version": importlib.metadata.version("torch"),
         "command": command,
     }
-    (args.output_dir / "run_metadata.json").write_text(
-        json.dumps(metadata, ensure_ascii=False, indent=2), encoding="utf-8"
-    )
     started = time.perf_counter()
     completed = subprocess.run(command, check=False)
     elapsed = time.perf_counter() - started
     metadata.update({"returncode": completed.returncode, "training_seconds": elapsed})
-    (args.output_dir / "run_metadata.json").write_text(
+    # lerobot-train requires a new output directory. Write metadata only after it has created one.
+    metadata_path = (
+        args.output_dir / "run_metadata.json"
+        if args.output_dir.is_dir()
+        else args.output_dir.parent / f"{args.output_dir.name}_run_metadata.json"
+    )
+    metadata_path.parent.mkdir(parents=True, exist_ok=True)
+    metadata_path.write_text(
         json.dumps(metadata, ensure_ascii=False, indent=2), encoding="utf-8"
     )
     if completed.returncode:

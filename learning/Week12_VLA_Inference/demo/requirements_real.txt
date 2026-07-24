@@ -1,5 +1,2 @@
-# Pin LeRobot with the model revision in an experiment lockfile before validation.
-lerobot
-torch>=2.2
-transformers>=4.49
-accelerate>=0.28
+# Python >=3.12; LeRobot 0.6 stable track with Dataset v3 and SmolVLA dependencies.
+lerobot[dataset,smolvla]>=0.6,<0.7

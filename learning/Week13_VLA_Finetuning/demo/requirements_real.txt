@@ -1,5 +1,2 @@
-# Use the official LeRobot installation path for CUDA training.
-lerobot
-torch>=2.2
-transformers>=4.49
-accelerate>=0.28
+# Python >=3.12; LeRobot 0.6 stable training and SmolVLA dependencies.
+lerobot[training,smolvla]>=0.6,<0.7

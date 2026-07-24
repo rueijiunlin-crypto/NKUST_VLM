@@ -22,7 +22,7 @@ Pretrained VLA、Processor、Observation Input、Normalization、Policy Inferenc
 ```powershell
 python demo/demo_01_basic_vla_inference.py --device cpu
 python demo/demo_02_runtime_planner.py
-python demo/demo_03_real_smolvla_inference.py --revision <commit> --dataset-id lerobot/svla_so100_pickplace --dataset-revision <commit> --device cuda
+python demo/demo_03_real_smolvla_inference.py --model-revision <commit> --dataset-id lerobot/svla_so100_pickplace --dataset-revision <commit> --device cuda
 python practice/coding/guided_demos/guided_policy_adapter.py
 ```
 

@@ -1,5 +1,14 @@
 # Week13 VLA Fine-tuning
 
+## LeRobot Compatibility
+
+- Target LeRobot version：`>=0.6,<0.7`（穩定目標為 `0.6.0`）。
+- Python：`>=3.12`。
+- Dataset format：LeRobotDataset v3.x。
+- Official documentation source：[LeRobot 0.6.0 release](https://github.com/huggingface/lerobot/releases/tag/v0.6.0)、[`lerobot-train` v0.6.0 source](https://github.com/huggingface/lerobot/blob/v0.6.0/src/lerobot/scripts/lerobot_train.py)。
+- API status：已依穩定 CLI schema 稽核 dataset revision、policy revision、`policy.optimizer_lr`、checkpoint 與 reload 流程；GPU 訓練仍為 Environment blocked。
+- Reproducibility：正式實驗必須固定 LeRobot 版本、model/dataset commit SHA、seed、訓練參數與 checkpoint。
+
 ## 本週定位
 
 本週以小型 NumPy Policy 說明 pretrained model + robot dataset → fine-tuning → task-specific policy，並以官方 `lerobot-train` 執行 Required Real Model Track。重點是 training step、validation、overfitting、checkpoint 與可重新載入，不從零訓練大型 VLA。舊占位內容在 `legacy_v1/`。

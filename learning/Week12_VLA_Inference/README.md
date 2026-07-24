@@ -1,5 +1,14 @@
 # Week12 SmolVLA / OpenVLA Inference
 
+## LeRobot Compatibility
+
+- Target LeRobot version：`>=0.6,<0.7`（穩定目標為 `0.6.0`）。
+- Python：`>=3.12`。
+- Dataset format：LeRobotDataset v3.x。
+- Official documentation source：[LeRobot 0.6.0 release](https://github.com/huggingface/lerobot/releases/tag/v0.6.0)、[SmolVLA v0.6.0 source](https://github.com/huggingface/lerobot/tree/v0.6.0/src/lerobot/policies/smolvla)。
+- API status：已稽核 `make_pre_post_processors` 與 `SmolVLAPolicy` 的穩定明確匯入路徑；本機真實模型推論仍為 Environment blocked。
+- Reproducibility：正式實驗必須同時固定 model revision 與 dataset revision 的 commit SHA。
+
 ## 本週定位
 
 本週第一次建立預訓練 VLA 推論介面觀念：

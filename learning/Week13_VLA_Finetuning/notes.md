@@ -1,5 +1,13 @@
 # Week13 Notes：VLA Fine-tuning
 
+## LeRobot 0.6 / Dataset v3 Training Contract
+
+訓練與重載必須使用同一個 LeRobot 0.6.x 相容環境與 Dataset v3 schema。`lerobot-train` 的穩定參數名稱包括 `--dataset.repo_id`、`--dataset.revision`、`--policy.path`、`--policy.pretrained_revision`；SmolVLA 採 policy training preset，因此學習率由 `--policy.optimizer_lr` 覆寫。
+
+輸出目錄必須在訓練開始前不存在，讓 `lerobot-train` 自行建立；wrapper 不可先建立該目錄。成功後再把 LeRobot/PyTorch 版本、model/dataset revision、command、seed、時間與 return code 寫入 `run_metadata.json`。
+
+Checkpoint reload 應沿用相同 Dataset v3 statistics 與官方 pre/post processors，並從未批次化的 `dataset[index]` 開始。能載入 checkpoint 且 action 為 finite 只代表離線介面通過，不代表真實機器人任務成功。
+
 ## Why 與 Problem
 
 Pretrained VLA 未必認得本地 camera、robot geometry、task wording 與 action convention。Fine-tuning（微調）以少量目標資料調整 policy，但小資料也最容易 overfit、split leakage 與忘記預訓練能力。

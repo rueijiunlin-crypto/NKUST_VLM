@@ -1,5 +1,17 @@
 # Runtime Validation Report
 
+## LeRobot Compatibility Audit
+
+- Target：LeRobot `>=0.6,<0.7`（以穩定版 `0.6.0` 稽核），Python `>=3.12`。
+- Dataset format：LeRobotDataset v3.x。
+- Week11：確認 `lerobot.datasets` 的 `LeRobotDatasetMetadata` / `LeRobotDataset`、revision、episodes、feature schema、tasks、statistics 與單一 frame sample；缺少欄位改為明確回報，不虛構資料。
+- Week12：改採 `lerobot.policies.factory.make_pre_post_processors` 與 `lerobot.policies.smolvla.modeling_smolvla.SmolVLAPolicy`；由未批次化 sample 進入會自行加 batch 的官方 processor。
+- Week13：確認 `lerobot-train` 穩定 CLI，SmolVLA 學習率使用 `--policy.optimizer_lr`；訓練前不預建 output directory，checkpoint reload 沿用相同 processors 與 Dataset v3 statistics。
+- Requirements：Week11 使用 `lerobot[dataset]`、Week12 使用 `lerobot[dataset,smolvla]`、Week13 使用 `lerobot[training,smolvla]`，全部限制於 `>=0.6,<0.7`。
+- Official sources：[PyPI 0.6.0 metadata](https://pypi.org/project/lerobot/0.6.0/)、[v0.6.0 source tag](https://github.com/huggingface/lerobot/tree/v0.6.0)、[v0.6.0 release](https://github.com/huggingface/lerobot/releases/tag/v0.6.0)。
+- Static validation：全 `learning/` 的 `compileall`、Week11–13 四個 Real Track CLI `--help` 與 Week13 20-step command dry-run 均通過；範圍內 40 份 Markdown 的本機相對連結缺漏為 0。
+- Runtime status：Environment blocked。本機 Python `3.12.13` 符合版本要求，但未安裝 LeRobot / PyTorch，亦未下載 Dataset v3 或 SmolVLA 權重；不得將靜態稽核標示為真實模型 Executed。
+
 > Date：2026-07-24
 >
 > Branch：`codex/refactor-curriculum-v2-full-migration`
@@ -43,9 +55,10 @@ No item is marked Network blocked, License blocked, or Model access blocked beca
 
 - [Transformers LLaVA documentation](https://huggingface.co/docs/transformers/model_doc/llava)
 - [Qwen2.5-VL model card](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct)
-- [LeRobot dataset loading example](https://github.com/huggingface/lerobot/blob/main/examples/dataset/load_lerobot_dataset.py)
-- [LeRobot SmolVLA usage example](https://github.com/huggingface/lerobot/blob/main/examples/tutorial/smolvla/using_smolvla_example.py)
-- [LeRobot SmolVLA training documentation](https://github.com/huggingface/lerobot/blob/main/docs/source/smolvla.mdx)
+- [LeRobot v0.6.0 dataset source](https://github.com/huggingface/lerobot/blob/v0.6.0/src/lerobot/datasets/lerobot_dataset.py)
+- [LeRobot v0.6.0 policy factory](https://github.com/huggingface/lerobot/blob/v0.6.0/src/lerobot/policies/factory.py)
+- [LeRobot v0.6.0 SmolVLA source](https://github.com/huggingface/lerobot/tree/v0.6.0/src/lerobot/policies/smolvla)
+- [LeRobot v0.6.0 training entrypoint](https://github.com/huggingface/lerobot/blob/v0.6.0/src/lerobot/scripts/lerobot_train.py)
 - [Isaac Sim quickstart](https://docs.isaacsim.omniverse.nvidia.com/latest/introduction/quickstart_isaacsim_robot.html)
 - [Isaac Sim 5.1 Camera API](https://docs.isaacsim.omniverse.nvidia.com/5.1.0/sensors/isaacsim_sensors_camera.html)
 

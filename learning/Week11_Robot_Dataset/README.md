@@ -1,5 +1,14 @@
 # Week11 Robot Dataset and Demonstrations
 
+## LeRobot Compatibility
+
+- Target LeRobot version：`>=0.6,<0.7`（穩定目標為 `0.6.0`）。
+- Python：`>=3.12`。
+- Dataset format：LeRobotDataset v3.x。
+- Official documentation source：[LeRobot 0.6.0 release](https://github.com/huggingface/lerobot/releases/tag/v0.6.0)、[PyPI package metadata](https://pypi.org/project/lerobot/0.6.0/)。
+- API status：已依 `v0.6.0` 原始碼稽核；本機缺少相依套件，真實資料執行仍為 Environment blocked。
+- Reproducibility：探索時可用 `main`；正式實驗必須以 `--dataset-revision` 固定不可變 commit SHA。
+
 ## 本週定位
 
 本週學習 VLA 的資料來源：Episode → Observation + Action + Language + Timestamp + Metadata。Implementation Practice 為主，使用小型 JSONL mock dataset，不需真實機器人。

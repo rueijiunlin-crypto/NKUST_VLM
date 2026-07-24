@@ -1,5 +1,21 @@
 # Week12 Notes：SmolVLA / OpenVLA Inference
 
+## LeRobotDataset v3 → SmolVLA
+
+LeRobot 0.6.x 的官方 preprocessor 會替單一 Dataset v3 sample 加上 batch 維度，再執行 device transfer、文字處理與正規化。因此流程起點應是 `dataset[index]`，不應先用 `DataLoader(batch_size=1)` 批次化後再交給同一個 preprocessor。
+
+```text
+dataset[index]（raw、未批次化）
+→ 挑選 observation / task 欄位
+→ preprocessor（add batch + normalize + tokenize + device）
+→ SmolVLAPolicy.select_action
+→ raw model-space action
+→ postprocessor（unnormalize + CPU）
+→ final action
+```
+
+`raw sample != normalized model input`，而且 `raw policy output != final postprocessed action`。教材與實驗紀錄應同時保存 raw/processed shapes、所用 statistics、action shape 與 finite 檢查，避免把模型空間中的數值誤認為機器人可直接使用的控制量。
+
 ## Why 與 Problem
 
 能載入 checkpoint 不等於 inference 正確。Observation keys、image order、state normalization、action unnormalization、chunk length 與 device/dtype 必須與訓練 metadata 相符。本週以 SmolVLA 為可執行真實軌，OpenVLA 作架構與資源比較。
@@ -32,7 +48,7 @@ Flow matching 從 noise path 逐步求得 continuous action。推論步數、chu
 
 ## Reproducible Real Inference
 
-CLI 必須可設定 `--model-id`、`--revision`、`--dataset-id`、`--episode`、`--device`、`--dtype`、`--seed`、`--max-steps` 與 cache。程式需印出 model、revision、parameter count、device、dtype、observation/action shape、warm-up 與單步時間、peak memory。
+CLI 必須可設定 `--model-id`、`--model-revision`、`--dataset-id`、`--dataset-revision`、`--episode`、`--index`、`--device`、`--dtype`、`--seed` 與 cache。程式需印出 model、revision、parameter count、device、dtype、observation/action shape、warm-up 與單步時間、peak memory。
 
 執行順序：
 

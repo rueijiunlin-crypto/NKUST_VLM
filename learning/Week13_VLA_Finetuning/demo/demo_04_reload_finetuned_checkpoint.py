@@ -13,6 +13,7 @@ def main() -> int:
     parser.add_argument("--dataset-id", required=True)
     parser.add_argument("--dataset-revision", default="main")
     parser.add_argument("--episode", type=int, default=0)
+    parser.add_argument("--index", type=int, default=0)
     parser.add_argument("--device", default="cuda")
     parser.add_argument("--dtype", choices=["float32", "float16", "bfloat16"], default="bfloat16")
     args = parser.parse_args()
@@ -25,13 +26,17 @@ def main() -> int:
 
     import torch
     from lerobot.datasets import LeRobotDataset
-    from lerobot.policies import make_pre_post_processors
-    from lerobot.policies.smolvla import SmolVLAPolicy
+    from lerobot.policies.factory import make_pre_post_processors
+    from lerobot.policies.smolvla.modeling_smolvla import SmolVLAPolicy
+
+    if args.device.startswith("cuda") and not torch.cuda.is_available():
+        raise RuntimeError("CUDA requested but unavailable; record Hardware blocked or choose --device cpu")
 
     dataset = LeRobotDataset(
         args.dataset_id, revision=args.dataset_revision, episodes=[args.episode]
     )
-    observation = next(iter(torch.utils.data.DataLoader(dataset, batch_size=1, num_workers=0)))
+    # The official preprocessor adds the batch dimension to an unbatched Dataset v3 sample.
+    observation = dataset[args.index]
     observation = {
         key: value
         for key, value in observation.items()
@@ -40,6 +45,7 @@ def main() -> int:
     policy = SmolVLAPolicy.from_pretrained(str(args.checkpoint)).to(
         device=args.device, dtype=getattr(torch, args.dtype)
     ).eval()
+    policy.config.device = args.device
     preprocessor, postprocessor = make_pre_post_processors(
         policy_cfg=policy.config,
         pretrained_path=str(args.checkpoint),
