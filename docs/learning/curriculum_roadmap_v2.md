@@ -1,8 +1,8 @@
 # Curriculum Roadmap v2
 
-> 本文件定義 Robot-oriented VLM / VLA research（機器人導向視覺語言模型／視覺語言動作模型研究）的目標課程路線與遷移計畫。它不是教材完成紀錄，不代表任何既有 Week 已重構或通過驗收。
+> Migration Status：Active Curriculum（正式課程）。本文件定義 Robot-oriented VLM / VLA research（機器人導向視覺語言模型／視覺語言動作模型研究）的正式課程路線；它不是學生完成紀錄，不代表任何 Week 已通過驗收。
 >
-> 現有 `learning/WeekXX_*` 資料夾名稱暫時保留。只有在逐週內容獲得明確批准、完成連結盤點後，才評估是否重新命名。
+> 舊課程教材與學生紀錄保存在各重構週的 `legacy_v1/`，供追蹤與後續內容整合。
 
 ## 1. Why Refactor
 
@@ -68,7 +68,7 @@ Research Evaluation
 
 ### Phase 1 — VLM Foundation
 
-| Week | Target Topic | Roadmap Role |
+| Week | Active Topic | Roadmap Role |
 | --- | --- | --- |
 | Week01 | Transformer Fundamentals | 建立 Token、Embedding、Attention、Transformer 與 Encoder／Decoder 基礎。 |
 | Week02 | CLIP and Vision-Language Alignment | 建立 image／text representation 與跨模態對齊基礎。 |
@@ -78,24 +78,24 @@ Research Evaluation
 
 ### Phase 2 — Robot Perception
 
-| Week | Target Topic | Roadmap Role |
+| Week | Active Topic | Roadmap Role |
 | --- | --- | --- |
 | Week06 | Video and Streaming VLM | 從單張圖片進入多影格、影片、串流輸入、時間記憶與 latency／throughput。 |
 | Week07 | ROS2 + Camera + Realtime VLM | 建立 Camera → ROS2 stream → sampling → inference → structured semantic interface。 |
 | Week08 | Spatial Reasoning and Grounding | 建立語意物件、2D、深度、3D 相機座標與機器人座標的資料鏈。 |
 
-現有 Paper Reading 教材不刪除。其 claim-to-evidence（主張到證據）方法未來將遷移為 Repository 共用的 Research Paper Reading Framework（研究論文閱讀框架），候選位置為 `docs/papers/` 或 `templates/`，但本次不搬動檔案。
+原有 Paper Reading 教材完整保存在 Week06 的 `legacy_v1/`；其 claim-to-evidence（主張到證據）方法已整理為共用的 [Research Paper Reading Framework](../papers/paper_reading_framework.md)。
 
 ### Phase 3 — Embodied AI / VLA
 
-| Week | Target Topic | Roadmap Role |
+| Week | Active Topic | Roadmap Role |
 | --- | --- | --- |
 | Week09 | Robot State + Multimodal Observation | 將 Vision、Language、proprioception（本體感覺）、關節、末端與時間同步組成 embodied observation（具身觀察）。 |
 | Week10 | Embodied AI + VLA Fundamentals | 比較 VLM 語意輸出與 VLA action，建立 Policy、Action Space、Action Chunk 與 closed／open-loop 概念。 |
 
 ### Phase 4 — Robot Learning
 
-| Week | Target Topic | Roadmap Role |
+| Week | Active Topic | Roadmap Role |
 | --- | --- | --- |
 | Week11 | Robot Dataset and Demonstrations | 理解 episode、trajectory、teleoperation、observation-action alignment 與資料品質。 |
 | Week12 | SmolVLA / OpenVLA Inference | 從較易部署的預訓練模型開始理解 Image + Robot State + Instruction → Predicted Action。 |
@@ -103,7 +103,7 @@ Research Evaluation
 
 ### Phase 5 — Simulation and Deployment
 
-| Week | Target Topic | Roadmap Role |
+| Week | Active Topic | Roadmap Role |
 | --- | --- | --- |
 | Week14 | Isaac Sim Robot Learning | 整合場景、機器人、Camera／Depth、Robot State、任務、Policy 與 evaluation。 |
 | Week15 | Sim-to-Real / Real Robot Deployment | 分析 domain shift、感測與標定誤差、latency、action error、失敗恢復與部署安全。 |
@@ -112,7 +112,7 @@ Research Evaluation
 
 ### Phase 6 — Research
 
-| Week | Target Topic | Roadmap Role |
+| Week | Active Topic | Roadmap Role |
 | --- | --- | --- |
 | Week16 | Research Prototype and Evaluation | 建立 Research Question → Baseline → Method → Dataset → Experiment → Metric → Failure Analysis → Conclusion。 |
 
@@ -120,7 +120,7 @@ Research Evaluation
 
 ## 3. Old → New Mapping
 
-| Existing Week | Existing Topic | Target Topic | Migration Level |
+| Existing Week | Existing Topic | Active Topic | Migration Level |
 | --- | --- | --- | --- |
 | Week01 | Transformer | Transformer Fundamentals | Keep |
 | Week02 | CLIP | CLIP and Vision-Language Alignment | Keep |
@@ -147,21 +147,21 @@ Migration Level 定義：
 - **Major Refactor**：保留高價值內容，但需重新定位、拆分或跨週遷移。
 - **Rebuild**：依新研究能力鏈重新設計；仍須先盤點並保存可重用內容。
 
-此表只用於 migration planning（遷移規劃），不表示各週教材已修改或完成。
+此表保留 migration planning（遷移規劃）的決策依據；教材已遷移為 Active Curriculum，但不表示學生已完成或通過各週驗收。
 
 ## 4. Content Preservation Plan
 
-Roadmap 改變不得成為刪除高品質教材或學生紀錄的理由。以下內容必須保留並在後續逐週重構時安排適當位置：
+Roadmap 改變不得成為刪除高品質教材或學生紀錄的理由。以下為本次遷移後的保存位置與整合結果：
 
-| Existing Source | Preserved Content | Future Direction |
+| Existing Source | Preserved Content | Migration Result |
 | --- | --- | --- |
-| Week06 | claim-to-evidence paper reading framework | 遷移為跨週可重用的 Research Paper Reading Framework。 |
-| Week07 | structured prompt、Prompt Contract、schema、validator、Unknown Policy、Retry Policy、Safety Gate | 規劃分配到新的 Week04、Week05、Week07 與 Week10；實際拆分需逐週批准。 |
-| Week08 | observation contract、structured output、validator | 整合至新的 Robot Perception pipeline 與 Spatial Grounding 驗證。 |
-| Week09 | camera lifecycle、timestamp | 整合至即時感知、Robot State 與多模態時間同步。 |
-| Week10 | ROS2 semantic interface | 整合至 realtime VLM 與具身系統模組介面。 |
+| Week06 | claim-to-evidence paper reading framework | 原教材保存在 `legacy_v1/`，共用框架位於 `docs/papers/paper_reading_framework.md`。 |
+| Week07 | structured prompt、Prompt Contract、schema、validator、Unknown Policy、Retry Policy、Safety Gate | 原教材保存在 `legacy_v1/`；schema、freshness 與 safety 邊界已整合至 Week07 與 Week10。 |
+| Week08 | observation contract、structured output、validator | 原教材保存在 `legacy_v1/`；契約與驗證觀點已整合至 Spatial Grounding。 |
+| Week09 | camera lifecycle、timestamp | 原教材保存在 `legacy_v1/`；timestamp 與同步觀點已整合至 Robot State。 |
+| Week10 | ROS2 semantic interface | 原教材保存在 `legacy_v1/`；semantic interface 已整合至 Realtime VLM ROS2。 |
 
-所有既有 `study_log.md`、學生答案、Practice 觀察、Demo 結果與 Notion 連結都必須保存。遷移前要先辨識內容擁有者與依賴路徑。
+所有既有 `study_log.md`、學生答案、Practice 觀察、Demo 結果與 Notion 連結均保存在對應週次的 `legacy_v1/`；新的空白紀錄檔不宣稱學生已完成任何項目。
 
 ### Paper Reading Strategy
 
@@ -178,46 +178,46 @@ Robot Dataset → dataset / imitation learning paper
 Simulation → sim-to-real paper
 ```
 
-未來可建立 `paper_reading_framework.md`，但其位置與實際遷移需另行批准。
+共用框架已建立於 `docs/papers/paper_reading_framework.md`，各週可依研究主題重用。
 
 ### Prompt Engineering Migration Strategy
 
-Prompt Engineering 不再作為獨立主階段。既有 Prompt Contract、Structured Output、Schema、Validator、Unknown Policy、Retry Policy 與 Safety Gate 應分散整合到最需要這些能力的主題中。本次不搬動或重寫原教材。
+Prompt Engineering 不再作為獨立主階段。原教材完整保存在 Week07 的 `legacy_v1/`；Prompt Contract、Structured Output、Schema、Validator、Unknown Policy、Retry Policy 與 Safety Gate 依系統責任整合至新教材。
 
-## 5. Refactor Order
+## 5. Migration Execution Record
 
 ```text
-Step 1
+Step 1 — Completed
 Approve Curriculum Roadmap
 
-Step 2
+Step 2 — Completed
 Update Week04 / Week05
 
-Step 3
+Step 3 — Completed
 Refactor Week06–08
 
-Step 4
+Step 4 — Completed
 Refactor Week09–10
 
-Step 5
+Step 5 — Completed
 Rebuild Week11–13
 
-Step 6
+Step 6 — Completed
 Rebuild Week14–16
 
-Step 7
+Step 7 — Completed
 Rename directories only if necessary
 
-Step 8
+Step 8 — Completed
 Final link / documentation audit
 ```
 
-每一 Step 都需獨立批准。Roadmap approval 不授權修改多週教材，也不代表任何 Week 已 Generated 或 Completed。
+本次完整 Curriculum Migration 已獲使用者授權並依序執行。`Completed` 僅指教材遷移步驟完成，不代表學生學習或 Practice 驗收完成。
 
 ## 6. Migration Guardrails
 
-- 不因 Roadmap 改變而直接刪除、覆蓋或搬移 Week 教材。
-- 不自動重新命名 `WeekXX_*` 資料夾。
+- 原教材搬移前先辨識內容擁有者與依賴路徑，並保存在 `legacy_v1/`。
+- 目錄改名使用 `git mv`，並同步更新 Markdown、Notion reference text 與 scripts 的路徑依賴。
 - 不修改或代填學生 `study_log.md`。
 - 不把 VLM output 默認為 motor command。
 - 不把 Demo 成功執行當成研究驗收的全部條件。

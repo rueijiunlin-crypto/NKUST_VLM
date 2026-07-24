@@ -86,6 +86,6 @@ python demo/demo_05_robot_vlm_system_flow.py
 - [ ] 能指出至少三個架構失敗點。
 - [ ] `study_log.md` 已由學生填入實際觀察。
 
-## 銜接 Week06 Paper Reading
+## 銜接 Week06 Video and Streaming VLM
 
-Week06 將使用本週的架構、輸出型態、token／latency、Grounding 與系統邊界詞彙閱讀論文，從架構圖、方法與實驗證據判斷作者的主張，而不只記模型名稱。
+Week06 將從 Single Image → Multi-frame → Video → Streaming 開始處理 Temporal Perception（時間感知），延伸本週的 multi-frame、token／latency 與系統邊界概念。論文閱讀方法則改由 Repository 共用的 Research Paper Reading Framework 支援。
