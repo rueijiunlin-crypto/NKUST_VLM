@@ -74,6 +74,37 @@ python demo/demo_02_clip_zero_shot_local.py --image ../Week02_CLIP/demo/00000003
 - [ ] 更新 Notion 學習狀態。
 - [ ] 進行 ChatGPT 驗收。
 
+## Paper Reading（論文閱讀）
+
+### Core Reading
+
+- Title: Transformers: State-of-the-Art Natural Language Processing
+- Authors: Thomas Wolf et al.
+- Year / Venue: 2020 / EMNLP System Demonstrations
+- DOI: 10.18653/v1/2020.emnlp-demos.6
+- arXiv: 1910.03771
+- Link: https://aclanthology.org/2020.emnlp-demos.6/
+- Code / Project: https://github.com/huggingface/transformers
+- Required Reading：Abstract、library architecture、pipeline／model API、reproducibility discussion。
+- Skim Reading：當時支援模型的完整清單。
+- Skip for Now：已淘汰版本的 API 細節。
+- Optional Reading：Transformers 官方 Pipeline 與 AutoClass 文件。
+
+### Reading Questions
+
+1. 函式庫要解決什麼研究工程問題？
+2. Config、Processor、Model 各自負責什麼？
+3. 從原始輸入到 tensor 的資料流為何？
+4. Batch 與 modality 維度如何檢查？
+5. AutoClass 如何降低架構耦合？
+6. Pretrained checkpoint 如何被識別與載入？
+7. Pipeline 抽象隱藏了哪些步驟？
+8. 論文如何證明可重用性？
+9. 版本、revision 與 cache 如何影響重現？
+10. 常見載入失敗與限制是什麼？
+11. 這套 API 如何支援後續 VLM/VLA 實驗？
+12. 哪項工程證據應記入實驗紀錄？
+
 ## 驗收條件
 
 - [ ] 能解釋 `CLIPProcessor` 與 `CLIPModel` 的分工。

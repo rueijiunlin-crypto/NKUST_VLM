@@ -247,17 +247,21 @@
 | Paper Title | Category | Related Week | Possible Thesis Usage |
 | --- | --- | --- | --- |
 | CLIP | VLM | Week02 | 圖文對齊與語意標籤比對 |
-| BLIP | VLM | Week06 | 影像描述與視覺問答基礎 |
-| BLIP-2 | VLM | Week06 | 輕量連接視覺模型與語言模型 |
+| Attention Is All You Need | Foundation | Week01 | Transformer 與 attention 共同骨架 |
 | LLaVA | VLM | Week04 | 影像問答與機器人場景理解 |
-| MiniGPT-4 | VLM | Week06 | 多模態對話架構比較 |
-| Qwen-VL | VLM | Week06 | 中文與多模態能力比較 |
-| InternVL | VLM | Week06 | 高效能 VLM 架構比較 |
-| RT-1 | VLA | Week12 | 機器人動作資料與策略學習 |
-| RT-2 | VLA | Week12 | 視覺語言到動作的概念延伸 |
-| OpenVLA | VLA | Week12 | 開源 VLA 實作參考 |
-| SayCan | Robot Learning | Week11 | 語言模型結合機器人可行動作 |
-| PaLM-E | Embodied AI | Week11 | 具身智慧與多模態機器人推理 |
+| BLIP | VLM | Week05 | 影像描述與視覺語言預訓練架構比較 |
+| BLIP-2 | VLM | Week05 | Q-Former 與凍結模型介面 |
+| MovieChat | Video VLM | Week06 | 長影片 sparse memory 與時間理解 |
+| RT-1 | VLA | Week07 | 即時機器人資料流、token 與系統邊界 |
+| 3D-LLM | Spatial Grounding | Week08 | 3D-language alignment 與空間推理 |
+| PaLM-E | Embodied AI | Week09 | 影像、語言與 robot state 融合 |
+| RT-2 | VLA | Week10 | VLA action token 與知識轉移 |
+| Open X-Embodiment | Robot Dataset | Week11 | 跨 embodiment 資料標準化 |
+| SmolVLA | VLA | Week12 | 可負擔 VLA inference 與 flow matching |
+| Octo | Robot Learning | Week13 | Generalist policy fine-tuning |
+| Isaac Lab | Isaac Sim | Week14 | GPU 模擬、感測器與任務介面 |
+| Domain Randomization | Sim-to-Real | Week15 | 模擬到真實的變異假設 |
+| OpenVLA | VLA | Week16 | 開源研究原型與 evaluation 比較 |
 
 每篇論文模板需包含：
 

@@ -1,8 +1,8 @@
 ﻿# AGENTS.md
 
-> Current revision: v3.2.0 curriculum-roadmap governance
+> Current revision: v3.2.1 paper-reading-and-real-model-integration
 >
-> 本修訂以 v3.1.2 Dual-Mode Coding Practice 規範為基礎，新增 Curriculum Roadmap Governance（課程路線治理）、Research Progression（研究能力進程）、Roadmap-Only Refactor Exception（僅限路線重構例外）、Curriculum Migration（課程遷移）、Robot System Boundary（機器人系統邊界）與 Research Evaluation（研究評估）規範。不改變既有 Demo、Practice、Week Lifecycle 與學生紀錄保護原則。
+> 本修訂保留 v3.2.0 Curriculum Roadmap Governance 全部規範，新增 Paper Reading（論文閱讀）、Real Model Integration（真實模型整合）、Multi-Level Implementation（多層實作）、版本與硬體揭露規則。不改變既有 Roadmap、Demo、Practice、Week Lifecycle 與學生紀錄保護原則。
 
 本文件定義本 Repository（程式碼與文件倉庫）的專案規則、工作流程、文件標準與 Codex 行為規範。
 
@@ -181,6 +181,124 @@ Motor Command
 - limitation
 
 具體採用哪些指標與驗收門檻，仍由該週 `weekly_plan.md` 決定。
+
+### Paper Reading Rule
+
+所有正式週次原則上至少指定一篇 Core Reading（核心必讀論文），並採用以下學習流程：
+
+```text
+Theory
+↓
+Demo
+↓
+Practice
+↓
+Core Paper Reading
+↓
+Study Log
+↓
+ChatGPT Validation
+```
+
+Paper Reading 不得只列為 Optional Reference（選讀參考資料）。文獻分為：
+
+- **Core Reading**：正式必修閱讀，每週至少一篇。
+- **Deep Reading**：用於 foundation model 原始論文、VLM 架構轉折、Video／Streaming 模型、VLM → VLA 轉折、主要 VLA 模型或與 Thesis Topic（論文題目）高度相關的研究。
+- **Optional Reading**：每週可推薦一至三篇，不列入必要完成條件。
+
+具體 Reading Level、論文與閱讀範圍必須寫在各週 `weekly_plan.md`，不得把特定週次或論文寫死在本規範。
+
+每篇 Core Paper 至少記錄：
+
+- Title
+- Authors
+- Year
+- Conference / Journal / Technical Report
+- DOI
+- arXiv
+- Official Project Page
+- Official Code Repository
+- Model Page（若存在）
+
+不存在或未確認的欄位標示 `N/A`，不得捏造。
+
+來源優先順序為 Original Paper、Official Technical Report、Conference／Journal Version、arXiv、Official Project Page、Official Code／Model Card。Blog、Medium 或二手整理只能作輔助資料，不能作 Core Paper 的主要研究依據。
+
+快速發展的 Video／Streaming VLM、VLA、Robot Foundation Model、Robot Dataset、Sim-to-Real 與 Embodied AI 主題必須查核較新研究；Transformer、CLIP、LLaVA 等基礎主題仍應保留經典原始論文。
+
+### Paper Reading Record Rule
+
+每週 `study_log.md` 必須提供空白的 Paper Reading Record，至少能記錄 research problem、motivation、input／output、core method、figure、experiment／table、evidence、limitation、課程關聯、Robot VLM／VLA 關聯與未解問題。
+
+Codex 只能新增空白欄位，不得代替學生填寫閱讀結論。若已有學生內容，必須保留原文並以追加方式加入新區塊。
+
+Paper Reading 驗收至少要求學生能說明：
+
+```text
+Claim
+↓
+Method
+↓
+Evidence
+↓
+Boundary
+↓
+Limitation
+```
+
+不要求背誦單一數字，但必須指出至少一個 evidence 與一個 limitation。
+
+### Multi-Level Implementation Rule
+
+AI／Robot Learning 內容應依學習目標採用一層或多層實作：
+
+1. **Level A — Concept / CPU**：以 Python、NumPy、mock data 或 small tensors 理解流程與除錯。
+2. **Level B — Real Model**：使用 official checkpoint、PyTorch、真實 processor 與真實 inference。
+3. **Level C — System Integration**：整合 ROS2、Camera、Isaac Sim、Robot State、Dataset 或 Controller Interface。
+
+不是每週都必須具備三層，但直接涉及真實模型或系統的主題不得只留下 mock。Real Model 是主要學習路徑；CPU／Mock Demo 是概念理解與除錯 fallback（備援）。
+
+Basic Demo 不得取代 Real Model Demo，Real Model Demo 也不得取代 Basic Demo。兩者必須說明各自回答的問題與可支持的證據。
+
+### Real Model Reproducibility Rule
+
+真實模型 Demo 必須使用 `argparse`，適用時支援：
+
+```text
+--model-id
+--revision
+--device
+--dtype
+--image
+--video
+--question
+--frames
+--max-new-tokens
+```
+
+程式至少印出 model ID、revision、device、dtype、input shape／keys、output shape 與 inference time。README 必須揭露：
+
+- model ID 與 tested revision／commit
+- download size、license 與 authentication requirement
+- GPU、VRAM、system RAM、dtype 與 quantization
+- expected inference memory、cache path 與 expected output
+- 已測套件版本與執行環境
+- CUDA OOM、Model Access、Processor Mismatch、Device Mismatch 的排除方法
+
+若硬體不足，應保留 Real Model Track，並提供 lower precision、quantization、smaller checkpoint、CPU offload、reduced frames／resolution 等調整。未執行時標記 `Not validated yet`、`Hardware / network blocked` 或具體 license／download blocker，不得宣稱成功。
+
+大型模型與資料應由各週獨立下載，不得為教材重構一次下載全部權重。快取、憑證、權重與受限制資料不得提交進 Git。
+
+### Real Robot System Boundary Rule
+
+即使使用 VLA，教材仍必須維持：
+
+```text
+VLM Output != Controller Command
+VLA Action != Guaranteed Safe Action
+```
+
+VLA action 後仍需 action validation、controller、safety limit、emergency stop 與 task constraint。System Integration Demo 不得繞過這些責任邊界。
 
 ---
 

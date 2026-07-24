@@ -1,5 +1,11 @@
 ﻿# Week03 Study Log
 
+## Paper Reading Record（學生填寫）
+
+| Paper / Version | Research Question | Method / Evidence | Dataset / Metric | Limitation / Reproducibility | Open Questions |
+|---|---|---|---|---|---|
+|  |  |  |  |  |  |
+
 ## 學習時間
 
 | 日期 | 時間 | 內容 | 備註 |

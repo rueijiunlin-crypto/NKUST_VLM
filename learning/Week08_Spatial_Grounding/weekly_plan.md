@@ -44,6 +44,41 @@ python practice/coding/solutions/coordinate_transform_solution.py
 
 本週採 Guided + Implementation 混合模式。
 
+## Paper Reading（論文閱讀）
+
+### Core Reading
+
+- Title: 3D-LLM: Injecting the 3D World into Large Language Models
+- Authors: Yining Hong et al.
+- Year / Venue: 2023 / NeurIPS
+- DOI: N/A
+- arXiv: 2307.12981
+- Link: https://arxiv.org/abs/2307.12981
+- Code / Project: https://github.com/UMass-Foundation-Model/3D-LLM
+- Required Reading：Abstract、3D feature extraction、3D-language alignment、tasks、evaluation。
+- Skim Reading：資料生成與完整附錄。
+- Skip for Now：大規模 3D 預訓練重現。
+- Optional Reading：Grounded-SAM；OpenScene。
+
+### Reading Questions
+
+1. 2D VLM 為何不足以處理機器人空間任務？
+2. 3D scene 與 language 的輸入輸出是什麼？
+3. 座標、特徵與文字如何對齊？
+4. Camera、world、robot frame 的 transform shape 為何？
+5. Grounding 如何由語詞連到 3D 區域？
+6. 深度誤差如何傳播到世界座標？
+7. 3D 表徵如何進入語言模型？
+8. 主要任務與評估指標是什麼？
+9. 哪項結果支持 3D-aware reasoning？
+10. 遮擋、尺度與標定限制是什麼？
+11. 空間語意如何安全交給導航或操作模組？
+12. 哪個公式與證據必須寫進本週推導紀錄？
+
+### Deep Reading
+
+深讀座標系、幾何投影、3D-language alignment 與失敗案例，並將論文公式對應到本週數值 Demo。
+
 ## 驗收條件
 
 - [ ] 能寫出 pinhole 反投影公式與變數。

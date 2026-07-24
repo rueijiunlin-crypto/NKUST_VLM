@@ -43,6 +43,41 @@ python practice/coding/solutions/action_validator_solution.py
 
 模式：Guided 為主、少量 Implementation。
 
+## Paper Reading（論文閱讀）
+
+### Core Reading
+
+- Title: RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control
+- Authors: Brianna Zitkovich et al.
+- Year / Venue: 2023 / CoRL
+- DOI: N/A
+- arXiv: 2307.15818
+- Link: https://proceedings.mlr.press/v229/zitkovich23a.html
+- Code / Project: https://robotics-transformer2.github.io/
+- Required Reading：Abstract、VLA co-fine-tuning、action tokenization、evaluation、limitations。
+- Skim Reading：完整資料混合比例與附錄案例。
+- Skip for Now：封閉模型的訓練重現。
+- Optional Reading：OpenVLA；π0；GR00T N1。
+
+### Reading Questions
+
+1. RT-2 將哪個 VLM 問題改寫成 VLA 問題？
+2. Observation、instruction、action 的輸入輸出為何？
+3. Action 如何表示成 token？
+4. Image tokens、language tokens、action tokens 的 shape 關係為何？
+5. Co-fine-tuning 如何保留 web knowledge？
+6. Action chunk 與單步 action 的差異是什麼？
+7. Config、processor、policy 各負責什麼？
+8. 使用哪些 seen／unseen 任務評估？
+9. 哪項結果支持 emergent semantic reasoning？
+10. Tokenization、latency 與 safety 的限制是什麼？
+11. 真實 VLA 架構檢查要驗證哪些欄位？
+12. 哪個比較維度適合放入 VLA 論文矩陣？
+
+### Deep Reading
+
+比較 RT-2、OpenVLA、SmolVLA、π0 與 GR00T N1 的 action representation、資料、模型規模、開放性與部署限制。
+
 ## 驗收條件
 
 - [ ] 能區分 VLM output 與 VLA action。

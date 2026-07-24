@@ -40,6 +40,41 @@ python practice/coding/solutions/experiment_validator_solution.py
 - [ ] 完成 `experiment_validator_practice.py` 後再比較 solution。
 - [ ] 在 `study_log.md` 記錄 controlled variables、seed 與 ground truth。
 
+## Paper Reading（論文閱讀）
+
+### Core Reading
+
+- Title: Isaac Lab: A GPU-Accelerated Simulation Framework for Multi-Modal Robot Learning
+- Authors: Mayank Mittal et al.
+- Year / Venue: 2025 / arXiv
+- DOI: N/A
+- arXiv: 2511.04831
+- Link: https://arxiv.org/abs/2511.04831
+- Code / Project: https://github.com/isaac-sim/IsaacLab / https://isaac-sim.github.io/IsaacLab/
+- Required Reading：Abstract、framework architecture、sensor／environment interface、benchmarks、limitations。
+- Skim Reading：所有 benchmark 超參數。
+- Skip for Now：大型 GPU 叢集重現。
+- Optional Reading：Isaac Sim official tutorials；Replicator documentation。
+
+### Reading Questions
+
+1. Isaac Lab 要解決什麼模擬研究工程問題？
+2. Scene、robot、sensor、action 的介面為何？
+3. OpenUSD、physics、rendering 的資料流為何？
+4. Environment、camera、state tensor shape 如何批次化？
+5. Simulation timestep 與 control timestep 如何區分？
+6. Randomization 在 pipeline 哪裡套用？
+7. ROS2 bridge 與原生 tensor path 有何差異？
+8. 使用哪些 benchmark 與效能指標？
+9. 哪項證據支持 GPU parallelism？
+10. 版本、資產與感測器 fidelity 限制是什麼？
+11. 本週真實 Isaac 軌需記錄哪些環境資訊？
+12. 哪些模擬輸出可供 VLM/VLA，哪些不能等同真實資料？
+
+### Deep Reading
+
+深讀 simulation boundary、sensor fidelity、timing 與 reproducibility，並把官方 API 對應到本週 observation pipeline。
+
 ## 驗收條件
 
 - [ ] 能畫出 simulation-to-evaluation flow。

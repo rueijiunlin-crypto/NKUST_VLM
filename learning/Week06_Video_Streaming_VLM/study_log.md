@@ -1,5 +1,17 @@
 # Week06 Study Log
 
+## Paper Reading Record（學生填寫）
+
+| Paper / Version | Architecture / Data Flow | Evidence / Metric | Limitation | Thesis Link |
+|---|---|---|---|---|
+|  |  |  |  |  |
+
+## Real Model / Hardware / Failure Record（學生填寫）
+
+| Model / Revision | Device / dtype | Input / Output Shape | Runtime / Memory | Failure / Questions |
+|---|---|---|---|---|
+|  |  |  |  |  |
+
 ## Curriculum Migration Note
 
 此 Week 已由 Paper Reading 遷移為 Video and Streaming VLM。重構前全部教材與歷史學習紀錄保存在 `legacy_v1/`；它們不代表新版課程已完成。

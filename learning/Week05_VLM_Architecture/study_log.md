@@ -2,6 +2,12 @@
 
 > 請由學生記錄實際學習結果，不要預先勾選或代寫個人理解。
 
+## Paper Reading Record（學生填寫）
+
+| Paper / Version | Research Question | Method / Evidence | Dataset / Metric | Limitation / Reproducibility | Open Questions |
+|---|---|---|---|---|---|
+|  |  |  |  |  |  |
+
 ## 學習時間
 
 | 日期 | 時間 | 內容 | 備註 |

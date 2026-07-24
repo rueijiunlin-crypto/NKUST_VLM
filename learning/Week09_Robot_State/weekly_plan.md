@@ -44,6 +44,37 @@ python practice/coding/solutions/observation_builder_solution.py
 
 模式：Guided + Implementation。
 
+## Paper Reading（論文閱讀）
+
+### Core Reading
+
+- Title: PaLM-E: An Embodied Multimodal Language Model
+- Authors: Danny Driess et al.
+- Year / Venue: 2023 / ICML
+- DOI: N/A
+- arXiv: 2303.03378
+- Link: https://proceedings.mlr.press/v202/driess23a.html
+- Code / Project: https://palm-e.github.io/
+- Required Reading：Abstract、architecture、multimodal sentences、robot experiments、limitations。
+- Skim Reading：完整 scaling 與語言 benchmark。
+- Skip for Now：不可取得模型的訓練重現。
+- Optional Reading：Gato；RoboCat。
+
+### Reading Questions
+
+1. PaLM-E 如何定義 embodied multimodal input？
+2. Image、state、text 的輸入輸出是什麼？
+3. Sensor embeddings 如何插入 language sequence？
+4. Batch、time、state 與 token shape 如何對齊？
+5. Continuous state 如何映射到 embedding？
+6. Timestamp 與同步誤差會造成什麼問題？
+7. 不同 embodiment 如何共享模型？
+8. 主要機器人任務與指標是什麼？
+9. 哪項結果支持 positive transfer？
+10. Closed model 與資料限制如何影響重現？
+11. 本週 observation schema 如何保存 provenance？
+12. 哪個 evidence 可支持多模態狀態融合設計？
+
 ## 驗收條件
 
 - [ ] 能畫出 Vision + Language + Robot State。

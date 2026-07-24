@@ -40,6 +40,37 @@ python practice/coding/solutions/dataset_validator_solution.py
 
 模式：Implementation Practice。
 
+## Paper Reading（論文閱讀）
+
+### Core Reading
+
+- Title: Open X-Embodiment: Robotic Learning Datasets and RT-X Models
+- Authors: Open X-Embodiment Collaboration
+- Year / Venue: 2024 / ICRA
+- DOI: N/A
+- arXiv: 2310.08864
+- Link: https://arxiv.org/abs/2310.08864
+- Code / Project: https://github.com/google-deepmind/open_x_embodiment
+- Required Reading：Abstract、dataset mixture、standardization、RT-X experiments、limitations。
+- Skim Reading：各資料集逐項統計。
+- Skip for Now：完整跨機器人訓練重現。
+- Optional Reading：LeRobotDataset v3 documentation；DROID。
+
+### Reading Questions
+
+1. 跨 embodiment 資料整合的核心問題是什麼？
+2. Episode、observation、action、task 的輸入輸出為何？
+3. 不同資料集如何標準化？
+4. Image、state、action、timestamp 的 shape 如何記錄？
+5. Task vocabulary 如何對齊？
+6. Sampling mixture 如何影響模型？
+7. 資料 provenance 與 license 為何重要？
+8. 使用哪些跨機器人評估？
+9. 哪項結果支持資料共訓練？
+10. Action space 與硬體差異造成哪些限制？
+11. LeRobot sample 的 schema 如何對應論文概念？
+12. 哪些資料品質證據必須寫入 dataset card？
+
 ## 驗收條件
 
 - [ ] 能畫出 episode schema。

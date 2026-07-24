@@ -43,6 +43,41 @@ python practice/coding/solutions/result_validator_solution.py
 
 模式：Research / Guided Code Reading / Implementation mixed mode。
 
+## Paper Reading（論文閱讀）
+
+### Core Reading
+
+- Title: OpenVLA: An Open-Source Vision-Language-Action Model
+- Authors: Moo Jin Kim et al.
+- Year / Venue: 2024 / CoRL
+- DOI: N/A
+- arXiv: 2406.09246
+- Link: https://arxiv.org/abs/2406.09246
+- Code / Project / Model: https://github.com/openvla/openvla / https://openvla.github.io/
+- Required Reading：Abstract、architecture、training data、evaluation、limitations。
+- Skim Reading：完整訓練基礎設施與附錄。
+- Skip for Now：7B 模型從零預訓練。
+- Optional Reading：依最後題目選 1–3 篇最接近的 baseline／evaluation 論文。
+
+### Reading Questions
+
+1. OpenVLA 的研究主張與適用邊界是什麼？
+2. Prototype 的 perception、state、policy、evaluation 介面為何？
+3. 模型內外部資料流如何連接？
+4. 每個模組的 tensor／message shape 如何驗證？
+5. Action representation 如何影響部署？
+6. Baseline 為何足以回答研究問題？
+7. Metric、threshold 與 safety gate 如何設定？
+8. 論文使用哪些資料集、任務與指標？
+9. 哪項結果最能支持其主要 claim？
+10. License、硬體、資料與 validity 限制是什麼？
+11. 本課程原型與論文系統有哪些可比／不可比處？
+12. 哪三項 evidence 能形成論文 proposal 的論證鏈？
+
+### Deep Reading
+
+完成 Evidence Table、Comparison Matrix、Reproducibility Check 與 Thesis Literature Review Usage；若研究題目已收斂，另選一篇直接 baseline 取代泛讀材料。
+
 ## 驗收條件
 
 - [ ] 研究問題可被實驗回答。

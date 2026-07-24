@@ -44,6 +44,37 @@ python practice/coding/solutions/realtime_policy_solution.py
 
 本週採 Guided Code Reading + Implementation Practice。
 
+## Paper Reading（論文閱讀）
+
+### Core Reading
+
+- Title: RT-1: Robotics Transformer for Real-World Control at Scale
+- Authors: Anthony Brohan et al.
+- Year / Venue: 2022 / arXiv
+- DOI: N/A
+- arXiv: 2212.06817
+- Link: https://arxiv.org/abs/2212.06817
+- Code / Project: https://robotics-transformer1.github.io/
+- Required Reading：Abstract、architecture、tokenization、real-time execution、evaluation。
+- Skim Reading：機器人資料收集細節。
+- Skip for Now：完整訓練基礎設施重現。
+- Optional Reading：ROS 2 executor 官方文件；RT-2。
+
+### Reading Questions
+
+1. RT-1 要解決什麼真實機器人規模問題？
+2. Image、instruction、action 的輸入輸出為何？
+3. TokenLearner 與 Transformer 的資料流為何？
+4. 時間、影像與 action token shape 如何變化？
+5. Action discretization 有什麼代價？
+6. 即時迴圈的頻率與模型延遲如何協調？
+7. 資料多樣性如何影響 generalization？
+8. 使用哪些真實機器人評估？
+9. 哪項結果支持多任務資料的價值？
+10. 失敗、延遲與安全限制是什麼？
+11. ROS2 camera→VLM→topic 可借用哪些邊界？
+12. 哪些輸出只能是語意事件、不能直接當控制命令？
+
 ## 驗收條件
 
 - [ ] 能解釋 QoS 與 freshness。

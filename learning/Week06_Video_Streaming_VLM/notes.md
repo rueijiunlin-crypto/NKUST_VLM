@@ -1,32 +1,60 @@
 # Week06 Notes：Video and Streaming VLM
 
-## 1. 從單張到時間上下文
+## Why：為什麼單張圖片不夠
 
-單張影像描述一個時間點；多影格提供順序，Video VLM 進一步建模動作、狀態改變與事件。Streaming VLM 還必須持續接收新資料、限制記憶並及時輸出。
+機器人面對的是持續變動的世界。單張 Vision-Language Model（視覺語言模型，VLM）只能回答「現在看見什麼」，無法可靠判斷物體剛才是否移動、門是否正在關閉，或操作是否已完成。Video VLM（影片視覺語言模型）要把多個時間點壓縮成可查詢的語意記憶；Streaming VLM（串流視覺語言模型）還必須在有限延遲與記憶體下持續更新。
 
-## 2. Frame Sampling
+## Problem、Input 與 Output
 
-Camera FPS 是感測器產生影格的速率；inference FPS 是模型完成推論的速率。若相機 30 FPS、模型 2 FPS，逐幀排隊會累積 stale frame（過期影格）。可用固定間隔、事件觸發、最新影格優先或 adaptive sampling（自適應取樣）。
+- Input：影片或 frame stream `[B, T, C, H, W]`、文字問題 `[B, L]`、frame timestamp。
+- Output：文字 token、結構化事件、時間區間或置信資訊。
+- 核心限制：`T` 增加會同步增加視覺 token、attention 成本與 latency。
 
-## 3. Visual Token Growth
+若每張 frame 產生 `V` 個 visual tokens，未壓縮的序列長度約為 `T × V + L`。Self-Attention 的記憶與計算成本近似序列長度平方，因此不能把無限串流直接串接。
 
-若每個 frame 產生 `V` 個 visual tokens，`F` 個影格的原始量約為 `F × V`。更多 token 增加 memory、attention cost 與 latency；壓縮雖省成本，可能遺失短暫事件與小物件。
+## Mechanism 與 Data Flow
 
-## 4. Temporal Context 與 Memory
+```text
+Camera / Video
+→ decode + timestamp
+→ frame sampling / scene-change trigger
+→ resize + normalize
+→ vision encoder
+→ per-frame tokens [B,T,V,D]
+→ temporal pooling / memory compression
+→ memory tokens [B,M,D]
+→ language-conditioned decoder
+→ structured semantic event
+→ freshness / schema validator
+```
 
-- Sliding Window：只保留最近 `W` 個影格，成本有界但會遺忘較早事件。
-- Temporal Memory：保存摘要或狀態，不等於保存所有原始 token。
-- Long-video Context：事件跨越視窗時可能失去因果關係。
-- KV Cache：重用已處理 token 的 key／value 表示，可減少重算，但仍占記憶體且需淘汰策略。
+Frame Sampling（影格取樣）可固定每秒取樣、均勻取樣、依場景變化觸發，或依任務事件自適應。Sliding Window（滑動視窗）只保留最近 `W` 張；hierarchical memory 先在 clip 內聚合，再將摘要送入長期記憶。KV Cache（鍵值快取）可避免重算既有 token，但不等於保存了所有視覺細節。
 
-## 5. Online vs Offline
+## Shape Example
 
-Offline Video Understanding 可讀完整影片，重視整體正確性；online／streaming 必須在未看到未來影格時輸出，重視 latency、throughput、freshness 與可更新性。
+輸入 8 張 `224×224` RGB frame：`[1,8,3,224,224]`。若每張得到 256 tokens、hidden size 為 1024，原始視覺表示為 `[1,8,256,1024]`；將每張壓成 4 個 memory tokens 後為 `[1,32,1024]`。壓縮率高不代表語意一定保留，必須用事件召回率與時間定位誤差驗證。
 
-## 6. Robot System Boundary
+## Online 與 Offline
 
-時間語意結果仍不是 Motor Command。模型輸出需要 timestamp、confidence／unknown、來源影格與 validator，後續 Planner、Policy、Control、Safety 各自負責其邊界。
+Offline 理解可讀完整影片，適合摘要與回溯。Online streaming 只能看到過去與現在，還要分別量測 capture、decode、preprocess、inference、validation 的延遲。機器人應優先處理 freshness；準確但過期的結果可能比 `unknown` 更危險。
+
+## Failure、Limitation 與 Safety
+
+- 過度取樣：token 爆炸、OOM、延遲上升。
+- 取樣過疏：短暫事件被漏掉。
+- 時序混淆：模型把前一時刻的物件狀態當成現在。
+- Memory overwrite：長期事件被新 frame 覆蓋。
+- Hallucination：模型補出畫面沒有發生的動作。
+
+輸出必須含 `source_timestamp`、`result_timestamp`、`model_id`、`valid` 與 `unknown`，且只能作為 semantic observation，不能直接當 Motor Command（馬達命令）。
+
+## Demo、Real Model 與 Paper Mapping
+
+- Basic Demo：觀察 sampling、window 與 token budget，回答 What。
+- Guided Code Reading：追蹤 `[B,T,V,D] → [B,M,D]`，回答 How。
+- Real Model Track：Qwen2.5-VL 影片推論；需記錄 model revision、device、dtype、輸入 shape、生成時間與 peak memory。
+- Core Paper：MovieChat，對應 sparse memory、long-video context 與失敗分析。
 
 ## 本週尚未涵蓋
 
-不實作大型 Video VLM 訓練、真實 Camera 或 ROS2；即時管線於 Week07 處理。
+本週不實作 ROS2 callback、硬體控制或 VLA action；即時 ROS2 系統邊界留到 Week07。

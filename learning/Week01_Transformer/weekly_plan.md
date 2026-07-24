@@ -61,6 +61,37 @@ Week01 採用 Guided Code Reading Mode，不使用 `exercises/`、`solutions/` �
 
 - [Concept Answer Key](./practice/concept/concept_answer_key.md)
 
+## Paper Reading（論文閱讀）
+
+### Core Reading
+
+- Title: Attention Is All You Need
+- Authors: Ashish Vaswani et al.
+- Year / Venue: 2017 / NeurIPS
+- DOI: N/A
+- arXiv: 1706.03762
+- Link: https://arxiv.org/abs/1706.03762
+- Code / Project / Model: https://github.com/tensorflow/tensor2tensor
+- Required Reading：Abstract、Figure 1、Section 3、Section 5.3。
+- Skim Reading：訓練設定與附錄。
+- Skip for Now：大規模翻譯基準的細部重現。
+- Optional Reading：The Illustrated Transformer；Annotated Transformer。
+
+### Reading Questions
+
+1. 論文要解決什麼序列建模瓶頸？
+2. 核心輸入與輸出是什麼？
+3. Self-Attention（自注意力）的資料流為何？
+4. Q、K、V 的 shape 如何變化？
+5. 為何需要縮放 dot-product？
+6. Multi-Head Attention（多頭注意力）帶來什麼能力？
+7. Position Encoding（位置編碼）補足什麼資訊？
+8. 主要實驗基準與比較對象是什麼？
+9. 哪項結果支持「不需要 recurrence」？
+10. 論文限制與重現風險是什麼？
+11. 這套機制如何成為 VLM/VLA 的共同骨架？
+12. 哪一句證據值得寫入論文閱讀紀錄？
+
 ## 6. 驗收清單
 
 - [✅] 閱讀 `README.md`。

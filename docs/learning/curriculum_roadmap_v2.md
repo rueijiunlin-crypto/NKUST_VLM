@@ -4,6 +4,17 @@
 >
 > 舊課程教材與學生紀錄保存在各重構週的 `legacy_v1/`，供追蹤與後續內容整合。
 
+## Curriculum Depth Status
+
+```text
+Structure Migration: Completed
+Paper Integration: Completed
+Real Model Integration: Completed (runtime validation tracked per Real Track)
+Content Depth Pass: Completed
+```
+
+以上只描述教材建置狀態，不表示學生已閱讀、執行、驗收或 Completed。
+
 ## 1. Why Refactor
 
 原 Roadmap 大致沿著以下順序前進：

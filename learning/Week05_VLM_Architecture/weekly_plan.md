@@ -71,6 +71,37 @@ python demo/demo_05_robot_vlm_system_flow.py
 - [ ] 在 `study_log.md` 記錄理解與未解問題。
 - [ ] 更新 Notion 學習狀態並進行 ChatGPT 驗收。
 
+## Paper Reading（論文閱讀）
+
+### Core Reading
+
+- Title: BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models
+- Authors: Junnan Li, Dongxu Li, Silvio Savarese, Steven Hoi
+- Year / Venue: 2023 / ICML
+- DOI: N/A
+- arXiv: 2301.12597
+- Link: https://proceedings.mlr.press/v202/li23q.html
+- Code / Project: https://github.com/salesforce/LAVIS/tree/main/projects/blip2
+- Required Reading：Abstract、Figure 1、Q-Former、兩階段預訓練、主要結果。
+- Skim Reading：完整資料清理與超參數。
+- Skip for Now：所有 benchmark 的逐表重現。
+- Optional Reading：Flamingo；InstructBLIP。
+
+### Reading Questions
+
+1. BLIP-2 要解決什麼成本與對齊問題？
+2. Frozen vision encoder、Q-Former、LLM 如何分工？
+3. Query tokens 如何壓縮視覺資訊？
+4. 各模組介面 shape 如何對齊？
+5. 兩階段目標各自建立什麼能力？
+6. 為何凍結大型模型仍能有效學習？
+7. Architecture choice 如何影響 latency 與 token budget？
+8. 主要基準與比較對象是什麼？
+9. 哪個 ablation 最能支持 Q-Former？
+10. 架構限制與資料偏差是什麼？
+11. 哪些介面可映射到機器人 VLM 系統？
+12. BLIP-2 應放在本路線哪個知識節點，為什麼？
+
 ## 驗收條件
 
 - [ ] 能畫出 Camera → Preprocess → Vision Encoder → Connector → LLM → Validator → Structured Perception。

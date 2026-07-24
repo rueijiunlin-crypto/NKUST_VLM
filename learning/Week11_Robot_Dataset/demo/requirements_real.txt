@@ -1,0 +1,5 @@
+# Install a LeRobot release compatible with the selected model/dataset revision.
+lerobot
+torch>=2.2
+datasets>=2.19
+pyarrow>=15

@@ -83,6 +83,37 @@ Demo 數量依本週必要概念設定，不受固定數量限制。每個 Demo 
 - [ ] 更新 Notion 學習狀態。
 - [ ] 進行 ChatGPT 驗收。
 
+## Paper Reading（論文閱讀）
+
+### Core Reading
+
+- Title: Visual Instruction Tuning
+- Authors: Haotian Liu, Chunyuan Li, Qingyang Wu, Yong Jae Lee
+- Year / Venue: 2023 / NeurIPS
+- DOI: N/A
+- arXiv: 2304.08485
+- Link: https://papers.nips.cc/paper_files/paper/2023/hash/6dcf277ea32ce3288914faf369fe6de0-Abstract-Conference.html
+- Code / Project: https://github.com/haotian-liu/LLaVA / https://llava-vl.github.io/
+- Required Reading：Abstract、Figure 1、visual instruction data、architecture、evaluation。
+- Skim Reading：完整 prompt 與附錄案例。
+- Skip for Now：大規模訓練基礎設施細節。
+- Optional Reading：LLaVA-1.5；LLaVA-NeXT。
+
+### Reading Questions
+
+1. Visual Instruction Tuning（視覺指令調校）解決什麼問題？
+2. Vision Encoder、Projector、LLM 的輸入輸出為何？
+3. Image tokens 如何進入語言模型？
+4. Projector 前後的 shape 如何對齊？
+5. 兩階段訓練各自更新哪些參數？
+6. 指令資料如何產生，可能帶來什麼偏差？
+7. Grounded reasoning 與一般 caption 有何不同？
+8. 使用哪些基準與評審方式？
+9. 哪項結果支持 instruction tuning 有效？
+10. Hallucination（幻覺）與定位限制是什麼？
+11. LLaVA 輸出如何安全轉成機器人語意事件？
+12. 真實模型執行時要保存哪些重現資訊？
+
 ## 驗收條件
 
 - [ ] 能解釋 `AutoProcessor` 與模型的分工。

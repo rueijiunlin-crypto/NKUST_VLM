@@ -1,5 +1,17 @@
 # Week07 Study Log
 
+## Paper Reading Record（學生填寫）
+
+| Paper / Version | Architecture / Evidence | Metric / Limitation | Thesis Link | Questions |
+|---|---|---|---|---|
+|  |  |  |  |  |
+
+## Real System Record（學生填寫）
+
+| Model / Revision | ROS2 / Camera / Hardware | Message Shape / Rate | Latency / Failure | Safety Observation |
+|---|---|---|---|---|
+|  |  |  |  |  |
+
 ## Curriculum Migration Note
 
 舊 Prompt Engineering 教材與歷史紀錄保存在 `legacy_v1/`，不代表新版課程已完成。

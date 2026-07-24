@@ -1,32 +1,62 @@
 # Week10 Notes：Embodied AI + VLA Fundamentals
 
-## 1. VLM 與 VLA
+## Why：從理解到動作
 
-VLM：`Vision + Language → Text / Semantic Output`。VLA：`Vision + Language + Robot State → Action`。Action 必須在明確 action space、單位、frame、時間步與安全限制下解讀。
+VLM 輸出文字或語意；Vision-Language-Action Model（視覺語言動作模型，VLA）接收影像、語言與 robot state，輸出連續或離散 action。這個轉換把模型錯誤從「回答錯」提升為可能造成物理風險，因此 action convention、rate、normalization 與 safety boundary 必須成為模型介面的一部分。
 
-## 2. Policy 與 Observation
+## Input、Output 與 Policy
 
-Policy `π(a|o)` 將 observation `o` 映射成 action `a`。這不是說 action 一定安全；Policy output 還需 limits、collision、workspace 與 emergency stop 等獨立約束。
+Policy 可寫成 `π(a_t | o_≤t, l)`。Observation 包含 image `[B,Ncam,C,H,W]`、state `[B,S]`、language tokens `[B,L]`；output 可為單步 `[B,A]` 或 action chunk `[B,H,A]`。`H` 是未來步數，`A` 是 action dimension。
 
-## 3. Action Representation
+## Architecture Data Flow
 
-- Joint Action：關節 position／velocity／torque。
-- Cartesian／End-Effector Action：末端 pose 或 delta。
-- Gripper Action：open／close 或連續寬度。
-- Action Chunk：一次預測多個時間步，降低推論頻率但增加 open-loop 風險。
+```text
+images → processor → visual tokens ┐
+language → tokenizer → text tokens ├→ multimodal backbone
+state → projector → state tokens ──┘
+                                  → action expert / decoder
+                                  → normalized action chunk
+                                  → unnormalize
+                                  → action validator
+                                  → controller (outside model)
+```
 
-## 4. Open-loop 與 Closed-loop
+Config 描述模型維度、camera keys、state/action features 與 chunk size；Processor 負責 resize、tokenize、normalization 與 batch；Policy 負責 forward／select_action。三者版本必須配套。
 
-Open-loop 執行預測序列而不重新觀察；Closed-loop 反覆 Observe → Act → Observe，可修正誤差，但受 inference latency 與控制頻率限制。
+## Action Representation
 
-## 5. Imitation Learning 與 Foundation Policy
+- Joint position/velocity/torque：與 robot joint order 強耦合。
+- Cartesian pose/delta pose：需 frame、rotation convention 與 controller。
+- Gripper：binary、continuous 或力控制。
+- Discrete action token：可沿用 language decoder，但有 quantization error。
+- Continuous action／flow matching：直接建模連續軌跡，但需 noise schedule 與多步去噪。
 
-Imitation Learning 從 demonstration 的 observation-action pairs 學習。Foundation Policy 以大規模、多任務資料預訓練，再做推論或 task adaptation。
+Action chunk 降低反覆推論成本，但 open-loop horizon 太長會累積誤差。Closed-loop 需定期重新觀測、重排或裁切 chunk。
 
-## 6. 模型案例
+## Real VLA Architecture Inspection
 
-RT-2、OpenVLA、SmolVLA、π0、GR00T 可用來比較輸入、action representation、資料、模型規模與部署條件；本週不宣稱它們介面相同。
+真實模型檢查不先執行機器人：讀取 config、processor 與 model card，列印 model ID、revision、parameter count、dtype、device、camera/state/action feature、chunk size、normalization mode與 license。再以符合 schema 的 dummy observation dry-run；若權重未下載，狀態標記 `Not validated yet`。
 
-## 7. Safety Boundary
+## Model Comparison
 
-Safety Gate 要檢查 action shape、finite values、limits、frame、freshness 與 state validity。VLA 是 action policy 也不等於可繞過 Controller 與 Safety。
+| Model | Action form | 特點 | 主要限制 |
+|---|---|---|---|
+| RT-2 | action tokens | web knowledge co-fine-tuning | closed model |
+| OpenVLA | discrete actions | 7B open implementation | 計算與 Llama 2 license |
+| SmolVLA | continuous action chunk | 約 450M、flow matching | dataset schema 強耦合 |
+| π0 | flow-based action | heterogeneous embodiment | 完整訓練成本高 |
+| GR00T N1 | dual-system / continuous | humanoid foundation model | 硬體與生態系門檻 |
+
+## Failure、Limitation 與 Safety
+
+Shape 相同但 joint order 不同、錯誤 normalization、action frame 不一致、NaN、超出 joint limit、stale observation 與 latency spike 都可能造成危險。Validator 至少檢查 finite、shape、range、frame、freshness、rate limit；E-stop、collision checking 與 low-level controller 永遠在模型外。
+
+## Demo 與 Paper Mapping
+
+- Basic Demo：比較 single-step、chunk 與 closed-loop。
+- Real Track：檢查 SmolVLA/OpenVLA config 與 processor，不動硬體。
+- Core Paper：RT-2；Deep Reading 比較 OpenVLA、SmolVLA、π0、GR00T N1。
+
+## 本週尚未涵蓋
+
+資料載入、真實 inference 與 fine-tuning 分別在 Week11–13。

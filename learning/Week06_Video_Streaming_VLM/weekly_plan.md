@@ -43,6 +43,41 @@ python practice/coding/guided_demos/guided_sliding_window.py
 - [ ] 使用共用 Paper Reading Framework 閱讀一篇相關論文。
 - [ ] 在 `study_log.md` 記錄實際輸出、理解與疑問。
 
+## Paper Reading（論文閱讀）
+
+### Core Reading
+
+- Title: MovieChat: From Dense Token to Sparse Memory for Long Video Understanding
+- Authors: Enxin Song et al.
+- Year / Venue: 2024 / CVPR
+- DOI: N/A
+- arXiv: 2307.16449
+- Link: https://openaccess.thecvf.com/content/CVPR2024/html/Song_MovieChat_From_Dense_Token_to_Sparse_Memory_for_Long_Video_Understanding_CVPR_2024_paper.html
+- Code / Project: https://github.com/rese1f/MovieChat
+- Required Reading：Abstract、architecture figure、short/long-term memory、experiments、limitations。
+- Skim Reading：完整資料集統計與附錄案例。
+- Skip for Now：大規模訓練重現。
+- Optional Reading：Video-LLaVA；StreamingLLM。
+
+### Reading Questions
+
+1. 長影片理解的主要瓶頸是什麼？
+2. Frame、clip、memory 的輸入輸出為何？
+3. Dense tokens 如何轉為 sparse memory？
+4. 時間與 token 維度如何變化？
+5. Short-term 與 long-term memory 如何互動？
+6. Sampling rate 對語意保留有何影響？
+7. Streaming 情境如何控制延遲與記憶？
+8. 使用哪些影片基準與指標？
+9. 哪個 ablation 支持記憶設計？
+10. 遺漏事件與時間混淆如何發生？
+11. 這些失敗如何影響機器人即時決策？
+12. 真實影片 VLM 軌應記錄哪些效能證據？
+
+### Deep Reading
+
+以 Architecture、Data Flow、Memory Compression 與 Evaluation 為本週深讀重點，完成共用 Paper Reading Record。
+
 ## 驗收條件
 
 - [ ] 能畫出 Camera → Sampling → Temporal Context → VLM。

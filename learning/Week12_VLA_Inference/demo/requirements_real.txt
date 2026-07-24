@@ -1,0 +1,5 @@
+# Pin LeRobot with the model revision in an experiment lockfile before validation.
+lerobot
+torch>=2.2
+transformers>=4.49
+accelerate>=0.28

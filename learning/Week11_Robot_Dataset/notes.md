@@ -1,35 +1,66 @@
 # Week11 Notes：Robot Dataset and Demonstrations
 
-## 1. Dataset Unit
+## Why 與 Problem
 
-Episode 是一次任務嘗試；trajectory 是隨時間排列的 observation-action sequence；demonstration 可由 teleoperation 或其他示範策略產生。
+VLA 的能力上限深受 demonstration 品質與 schema 一致性限制。Robot dataset 不是影像資料夾，而是同步的 observation-action trajectories；少一個 timestamp、錯一個 joint order 或洩漏相鄰 frame，就可能得到看似很高但不可用的指標。
+
+## Dataset Unit 與 Schema
 
 ```text
-Episode
-├─ Camera Observation
-├─ Robot State
-├─ Action
-├─ Language Instruction
-├─ Timestamp
-└─ Metadata
+Dataset
+└─ Episode
+   ├─ task / language instruction
+   ├─ observation.images.{camera} [T,C,H,W]
+   ├─ observation.state [T,S]
+   ├─ action [T,A]
+   ├─ timestamp [T]
+   └─ metadata: robot, fps, units, frames, calibration, license
 ```
 
-## 2. Alignment
+LeRobotDataset v3 以 Parquet 保存 tabular data、以 MP4 保存影像，metadata 記錄 features、episodes、tasks 與 statistics。使用 sample 前先 pin repository revision，閱讀 dataset card 與 license，避免不受控地下載完整資料。
 
-每個 action 必須對應正確時間的 observation。延遲、不同頻率與 dropped frame 會造成 label shift；資料管線需記錄原始 timestamp 與 alignment policy。
+## Alignment 與 Data Flow
 
-## 3. Schema 與 LeRobot
+```text
+raw sensors / teleoperation
+→ timestamp normalization
+→ observation-action alignment
+→ schema validation
+→ episode segmentation
+→ statistics / normalization
+→ split by episode/task/environment
+→ dataloader batch [B,T,...]
+```
 
-Schema 應定義 shape、dtype、unit、frame、rate、normalization 與 task metadata。可用 LeRobot Dataset 作格式案例，但本週 Basic Demo 不下載資料。
+Action 的語意需明確：它是與 `o_t` 同時量測、由 `o_t` 導出的 `a_t`，或下一步執行後的狀態差？必須寫入 dataset card。Dropped frame 不可悄悄 forward-fill。
 
-## 4. Split 與 Leakage
+## Split、Leakage 與 Metric
 
-不可把同一 episode 的相鄰 frames 隨機分到 train／validation，否則場景幾乎相同造成 leakage。應依 episode、task、environment 或 robot 分組切分。
+不能把同一 episode 的相鄰 frame 分散到 train 與 validation。依研究問題以 episode、task、environment、robot 或 operator 分割。保存 split manifest 與 seed。Data quality 指標包含 missing rate、timestamp monotonicity、action finite/range、task distribution、episode length 與 failed demonstration ratio。
 
-## 5. Data Quality
+## Real LeRobot Sample Track
 
-檢查 missing field、non-finite action、timestamp order、stale observation、task imbalance 與 failed demonstrations。失敗資料可用於 failure analysis，不應無記錄刪除。
+載入官方小型 sample／公開 dataset subset，列印 repo ID、revision、episode/task 數、feature schema、image/state/action shape、fps 與 cache path。只讀一小段，不預設下載全資料。若套件或網路未就緒，必須標記 `Not validated yet`，不得偽造 frame 或統計。
 
-## 6. Research Boundary
+## Example
 
-資料量不等於資料品質；必須記錄 collection policy、operator、版本、license、privacy 與 known bias。
+一個 batch 可為 image `[8,2,3,480,640]`、state `[8,8]`、action `[8,7]`、timestamp `[8]`。Dataset statistics 的 shape 應與 state/action feature 對應；同為 `[7]` 不代表 joint order 相同。
+
+## Failure、Limitation 與 Ethics
+
+- observation/action shift 一格。
+- episode 邊界錯誤。
+- failed demo 未標示。
+- normalization statistics 由 validation 計算造成 leakage。
+- private scene、operator 影像或受限資料未處理。
+- dataset license 與模型再散布條款不相容。
+
+## Demo 與 Paper Mapping
+
+- Basic Demo：小型 episode schema 與 validation。
+- Real Track：官方 LeRobot sample dataset。
+- Core Paper：Open X-Embodiment，對應跨 embodiment standardization 與 RT-X mixture。
+
+## 本週尚未涵蓋
+
+不進行 policy training；Week12 先驗證 inference contract。
