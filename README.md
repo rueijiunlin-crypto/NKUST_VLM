@@ -28,24 +28,52 @@ assets/     文件附件、圖片、資料與其他素材
 
 ## 16 週學習路線
 
-| 週次 | 主題 | 對應資料夾 |
+> Roadmap 重構狀態：下列主題代表目標學習路線。現有 `WeekXX` 資料夾名稱暫時保留，直到各週遷移內容經明確批准後才調整；目前資料夾名稱不代表該週教材已完成重構。
+
+### Phase 1 — VLM Foundation（視覺語言模型基礎）
+
+Week01–05：建立深度學習、視覺語言對齊、真實模型操作、生成式 VLM 與機器人導向架構基礎。
+
+### Phase 2 — Robot Perception（機器人感知）
+
+Week06–08：建立時間感知、即時相機資料流與空間定位能力。
+
+### Phase 3 — Embodied AI / VLA（具身人工智慧／視覺語言動作模型）
+
+Week09–10：將視覺、語言與 Robot State（機器人狀態）整合為具身觀察，銜接 VLA 與 Policy（策略）。
+
+### Phase 4 — Robot Learning（機器人學習）
+
+Week11–13：學習示範資料、預訓練 VLA 推論與任務適應。
+
+### Phase 5 — Simulation and Deployment（模擬與部署）
+
+Week14–15：建立機器人學習模擬、Sim-to-Real（模擬到真實）分析與部署能力。
+
+### Phase 6 — Research（研究）
+
+Week16：完成具有 baseline（基準方法）、metric（評估指標）、失敗分析與可重現性的研究 Prototype（原型）。
+
+| Week | Target Topic | Current Directory |
 | --- | --- | --- |
-| Week01 | Transformer 基礎 | `learning/Week01_Transformer/` |
-| Week02 | CLIP | `learning/Week02_CLIP/` |
-| Week03 | Hugging Face（模型平台） | `learning/Week03_HuggingFace/` |
-| Week04 | LLaVA | `learning/Week04_LLaVA/` |
-| Week05 | VLM Architecture（視覺語言模型架構） | `learning/Week05_VLM_Architecture/` |
-| Week06 | VLM Paper Reading（論文閱讀） | `learning/Week06_PaperReading/` |
-| Week07 | Prompt Engineering（提示工程） | `learning/Week07_PromptEngineering/` |
-| Week08 | Mini Project：Image Caption（影像描述）與 Visual QA（視覺問答） | `learning/Week08_MiniProject/` |
-| Week09 | VLM + Camera（相機） | `learning/Week09_VLM_Camera/` |
-| Week10 | VLM + ROS2 Topic（主題） | `learning/Week10_VLM_ROS2/` |
-| Week11 | VLM + Navigation Concept（導航概念） | `learning/Week11_VLM_Navigation/` |
-| Week12 | VLM Robot System Prototype（機器人系統雛型） | `learning/Week12_Robot_Prototype/` |
-| Week13 | Isaac Sim Environment（模擬環境） | `learning/Week13_IsaacSim_Environment/` |
-| Week14 | Isaac Sim Camera（模擬相機） | `learning/Week14_IsaacSim_Camera/` |
-| Week15 | Isaac Sim + VLM | `learning/Week15_IsaacSim_VLM/` |
-| Week16 | Final Mini Project（期末小專案） | `learning/Week16_FinalProject/` |
+| Week01 | Transformer Fundamentals | `learning/Week01_Transformer/` |
+| Week02 | CLIP and Vision-Language Alignment | `learning/Week02_CLIP/` |
+| Week03 | Hugging Face Model Workflow | `learning/Week03_HuggingFace/` |
+| Week04 | LLaVA + Grounded Visual Reasoning | `learning/Week04_LLaVA/` |
+| Week05 | VLM Architecture for Robotics | `learning/Week05_VLM_Architecture/` |
+| Week06 | Video and Streaming VLM | `learning/Week06_PaperReading/` |
+| Week07 | ROS2 + Camera + Realtime VLM | `learning/Week07_PromptEngineering/` |
+| Week08 | Spatial Reasoning and Grounding | `learning/Week08_MiniProject/` |
+| Week09 | Robot State + Multimodal Observation | `learning/Week09_VLM_Camera/` |
+| Week10 | Embodied AI + VLA Fundamentals | `learning/Week10_VLM_ROS2/` |
+| Week11 | Robot Dataset and Demonstrations | `learning/Week11_VLM_Navigation/` |
+| Week12 | SmolVLA / OpenVLA Inference | `learning/Week12_Robot_Prototype/` |
+| Week13 | VLA Fine-tuning | `learning/Week13_IsaacSim_Environment/` |
+| Week14 | Isaac Sim Robot Learning | `learning/Week14_IsaacSim_Camera/` |
+| Week15 | Sim-to-Real / Real Robot Deployment | `learning/Week15_IsaacSim_VLM/` |
+| Week16 | Research Prototype and Evaluation | `learning/Week16_FinalProject/` |
+
+完整的舊課程對照、內容保存與後續重構順序請見 [Curriculum Roadmap v2](./docs/learning/curriculum_roadmap_v2.md)。
 
 ## GitHub 與 Notion 分工
 

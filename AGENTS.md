@@ -1,8 +1,8 @@
 ﻿# AGENTS.md
 
-> Current revision: v3.1.2 dual-mode coding practice
+> Current revision: v3.2.0 curriculum-roadmap governance
 >
-> 本修訂以 v3.1.1 Practice 規範為基礎，補充 Guided Code Reading Mode 與 Implementation Practice Mode，不改寫原本 v3.1 的核心內容。
+> 本修訂以 v3.1.2 Dual-Mode Coding Practice 規範為基礎，新增 Curriculum Roadmap Governance（課程路線治理）、Research Progression（研究能力進程）、Roadmap-Only Refactor Exception（僅限路線重構例外）、Curriculum Migration（課程遷移）、Robot System Boundary（機器人系統邊界）與 Research Evaluation（研究評估）規範。不改變既有 Demo、Practice、Week Lifecycle 與學生紀錄保護原則。
 
 本文件定義本 Repository（程式碼與文件倉庫）的專案規則、工作流程、文件標準與 Codex 行為規範。
 
@@ -25,6 +25,15 @@
 - Transformer（轉換器架構）
 - CLIP（對比式圖文預訓練）
 - LLaVA（大型語言與視覺助手）
+- Video / Streaming VLM（影片／串流視覺語言模型）
+- Spatial Grounding（空間語意定位）
+- Embodied AI（具身人工智慧）
+- Robot State / Multimodal Observation（機器人狀態／多模態觀察）
+- Robot Learning Dataset（機器人學習資料集）
+- VLA Policy（視覺語言動作策略）
+- Fine-tuning / Task Adaptation（微調／任務適應）
+- Sim-to-Real（模擬到真實）
+- Research Evaluation（研究評估）
 - OpenVLA（開源視覺語言動作模型）
 - ROS2（機器人作業系統第二版）
 - Isaac Sim（NVIDIA 機器人模擬器）
@@ -44,6 +53,134 @@
 - 海事機器人
 
 若因規範說明需要提及，只能出現在排除項目或限制條款中。
+
+---
+
+## Curriculum Roadmap Governance Rule
+
+本章只定義 Repository 層級的通用課程治理原則，不得列出特定週次名稱、把具體課程內容寫死在 `AGENTS.md`，或取代各週 `weekly_plan.md`。
+
+### Curriculum Roadmap Rule
+
+Repository 的整體學習路線應形成：
+
+```text
+Foundation
+↓
+Model Understanding
+↓
+Perception
+↓
+Embodied Intelligence
+↓
+Robot Learning
+↓
+Simulation / Deployment
+↓
+Research Evaluation
+```
+
+此鏈描述能力依賴，不是固定 Week 對照。具體主題、任務與驗收條件仍由 Roadmap 文件及各週 `weekly_plan.md` 管理。
+
+### Research Progression Rule
+
+教材整體應逐步建立：
+
+1. 模型原理理解。
+2. 真實模型推論。
+3. 多模態感知。
+4. 時序與空間理解。
+5. Robot State 整合。
+6. VLA / Policy 理解。
+7. Robot Dataset。
+8. Model Adaptation。
+9. Simulation / Deployment。
+10. Research Evaluation。
+
+以上是 curriculum-level capability（課程層級能力），不得解讀為固定週次或一次生成多週教材的授權。
+
+### Roadmap-Only Refactor Exception
+
+「禁止一次生成多週教材」規則維持有效。只有在使用者明確要求 curriculum roadmap redesign、course ordering refactor 或 learning roadmap planning 時，Codex 才可在同一次任務中修改：
+
+- Root README 的 Roadmap。
+- Curriculum planning documents（課程規劃文件）。
+- Migration plan（遷移計畫）。
+- `AGENTS.md` 的通用 Roadmap 規則。
+
+此例外不得用來：
+
+- 生成多週教材。
+- 修改各週 `notes.md`。
+- 修改各週 Demo、Guided Demo 或 Practice。
+- 填寫或改寫學生 `study_log.md`。
+- 宣稱多週已 Generated、Completed 或通過驗收。
+
+```text
+Roadmap Refactor
+≠
+Week Content Generation
+```
+
+### Curriculum Migration Rule
+
+Roadmap 改變時必須：
+
+1. 先建立 migration map（遷移對照）。
+2. 不直接刪除既有高品質教材。
+3. 使用 Keep、Refactor 或 Rebuild 等級標記遷移範圍。
+4. 保存學生紀錄與既有可追蹤性。
+5. 逐週取得使用者或 ChatGPT 批准後才修改實際內容。
+6. 資料夾 rename 必須在依賴連結盤點後進行。
+7. Rename 前先確認 README、Notion、relative links（相對連結）與 scripts 是否依賴舊路徑。
+
+### Research Relevance Rule
+
+中後期課程主題應能回答：
+
+```text
+How does this capability contribute to a robot VLM/VLA research system?
+```
+
+不得為了「機器人化」而強行加入不必要的控制實作。教材需維持 Perception（感知）、Planning（規劃）、Policy（策略）、Control（控制）與 Safety（安全）的角色邊界。
+
+### System Boundary Rule
+
+Robot VLM/VLA 教材必須區分：
+
+```text
+Perception
+Semantic Reasoning
+Robot State
+Planning
+Policy
+Control
+Safety
+```
+
+不得默認：
+
+```text
+VLM Output
+=
+Motor Command
+```
+
+除非模型本身是經明確定義與驗證的 action policy（動作策略），而且教材清楚說明 action space（動作空間）、控制介面、失敗模式與安全邊界。
+
+### Research Evaluation Rule
+
+進入研究導向內容後，不應只以 `Demo successfully runs` 作為學習成果。應逐步加入：
+
+- baseline
+- metric
+- ground truth
+- failure case
+- latency
+- reproducibility
+- limitation
+
+具體採用哪些指標與驗收門檻，仍由該週 `weekly_plan.md` 決定。
 
 ---
 
